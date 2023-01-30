@@ -9,4 +9,6 @@ public class Roster {
     public void print () {} //print roster sorted by profiles
     public void printBySchoolMajor() {} //print roster sorted by school major
     public void printByStanding() {} //print roster sorted by standing
+
+
 }

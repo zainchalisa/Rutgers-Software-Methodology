@@ -8,6 +8,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Hello world!");
+        Date  day = new Date("1/02/2002");
+        System.out.println(day);
+
     }
 }

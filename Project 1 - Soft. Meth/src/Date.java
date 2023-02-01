@@ -9,6 +9,10 @@ public class Date implements Comparable {
 
     public static final int  MONTH_ADDITIVE = 1;
 
+    public static final int QUADRENNIAL = 4;
+    public static final int CENTENNIAL = 100;
+    public static final int QUATERCENTENNIAL = 400;
+
     public Date() { //create an object with today’s date (see Calendar class)
 
         Calendar calendar = Calendar.getInstance();
@@ -27,6 +31,30 @@ public class Date implements Comparable {
     }
     public boolean isValid() { //check if a date is a valid calendar date
 
+
+
+
+        return false;
+    }
+
+
+    private boolean isLeapYear(){
+
+        if (year % QUADRENNIAL == 0){
+
+            if (year % CENTENNIAL == 0 ){
+
+                if (year % QUATERCENTENNIAL == 0){
+
+                } else{
+                    System.out.println("not a leap year");
+                }
+            } else{
+                System.out.println("not a leap year");
+            }
+        } else{
+            System.out.println("not a leap year");
+        }
 
 
 

@@ -22,4 +22,5 @@ public class Profile implements Comparable<Profile> { // implements Comparable a
     public boolean equals(Object obj) {
         return false;
     }
+
 }

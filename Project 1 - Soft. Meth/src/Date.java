@@ -30,35 +30,25 @@ public class Date implements Comparable {
 
     }
     public boolean isValid() { //check if a date is a valid calendar date
-
-
-
-
         return false;
     }
 
 
     private boolean isLeapYear(){
 
-        if (year % QUADRENNIAL == 0){
-
-            if (year % CENTENNIAL == 0 ){
-
-                if (year % QUATERCENTENNIAL == 0){
-
-                } else{
-                    System.out.println("not a leap year");
-                }
-            } else{
-                System.out.println("not a leap year");
-            }
-        } else{
-            System.out.println("not a leap year");
+        if (this.year % QUADRENNIAL != 0){
+            return false;
         }
 
+        if(this.year % CENTENNIAL != 0){
+            return false;
+        }
 
+        if(this.year % QUATERCENTENNIAL != 0){
+            return false;
+        }
 
-        return false;
+        return true;
     }
 
     @Override

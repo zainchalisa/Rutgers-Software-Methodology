@@ -4,7 +4,7 @@ public enum Major {
     MATH ("01:640","SAS"),
     EE ("14:332","SOE"),
     ITI ("04:547","SC&I"),
-    BAIT ("33:136","RBS")
+    BAIT ("33:136","RBS");
 
     private final String coreCode;
     private final String school;

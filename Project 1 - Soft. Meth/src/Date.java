@@ -1,6 +1,4 @@
-
 import java.util.Calendar;
-import java.util.StringTokenizer;
 
 public class Date implements Comparable {
     private int year;
@@ -8,10 +6,15 @@ public class Date implements Comparable {
     private int day;
 
     public static final int  MONTH_ADDITIVE = 1;
-
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
+    public static final int [] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    public static final int FEBRUARY = 2;
+    public static final int LEAP_YEAR_DAY = 29;
+    public static final int LOWEST_DAY = 1;
+
 
     public Date() { //create an object with today’s date (see Calendar class)
 
@@ -30,9 +33,21 @@ public class Date implements Comparable {
 
     }
     public boolean isValid() { //check if a date is a valid calendar date
-        return false;
-    }
 
+        if(this.month > 12 || this.month < 1){
+            return false;
+        }
+
+        if(this.month == FEBRUARY && isLeapYear()){
+            if(this.day > LEAP_YEAR_DAY){
+                return false;
+            }
+        } else if (this.month > MONTH_DAYS[this.month - MONTH_ADDITIVE] || this.month < LOWEST_DAY) {
+            return false;
+        }
+
+        return true;
+    }
 
     private boolean isLeapYear(){
 
@@ -47,12 +62,12 @@ public class Date implements Comparable {
         if(this.year % QUATERCENTENNIAL != 0){
             return false;
         }
-
         return true;
     }
 
     @Override
     public int compareTo(Object obj){
+
         return 0;
     }
 

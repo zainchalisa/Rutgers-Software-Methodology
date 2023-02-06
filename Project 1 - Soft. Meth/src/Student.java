@@ -1,4 +1,4 @@
-public class Student implements Comparable<Student> {
+public class Student implements Comparable {
     private Profile profile;
     private Major major; // Major is an enum type
     private int creditCompleted;

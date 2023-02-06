@@ -16,7 +16,7 @@ public class Date implements Comparable {
     public static final int LOWEST_DAY = 1;
 
 
-    public Date() { //create an object with today’s date (see Calendar class)
+    public Date() {
 
         Calendar calendar = Calendar.getInstance();
         this.year = calendar.get(Calendar.YEAR);
@@ -25,7 +25,7 @@ public class Date implements Comparable {
 
     }
 
-    public Date(String date) { //take “mm/dd/yyyy” and create a Date object
+    public Date(String date) {
 
         String[] dateArray = date.split("/", 3);
         String day = dateArray[0];

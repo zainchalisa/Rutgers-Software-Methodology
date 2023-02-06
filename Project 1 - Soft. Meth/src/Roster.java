@@ -10,7 +10,7 @@ public class Roster {
         this.size = size;
     }
 
-    private int find(Student student) { //search the given student in roster
+    public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i =0; i < size; i++){
             if (student.equals(roster[i])){
@@ -21,10 +21,11 @@ public class Roster {
         return NOT_FOUND;
     }
     private void grow() { //increase the array capacity by 4
-        Student[] newRoster = new Student[size + ARRAY_GROWTH];
+        Student[] newRoster = new Student[roster.length + ARRAY_GROWTH];
         size = size + ARRAY_GROWTH;
         for (int i = 0; i < size; i++){
-            newRoster[i] = roster[i];
+
+            newRoster[i] = this.roster[i];
         }
         this.roster = newRoster;
     }
@@ -37,6 +38,7 @@ public class Roster {
         for(int i = 0; i < size; i++){
             if (roster[i] == null) {
                 roster[i] = student;
+                size++;
                 break;
             }
         }
@@ -52,7 +54,7 @@ public class Roster {
             }
         }
 
-        Student[] newRoster = new Student[size];
+        Student[] newRoster = new Student[roster.length];
 
         for(int i = 0; i <= size; i++){
             if (roster[i] == null){
@@ -81,11 +83,15 @@ public class Roster {
         String students = "";
 
         for (Student student: roster) {
-            students += student.toString();
+            if(student != null) {
+                students += student.toString() + "\n";
+            }
         }
 
         return students;
     }
+
+
     public void print () {} //print roster sorted by profiles
     public void printBySchoolMajor() {} //print roster sorted by school major
     public void printByStanding() {} //print roster sorted by standing

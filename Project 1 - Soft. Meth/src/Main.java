@@ -11,10 +11,15 @@ public class Main {
         Student day = new Student( new Profile("Chalisa", "Zain", new Date("1/2/2002") ) , Major.CS, 191);
         //System.out.println(day);
 
-        Student[] theRoster = new Student[5];
+        Student[] theRoster = new Student[4];
 
-        Roster roster = new Roster(theRoster, 5);
+        Roster roster = new Roster(theRoster, 4);
         roster.add(day);
+        roster.add(day);
+        roster.add(day);
+        roster.add(day);
+        roster.add(day);
+        System.out.println(roster.find(day));
         System.out.println(roster);
 
 

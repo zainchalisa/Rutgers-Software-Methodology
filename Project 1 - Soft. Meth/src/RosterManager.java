@@ -43,7 +43,7 @@ public class RosterManager {
                 }
 
                 Student student = new Student(new Profile(lastName,firstName,new Date(dateOfBirth)),majorName,creditCompleted);
-                Roster roster = new Roster(new Student[ROSTER_SIZE],ROSTER_SIZE);
+                Roster roster = new Roster();
                 roster.add(student);
                 System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
             }

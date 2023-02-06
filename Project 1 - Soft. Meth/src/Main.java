@@ -13,7 +13,7 @@ public class Main {
 
         Student[] theRoster = new Student[4];
 
-        Roster roster = new Roster(theRoster, 4);
+        Roster roster = new Roster();
         roster.add(day);
         roster.add(day);
         roster.add(day);

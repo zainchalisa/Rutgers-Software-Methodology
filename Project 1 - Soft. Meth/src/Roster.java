@@ -5,9 +5,9 @@ public class Roster {
     public static final int ARRAY_GROWTH = 4;
     public static final int NOT_FOUND = -1;
 
-    public Roster(Student[] roster, int size){
-        this.roster = roster;
-        this.size = size;
+    public Roster(){
+        this.roster = new Student[4];
+        this.size = 0;
     }
 
     public int find(Student student) { //search the given student in roster
@@ -31,7 +31,7 @@ public class Roster {
     }
     public boolean add(Student student){ //add student to end of array
 
-        if (roster[size - SUBTRACTOR] != null){
+        if (roster[size] != null){
             grow();
         }
 

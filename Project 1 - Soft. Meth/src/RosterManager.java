@@ -44,7 +44,7 @@ public class RosterManager {
         int tokenCount = 0;
         while ( tokenCount < line.length ) {
             if ( line[0].equals("A") ) {
-                Student student = new Student(new Profile(lastName,firstName,new Date(dateOfBirth)),null,creditCompleted);
+                Student student = new Student(new Profile(lastName,firstName,new Date(dateOfBirth)),null,Integer.parseInt(creditCompleted));
                 //Roster.add(student);
             }
             else if ( line[0].equals("R") ) {

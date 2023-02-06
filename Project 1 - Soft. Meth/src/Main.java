@@ -8,8 +8,17 @@
 public class Main {
     public static void main(String[] args) {
 
-        Date day = new Date("-1/31/2003");
-        System.out.println(day.isValid());
+        Student day = new Student( new Profile("Chalisa", "Zain", new Date("1/2/2002") ) , Major.CS, 191);
+        //System.out.println(day);
+
+        Student[] theRoster = new Student[5];
+
+        Roster roster = new Roster(theRoster, 5);
+        roster.add(day);
+        System.out.println(roster);
+
+
+
 
     }
 }

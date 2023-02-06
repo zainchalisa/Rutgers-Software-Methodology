@@ -1,4 +1,6 @@
-public class Student implements Comparable<Student> {
+import java.sql.SQLOutput;
+
+public class Student implements Comparable {
     private Profile profile;
     private Major major; // Major is an enum type
     private int creditCompleted;
@@ -11,7 +13,8 @@ public class Student implements Comparable<Student> {
 
     @Override
     public String toString(){
-        return null;
+        return "This is the profile:" + profile + major + creditCompleted;
+
     }
 
     @Override

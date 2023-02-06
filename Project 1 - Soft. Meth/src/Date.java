@@ -28,9 +28,9 @@ public class Date implements Comparable {
     public Date(String date) { //take “mm/dd/yyyy” and create a Date object
 
         String[] dateArray = date.split("/", 3);
-        String day = dateArray[0];
-        String month = dateArray[1];
-        String year = dateArray[2];
+        this.month = Integer.parseInt(dateArray[0]);
+        this.day = Integer.parseInt(dateArray[1]);
+        this.year = Integer.parseInt(dateArray[2]);
 
     }
 
@@ -84,6 +84,7 @@ public class Date implements Comparable {
 
     @Override
     public String toString(){
+
         return month + "/" + day + "/" + year;
     }
 }

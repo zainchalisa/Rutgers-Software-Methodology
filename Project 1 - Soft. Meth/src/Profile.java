@@ -20,7 +20,12 @@ public class Profile implements Comparable { // implements Comparable allow us t
     }
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof Profile) {
+            Profile profile = (Profile) obj; //casting
+            return (profile.lname.equals(this.lname)) && (profile.fname.equals(this.fname)) && (profile.dob.equals(this.dob));
+        } else{
+            return false;
+        }
     }
 
 }

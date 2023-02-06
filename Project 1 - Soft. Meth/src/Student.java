@@ -11,16 +11,22 @@ public class Student implements Comparable {
 
     @Override
     public String toString(){
-        return null;
+        return "" + profile + major + creditCompleted;
     }
 
     @Override
     public int compareTo(Object obj){
+
         return 0;
     }
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof Student) {
+            Student student = (Student) obj; //casting
+            return (student.profile.equals(this.profile));
+        } else {
+            return false;
+        }
     }
 
 }

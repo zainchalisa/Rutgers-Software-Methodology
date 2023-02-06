@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class RosterManager {
 
-    private static final int ROSTER_SIZE = 4;
-
     public void run() { // will need to Scanner class to read input, either StringTokenizer or String.split() to break up command line args
         System.out.println("Roster Manager running...");
         Scanner scanner = new Scanner(System.in);
@@ -43,7 +41,7 @@ public class RosterManager {
                 }
 
                 Student student = new Student(new Profile(lastName,firstName,new Date(dateOfBirth)),majorName,creditCompleted);
-                Roster roster = new Roster(new Student[ROSTER_SIZE],ROSTER_SIZE);
+                Roster roster = new Roster();
                 roster.add(student);
                 System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
             }

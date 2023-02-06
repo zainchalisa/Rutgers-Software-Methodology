@@ -22,9 +22,7 @@ public class Roster {
     }
     private void grow() { //increase the array capacity by 4
         Student[] newRoster = new Student[roster.length + ARRAY_GROWTH];
-        size = size + ARRAY_GROWTH;
         for (int i = 0; i < size; i++){
-
             newRoster[i] = this.roster[i];
         }
         this.roster = newRoster;
@@ -35,13 +33,8 @@ public class Roster {
             grow();
         }
 
-        for(int i = 0; i < size; i++){
-            if (roster[i] == null) {
-                roster[i] = student;
-                size++;
-                break;
-            }
-        }
+        roster[size] = student;
+        size++;
 
         return false;
     }

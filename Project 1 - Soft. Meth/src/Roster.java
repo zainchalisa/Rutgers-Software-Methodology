@@ -1,7 +1,6 @@
 public class Roster {
     private Student[] roster;
     private int size;
-    public static final int SUBTRACTOR = 1;
     public static final int ARRAY_GROWTH = 4;
     public static final int NOT_FOUND = -1;
 
@@ -29,14 +28,18 @@ public class Roster {
     }
     public boolean add(Student student){ //add student to end of array
 
-        if (roster[size] != null){
+        if (size >= roster.length){
             grow();
+        }
+
+        if(find(student) != NOT_FOUND){
+            return false; // it already is in the roster
         }
 
         roster[size] = student;
         size++;
 
-        return false;
+        return true; // added it to the roster
     }
 
     public boolean remove(Student student){ //maintain the order after remove
@@ -85,7 +88,17 @@ public class Roster {
     }
 
 
-    public void print () {} //print roster sorted by profiles
-    public void printBySchoolMajor() {} //print roster sorted by school major
-    public void printByStanding() {} //print roster sorted by standing
+    public void print () {
+
+    } //print roster sorted by profiles
+    public void printBySchoolMajor() {
+
+    } //print roster sorted by school major
+    public void printByStanding() {
+        for(int i =0; i < size; i++){
+            int currentStanding = roster[i].getCreditCompleted();
+
+
+        }
+    } //print roster sorted by standing
 }

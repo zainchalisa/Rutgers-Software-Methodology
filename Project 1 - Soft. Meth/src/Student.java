@@ -12,6 +12,14 @@ public class Student implements Comparable {
         this.creditCompleted = creditCompleted;
     }
 
+    public int getCreditCompleted(){
+        return this.creditCompleted;
+    }
+
+    public Major getMajor(){
+        return this.major;
+    }
+
     @Override
     public String toString(){
         return "" + profile + major + creditCompleted;

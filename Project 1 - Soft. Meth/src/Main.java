@@ -14,11 +14,6 @@ public class Main {
         Student[] theRoster = new Student[4];
 
         Roster roster = new Roster();
-        roster.add(day);
-        roster.add(day);
-        roster.add(day);
-        roster.add(day);
-        roster.add(day);
         System.out.println(roster.find(day));
         System.out.println(roster);
 

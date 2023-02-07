@@ -3,6 +3,9 @@ public class Student implements Comparable {
     private Major major; // Major is an enum type
     private int creditCompleted;
 
+    public Student(Profile profile) {
+        this.profile = profile;
+    }
     public Student(Profile profile, Major major, int creditCompleted) {
         this.profile = profile;
         this.major = major;

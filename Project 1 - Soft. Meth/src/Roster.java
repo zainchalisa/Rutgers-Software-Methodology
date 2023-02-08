@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 public class Roster {
     private Student[] roster;
     private int size;
@@ -48,26 +50,21 @@ public class Roster {
 
     public boolean remove(Student student){ //maintain the order after remove
 
-        for(int i = 0; i <= size; i++){
-            if(roster[i].equals(student)){
-                roster[i] = null;
-            }
+        if(find(student) == NOT_FOUND){
+            return false;
         }
 
-        Student[] newRoster = new Student[roster.length];
+        int studentIndex = find(student);
 
-        for(int i = 0; i <= size; i++){
-            if (roster[i] == null){
-                int arrayHolder = i;
-                newRoster[i] = this.roster[arrayHolder + 1];
-            }
-            newRoster[i] = this.roster[i];
+        for(int i = studentIndex; i < size - 1; i++){
+                roster[i] = roster[i+1];
         }
 
-        this.roster = newRoster;
-
-        return false;
+        roster[size] = null;
+        size--;
+        return true;
     }
+
     public boolean contains(Student student){ //if the student is in roster
         for (int i =0; i <= size; i++){
             if (student.equals(roster[i])){
@@ -90,12 +87,10 @@ public class Roster {
         return students;
     }
 
-    public void Student[] insertionSort(){
-
+    public void insertionSort(Student[] roster){
         for(int i = 0; i < size; i++){
             int j = i;
             while (j > 0 && roster[j-1].compareTo(roster[j]) == GREATER){
-
                     Student temp = roster[j];
                     roster[j] = roster[j - 1];
                     roster[j - 1] = temp;
@@ -104,20 +99,12 @@ public class Roster {
         }
     }
 
-
     public void print () { //print roster sorted by profiles
-        for(int i = 0; i < size; i++){
-
+        insertionSort(roster);
+        for(int i = 0; i < size; i++) {
+            System.out.println(roster[i]);
         }
     }
-    public void printBySchoolMajor() {
-
-    } //print roster sorted by school major
-    public void printByStanding() {
-        for(int i =0; i < size; i++){
-            int currentStanding = roster[i].getCreditCompleted();
-
-
-        }
-    } //print roster sorted by standing
+    public void printBySchoolMajor() {} //print roster sorted by school major
+    public void printByStanding() {} //print roster sorted by standing
 }

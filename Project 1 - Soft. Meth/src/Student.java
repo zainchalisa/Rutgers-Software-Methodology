@@ -28,7 +28,11 @@ public class Student implements Comparable {
     @Override
     public int compareTo(Object obj){
         Student student = (Student) obj; //casting
-        return this.profile.compareTo(student.profile);
+        if(student.profile != null){
+            return this.profile.compareTo(student.profile);
+        } else{
+            return 1;
+        }
     }
     @Override
     public boolean equals(Object obj) {

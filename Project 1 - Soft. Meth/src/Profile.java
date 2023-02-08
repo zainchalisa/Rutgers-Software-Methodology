@@ -22,7 +22,7 @@ public class Profile implements Comparable { // implements Comparable allow us t
     public boolean equals(Object obj) {
         if (obj instanceof Profile) {
             Profile profile = (Profile) obj; //casting
-            return (profile.lname.equals(this.lname)) && (profile.fname.equals(this.fname)) && (profile.dob.equals(this.dob));
+            return (profile.lname.equalsIgnoreCase(this.lname)) && (profile.fname.equalsIgnoreCase(this.fname)) && (profile.dob.equals(this.dob));
         } else{
             return false;
         }

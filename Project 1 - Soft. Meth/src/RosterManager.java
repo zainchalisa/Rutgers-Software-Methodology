@@ -1,6 +1,3 @@
-// need to add packages to classes
-
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class RosterManager {
@@ -11,26 +8,48 @@ public class RosterManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
+        Student studentProfile = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
 
-        int creditsCompleted = Integer.parseInt(creditsCompletedString);
-
-        Major majorName = null;
-
-        if (major.equals("CS")) {
-            majorName = Major.CS;
-        } else if (major.equals("MATH")) {
-            majorName = Major.MATH;
-        } else if (major.equals("EE")) {
-            majorName = Major.EE;
-        } else if (major.equals("ITI")) {
-            majorName = Major.ITI;
-        } else if (major.equals("BAIT")) {
-            majorName = Major.BAIT;
+        if (!roster.contains(studentProfile)) {
+            Major majorName = null;
+            if (major.equalsIgnoreCase("CS")) {
+                majorName = Major.CS;
+            } else if (major.equalsIgnoreCase("MATH")) {
+                majorName = Major.MATH;
+            } else if (major.equalsIgnoreCase("EE")) {
+                majorName = Major.EE;
+            } else if (major.equalsIgnoreCase("ITI")) {
+                majorName = Major.ITI;
+            } else if (major.equalsIgnoreCase("BAIT")) {
+                majorName = Major.BAIT;
+            } else {
+                System.out.println("Major code invalid: " + major);
+                return;
+            }
+            if (isValidCredit(creditsCompletedString)) {
+                int creditsCompleted = Integer.parseInt(creditsCompletedString);
+                if (creditsCompleted >= 0) {
+                    Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
+                    roster.add(student);
+                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+                } else {
+                    System.out.println("Credits completed invalid: cannot be negative!");
+                }
+            } else {
+                System.out.println("Credits completed invalid: not an integer!");
+            }
+        } else {
+            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is already in the roster.");
         }
+    }
 
-        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
-        roster.add(student);
-        System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+    private boolean isValidCredit (String creditsCompletedString) {
+        try {
+            Integer.parseInt(creditsCompletedString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private void removeStudent(Roster roster, String[] inputLine) {
@@ -47,7 +66,7 @@ public class RosterManager {
         }
     }
 
-    public void run() { // will need to Scanner class to read input, either StringTokenizer or String.split() to break up command line args
+    public void run() {
         System.out.println("Roster Manager running...");
         Scanner scanner = new Scanner(System.in);
         String dataToken = "";

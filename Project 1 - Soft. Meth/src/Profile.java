@@ -3,6 +3,10 @@ public class Profile implements Comparable { // implements Comparable allow us t
     private String fname;
     private Date dob; //use the Date class described in (f)
 
+    public static final int GREATER = 1;
+    public static final int SMALLER = -1;
+    public static final int EQUAL = 0;
+
     public Profile(String lname, String fname, Date dob) {
         this.lname = lname;
         this.fname = fname;
@@ -16,7 +20,37 @@ public class Profile implements Comparable { // implements Comparable allow us t
 
     @Override
     public int compareTo(Object obj){
-        return 0;
+
+        String fName = this.fname;
+        String lName = this.lname;
+        Date dob = this.dob;
+
+        Profile profile = (Profile)obj;
+
+        String compareFirstName = profile.fname;
+        String compareLastName = profile.lname;
+        Date compareDate = profile.dob;
+
+        if(lName.compareTo(compareLastName) < 0){
+            return SMALLER;
+        } else if(lName.compareTo(compareLastName) > 0){
+            return GREATER;
+        } else{
+            if (fName.compareTo(compareFirstName) < 0){
+                return SMALLER;
+            } else if (fName.compareTo(compareFirstName) > 0){
+                return GREATER;
+            } else{
+                if (dob.compareTo(compareDate) < 0){
+                    return SMALLER;
+                } else if (dob.compareTo(compareDate) > 0){
+                    return GREATER;
+                } else{
+                    return EQUAL;
+                }
+            }
+        }
+
     }
     @Override
     public boolean equals(Object obj) {

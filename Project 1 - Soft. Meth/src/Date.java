@@ -15,6 +15,10 @@ public class Date implements Comparable {
     public static final int LEAP_YEAR_DAY = 29;
     public static final int LOWEST_DAY = 1;
 
+    public static final int GREATER = 1;
+    public static final int SMALLER = -1;
+    public static final int EQUAL = 0;
+
 
     public Date() {
 
@@ -69,7 +73,36 @@ public class Date implements Comparable {
 
     @Override
     public int compareTo(Object obj) {
-        return 0;
+
+        int year = this.year;
+        int month = this.month;
+        int day = this.day;
+
+        Date date = (Date)obj;
+
+        int compareYear = date.year;
+        int compareMonth = date.month;
+        int compareDay = date.day;
+
+        if(year < compareYear){
+            return SMALLER;
+        } else if(year > compareYear){
+            return GREATER;
+        } else{
+            if (month < compareMonth){
+                return SMALLER;
+            } else if(month > compareMonth){
+                return GREATER;
+            } else{
+                if (day < compareDay){
+                    return SMALLER;
+                } else if (day > compareDay){
+                    return GREATER;
+                } else{
+                    return EQUAL;
+                }
+            }
+        }
     }
 
     @Override

@@ -4,6 +4,10 @@ public class Roster {
     public static final int ARRAY_GROWTH = 4;
     public static final int NOT_FOUND = -1;
 
+    public static final int GREATER = 1;
+    public static final int SMALLER = -1;
+    public static final int EQUAL = 0;
+
     public Roster(){
         this.roster = new Student[4];
         this.size = 0;
@@ -83,14 +87,29 @@ public class Roster {
                 students += student.toString() + "\n";
             }
         }
-
         return students;
     }
 
+    public void Student[] insertionSort(){
 
-    public void print () {
+        for(int i = 0; i < size; i++){
+            int j = i;
+            while (j > 0 && roster[j-1].compareTo(roster[j]) == GREATER){
 
-    } //print roster sorted by profiles
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                    j--;
+            }
+        }
+    }
+
+
+    public void print () { //print roster sorted by profiles
+        for(int i = 0; i < size; i++){
+
+        }
+    }
     public void printBySchoolMajor() {
 
     } //print roster sorted by school major

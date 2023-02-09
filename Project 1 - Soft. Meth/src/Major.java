@@ -14,4 +14,8 @@ public enum Major {
         this.school = school;
     }
 
+    public static void setMajor(Student student, Major major) {
+
+    }
+
 }

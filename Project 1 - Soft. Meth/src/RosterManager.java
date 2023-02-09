@@ -66,6 +66,37 @@ public class RosterManager {
         }
     }
 
+    private void changeMajor(Roster roster, String[] inputLine) {
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String major = inputLine[4];
+
+        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
+        if (roster.contains(student)) {
+            int studentIndex = roster.find(student);
+            Major majorName = null;
+            if (major.equalsIgnoreCase("CS")) {
+                majorName = Major.CS;
+            } else if (major.equalsIgnoreCase("MATH")) {
+                majorName = Major.MATH;
+            } else if (major.equalsIgnoreCase("EE")) {
+                majorName = Major.EE;
+            } else if (major.equalsIgnoreCase("ITI")) {
+                majorName = Major.ITI;
+            } else if (major.equalsIgnoreCase("BAIT")) {
+                majorName = Major.BAIT;
+            } else {
+                System.out.println("Major code invalid: " + major);
+                return;
+            }
+            //Major.setMajor(roster.roster[studentIndex],majorName);
+
+            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " major changed to " + major);
+        } else {
+            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+        }
+    }
     public void run() {
         System.out.println("Roster Manager running...");
         Scanner scanner = new Scanner(System.in);
@@ -81,15 +112,15 @@ public class RosterManager {
             } else if (command.equals("R")) {
                 removeStudent(roster,inputLine);
             } else if (command.equals("P")) {
-                System.out.println("Run command P");
+                roster.print(); // need to add spacing, if roster is empty need to print to terminal
             } else if (command.equals("PS")) {
                 System.out.println("Run command PS");
             } else if (command.equals("PC")) {
                 System.out.println("Run command PC");
             } else if (command.equals("L")) {
-                System.out.println("Run command PC");
+                System.out.println("Run command L");
             } else if (command.equals("C")) {
-                System.out.println("Run command PC");
+                changeMajor(roster,inputLine);
             } else if (command.equals("Q")) {
                 break;
             } else {

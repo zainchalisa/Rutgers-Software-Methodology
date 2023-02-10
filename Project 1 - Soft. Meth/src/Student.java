@@ -34,6 +34,10 @@ public class Student implements Comparable {
         return this.major;
     }
 
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
     @Override
     public String toString(){
         return "" + profile + " " + "(" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ")" + "credits completed: " + creditCompleted + " (" + getStanding() + ")";

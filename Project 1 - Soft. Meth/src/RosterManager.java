@@ -11,32 +11,20 @@ public class RosterManager {
         Student studentProfile = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
 
         if (!roster.contains(studentProfile)) {
-            Major majorName = null;
-            if (major.equalsIgnoreCase("CS")) {
-                majorName = Major.CS;
-            } else if (major.equalsIgnoreCase("MATH")) {
-                majorName = Major.MATH;
-            } else if (major.equalsIgnoreCase("EE")) {
-                majorName = Major.EE;
-            } else if (major.equalsIgnoreCase("ITI")) {
-                majorName = Major.ITI;
-            } else if (major.equalsIgnoreCase("BAIT")) {
-                majorName = Major.BAIT;
-            } else {
-                System.out.println("Major code invalid: " + major);
-                return;
-            }
-            if (isValidCredit(creditsCompletedString)) {
-                int creditsCompleted = Integer.parseInt(creditsCompletedString);
-                if (creditsCompleted >= 0) {
-                    Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
-                    roster.add(student);
-                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+            Major majorName = checkMajor(major);
+            if (majorName != null) {
+                if (isValidCredit(creditsCompletedString)) {
+                    int creditsCompleted = Integer.parseInt(creditsCompletedString);
+                    if (creditsCompleted >= 0) {
+                        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
+                        roster.add(student);
+                        System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+                    } else {
+                        System.out.println("Credits completed invalid: cannot be negative!");
+                    }
                 } else {
-                    System.out.println("Credits completed invalid: cannot be negative!");
+                    System.out.println("Credits completed invalid: not an integer!");
                 }
-            } else {
-                System.out.println("Credits completed invalid: not an integer!");
             }
         } else {
             System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is already in the roster.");
@@ -75,27 +63,33 @@ public class RosterManager {
         Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
         if (roster.contains(student)) {
             int studentIndex = roster.find(student);
-            Major majorName = null;
-            if (major.equalsIgnoreCase("CS")) {
-                majorName = Major.CS;
-            } else if (major.equalsIgnoreCase("MATH")) {
-                majorName = Major.MATH;
-            } else if (major.equalsIgnoreCase("EE")) {
-                majorName = Major.EE;
-            } else if (major.equalsIgnoreCase("ITI")) {
-                majorName = Major.ITI;
-            } else if (major.equalsIgnoreCase("BAIT")) {
-                majorName = Major.BAIT;
-            } else {
-                System.out.println("Major code invalid: " + major);
-                return;
+            Major majorName = checkMajor(major);
+            if (majorName != null) {
+                Student rosterStudent = roster.getRoster()[studentIndex];
+                rosterStudent.setMajor(majorName);
+                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " major changed to " + major);
             }
-            //Major.setMajor(roster.roster[studentIndex],majorName);
-
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " major changed to " + major);
         } else {
             System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
         }
+    }
+
+    private Major checkMajor(String major) {
+        Major majorName = null;
+        if (major.equalsIgnoreCase("CS")) {
+            majorName = Major.CS;
+        } else if (major.equalsIgnoreCase("MATH")) {
+            majorName = Major.MATH;
+        } else if (major.equalsIgnoreCase("EE")) {
+            majorName = Major.EE;
+        } else if (major.equalsIgnoreCase("ITI")) {
+            majorName = Major.ITI;
+        } else if (major.equalsIgnoreCase("BAIT")) {
+            majorName = Major.BAIT;
+        } else {
+            System.out.println("Major code invalid: " + major);
+        }
+        return majorName;
     }
     public void run() {
         System.out.println("Roster Manager running...");

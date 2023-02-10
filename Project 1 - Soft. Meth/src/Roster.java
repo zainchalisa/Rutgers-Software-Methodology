@@ -15,6 +15,10 @@ public class Roster {
         this.size = 0;
     }
 
+    public Student[] getRoster() {
+        return roster;
+    }
+
     public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i =0; i < size; i++){

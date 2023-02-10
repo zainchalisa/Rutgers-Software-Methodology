@@ -16,16 +16,31 @@ public class Student implements Comparable {
         return this.creditCompleted;
     }
 
+    public Standing getStanding(){
+
+        int credits = this.creditCompleted;
+        if(credits < 30){
+            return Standing.FRESHMAN;
+        } else if (credits >= 30 && credits < 60){
+            return Standing.SOPHOMORE;
+        } else if (credits >= 60 && credits < 90){
+            return Standing.JUNIOR;
+        } else{
+            return Standing.SENIOR;
+        }
+    }
+
     public Major getMajor(){
         return this.major;
     }
 
     @Override
     public String toString(){
-        return "" + profile + major + creditCompleted;
+        return "" + profile + " " + "(" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ")" + "credits completed: " + creditCompleted + " (" + getStanding() + ")";
     }
 
-    @Override
+    //Kate Lindsey 7/15/2002 (04:547 ITI SC&I) credits completed: 59 (Sophomore)
+
     public int compareTo(Object obj){
         Student student = (Student) obj; //casting
         if(student.profile != null){

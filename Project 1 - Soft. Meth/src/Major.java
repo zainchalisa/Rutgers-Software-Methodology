@@ -18,4 +18,11 @@ public enum Major {
 
     }
 
+    public String getSchool() {
+        return school;
+    }
+
+    public String getCoreCode() {
+        return coreCode;
+    }
 }

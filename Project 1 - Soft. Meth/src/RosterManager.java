@@ -114,9 +114,9 @@ public class RosterManager {
             } else if (command.equals("P")) {
                 roster.print(); // need to add spacing, if roster is empty need to print to terminal
             } else if (command.equals("PS")) {
-                System.out.println("Run command PS");
+                roster.printByStanding();
             } else if (command.equals("PC")) {
-                System.out.println("Run command PC");
+                roster.printBySchoolMajor();
             } else if (command.equals("L")) {
                 System.out.println("Run command L");
             } else if (command.equals("C")) {

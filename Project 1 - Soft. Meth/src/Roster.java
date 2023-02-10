@@ -66,12 +66,11 @@ public class Roster {
     }
 
     public boolean contains(Student student){ //if the student is in roster
-        for (int i =0; i <= size; i++){
-            if (student.equals(roster[i])){
-                return true;
-            }
+        if(find(student) == NOT_FOUND){
+            return false;
+        } else{
+            return true;
         }
-        return false;
     }
 
     @Override
@@ -99,12 +98,64 @@ public class Roster {
         }
     }
 
+    public void insertionSortMajor(Student[] roster){
+        for(int i = 0; i < size; i++){
+            int j = i;
+            while (j > 0){
+                if(roster[j-1].getMajor().getSchool().compareTo(roster[j].getMajor().getSchool()) > EQUAL){
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                }
+                if (roster[j-1].getMajor().getSchool().compareTo(roster[j].getMajor().getSchool()) == EQUAL && roster[j-1].getMajor().name().compareTo(roster[j].getMajor().name()) > EQUAL){
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                }
+                j--;
+            }
+        }
+    }
+
+
+    public void insertionSortStanding(Student[] roster){
+        for(int i = 0; i < size; i++){
+            int j = i;
+            while (j > 0 && roster[j-1].getStanding().name().compareTo(roster[j].getStanding().name()) > GREATER){
+                Student temp = roster[j];
+                roster[j] = roster[j - 1];
+                roster[j - 1] = temp;
+                j--;
+            }
+        }
+    }
+
     public void print () { //print roster sorted by profiles
         insertionSort(roster);
         for(int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
     }
-    public void printBySchoolMajor() {} //print roster sorted by school major
-    public void printByStanding() {} //print roster sorted by standing
+    public void printBySchoolMajor() { //print roster sorted by school major
+        insertionSortMajor(roster);
+        for(int i =0; i < size; i++){
+            System.out.println(roster[i]);
+        }
+    }
+    public void printByStanding() { //print roster sorted by standing
+        insertionSortStanding(roster);
+        for(int i =0; i < size; i++){
+            System.out.println(roster[i]);
+        }
+    }
 }
+
+/*
+A Zain Chalisa 01/02/2002 CS 30
+A Andrew Chacko 01/04/2002 EE 60
+A Abhitej Bokka 09/10/2002 ITI 20
+A Akash Shah 12/18/2002 BAIT 3
+A Kush Patel 04/17/2002 MATH 120
+A Vivek Kumar 03/12/2002 CS 55
+A Humpty Dumpty 04/02/2002 CS 77
+ */

@@ -33,25 +33,26 @@ public class Profile implements Comparable { // implements Comparable allow us t
         String compareLastName = profile.lname;
         Date compareDate = profile.dob;
 
-        if(lName.compareTo(compareLastName) < 0){
-            return SMALLER;
-        } else if(lName.compareTo(compareLastName) > 0){
-            return GREATER;
-        } else{
-            if (fName.compareTo(compareFirstName) < 0){
+
+        if (lName.compareTo(compareLastName) < 0) {
                 return SMALLER;
-            } else if (fName.compareTo(compareFirstName) > 0){
+            } else if (lName.compareTo(compareLastName) > 0) {
                 return GREATER;
-            } else{
-                if (dob.compareTo(compareDate) < 0){
+            } else {
+                if (fName.compareTo(compareFirstName) < 0) {
                     return SMALLER;
-                } else if (dob.compareTo(compareDate) > 0){
+                } else if (fName.compareTo(compareFirstName) > 0) {
                     return GREATER;
-                } else{
-                    return EQUAL;
+                } else {
+                    if (dob.compareTo(compareDate) < 0) {
+                        return SMALLER;
+                    } else if (dob.compareTo(compareDate) > 0) {
+                        return GREATER;
+                    } else {
+                        return EQUAL;
+                    }
                 }
             }
-        }
     }
 
     public Date getDob() {

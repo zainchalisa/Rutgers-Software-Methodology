@@ -83,6 +83,7 @@ public class RosterManager {
         }
     }
 
+
     private Major checkMajor(String major) {
         Major majorName = null;
         if (major.equalsIgnoreCase("CS")) {
@@ -100,6 +101,8 @@ public class RosterManager {
         }
         return majorName;
     }
+
+
     public void run() {
         System.out.println("Roster Manager running...");
         Scanner scanner = new Scanner(System.in);
@@ -121,7 +124,7 @@ public class RosterManager {
             } else if (command.equals("PC")) {
                 roster.printBySchoolMajor();
             } else if (command.equals("L")) {
-                System.out.println("Run command L");
+                roster.listBySchoolMethod("SAS");
             } else if (command.equals("C")) {
                 changeMajor(roster,inputLine);
             } else if (command.equals("Q")) {

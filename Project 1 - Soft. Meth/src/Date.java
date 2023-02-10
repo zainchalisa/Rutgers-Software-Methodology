@@ -18,7 +18,7 @@ public class Date implements Comparable {
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
-    public static final int minAge = 1;
+    public static final int minAge = 16;
 
     public Date() {
         Calendar calendar = Calendar.getInstance();
@@ -51,14 +51,10 @@ public class Date implements Comparable {
             return false;
         }
 
-        if(isValidStudent() == false){
-            return false;
-        }
-
         return true;
     }
 
-    public boolean isValidStudent(){
+    public boolean isValidStudent() {
         Calendar calendar = Calendar.getInstance();
 
         int year = calendar.get(Calendar.YEAR);
@@ -67,19 +63,24 @@ public class Date implements Comparable {
 
         int minYear = year - minAge;
 
-        if(this.year <= minYear){
+        if (this.year <= minYear) {
             return true;
-        } else if (this.year == minYear){
-            if (this.month <= month){
-                return true;
-            } else if (this.day <= day){
-                return true;
-            } else{
-                return false;
-            }
-        } else{
+        } else if (this.year > minYear) {
             return false;
         }
+
+        if (this.year == minYear) {
+            if (this.month < month) {
+                return true;
+            } else if (this.month == month) {
+                if (this.day <= day) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean isLeapYear() {
@@ -155,13 +156,13 @@ public class Date implements Comparable {
         Date testCase3 = new Date("13/31/2003");
         Date testCase4 = new Date("3/32/2003");
         Date testCase5 = new Date("-1/31/2003");
-        Date testCase6 = new Date("2/29/2017");
+        Date testCase6 = new Date("3/20/2007");
         System.out.println(testCase1.isValid());
         System.out.println(testCase2.isValid());
         System.out.println(testCase3.isValid());
         System.out.println(testCase4.isValid());
         System.out.println(testCase5.isValid());
-        System.out.println(testCase5.isValidStudent());
+        System.out.println(testCase6.isValidStudent());
 
     }
 }

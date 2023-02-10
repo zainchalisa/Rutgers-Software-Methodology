@@ -10,6 +10,7 @@ public class Roster {
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
 
+
     public Roster(){
         this.roster = new Student[4];
         this.size = 0;
@@ -94,6 +95,37 @@ public class Roster {
         return students;
     }
 
+    public void listBySchoolMethod(String school){
+
+       Student[] sortedSchoolArray = new Student[size];
+       int counter = 0;
+
+        for(int i =0; i < size; i++){
+            if(roster[i].getMajor().getSchool().compareTo(school) == EQUAL){
+                sortedSchoolArray[counter] = roster[i];
+                counter++;
+            }
+        }
+        insertionSortList(sortedSchoolArray);
+        for(int i =0; i < counter; i++){
+            System.out.println(sortedSchoolArray[i]);
+        }
+    }
+
+    public void insertionSortList(Student[] roster){
+        for(int i = 0; i < roster.length; i++){
+            int j = i;
+            if(roster[j] != null) {
+                while (j > 0 && roster[j - 1].compareTo(roster[j]) == GREATER) {
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                    j--;
+                }
+            }
+        }
+    }
+
     public void insertionSort(Student[] roster){
         for(int i = 0; i < size; i++){
             int j = i;
@@ -129,12 +161,12 @@ public class Roster {
     public void insertionSortStanding(Student[] roster){
         for(int i = 0; i < size; i++){
             int j = i;
-            while (j > 0 && roster[j-1].getStanding().name().compareTo(roster[j].getStanding().name()) > GREATER){
-                Student temp = roster[j];
-                roster[j] = roster[j - 1];
-                roster[j - 1] = temp;
-                j--;
-            }
+                while (j > 0 && roster[j - 1].getStanding().name().compareTo(roster[j].getStanding().name()) > GREATER) {
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                    j--;
+                }
         }
     }
 
@@ -160,8 +192,8 @@ public class Roster {
 
 /*
 A Zain Chalisa 01/02/2002 CS 30
-A Andrew Chacko 01/04/2002 EE 60
-A Abhitej Bokka 09/10/2002 ITI 20
+A Andrew Chacko 01/04/2002 CS 60
+A Abhitej Bokka 09/10/2002 CS 20
 A Akash Shah 12/18/2002 BAIT 3
 A Kush Patel 04/17/2002 MATH 120
 A Vivek Kumar 03/12/2002 CS 55

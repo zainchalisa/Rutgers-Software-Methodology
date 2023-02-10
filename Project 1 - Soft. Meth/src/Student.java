@@ -30,6 +30,10 @@ public class Student implements Comparable {
         }
     }
 
+    public Profile getProfile() {
+        return this.profile;
+    }
+
     public Major getMajor(){
         return this.major;
     }

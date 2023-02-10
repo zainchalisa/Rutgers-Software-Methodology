@@ -12,7 +12,7 @@ public class Date implements Comparable {
     public static final int[] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public static final int FEBRUARY = 2;
-    public static final int LEAP_YEAR_DAY = 29;
+    public static final int LEAP_YEAR_DAY = 28;
     public static final int LOWEST_DAY = 1;
 
     public static final int GREATER = 1;
@@ -43,11 +43,11 @@ public class Date implements Comparable {
             return false;
         }
 
-        if (this.month == FEBRUARY && isLeapYear()) {
+        if (this.month == FEBRUARY && isLeapYear() == false) {
             if (this.day > LEAP_YEAR_DAY) {
                 return false;
             }
-        } else if (this.month > MONTH_DAYS[this.month - MONTH_ADDITIVE] || this.month < LOWEST_DAY) {
+        } else if (this.day > MONTH_DAYS[this.month - MONTH_ADDITIVE] || this.month < LOWEST_DAY) {
             return false;
         }
 
@@ -65,9 +65,9 @@ public class Date implements Comparable {
         int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int minYear = this.year - minAge;
+        int minYear = year - minAge;
 
-        if(this.year >= minYear){
+        if(this.year <= minYear){
             return true;
         } else if (this.year == minYear){
             if (this.month <= month){
@@ -84,18 +84,19 @@ public class Date implements Comparable {
 
     private boolean isLeapYear() {
 
-        if (this.year % QUADRENNIAL != 0) {
+        if (this.year % QUADRENNIAL == 0) {
+            if (this.year % CENTENNIAL == 0) {
+                if(this.year % QUATERCENTENNIAL == 0) {
+                    return true;
+                } else{
+                    return false;
+                }
+            }else{
+                return true;
+            }
+        } else{
             return false;
         }
-
-        if (this.year % CENTENNIAL != 0) {
-            return false;
-        }
-
-        if (this.year % QUATERCENTENNIAL != 0) {
-            return false;
-        }
-        return true;
     }
 
     @Override
@@ -150,5 +151,17 @@ public class Date implements Comparable {
 
     public static void main(String[] args){
         Date testCase1 = new Date("2/29/2003");
+        Date testCase2 = new Date("4/31/2003");
+        Date testCase3 = new Date("13/31/2003");
+        Date testCase4 = new Date("3/32/2003");
+        Date testCase5 = new Date("-1/31/2003");
+        Date testCase6 = new Date("2/29/2017");
+        System.out.println(testCase1.isValid());
+        System.out.println(testCase2.isValid());
+        System.out.println(testCase3.isValid());
+        System.out.println(testCase4.isValid());
+        System.out.println(testCase5.isValid());
+        System.out.println(testCase5.isValidStudent());
+
     }
 }

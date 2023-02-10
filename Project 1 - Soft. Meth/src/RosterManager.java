@@ -9,25 +9,34 @@ public class RosterManager {
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
         Student studentProfile = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
 
-        if (!roster.contains(studentProfile)) {
-            Major majorName = checkMajor(major);
-            if (majorName != null) {
-                if (isValidCredit(creditsCompletedString)) {
-                    int creditsCompleted = Integer.parseInt(creditsCompletedString);
-                    if (creditsCompleted >= 0) {
-                        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
-                        roster.add(student);
-                        System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
-                    } else {
-                        System.out.println("Credits completed invalid: cannot be negative!");
+        if (dob.isValid()) {
+            if (dob.isValidStudent()) {
+                if (!roster.contains(studentProfile)) {
+                    Major majorName = checkMajor(major);
+                    if (majorName != null) {
+                        if (isValidCredit(creditsCompletedString)) {
+                            int creditsCompleted = Integer.parseInt(creditsCompletedString);
+                            if (creditsCompleted >= 0) {
+                                Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
+                                roster.add(student);
+                                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+                            } else {
+                                System.out.println("Credits completed invalid: cannot be negative!");
+                            }
+                        } else {
+                            System.out.println("Credits completed invalid: not an integer!");
+                        }
                     }
                 } else {
-                    System.out.println("Credits completed invalid: not an integer!");
+                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is already in the roster.");
                 }
+            } else {
+                System.out.println("DOB invalid: " + dob + " younger than 16 years old.");
             }
         } else {
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is already in the roster.");
+            System.out.println("DOB invalid: " + dob + " not a valid calendar date!");
         }
     }
 

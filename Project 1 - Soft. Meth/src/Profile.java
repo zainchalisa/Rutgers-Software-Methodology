@@ -50,8 +50,12 @@ public class Profile implements Comparable { // implements Comparable allow us t
                 }
             }
         }
-
     }
+
+    public Date getDob() {
+        return dob;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Profile) {

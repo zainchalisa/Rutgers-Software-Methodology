@@ -26,6 +26,7 @@ public class Main {
         roster.add(studentFifth);
 
 
+
         //roster.remove(studentOne);
         //roster.remove(studentTwo);
         roster.printBySchoolMajor();

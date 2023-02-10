@@ -42,6 +42,7 @@ public class Roster {
             return false; // it already is in the roster
         }
 
+
         roster[size] = student;
         size++;
 

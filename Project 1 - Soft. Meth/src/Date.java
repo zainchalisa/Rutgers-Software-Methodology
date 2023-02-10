@@ -18,10 +18,9 @@ public class Date implements Comparable {
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
-
+    public static final int minAge = 1;
 
     public Date() {
-
         Calendar calendar = Calendar.getInstance();
         this.year = calendar.get(Calendar.YEAR);
         this.month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
@@ -52,7 +51,35 @@ public class Date implements Comparable {
             return false;
         }
 
+        if(isValidStudent() == false){
+            return false;
+        }
+
         return true;
+    }
+
+    public boolean isValidStudent(){
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int minYear = this.year - minAge;
+
+        if(this.year >= minYear){
+            return true;
+        } else if (this.year == minYear){
+            if (this.month <= month){
+                return true;
+            } else if (this.day <= day){
+                return true;
+            } else{
+                return false;
+            }
+        } else{
+            return false;
+        }
     }
 
     private boolean isLeapYear() {
@@ -119,5 +146,9 @@ public class Date implements Comparable {
     public String toString(){
 
         return month + "/" + day + "/" + year;
+    }
+
+    public static void main(String[] args){
+        Date testCase1 = new Date("2/29/2003");
     }
 }

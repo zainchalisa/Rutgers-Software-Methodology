@@ -65,7 +65,7 @@ public class Date implements Comparable {
         int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int minYear = this.year - minAge;
+        int minYear = year - minAge;
 
         if(this.year >= minYear){
             return true;
@@ -155,10 +155,13 @@ public class Date implements Comparable {
         Date testCase3 = new Date("13/31/2003");
         Date testCase4 = new Date("3/32/2003");
         Date testCase5 = new Date("-1/31/2003");
+        Date testCase6 = new Date("2/29/2017");
         System.out.println(testCase1.isValid());
         System.out.println(testCase2.isValid());
         System.out.println(testCase3.isValid());
         System.out.println(testCase4.isValid());
         System.out.println(testCase5.isValid());
+        System.out.println(testCase5.isValidStudent());
+
     }
 }

@@ -58,10 +58,13 @@ public class Roster {
         int studentIndex = find(student);
 
         for(int i = studentIndex; i < size - 1; i++){
+            if(i + 1 < size){
                 roster[i] = roster[i+1];
-        }
+            } else{
+                roster[size] = null;
+            }
 
-        roster[size] = null;
+        }
         size--;
         return true;
     }

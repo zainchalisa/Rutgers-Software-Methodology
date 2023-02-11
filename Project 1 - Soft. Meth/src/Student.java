@@ -6,26 +6,27 @@ public class Student implements Comparable {
     public Student(Profile profile) {
         this.profile = profile;
     }
+
     public Student(Profile profile, Major major, int creditCompleted) {
         this.profile = profile;
         this.major = major;
         this.creditCompleted = creditCompleted;
     }
 
-    public int getCreditCompleted(){
+    public int getCreditCompleted() {
         return this.creditCompleted;
     }
 
-    public Standing getStanding(){
+    public Standing getStanding() {
 
         int credits = this.creditCompleted;
-        if(credits < 30){
+        if (credits < 30) {
             return Standing.Freshman;
-        } else if (credits >= 30 && credits < 60){
+        } else if (credits >= 30 && credits < 60) {
             return Standing.Sophomore;
-        } else if (credits >= 60 && credits < 90){
+        } else if (credits >= 60 && credits < 90) {
             return Standing.Junior;
-        } else{
+        } else {
             return Standing.Senior;
         }
     }
@@ -34,7 +35,7 @@ public class Student implements Comparable {
         return this.profile;
     }
 
-    public Major getMajor(){
+    public Major getMajor() {
         return this.major;
     }
 
@@ -43,20 +44,25 @@ public class Student implements Comparable {
     }
 
     @Override
-    public String toString(){
-        return "" + profile + " " + "(" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")";
+    public String toString() {
+        return "" + profile + " " + "(" + getMajor().getCoreCode() + " " +
+                major + " " + getMajor().getSchool() + ") " +
+                "credits completed: " + creditCompleted + " (" +
+                getStanding() + ")";
     }
 
-    //Kate Lindsey 7/15/2002 (04:547 ITI SC&I) credits completed: 59 (Sophomore)
+    //Kate Lindsey 7/15/2002 (04:547 ITI SC&I) credits completed: 59
+    // (Sophomore)
 
-    public int compareTo(Object obj){
+    public int compareTo(Object obj) {
         Student student = (Student) obj; //casting
-        if(student.profile != null){
+        if (student.profile != null) {
             return this.profile.compareTo(student.profile);
-        } else{
+        } else {
             return 1;
         }
     }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Student) {

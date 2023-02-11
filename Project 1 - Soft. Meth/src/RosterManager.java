@@ -8,7 +8,8 @@ public class RosterManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
-        Student studentProfile = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
+        Student studentProfile = new Student(new Profile(lastName,
+                firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
         if (dob.isValid()) {
@@ -17,30 +18,43 @@ public class RosterManager {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
                         if (isValidCredit(creditsCompletedString)) {
-                            int creditsCompleted = Integer.parseInt(creditsCompletedString);
+                            int creditsCompleted = Integer.
+                                    parseInt(creditsCompletedString);
                             if (creditsCompleted >= 0) {
-                                Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)), majorName, creditsCompleted);
+                                Student student =
+                                        new Student(new Profile(lastName
+                                                , firstName,
+                                                new Date(dateOfBirth)),
+                                                majorName,
+                                                creditsCompleted);
                                 roster.add(student);
-                                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " added to the roster.");
+                                System.out.println(firstName + " " +
+                                        lastName + " " + dateOfBirth +
+                                        " added to the roster.");
                             } else {
-                                System.out.println("Credits completed invalid: cannot be negative!");
+                                System.out.println("Credits completed " +
+                                        "invalid: cannot be negative!");
                             }
                         } else {
-                            System.out.println("Credits completed invalid: not an integer!");
+                            System.out.println("Credits completed " +
+                                    "invalid: not an integer!");
                         }
                     }
                 } else {
-                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is already in the roster.");
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " is already in the roster.");
                 }
             } else {
-                System.out.println("DOB invalid: " + dob + " younger than 16 years old.");
+                System.out.println("DOB invalid: " + dob + " younger " +
+                        "than 16 years old.");
             }
         } else {
-            System.out.println("DOB invalid: " + dob + " not a valid calendar date!");
+            System.out.println("DOB invalid: " + dob + " not a valid " +
+                    "calendar date!");
         }
     }
 
-    private boolean isValidCredit (String creditsCompletedString) {
+    private boolean isValidCredit(String creditsCompletedString) {
         try {
             Integer.parseInt(creditsCompletedString);
             return true;
@@ -54,12 +68,15 @@ public class RosterManager {
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
 
-        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
+        Student student = new Student(new Profile(lastName, firstName,
+                new Date(dateOfBirth)));
         if (roster.contains(student)) {
             roster.remove(student);
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " removed from the roster.");
+            System.out.println(firstName + " " + lastName + " " +
+                    dateOfBirth + " removed from the roster.");
         } else {
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+            System.out.println(firstName + " " + lastName + " " +
+                    dateOfBirth + " is not in the roster.");
         }
     }
 
@@ -69,17 +86,20 @@ public class RosterManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
 
-        Student student = new Student(new Profile(lastName, firstName, new Date(dateOfBirth)));
+        Student student = new Student(new Profile(lastName, firstName,
+                new Date(dateOfBirth)));
         if (roster.contains(student)) {
             int studentIndex = roster.find(student);
             Major majorName = checkMajor(major);
             if (majorName != null) {
                 Student rosterStudent = roster.getRoster()[studentIndex];
                 rosterStudent.setMajor(majorName);
-                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " major changed to " + major);
+                System.out.println(firstName + " " + lastName + " " +
+                        dateOfBirth + " major changed to " + major);
             }
         } else {
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+            System.out.println(firstName + " " + lastName + " " +
+                    dateOfBirth + " is not in the roster.");
         }
     }
 
@@ -114,11 +134,12 @@ public class RosterManager {
             String[] inputLine = dataToken.split("\\s+");
             String command = inputLine[0];
             if (command.equals("A")) {
-                addStudent(roster,inputLine);
+                addStudent(roster, inputLine);
             } else if (command.equals("R")) {
-                removeStudent(roster,inputLine);
+                removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
-                roster.print(); // need to add spacing, if roster is empty need to print to terminal
+                roster.print(); // need to add spacing, if roster is
+                // empty// need to print to terminal
             } else if (command.equals("PS")) {
                 roster.printByStanding();
             } else if (command.equals("PC")) {
@@ -126,7 +147,7 @@ public class RosterManager {
             } else if (command.equals("L")) {
                 roster.listBySchoolMethod("SAS");
             } else if (command.equals("C")) {
-                changeMajor(roster,inputLine);
+                changeMajor(roster, inputLine);
             } else if (command.equals("Q")) {
                 break;
             } else {

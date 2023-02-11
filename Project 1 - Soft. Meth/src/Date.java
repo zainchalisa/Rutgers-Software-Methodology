@@ -9,7 +9,8 @@ public class Date implements Comparable {
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
-    public static final int[] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    public static final int[] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31,
+            31, 30, 31, 30, 31};
 
     public static final int FEBRUARY = 2;
     public static final int LEAP_YEAR_DAY = 28;
@@ -47,7 +48,8 @@ public class Date implements Comparable {
             if (this.day > LEAP_YEAR_DAY) {
                 return false;
             }
-        } else if (this.day > MONTH_DAYS[this.month - MONTH_ADDITIVE] || this.month < LOWEST_DAY) {
+        } else if (this.day > MONTH_DAYS[this.month - MONTH_ADDITIVE] ||
+                this.month < LOWEST_DAY) {
             return false;
         }
 
@@ -78,7 +80,7 @@ public class Date implements Comparable {
                 } else {
                     return false;
                 }
-            } else{
+            } else {
                 return false;
             }
         }
@@ -89,15 +91,15 @@ public class Date implements Comparable {
 
         if (this.year % QUADRENNIAL == 0) {
             if (this.year % CENTENNIAL == 0) {
-                if(this.year % QUATERCENTENNIAL == 0) {
+                if (this.year % QUATERCENTENNIAL == 0) {
                     return true;
-                } else{
+                } else {
                     return false;
                 }
-            }else{
+            } else {
                 return true;
             }
-        } else{
+        } else {
             return false;
         }
     }
@@ -109,27 +111,27 @@ public class Date implements Comparable {
         int month = this.month;
         int day = this.day;
 
-        Date date = (Date)obj;
+        Date date = (Date) obj;
 
         int compareYear = date.year;
         int compareMonth = date.month;
         int compareDay = date.day;
 
-        if(year < compareYear){
+        if (year < compareYear) {
             return SMALLER;
-        } else if(year > compareYear){
+        } else if (year > compareYear) {
             return GREATER;
-        } else{
-            if (month < compareMonth){
+        } else {
+            if (month < compareMonth) {
                 return SMALLER;
-            } else if(month > compareMonth){
+            } else if (month > compareMonth) {
                 return GREATER;
-            } else{
-                if (day < compareDay){
+            } else {
+                if (day < compareDay) {
                     return SMALLER;
-                } else if (day > compareDay){
+                } else if (day > compareDay) {
                     return GREATER;
-                } else{
+                } else {
                     return EQUAL;
                 }
             }
@@ -140,19 +142,20 @@ public class Date implements Comparable {
     public boolean equals(Object obj) {
         if (obj instanceof Date) {
             Date date = (Date) obj; //casting
-            return (date.year == this.year) && (date.day == this.day) && (date.month == this.month);
+            return (date.year == this.year) && (date.day == this.day) &&
+                    (date.month == this.month);
         }
         return true;
     }
 
 
     @Override
-    public String toString(){
+    public String toString() {
 
         return month + "/" + day + "/" + year;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Date testCase1 = new Date("2/29/2003");
         Date testCase2 = new Date("4/31/2003");
         Date testCase3 = new Date("13/31/2003");

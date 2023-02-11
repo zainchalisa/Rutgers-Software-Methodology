@@ -1,4 +1,5 @@
-public class Profile implements Comparable { // implements Comparable allow us to compare objects of the same class
+public class Profile implements Comparable { // implements Comparable
+    // allow us to compare objects of the same class
     private String lname;
     private String fname;
     private Date dob; //use the Date class described in (f)
@@ -14,20 +15,22 @@ public class Profile implements Comparable { // implements Comparable allow us t
     }
 
 
-
     @Override
-    public String toString(){
-        return fname.substring(0,1).toUpperCase() + fname.substring(1) + " " + lname.substring(0,1).toUpperCase() + lname.substring(1) + " " + dob;
+    public String toString() {
+        return fname.substring(0, 1).toUpperCase() +
+                fname.substring(1) + " " +
+                lname.substring(0, 1).toUpperCase() +
+                lname.substring(1) + " " + dob;
     }
 
     @Override
-    public int compareTo(Object obj){
+    public int compareTo(Object obj) {
 
         String fName = this.fname;
         String lName = this.lname;
         Date dob = this.dob;
 
-        Profile profile = (Profile)obj;
+        Profile profile = (Profile) obj;
 
         String compareFirstName = profile.fname;
         String compareLastName = profile.lname;
@@ -35,24 +38,24 @@ public class Profile implements Comparable { // implements Comparable allow us t
 
 
         if (lName.compareTo(compareLastName) < 0) {
+            return SMALLER;
+        } else if (lName.compareTo(compareLastName) > 0) {
+            return GREATER;
+        } else {
+            if (fName.compareTo(compareFirstName) < 0) {
                 return SMALLER;
-            } else if (lName.compareTo(compareLastName) > 0) {
+            } else if (fName.compareTo(compareFirstName) > 0) {
                 return GREATER;
             } else {
-                if (fName.compareTo(compareFirstName) < 0) {
+                if (dob.compareTo(compareDate) < 0) {
                     return SMALLER;
-                } else if (fName.compareTo(compareFirstName) > 0) {
+                } else if (dob.compareTo(compareDate) > 0) {
                     return GREATER;
                 } else {
-                    if (dob.compareTo(compareDate) < 0) {
-                        return SMALLER;
-                    } else if (dob.compareTo(compareDate) > 0) {
-                        return GREATER;
-                    } else {
-                        return EQUAL;
-                    }
+                    return EQUAL;
                 }
             }
+        }
     }
 
     public Date getDob() {
@@ -63,8 +66,10 @@ public class Profile implements Comparable { // implements Comparable allow us t
     public boolean equals(Object obj) {
         if (obj instanceof Profile) {
             Profile profile = (Profile) obj; //casting
-            return (profile.lname.equalsIgnoreCase(this.lname)) && (profile.fname.equalsIgnoreCase(this.fname)) && (profile.dob.equals(this.dob));
-        } else{
+            return (profile.lname.equalsIgnoreCase(this.lname)) &&
+                    (profile.fname.equalsIgnoreCase(this.fname)) &&
+                    (profile.dob.equals(this.dob));
+        } else {
             return false;
         }
     }

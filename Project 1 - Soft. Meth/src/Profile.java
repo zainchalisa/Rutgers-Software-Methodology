@@ -17,7 +17,7 @@ public class Profile implements Comparable { // implements Comparable allow us t
 
     @Override
     public String toString(){
-        return fname + " " + lname + " " + dob;
+        return fname.substring(0,1).toUpperCase() + fname.substring(1) + " " + lname.substring(0,1).toUpperCase() + lname.substring(1) + " " + dob;
     }
 
     @Override

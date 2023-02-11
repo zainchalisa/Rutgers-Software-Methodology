@@ -44,7 +44,7 @@ public class Student implements Comparable {
 
     @Override
     public String toString(){
-        return "" + profile + " " + "(" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ")" + "credits completed: " + creditCompleted + " (" + getStanding() + ")";
+        return "" + profile + " " + "(" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")";
     }
 
     //Kate Lindsey 7/15/2002 (04:547 ITI SC&I) credits completed: 59 (Sophomore)

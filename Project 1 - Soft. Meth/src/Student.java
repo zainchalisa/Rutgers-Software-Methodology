@@ -20,13 +20,13 @@ public class Student implements Comparable {
 
         int credits = this.creditCompleted;
         if(credits < 30){
-            return Standing.FRESHMAN;
+            return Standing.Freshman;
         } else if (credits >= 30 && credits < 60){
-            return Standing.SOPHOMORE;
+            return Standing.Sophomore;
         } else if (credits >= 60 && credits < 90){
-            return Standing.JUNIOR;
+            return Standing.Junior;
         } else{
-            return Standing.SENIOR;
+            return Standing.Senior;
         }
     }
 

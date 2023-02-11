@@ -63,7 +63,7 @@ public class Date implements Comparable {
 
         int minYear = year - minAge;
 
-        if (this.year <= minYear) {
+        if (this.year < minYear) {
             return true;
         } else if (this.year > minYear) {
             return false;
@@ -78,6 +78,8 @@ public class Date implements Comparable {
                 } else {
                     return false;
                 }
+            } else{
+                return false;
             }
         }
         return false;

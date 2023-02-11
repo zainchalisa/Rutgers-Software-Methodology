@@ -1,7 +1,7 @@
 public enum Standing {
 
-    FRESHMAN,
-    SOPHOMORE,
-    JUNIOR,
-    SENIOR;
+    Freshman,
+    Sophomore,
+    Junior,
+    Senior;
 }

@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 /**
- * This class creates a user interface to process command line arguments entered in the terminal and display results
+ * This class creates a user interface to process command line arguments
+ * entered in the terminal and display results
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -10,7 +11,8 @@ public class RosterManager {
     /**
      * This method adds a student to the roster.
      * @param roster object to hold a list of students
-     * @param inputLine command line arguments from user input to access student information
+     * @param inputLine command line arguments from user input to access
+     * student information
      */
     private void addStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
@@ -30,7 +32,9 @@ public class RosterManager {
                         if (isValidCreditString(creditsCompletedString)) {
                             int creditsCompleted = Integer.
                                     parseInt(creditsCompletedString);
-                            isValidCredit(roster,firstName,lastName,dateOfBirth,creditsCompleted,majorName);
+                            isValidCredit(roster,firstName,lastName,
+                                    dateOfBirth,creditsCompleted,
+                                    majorName);
                         } else {
                             System.out.println("Credits completed " +
                                     "invalid: not an integer!");
@@ -52,7 +56,8 @@ public class RosterManager {
 
     /**
      * Checks to make sure credits entered by user is an integer
-     * @param creditsCompletedString string entered by user to show how many credits student has
+     * @param creditsCompletedString string entered by user to show how
+     * many credits student has
      * @return returns whether or not credit value entered by user is valid
      */
     private boolean isValidCreditString(String creditsCompletedString) {
@@ -67,7 +72,8 @@ public class RosterManager {
     /**
      * Removes student from the roster
      * @param roster object to hold a list of students
-     * @param inputLine command line arguments from user input to access student information
+     * @param inputLine command line arguments from user input to access
+     *                  student information
      */
     private void removeStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
@@ -89,7 +95,8 @@ public class RosterManager {
     /**
      * Change the major of a student in the roster
      * @param roster object to hold a list of students
-     * @param inputLine command line arguments from user input to access student information
+     * @param inputLine command line arguments from user input to access
+     *                  student information
      */
     private void changeMajor(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
@@ -154,7 +161,8 @@ public class RosterManager {
     /**
      * Lists all students in a specific school
      * @param roster object to hold a list of students
-     * @param inputLine command line arguments from user input to access student information
+     * @param inputLine command line arguments from user input to access
+     *                  student information
      */
     private void listSchool(Roster roster, String[] inputLine) {
         String school = inputLine[1];
@@ -165,7 +173,8 @@ public class RosterManager {
             return;
         }
         for (int i = 0; i < roster.getSize(); i++) {
-            if (roster.getRoster()[i].getMajor().getSchool().equalsIgnoreCase(school)) {
+            if (roster.getRoster()[i].getMajor().getSchool().
+                    equalsIgnoreCase(school)) {
                 sortedSchoolArray[counter] = roster.getRoster()[i];
                 counter++;
             }
@@ -187,7 +196,9 @@ public class RosterManager {
      * @param creditsCompleted number of credits entered by user
      * @param majorName major of student entered by user
      */
-    private void isValidCredit (Roster roster, String firstName, String lastName, String dateOfBirth, int creditsCompleted, Major majorName) {
+    private void isValidCredit (Roster roster, String firstName, String
+            lastName, String dateOfBirth, int creditsCompleted, Major
+            majorName) {
         if (creditsCompleted >= 0) {
             Student student =
                     new Student(new Profile(lastName
@@ -206,7 +217,8 @@ public class RosterManager {
     }
 
     /**
-     * This method reads input from the command line and executes commands based on the input
+     * This method reads input from the command line and executes commands
+     * based on the input
      */
     public void run() {
         System.out.println("Roster Manager running...");

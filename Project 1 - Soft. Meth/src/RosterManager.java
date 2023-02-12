@@ -175,7 +175,7 @@ public class RosterManager {
         for (int i = 0; i < counter; i++) {
             System.out.println(sortedSchoolArray[i]);
         }
-        System.out.println("* end of list *");
+        System.out.println("* end of list **");
     }
 
     /**
@@ -232,12 +232,14 @@ public class RosterManager {
                 listSchool(roster,inputLine);
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
+            } else if (command.equals("\n")) {
+                continue;
             } else if (command.equals("Q")) {
                 break;
             } else {
-                System.out.println(command + " is not a valid command!");
+                System.out.println(command + " is an invalid command!");
             }
         }
-        System.out.println("Roster Manager Terminated");
+        System.out.println("Roster Manager terminated.");
     }
 }

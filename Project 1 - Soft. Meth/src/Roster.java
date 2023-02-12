@@ -246,31 +246,45 @@ public class Roster {
     public void print() { //print roster sorted by profiles
         if (size == 0) {
             System.out.println("Student roster is empty!");
+            return;
         }
         insertionSort(roster);
+        System.out.println("* Student roster sorted by last name, first name, DOB **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
+        System.out.println("* end of roster **");
     }
 
     /**
      * This constructor prints the roster in order of majors
      */
-    public void printBySchoolMajor() { //print roster sorted by school
-        // major
+    public void printBySchoolMajor() {
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+            return;
+        }
         insertionSortMajor(roster);
+        System.out.println("* Student roster sorted by school, major **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
+        System.out.println("* end of roster **");
     }
 
     /**
      * This constructors prints the roster in order of standings
      */
-    public void printByStanding() { //print roster sorted by standing
+    public void printByStanding() {
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+            return;
+        }
         insertionSortStanding(roster);
+        System.out.println("* Student roster sorted by standing **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
+        System.out.println("* end of roster **");
     }
 }

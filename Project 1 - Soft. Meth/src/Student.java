@@ -1,5 +1,6 @@
 /**
- * This class creates student objects with the given fields Profile, Major, and Date.
+ * This class creates student objects with the given fields Profile, Major,
+ * and Date.
  * @author zainchalisa
  * @author nanaafriyie
  */

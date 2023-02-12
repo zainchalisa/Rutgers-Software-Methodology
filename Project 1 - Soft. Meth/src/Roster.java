@@ -224,21 +224,10 @@ public class Roster {
                     roster[j - 1] = temp;
                 }
 
-                if(roster[j - 1].getStanding().name().compareTo(roster[j].
-                        getStanding().name()) == EQUAL){
-                    if(roster[j-1].getCreditCompleted() < roster[j].
-                            getCreditCompleted()){
-                        Student temp = roster[j];
-                        roster[j] = roster[j - 1];
-                        roster[j - 1] = temp;
-                    }
-                }
                 j--;
             }
         }
     }
-
-
 
     /**
      * This constructor prints the student by first name, last name, DOB

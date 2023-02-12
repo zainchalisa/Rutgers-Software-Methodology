@@ -1,26 +1,31 @@
 import java.util.Calendar;
 
+/**
+ * This class implements date processing and implementations
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class Date implements Comparable {
     private int year;
     private int month;
     private int day;
-
     public static final int MONTH_ADDITIVE = 1;
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
     public static final int[] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31,
             31, 30, 31, 30, 31};
-
     public static final int FEBRUARY = 2;
     public static final int LEAP_YEAR_DAY = 28;
     public static final int LOWEST_DAY = 1;
-
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
     public static final int minAge = 16;
 
+    /**
+     * This is a constructor which fetches the current date
+     */
     public Date() {
         Calendar calendar = Calendar.getInstance();
         this.year = calendar.get(Calendar.YEAR);
@@ -29,6 +34,10 @@ public class Date implements Comparable {
 
     }
 
+    /**
+     * This method splits the date string inputted by the user
+     * @param date is the inputted string by the user
+     */
     public Date(String date) {
 
         String[] dateArray = date.split("/", 3);
@@ -38,6 +47,10 @@ public class Date implements Comparable {
 
     }
 
+    /**
+     * This method validates if the date string entered is valid
+     * @return returns if the date is a valid date
+     */
     public boolean isValid() { //check if a date is a valid calendar date
 
         if (this.month > 12 || this.month < 1) {
@@ -56,6 +69,10 @@ public class Date implements Comparable {
         return true;
     }
 
+    /**
+     * This method checks if the student is exactly 16 older or younger,
+     * @return returns if the students is valid based on their age
+     */
     public boolean isValidStudent() {
         Calendar calendar = Calendar.getInstance();
 
@@ -87,6 +104,10 @@ public class Date implements Comparable {
         return false;
     }
 
+    /**
+     * This method checks if the year is a leap year
+     * @return if the year is a leap year or not
+     */
     private boolean isLeapYear() {
 
         if (this.year % QUADRENNIAL == 0) {
@@ -104,6 +125,11 @@ public class Date implements Comparable {
         }
     }
 
+    /**
+     * Overrides the compareTo() method for the Date object
+     * @param obj the object to be compared.
+     * @return returns if the date is greater, smaller, or equal to another
+     */
     @Override
     public int compareTo(Object obj) {
 
@@ -138,23 +164,34 @@ public class Date implements Comparable {
         }
     }
 
+    /**
+     * Overrides the equals() method for the Date object
+     * @param obj compared to another date object
+     * @return return false if the dates are not the same
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Date) {
-            Date date = (Date) obj; //casting
+            Date date = (Date) obj;
             return (date.year == this.year) && (date.day == this.day) &&
                     (date.month == this.month);
         }
         return true;
     }
 
-
+    /**
+     * Overrides the toString() method for date objects
+     * @return returns the date as a string
+     */
     @Override
     public String toString() {
-
         return month + "/" + day + "/" + year;
     }
 
+    /**
+     * Main method tests the funtionality of the Date method
+     * @param args takes in arguments to test the Date file
+     */
     public static void main(String[] args) {
         Date testCase1 = new Date("2/29/2003");
         Date testCase2 = new Date("4/31/2003");
@@ -168,6 +205,5 @@ public class Date implements Comparable {
         System.out.println(testCase4.isValid());
         System.out.println(testCase5.isValid());
         System.out.println(testCase6.isValidStudent());
-
     }
 }

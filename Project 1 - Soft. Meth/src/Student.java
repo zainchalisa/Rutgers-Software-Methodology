@@ -1,22 +1,45 @@
+/**
+ * This class creates student objects with the given fields Profile, Major, and Date.
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class Student implements Comparable {
     private Profile profile;
-    private Major major; // Major is an enum type
+    private Major major;
     private int creditCompleted;
 
+    /**
+     * This method sets the profile based off user inputs
+     * @param profile profile of the student (first, last, dob)
+     */
     public Student(Profile profile) {
         this.profile = profile;
     }
 
+    /**
+     * Creates a student object with the given parameters
+     * @param profile profile of the student (first, last, dob)
+     * @param major major of the student
+     * @param creditCompleted credits completed towards major of student
+     */
     public Student(Profile profile, Major major, int creditCompleted) {
         this.profile = profile;
         this.major = major;
         this.creditCompleted = creditCompleted;
     }
 
+    /**
+     * Getter method for credits the student completed
+     * @return returns the credits the student completed
+     */
     public int getCreditCompleted() {
         return this.creditCompleted;
     }
 
+    /**
+     * Provides the standing of thr student depending on credits completed
+     * @return returns the standing of the student
+     */
     public Standing getStanding() {
 
         int credits = this.creditCompleted;
@@ -31,18 +54,34 @@ public class Student implements Comparable {
         }
     }
 
+    /**
+     * Getter method for the students profile
+     * @return returns the profile of the student
+     */
     public Profile getProfile() {
         return this.profile;
     }
 
+    /**
+     * Getter method for the students major
+     * @return returns the major of the student
+     */
     public Major getMajor() {
         return this.major;
     }
 
+    /**
+     * Setter method used to change the students major
+     * @param major major which your changing
+     */
     public void setMajor(Major major) {
         this.major = major;
     }
 
+    /**
+     * Overrides the toString() method for the student object
+     * @return returns the student object
+     */
     @Override
     public String toString() {
         return "" + profile + " " + "(" + getMajor().getCoreCode() + " " +
@@ -51,8 +90,9 @@ public class Student implements Comparable {
                 getStanding() + ")";
     }
 
+
     public int compareTo(Object obj) {
-        Student student = (Student) obj; //casting
+        Student student = (Student) obj;
         if (student.profile != null) {
             return this.profile.compareTo(student.profile);
         } else {
@@ -60,10 +100,15 @@ public class Student implements Comparable {
         }
     }
 
+    /**
+     * Overrides the equals method for a student object
+     * @param obj which object is checked if it's equal to another
+     * @return return false if it's not a student
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Student) {
-            Student student = (Student) obj; //casting
+            Student student = (Student) obj;
             return (student.profile.equals(this.profile));
         } else {
             return false;

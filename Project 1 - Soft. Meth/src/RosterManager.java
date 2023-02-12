@@ -1,7 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * This class creates a user interface to process command line arguments entered in the terminal and display results
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class RosterManager {
 
+    /**
+     * This method adds a student to the roster.
+     * @param roster object to hold a list of students
+     * @param inputLine command line arguments from user input to access student information
+     */
     private void addStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -40,6 +50,11 @@ public class RosterManager {
         }
     }
 
+    /**
+     * Checks to make sure credits entered by user is an integer
+     * @param creditsCompletedString string entered by user to show how many credits student has
+     * @return returns whether or not credit value entered by user is valid
+     */
     private boolean isValidCreditString(String creditsCompletedString) {
         try {
             Integer.parseInt(creditsCompletedString);
@@ -49,6 +64,11 @@ public class RosterManager {
         }
     }
 
+    /**
+     * Removes student from the roster
+     * @param roster object to hold a list of students
+     * @param inputLine command line arguments from user input to access student information
+     */
     private void removeStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -66,6 +86,11 @@ public class RosterManager {
         }
     }
 
+    /**
+     * Change the major of a student in the roster
+     * @param roster object to hold a list of students
+     * @param inputLine command line arguments from user input to access student information
+     */
     private void changeMajor(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -89,6 +114,11 @@ public class RosterManager {
         }
     }
 
+    /**
+     * Checks string user inputted for the major and sees if it's valid
+     * @param major string entered by user for the major
+     * @return returns corresponding major from enum class
+     */
     private Major checkMajor(String major) {
         Major majorName = null;
         if (major.equalsIgnoreCase("CS")) {
@@ -107,6 +137,11 @@ public class RosterManager {
         return majorName;
     }
 
+    /**
+     * Checks if school enter by user for list command is valid
+     * @param school string entered by user to a call the list of a school
+     * @return returns true if school entered by student is valid
+     */
     private boolean isValidSchool(String school) {
         for (Major major : Major.values()) {
             if (major.getSchool().equalsIgnoreCase(school)) {
@@ -116,6 +151,11 @@ public class RosterManager {
         return false;
     }
 
+    /**
+     * Lists all students in a specific school
+     * @param roster object to hold a list of students
+     * @param inputLine command line arguments from user input to access student information
+     */
     private void listSchool(Roster roster, String[] inputLine) {
         String school = inputLine[1];
         Student[] sortedSchoolArray = new Student[roster.getSize()];
@@ -138,6 +178,15 @@ public class RosterManager {
         System.out.println("* end of list *");
     }
 
+    /**
+     * Checks if credits enter by user are non-negative
+     * @param roster object to hold a list of students
+     * @param firstName string entered by user for the student's first name
+     * @param lastName string entered by user for the student's last name
+     * @param dateOfBirth string entered by user for the student's DOB
+     * @param creditsCompleted number of credits entered by user
+     * @param majorName major of student entered by user
+     */
     private void isValidCredit (Roster roster, String firstName, String lastName, String dateOfBirth, int creditsCompleted, Major majorName) {
         if (creditsCompleted >= 0) {
             Student student =
@@ -156,7 +205,9 @@ public class RosterManager {
         }
     }
 
-
+    /**
+     * This method reads input from the command line and executes commands based on the input
+     */
     public void run() {
         System.out.println("Roster Manager running...");
         Scanner scanner = new Scanner(System.in);

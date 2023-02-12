@@ -29,19 +29,13 @@ public class Roster {
         return roster;
     }
 
-<<<<<<< HEAD
-    /**
-     * This method is used to find where the student object is located
-     * in the array
-     * @param student the object the array is made up of
-     * @return returns the index which the student is located at
-     */
-=======
+
+
     public int getSize() {
         return size;
     }
 
->>>>>>> 184654e52a79d9636125baf196e9ff0158cbfa8e
+
     public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i = 0; i < size; i++) {
@@ -145,13 +139,6 @@ public class Roster {
         }
         return students;
     }
-<<<<<<< HEAD
-
-    /**
-     * This method is used to list the specific students which attending
-     * the school in the parameter
-     * @param school the school used to sort the students
-     */
 
     public void insertionSortList(Student[] roster) {
         for (int i = 0; i < roster.length; i++) {

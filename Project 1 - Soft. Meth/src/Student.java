@@ -90,7 +90,11 @@ public class Student implements Comparable {
                 getStanding() + ")";
     }
 
-
+    /**
+     * Compares two student objects to one another
+     * @param obj the object to be compared.
+     * @return returns if the object is greater, less, or equal
+     */
     public int compareTo(Object obj) {
         Student student = (Student) obj;
         if (student.profile != null) {

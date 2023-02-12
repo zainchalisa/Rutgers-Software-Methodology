@@ -51,9 +51,6 @@ public class Student implements Comparable {
                 getStanding() + ")";
     }
 
-    //Kate Lindsey 7/15/2002 (04:547 ITI SC&I) credits completed: 59
-    // (Sophomore)
-
     public int compareTo(Object obj) {
         Student student = (Student) obj; //casting
         if (student.profile != null) {

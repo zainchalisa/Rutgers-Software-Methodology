@@ -244,7 +244,7 @@ public class RosterManager {
                 listSchool(roster,inputLine);
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
-            } else if (command.equals("\n")) {
+            } else if (command.equals(" ")) {
                 continue;
             } else if (command.equals("Q")) {
                 break;

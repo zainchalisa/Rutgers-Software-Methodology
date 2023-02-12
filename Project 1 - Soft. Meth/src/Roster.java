@@ -20,6 +20,10 @@ public class Roster {
         return roster;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i = 0; i < size; i++) {
@@ -98,7 +102,7 @@ public class Roster {
         }
         return students;
     }
-
+/*
     public void listBySchoolMethod(String school) {
 
         Student[] sortedSchoolArray = new Student[size];
@@ -116,6 +120,8 @@ public class Roster {
             System.out.println(sortedSchoolArray[i]);
         }
     }
+
+ */
 
     public void insertionSortList(Student[] roster) {
         for (int i = 0; i < roster.length; i++) {
@@ -182,6 +188,9 @@ public class Roster {
     }
 
     public void print() { //print roster sorted by profiles
+        if (size == 0) {
+            System.out.println("Student roster is empty!");
+        }
         insertionSort(roster);
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
@@ -210,6 +219,6 @@ A Andrew Chacko 01/04/2002 CS 60
 A Abhitej Bokka 09/10/2002 CS 20
 A Akash Shah 12/18/2002 BAIT 3
 A Kush Patel 04/17/2002 MATH 120
-A Vivek Kumar 03/12/2002 CS 55
-A Humpty Dumpty 04/02/2002 CS 77
+A Vivek Kumar 03/12/2002 ITI 55
+A Humpty Dumpty 04/02/2002 EE 77
  */

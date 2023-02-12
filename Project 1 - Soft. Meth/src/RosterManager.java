@@ -17,24 +17,10 @@ public class RosterManager {
                 if (!roster.contains(studentProfile)) {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
-                        if (isValidCredit(creditsCompletedString)) {
+                        if (isValidCreditString(creditsCompletedString)) {
                             int creditsCompleted = Integer.
                                     parseInt(creditsCompletedString);
-                            if (creditsCompleted >= 0) {
-                                Student student =
-                                        new Student(new Profile(lastName
-                                                , firstName,
-                                                new Date(dateOfBirth)),
-                                                majorName,
-                                                creditsCompleted);
-                                roster.add(student);
-                                System.out.println(firstName + " " +
-                                        lastName + " " + dateOfBirth +
-                                        " added to the roster.");
-                            } else {
-                                System.out.println("Credits completed " +
-                                        "invalid: cannot be negative!");
-                            }
+                            isValidCredit(roster,firstName,lastName,dateOfBirth,creditsCompleted,majorName);
                         } else {
                             System.out.println("Credits completed " +
                                     "invalid: not an integer!");
@@ -54,7 +40,7 @@ public class RosterManager {
         }
     }
 
-    private boolean isValidCredit(String creditsCompletedString) {
+    private boolean isValidCreditString(String creditsCompletedString) {
         try {
             Integer.parseInt(creditsCompletedString);
             return true;
@@ -103,7 +89,6 @@ public class RosterManager {
         }
     }
 
-
     private Major checkMajor(String major) {
         Major majorName = null;
         if (major.equalsIgnoreCase("CS")) {
@@ -122,6 +107,55 @@ public class RosterManager {
         return majorName;
     }
 
+    private boolean isValidSchool(String school) {
+        for (Major major : Major.values()) {
+            if (major.getSchool().equalsIgnoreCase(school)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void listSchool(Roster roster, String[] inputLine) {
+        String school = inputLine[1];
+        Student[] sortedSchoolArray = new Student[roster.getSize()];
+        int counter = 0;
+        if (!isValidSchool(school)) {
+            System.out.println("School doesn't exist: " + school);
+            return;
+        }
+        for (int i = 0; i < roster.getSize(); i++) {
+            if (roster.getRoster()[i].getMajor().getSchool().equalsIgnoreCase(school)) {
+                sortedSchoolArray[counter] = roster.getRoster()[i];
+                counter++;
+            }
+        }
+        roster.insertionSortList(sortedSchoolArray);
+        System.out.println("* Students in " + school + " *");
+        for (int i = 0; i < counter; i++) {
+            System.out.println(sortedSchoolArray[i]);
+        }
+        System.out.println("* end of list *");
+    }
+
+    private void isValidCredit (Roster roster, String firstName, String lastName, String dateOfBirth, int creditsCompleted, Major majorName) {
+        if (creditsCompleted >= 0) {
+            Student student =
+                    new Student(new Profile(lastName
+                            , firstName,
+                            new Date(dateOfBirth)),
+                            majorName,
+                            creditsCompleted);
+            roster.add(student);
+            System.out.println(firstName + " " +
+                    lastName + " " + dateOfBirth +
+                    " added to the roster.");
+        } else {
+            System.out.println("Credits completed " +
+                    "invalid: cannot be negative!");
+        }
+    }
+
 
     public void run() {
         System.out.println("Roster Manager running...");
@@ -138,14 +172,13 @@ public class RosterManager {
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
-                roster.print(); // need to add spacing, if roster is
-                // empty// need to print to terminal
+                roster.print();
             } else if (command.equals("PS")) {
                 roster.printByStanding();
             } else if (command.equals("PC")) {
                 roster.printBySchoolMajor();
             } else if (command.equals("L")) {
-                roster.listBySchoolMethod("SAS");
+                listSchool(roster,inputLine);
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("Q")) {

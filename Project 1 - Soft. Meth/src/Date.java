@@ -16,7 +16,7 @@ public class Date implements Comparable {
     public static final int[] MONTH_DAYS = {31, 28, 31, 30, 31, 30, 31,
             31, 30, 31, 30, 31};
     public static final int FEBRUARY = 2;
-    public static final int LEAP_YEAR_DAY = 28;
+    public static final int LEAP_YEAR_DAY = 29;
     public static final int LOWEST_DAY = 1;
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
@@ -57,8 +57,8 @@ public class Date implements Comparable {
             return false;
         }
 
-        if (this.month == FEBRUARY && isLeapYear() == false) {
-            if (this.day > LEAP_YEAR_DAY) {
+        if (this.month == FEBRUARY && isLeapYear() == true) {
+            if (this.day > LEAP_YEAR_DAY || this.day < LOWEST_DAY) {
                 return false;
             }
         } else if (this.day > MONTH_DAYS[this.month - MONTH_ADDITIVE] ||
@@ -193,13 +193,13 @@ public class Date implements Comparable {
      * @param args takes in arguments to test the Date file
      */
     public static void main(String[] args) {
-        Date testCase1 = new Date("2/29/2003");
+        Date testCase1 = new Date("2/29/2007");
         Date testCase2 = new Date("4/31/2003");
         Date testCase3 = new Date("13/31/2003");
         Date testCase4 = new Date("3/32/2003");
         Date testCase5 = new Date("-1/31/2003");
         Date testCase6 = new Date("3/20/2007");
-        System.out.println(testCase1.isValid());
+        System.out.println(testCase1.isLeapYear());
         System.out.println(testCase2.isValid());
         System.out.println(testCase3.isValid());
         System.out.println(testCase4.isValid());

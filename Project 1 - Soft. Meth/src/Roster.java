@@ -226,6 +226,8 @@ public class Roster {
         }
     }
 
+    //public
+
     /**
      * This constructor prints the student by first name, last name, DOB
      */

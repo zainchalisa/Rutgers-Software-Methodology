@@ -1,25 +1,40 @@
-import java.sql.SQLOutput;
-
+/**
+ * This class forms a roster based on the Students, Profiles,
+ * Date, Majors, and Standings
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class Roster {
     private Student[] roster;
     private int size;
     public static final int ARRAY_GROWTH = 4;
     public static final int NOT_FOUND = -1;
-
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
 
-
+    /**
+     * This constructor is used to create an starting array for the roster
+     */
     public Roster() {
         this.roster = new Student[4];
         this.size = 0;
     }
 
+    /**
+     * Getter method used to get the roster storing the students
+     * @return returns the roster array
+     */
     public Student[] getRoster() {
         return roster;
     }
 
+    /**
+     * This method is used to find where the student object is located
+     * in the array
+     * @param student the object the array is made up of
+     * @return returns the index which the student is located at
+     */
     public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i = 0; i < size; i++) {
@@ -31,6 +46,10 @@ public class Roster {
         return NOT_FOUND;
     }
 
+    /**
+     * This constructor is used to grow the array when it reaches max
+     * capacity
+     */
     private void grow() { //increase the array capacity by 4
         Student[] newRoster = new Student[roster.length + ARRAY_GROWTH];
         for (int i = 0; i < size; i++) {
@@ -38,7 +57,13 @@ public class Roster {
         }
         this.roster = newRoster;
     }
-
+    /**
+     * This method is used to validate if the student can and should be
+     * added to the array. This is based off the size and if the student
+     * is already in the roster.
+     * @param student object which the array is made up of
+     * @return returns the if the student was added to the roster
+     */
     public boolean add(Student student) { //add student to end of array
 
         if (size >= roster.length) {
@@ -49,13 +74,18 @@ public class Roster {
             return false; // it already is in the roster
         }
 
-
         roster[size] = student;
         size++;
 
         return true; // added it to the roster
     }
 
+    /**
+     * This method is used to remove the student from the roster and also
+     * reorganize the array after the student has been removed.
+     * @param student object which is being removed from the array
+     * @return returns if the student was removed from the array
+     */
     public boolean remove(Student student) { //maintain the order after
         // remove
 
@@ -77,6 +107,12 @@ public class Roster {
         return true;
     }
 
+    /**
+     * This method checks if the student is in the roster
+     * @param student the object which we're looking for in the roster
+     * @return returns true if the student is in the roster and false if
+     * not
+     */
     public boolean contains(Student student) { //if the student is in
         // roster
         if (find(student) == NOT_FOUND) {
@@ -86,6 +122,10 @@ public class Roster {
         }
     }
 
+    /**
+     * Overrides the toString() method for the Roster class
+     * @return returns the student proceeding with a new line for the next
+     */
     @Override
     public String toString() {
 
@@ -99,6 +139,11 @@ public class Roster {
         return students;
     }
 
+    /**
+     * This method is used to list the specific students which attending
+     * the school in the parameter
+     * @param school the school used to sort the students
+     */
     public void listBySchoolMethod(String school) {
 
         Student[] sortedSchoolArray = new Student[size];
@@ -117,6 +162,10 @@ public class Roster {
         }
     }
 
+    /**
+     * This method is used to sort the roster by last, first, and dob
+     * @param roster is the array of students
+     */
     public void insertionSortList(Student[] roster) {
         for (int i = 0; i < roster.length; i++) {
             int j = i;
@@ -132,6 +181,10 @@ public class Roster {
         }
     }
 
+    /**
+     * This method sorts the roster by last name, first name , and DOB
+     * @param roster the roster of students
+     */
     public void insertionSort(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
@@ -144,6 +197,10 @@ public class Roster {
         }
     }
 
+    /**
+     *
+     * @param roster
+     */
     public void insertionSortMajor(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;

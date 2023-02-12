@@ -216,17 +216,29 @@ public class Roster {
     public void insertionSortStanding(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
-            while (j > 0 && roster[j - 1].getStanding().name().
-                    compareTo(roster[j].getStanding().name()) > GREATER) {
-                Student temp = roster[j];
-                roster[j] = roster[j - 1];
-                roster[j - 1] = temp;
+            while (j > 0){
+                if(roster[j - 1].getStanding().name().compareTo(roster[j].
+                        getStanding().name()) > GREATER){
+                    Student temp = roster[j];
+                    roster[j] = roster[j - 1];
+                    roster[j - 1] = temp;
+                }
+
+                if(roster[j - 1].getStanding().name().compareTo(roster[j].
+                        getStanding().name()) == EQUAL){
+                    if(roster[j-1].getCreditCompleted() < roster[j].
+                            getCreditCompleted()){
+                        Student temp = roster[j];
+                        roster[j] = roster[j - 1];
+                        roster[j - 1] = temp;
+                    }
+                }
                 j--;
             }
         }
     }
 
-    //public
+
 
     /**
      * This constructor prints the student by first name, last name, DOB

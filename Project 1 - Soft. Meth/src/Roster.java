@@ -29,13 +29,19 @@ public class Roster {
         return roster;
     }
 
-
-
+    /**
+     * Getter method which gets the size of the roster
+     * @return returns the size of the array
+     */
     public int getSize() {
         return size;
     }
 
-
+    /**
+     * This method finds the index for the student you're looking for
+     * @param student student you're looking for in the roster array
+     * @return returns the index the student is located in the roster
+     */
     public int find(Student student) { //search the given student in roster
         int studentFinder = 0;
         for (int i = 0; i < size; i++) {
@@ -48,7 +54,8 @@ public class Roster {
     }
 
     /**
-     * This constructor is used to grow the array when it reaches max
+     * This constructor is used to grow the array by 4 when it
+     * reaches max
      * capacity
      */
     private void grow() { //increase the array capacity by 4
@@ -140,6 +147,10 @@ public class Roster {
         return students;
     }
 
+    /**
+     * Sorts the list by first name, last name, and DOB
+     * @param roster the array holding all the different students
+     */
     public void insertionSortList(Student[] roster) {
         for (int i = 0; i < roster.length; i++) {
             int j = i;
@@ -172,8 +183,8 @@ public class Roster {
     }
 
     /**
-     *
-     * @param roster
+     * This method sorts the students by their majors in alphabetical order
+     * @param roster the roster array of students
      */
     public void insertionSortMajor(Student[] roster) {
         for (int i = 0; i < size; i++) {
@@ -198,7 +209,10 @@ public class Roster {
         }
     }
 
-
+    /**
+     * This method sorts the students by standing
+     * @param roster the roster array of students being sorted
+     */
     public void insertionSortStanding(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
@@ -212,6 +226,9 @@ public class Roster {
         }
     }
 
+    /**
+     * This constructor prints the student by first name, last name, DOB
+     */
     public void print() { //print roster sorted by profiles
         if (size == 0) {
             System.out.println("Student roster is empty!");
@@ -222,6 +239,9 @@ public class Roster {
         }
     }
 
+    /**
+     * This constructor prints the roster in order of majors
+     */
     public void printBySchoolMajor() { //print roster sorted by school
         // major
         insertionSortMajor(roster);
@@ -230,6 +250,9 @@ public class Roster {
         }
     }
 
+    /**
+     * This constructors prints the roster in order of standings
+     */
     public void printByStanding() { //print roster sorted by standing
         insertionSortStanding(roster);
         for (int i = 0; i < size; i++) {
@@ -237,13 +260,3 @@ public class Roster {
         }
     }
 }
-
-/*
-A Zain Chalisa 01/02/2002 CS 30
-A Andrew Chacko 01/04/2002 CS 60
-A Abhitej Bokka 09/10/2002 CS 20
-A Akash Shah 12/18/2002 BAIT 3
-A Kush Patel 04/17/2002 MATH 120
-A Vivek Kumar 03/12/2002 ITI 55
-A Humpty Dumpty 04/02/2002 EE 77
- */

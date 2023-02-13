@@ -122,4 +122,19 @@ public class Student implements Comparable {
         }
     }
 
+    public static void main(String[] args) {
+        Student firstStudent = new Student(new Profile("Chalisa",
+                "Zain", (new Date("01/02/2002"))));
+        Student secondStudent = new Student(new Profile("Afriyie",
+                "Nana", (new Date("10/24/2002"))));
+        System.out.println("Comparing two students which are equal " +
+                "to each other: " + firstStudent.compareTo(firstStudent));
+        System.out.println("Comparing two students where one is " +
+                "greater than the other: " + firstStudent.compareTo
+                (secondStudent));
+        System.out.println("Comparing two students where one " +
+                "is less than the other: " + secondStudent.compareTo
+                (firstStudent));
+    }
+
 }

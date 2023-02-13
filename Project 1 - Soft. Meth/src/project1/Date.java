@@ -55,6 +55,11 @@ public class Date implements Comparable {
      */
     public boolean isValid() { //check if a date is a valid calendar date
 
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         if (this.month > 12 || this.month < 1) {
             return false;
         }
@@ -64,10 +69,18 @@ public class Date implements Comparable {
                 return false;
             }
         } else if (this.day > MONTH_DAYS[this.month - MONTH_ADDITIVE] ||
-                this.month < LOWEST_DAY) {
+                this.day < LOWEST_DAY) {
             return false;
         }
 
+        if(isValidStudent() == false){
+            return false;
+        }
+
+        if(this.year > year && this.month > month && this.day > day ||
+                this.year < EQUAL){
+            return false;
+        }
         return true;
     }
 
@@ -195,17 +208,19 @@ public class Date implements Comparable {
      * @param args takes in arguments to test the Date file
      */
     public static void main(String[] args) {
-        Date testCase1 = new Date("2/29/2007");
+        Date testCase1 = new Date("2/29/2003");
         Date testCase2 = new Date("4/31/2003");
         Date testCase3 = new Date("13/31/2003");
         Date testCase4 = new Date("3/32/2003");
         Date testCase5 = new Date("-1/31/2003");
-        Date testCase6 = new Date("3/20/2007");
-        System.out.println(testCase1.isLeapYear());
-        System.out.println(testCase2.isValid());
-        System.out.println(testCase3.isValid());
-        System.out.println(testCase4.isValid());
-        System.out.println(testCase5.isValid());
-        System.out.println(testCase6.isValidStudent());
+        Date testCase6 = new Date("02/13/2007");
+        Date testCase7 = new Date("2/29/1996");
+        System.out.println("Test Case 1: " + testCase1.isValid());
+        System.out.println("Test Case 2: " + testCase2.isValid());
+        System.out.println("Test Case 3: " + testCase3.isValid());
+        System.out.println("Test Case 4: " + testCase4.isValid());
+        System.out.println("Test Case 5: " + testCase5.isValid());
+        System.out.println("Test Case 6: " + testCase6.isValid());
+        System.out.println("Test Case 7: " + testCase7.isValid());
     }
 }

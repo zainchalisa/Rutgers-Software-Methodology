@@ -73,10 +73,6 @@ public class Date implements Comparable {
             return false;
         }
 
-        if(isValidStudent() == false){
-            return false;
-        }
-
         if(this.year > year && this.month > month && this.day > day ||
                 this.year < EQUAL){
             return false;

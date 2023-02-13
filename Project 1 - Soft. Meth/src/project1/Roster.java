@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This class forms a roster based on the Students, Profiles,
  * Date, Majors, and Standings
@@ -10,7 +12,6 @@ public class Roster {
     public static final int ARRAY_GROWTH = 4;
     public static final int NOT_FOUND = -1;
     public static final int GREATER = 1;
-    public static final int SMALLER = -1;
     public static final int EQUAL = 0;
 
     /**
@@ -238,7 +239,8 @@ public class Roster {
             return;
         }
         insertionSort(roster);
-        System.out.println("* Student roster sorted by last name, first name, DOB **");
+        System.out.println("* Student roster sorted by last name, first " +
+                "name, DOB **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
@@ -262,7 +264,7 @@ public class Roster {
     }
 
     /**
-     * This constructors prints the roster in order of standings
+     * This constructor prints the roster in order of standings
      */
     public void printByStanding() {
         if (size == 0) {

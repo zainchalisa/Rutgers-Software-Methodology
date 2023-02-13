@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This method runs the project and builds it for user input
  * in the terminal

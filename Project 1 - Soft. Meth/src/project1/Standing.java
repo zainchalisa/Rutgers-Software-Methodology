@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This enum class was made to store the different standing depending on
  * credits

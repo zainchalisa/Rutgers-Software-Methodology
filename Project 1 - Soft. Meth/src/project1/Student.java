@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This class creates student objects with the given fields Profile, Major,
  * and Date.

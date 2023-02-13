@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This enum is used to access the majors, course codes, and schools.
  * @author zainchalisa

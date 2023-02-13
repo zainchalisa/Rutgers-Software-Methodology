@@ -1,3 +1,5 @@
+package project1;
+
 /**
  * This class creates Profile objects with First/Last Name and DOB.
  * @author zainchalisa

@@ -1,10 +1,22 @@
 package project2;
 
-public abstract class NonResident extends Student {
+public class NonResident extends Student {
 
-    public NonResident() {
-        this.profile = null;
-        this.major = null;
-        this.creditCompleted = 0;
+
+    public NonResident(Profile profile) {
+        super(profile);
+    }
+    public NonResident(Profile profile, Major major, int creditCompleted) {
+        super(profile, major, creditCompleted);
+    }
+
+    @Override
+    public double tuitionDue(int creditsEnrolled) {
+        return 0;
+    }
+
+    @Override
+    public boolean isResident() {
+        return false;
     }
 }

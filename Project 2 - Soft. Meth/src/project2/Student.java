@@ -11,11 +11,6 @@ public abstract class Student implements Comparable {
     protected int creditCompleted;
 
     // Superclass needs default constructor for subclass to call on
-    public Student(){
-        this.profile = null;
-        this.major = null;
-        this.creditCompleted = 0;
-    }
 
     /**
      * This method sets the profile based off user inputs

@@ -22,8 +22,8 @@ public class TuitionManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
-        Student studentProfile = new Student(new Profile(lastName,
-                firstName, new Date(dateOfBirth)));
+        //Student studentProfile = new Student(new Profile(lastName,
+          //      firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
         if (dob.isValid()) {

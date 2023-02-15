@@ -37,6 +37,10 @@ public abstract class Student implements Comparable {
         this.creditCompleted = creditCompleted;
     }
 
+    public boolean isValid(int creditEnrolled) {return false;} //polymorphism // don't have to override in all subclasses
+    public abstract double tuitionDue(int creditsEnrolled); //polymorphism // implement differently in subclasses
+    public abstract boolean isResident(); //polymorphism
+
     /**
      * Getter method for credits the student completed
      * @return returns the credits the student completed
@@ -142,10 +146,7 @@ public abstract class Student implements Comparable {
         System.out.println("Comparing two students where one " +
                 "is less than the other: " + secondStudent.compareTo
                 (firstStudent));
-
          */
     }
-    public boolean isValid(int creditEnrolled) {return false;} //polymorphism
-    public abstract double tuitionDue(int creditsEnrolled); //polymorphism
-    public abstract boolean isResident(); //polymorphism
+
 }

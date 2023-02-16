@@ -16,6 +16,7 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      * student information
      */
+    /*
     private void addStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -56,6 +57,8 @@ public class TuitionManager {
         }
     }
 
+     */
+
     /**
      * Checks to make sure credits entered by user is an integer
      * @param creditsCompletedString string entered by user to show how
@@ -77,6 +80,7 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
+    /*
     private void removeStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -94,12 +98,15 @@ public class TuitionManager {
         }
     }
 
+     */
+
     /**
      * Change the major of a student in the roster
      * @param roster object to hold a list of students
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
+    /*
     private void changeMajor(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
@@ -122,6 +129,8 @@ public class TuitionManager {
                     dateOfBirth + " is not in the roster.");
         }
     }
+
+     */
 
     /**
      * Checks string user inputted for the major and sees if it's valid
@@ -198,6 +207,7 @@ public class TuitionManager {
      * @param creditsCompleted number of credits entered by user
      * @param majorName major of student entered by user
      */
+    /*
     private void isValidCredit (Roster roster, String firstName, String
             lastName, String dateOfBirth, int creditsCompleted, Major
             majorName) {
@@ -218,12 +228,14 @@ public class TuitionManager {
         }
     }
 
+     */
+
     /**
      * This method reads input from the command line and executes commands
      * based on the input
      */
     public void run() {
-        System.out.println("Roster Manager running...");
+        System.out.println("Tuition Manager running...");
         Scanner scanner = new Scanner(System.in);
         String dataToken = "";
         Roster roster = new Roster();
@@ -233,9 +245,9 @@ public class TuitionManager {
             String[] inputLine = dataToken.split("\\s+");
             String command = inputLine[0];
             if (command.equals("A")) {
-                addStudent(roster, inputLine);
+                //addStudent(roster, inputLine);
             } else if (command.equals("R")) {
-                removeStudent(roster, inputLine);
+                //removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
@@ -245,8 +257,10 @@ public class TuitionManager {
             } else if (command.equals("L")) {
                 listSchool(roster,inputLine);
             } else if (command.equals("C")) {
-                changeMajor(roster, inputLine);
-            } else if (command.equals(" ")) {
+                //changeMajor(roster, inputLine);
+            } else if (command.equals("C")) {
+                
+            } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {
                 break;

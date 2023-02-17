@@ -15,11 +15,11 @@ public class Resident extends Student {
 
     public Resident(Profile profile) {
         super(profile);
-        this.scholarship = scholarship;
     }
 
-    public Resident(Profile profile, Major major, int creditCompleted) {
+    public Resident(Profile profile, Major major, int creditCompleted, int scholarship) {
         super(profile, major, creditCompleted);
+        this.scholarship = scholarship;
     }
 
     @Override

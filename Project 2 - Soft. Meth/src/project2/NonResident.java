@@ -30,7 +30,6 @@ public class NonResident extends Student {
 
     @Override
     public boolean isResident() {
-
         return false;
     }
 }

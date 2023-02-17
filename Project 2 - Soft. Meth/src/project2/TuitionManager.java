@@ -131,6 +131,7 @@ public class TuitionManager {
             System.out.println(state + ": Invalid state code.");
             return;
         }
+
         // Can make this whole block a method because it's reused 4 times
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
@@ -393,7 +394,7 @@ public class TuitionManager {
                             , firstName,
                             new Date(dateOfBirth)),
                             majorName,
-                            creditsCompleted);
+                            creditsCompleted,0);
             roster.add(student);
             System.out.println(firstName + " " +
                     lastName + " " + dateOfBirth +

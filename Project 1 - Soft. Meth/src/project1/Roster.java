@@ -235,11 +235,11 @@ public class Roster {
      */
     public void print() { //print roster sorted by profiles
         if (size == 0) {
-            System.out.println("Student roster is empty!");
+            System.out.println("project2.Student roster is empty!");
             return;
         }
         insertionSort(roster);
-        System.out.println("* Student roster sorted by last name, first " +
+        System.out.println("* project2.Student roster sorted by last name, first " +
                 "name, DOB **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
@@ -252,11 +252,11 @@ public class Roster {
      */
     public void printBySchoolMajor() {
         if (size == 0) {
-            System.out.println("Student roster is empty!");
+            System.out.println("project2.Student roster is empty!");
             return;
         }
         insertionSortMajor(roster);
-        System.out.println("* Student roster sorted by school, major **");
+        System.out.println("* project2.Student roster sorted by school, major **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }
@@ -268,11 +268,11 @@ public class Roster {
      */
     public void printByStanding() {
         if (size == 0) {
-            System.out.println("Student roster is empty!");
+            System.out.println("project2.Student roster is empty!");
             return;
         }
         insertionSortStanding(roster);
-        System.out.println("* Student roster sorted by standing **");
+        System.out.println("* project2.Student roster sorted by standing **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }

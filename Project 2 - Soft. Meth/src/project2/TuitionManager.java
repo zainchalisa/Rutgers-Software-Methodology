@@ -16,6 +16,182 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      * student information
      */
+
+    private void addResident(Roster roster,String[] inputLine) {
+        if (inputLine.length != 6) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String major = inputLine[4];
+        String creditsCompletedString = inputLine[5];
+        Resident studentProfile = new Resident(new Profile(lastName,
+                      firstName, new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        if (dob.isValid()) {
+            if (dob.isValidStudent()) {
+                if (!roster.contains(studentProfile)) {
+                    Major majorName = checkMajor(major);
+                    if (majorName != null) {
+                        if (isValidCreditString(creditsCompletedString)) {
+                            int creditsCompleted = Integer.
+                                    parseInt(creditsCompletedString);
+                            isValidCredit(roster,firstName,lastName,
+                                    dateOfBirth,creditsCompleted,
+                                    majorName);
+                        } else {
+                            System.out.println("Credits completed " +
+                                    "invalid: not an integer!");
+                        }
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " is already in the roster.");
+                }
+            } else {
+                System.out.println("DOB invalid: " + dob + " younger " +
+                        "than 16 years old.");
+            }
+        } else {
+            System.out.println("DOB invalid: " + dob + " not a valid " +
+                    "calendar date!");
+        }
+
+    }
+
+    private void addNonResident(Roster roster,String[] inputLine) {
+        if (inputLine.length != 6) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String major = inputLine[4];
+        String creditsCompletedString = inputLine[5];
+        NonResident studentProfile = new NonResident(new Profile(lastName,
+                firstName, new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        if (dob.isValid()) {
+            if (dob.isValidStudent()) {
+                if (!roster.contains(studentProfile)) {
+                    Major majorName = checkMajor(major);
+                    if (majorName != null) {
+                        if (isValidCreditString(creditsCompletedString)) {
+                            int creditsCompleted = Integer.
+                                    parseInt(creditsCompletedString);
+                            isValidCredit(roster,firstName,lastName,
+                                    dateOfBirth,creditsCompleted,
+                                    majorName);
+                        } else {
+                            System.out.println("Credits completed " +
+                                    "invalid: not an integer!");
+                        }
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " is already in the roster.");
+                }
+            } else {
+                System.out.println("DOB invalid: " + dob + " younger " +
+                        "than 16 years old.");
+            }
+        } else {
+            System.out.println("DOB invalid: " + dob + " not a valid " +
+                    "calendar date!");
+        }
+    }
+
+    private void addTristate(Roster roster,String[] inputLine) {
+        if (inputLine.length != 7) {
+            if (inputLine.length == 6) {
+                System.out.println("Missing state code");
+                return;
+            }
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String major = inputLine[4];
+        String creditsCompletedString = inputLine[5];
+        String state = inputLine[6];
+        TriState studentProfile = new TriState(new Profile(lastName,
+                firstName, new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        if (state.equalsIgnoreCase("NY") || state.equalsIgnoreCase("CT")){
+            studentProfile.setState(state);
+        } else {
+            System.out.println(state + ": Invalid state code.");
+            return;
+        }
+        // Can make this whole block a method because it's reused 4 times
+        if (dob.isValid()) {
+            if (dob.isValidStudent()) {
+                if (!roster.contains(studentProfile)) {
+                    Major majorName = checkMajor(major);
+                    if (majorName != null) {
+                        if (isValidCreditString(creditsCompletedString)) {
+                            int creditsCompleted = Integer.
+                                    parseInt(creditsCompletedString);
+                            isValidCredit(roster,firstName,lastName,
+                                    dateOfBirth,creditsCompleted,
+                                    majorName);
+                        } else {
+                            System.out.println("Credits completed " +
+                                    "invalid: not an integer!");
+                        }
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " is already in the roster.");
+                }
+            } else {
+                System.out.println("DOB invalid: " + dob + " younger " +
+                        "than 16 years old.");
+            }
+        } else {
+            System.out.println("DOB invalid: " + dob + " not a valid " +
+                    "calendar date!");
+        }
+    }
+
+    /*
+    private boolean isValidTokens(String[] inputLine) {
+        String command = inputLine[0];
+        if (command.equals("AR") || command.equals("AN")) {
+            try {
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Missing data in command line.");
+                return false;
+            }
+        } else if (command.equals("AT")) {
+            try {
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+                String state = inputLine[6];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Missing data in command line.");
+                return false;
+            }
+        }
+        return true;
+    }
+
     /*
     private void addStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
@@ -207,13 +383,13 @@ public class TuitionManager {
      * @param creditsCompleted number of credits entered by user
      * @param majorName major of student entered by user
      */
-    /*
+
     private void isValidCredit (Roster roster, String firstName, String
             lastName, String dateOfBirth, int creditsCompleted, Major
             majorName) {
         if (creditsCompleted >= 0) {
             Student student =
-                    new Student(new Profile(lastName
+                    new Resident(new Profile(lastName
                             , firstName,
                             new Date(dateOfBirth)),
                             majorName,
@@ -228,7 +404,7 @@ public class TuitionManager {
         }
     }
 
-     */
+
 
     /**
      * This method reads input from the command line and executes commands
@@ -244,8 +420,12 @@ public class TuitionManager {
             dataToken = scanner.nextLine();
             String[] inputLine = dataToken.split("\\s+");
             String command = inputLine[0];
-            if (command.equals("A")) {
-                //addStudent(roster, inputLine);
+            if (command.equals("AR")) {
+                addResident(roster, inputLine);
+            } else if (command.equals("AN")) {
+                addNonResident(roster,inputLine);
+            } else if (command.equals("AT")) {
+                addTristate(roster,inputLine);
             } else if (command.equals("R")) {
                 //removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
@@ -268,6 +448,6 @@ public class TuitionManager {
                 System.out.println(command + " is an invalid command!");
             }
         }
-        System.out.println("Roster Manager terminated.");
+        System.out.println("Tuition Manager terminated.");
     }
 }

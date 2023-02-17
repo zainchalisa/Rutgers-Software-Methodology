@@ -13,13 +13,9 @@ public class Resident extends Student {
     public static final int MAX_CREDITS = 16;
     public static final int MIN_FULL_TIME_CREDITS = 12;
 
-    public Resident(Profile profile) {
-        super(profile);
-        this.scholarship = scholarship;
-    }
-
-    public Resident(Profile profile, Major major, int creditCompleted) {
+    public Resident(Profile profile, Major major, int creditCompleted, int scholarship) {
         super(profile, major, creditCompleted);
+        this.scholarship = scholarship;
     }
 
     @Override

@@ -74,20 +74,20 @@ public class Roster {
      * @param student object which the array is made up of
      * @return returns the if the student was added to the roster
      */
-    public boolean add(Student student) { //add student to end of array
+    public boolean add(Student student) {
 
         if (size >= roster.length) {
             grow();
         }
 
         if (find(student) != NOT_FOUND) {
-            return false; // it already is in the roster
+            return false;
         }
 
         roster[size] = student;
         size++;
 
-        return true; // added it to the roster
+        return true;
     }
 
     /**

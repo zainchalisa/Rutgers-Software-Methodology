@@ -190,7 +190,8 @@ public class RosterManager {
     }
 
     /**
-     * Checks if credits enter by user are non-negative
+     * Checks if credits enter by user are non-negative and adds student to
+     * roster
      * @param roster object to hold a list of students
      * @param firstName string entered by user for the student's first name
      * @param lastName string entered by user for the student's last name

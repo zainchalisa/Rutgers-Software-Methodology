@@ -19,6 +19,12 @@ public class International extends NonResident {
         super(profile, major, creditCompleted);
     }
 
+    public International(Profile profile, Major major,
+                         int creditCompleted, boolean isStudyAbroad) {
+        super(profile, major, creditCompleted);
+        this.isStudyAbroad = isStudyAbroad;
+    }
+
     @Override
     public double tuitionDue(int creditsEnrolled) {
         if(!isStudyAbroad){

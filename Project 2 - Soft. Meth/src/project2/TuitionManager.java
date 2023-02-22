@@ -131,7 +131,7 @@ public class TuitionManager {
         }
     }
 
-    private void addTristate(Roster roster,String[] inputLine) {
+    private void addTriState(Roster roster, String[] inputLine) {
         if (inputLine.length != 7) {
             if (inputLine.length == 6) {
                 System.out.println("Missing the state code.");
@@ -357,13 +357,13 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
-    /*
+
     private void removeStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
 
-        Student student = new Student(new Profile(lastName, firstName,
+        Student student = new Resident(new Profile(lastName, firstName,
                 new Date(dateOfBirth)));
         if (roster.contains(student)) {
             roster.remove(student);
@@ -375,7 +375,7 @@ public class TuitionManager {
         }
     }
 
-     */
+
 
     /**
      * Change the major of a student in the roster
@@ -383,14 +383,14 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
-    /*
+
     private void changeMajor(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
 
-        Student student = new Student(new Profile(lastName, firstName,
+        Student student = new Resident(new Profile(lastName, firstName,
                 new Date(dateOfBirth)));
         if (roster.contains(student)) {
             int studentIndex = roster.find(student);
@@ -406,8 +406,6 @@ public class TuitionManager {
                     dateOfBirth + " is not in the roster.");
         }
     }
-
-     */
 
     /**
      * Checks string user inputted for the major and sees if it's valid
@@ -528,11 +526,11 @@ public class TuitionManager {
             } else if (command.equals("AN")) {
                 addNonResident(roster,inputLine);
             } else if (command.equals("AT")) {
-                addTristate(roster,inputLine);
+                addTriState(roster,inputLine);
             } else if (command.equals("AI")){
                 addInternational(roster,inputLine);
             } else if (command.equals("R")) {
-                //removeStudent(roster, inputLine);
+                removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
@@ -542,9 +540,7 @@ public class TuitionManager {
             } else if (command.equals("L")) {
                 listSchool(roster,inputLine);
             } else if (command.equals("C")) {
-                //changeMajor(roster, inputLine);
-            } else if (command.equals("C")) {
-                
+                changeMajor(roster, inputLine);
             } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {

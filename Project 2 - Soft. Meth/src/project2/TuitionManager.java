@@ -1,6 +1,7 @@
 package project2;
 
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * This class creates a user interface to process command line arguments
@@ -405,6 +406,13 @@ public class TuitionManager {
         }
     }
 
+    private void inputText (){
+        Scanner scanner = new Scanner(new File("studentList.txt"));
+
+    }
+
+
+
 
 
     /**
@@ -440,7 +448,9 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 //changeMajor(roster, inputLine);
             } else if (command.equals("C")) {
-                
+                //izk
+            } else if (command.equals("LS")) {
+                // expected input file
             } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {

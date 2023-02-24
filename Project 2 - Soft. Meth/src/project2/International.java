@@ -19,7 +19,7 @@ public class International extends NonResident {
         super(profile, major, creditCompleted);
     }
 
-    @Override
+
     public double tuitionDue(int creditsEnrolled) {
         if(!isStudyAbroad){
             if(creditsEnrolled == MAX_CREDITS){
@@ -36,7 +36,6 @@ public class International extends NonResident {
 
     }
 
-    @Override
     public boolean isValid(int creditsEnrolled){
         if(creditsEnrolled < 3 || creditsEnrolled > 24){
             return false;
@@ -45,5 +44,10 @@ public class International extends NonResident {
         } else{
             return true;
         }
+    }
+
+    public static void main(String[] args) {
+        International student1 = new International(new Profile("Chalisa", "Zain", new Date("01/02/2002")), Major.CS, 99);
+        System.out.println(student1.isValid(12));
     }
 }

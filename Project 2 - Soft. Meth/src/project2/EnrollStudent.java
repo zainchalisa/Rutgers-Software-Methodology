@@ -1,6 +1,7 @@
 package project2;
 
 public class EnrollStudent {
+
     private Profile profile;
     private int creditsEnrolled;
 
@@ -13,7 +14,7 @@ public class EnrollStudent {
     public boolean equals(Object obj){
         if (obj instanceof EnrollStudent) {
             EnrollStudent enrollStudent = (EnrollStudent) obj;
-            return (EnrollStudent.enrollStudent.equals(this.enrollStudent));
+            return (enrollStudent.equals(this.profile));
         } else {
             return false;
         }

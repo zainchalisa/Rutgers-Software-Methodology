@@ -121,9 +121,9 @@ public class Date implements Comparable {
      */
     private boolean isLeapYear() {
 
-        if (this.year % QUADRENNIAL == 0) {
-            if (this.year % CENTENNIAL == 0) {
-                if (this.year % QUATERCENTENNIAL == 0) {
+        if (this.year % QUADRENNIAL == EQUAL) {
+            if (this.year % CENTENNIAL == EQUAL) {
+                if (this.year % QUATERCENTENNIAL == EQUAL) {
                     return true;
                 } else {
                     return false;

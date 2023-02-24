@@ -263,7 +263,7 @@ public class TuitionManager {
         }
     }
 
-    /*
+    /* Helper method to check tokens
     private boolean isValidTokens(String[] inputLine) {
         String command = inputLine[0];
         if (command.equals("AR") || command.equals("AN")) {
@@ -531,7 +531,10 @@ public class TuitionManager {
                 addInternational(roster,inputLine);
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
-            } else if (command.equals("P")) {
+            } else if (command.equals("E")) {
+
+            }
+            else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
                 roster.printByStanding();

@@ -28,6 +28,7 @@ public class TuitionManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
+        int defaultScholarship = 0;
         Resident studentProfile = new Resident(new Profile(lastName,
                       firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
@@ -40,9 +41,21 @@ public class TuitionManager {
                         if (isValidCreditString(creditsCompletedString)) {
                             int creditsCompleted = Integer.
                                     parseInt(creditsCompletedString);
-                            isValidCredit(roster,firstName,lastName,
-                                    dateOfBirth,creditsCompleted,
-                                    majorName);
+                            if (creditsCompleted >= 0) {
+                                Student student =
+                                        new Resident(new Profile(lastName
+                                                , firstName,
+                                                new Date(dateOfBirth)),
+                                                majorName,
+                                                creditsCompleted,defaultScholarship);
+                                roster.add(student);
+                                System.out.println(firstName + " " +
+                                        lastName + " " + dateOfBirth +
+                                        " added to the roster.");
+                            } else {
+                                System.out.println("Credits completed " +
+                                        "invalid: cannot be negative!");
+                            }
                         } else {
                             System.out.println("Credits completed " +
                                     "invalid: not an integer!");
@@ -85,9 +98,21 @@ public class TuitionManager {
                         if (isValidCreditString(creditsCompletedString)) {
                             int creditsCompleted = Integer.
                                     parseInt(creditsCompletedString);
-                            isValidCredit(roster,firstName,lastName,
-                                    dateOfBirth,creditsCompleted,
-                                    majorName);
+                            if (creditsCompleted >= 0) {
+                                Student student =
+                                        new NonResident(new Profile(lastName
+                                                , firstName,
+                                                new Date(dateOfBirth)),
+                                                majorName,
+                                                creditsCompleted);
+                                roster.add(student);
+                                System.out.println(firstName + " " +
+                                        lastName + " " + dateOfBirth +
+                                        " added to the roster.");
+                            } else {
+                                System.out.println("Credits completed " +
+                                        "invalid: cannot be negative!");
+                            }
                         } else {
                             System.out.println("Credits completed " +
                                     "invalid: not an integer!");
@@ -107,10 +132,10 @@ public class TuitionManager {
         }
     }
 
-    private void addTristate(Roster roster,String[] inputLine) {
+    private void addTriState(Roster roster, String[] inputLine) {
         if (inputLine.length != 7) {
             if (inputLine.length == 6) {
-                System.out.println("Missing state code");
+                System.out.println("Missing the state code.");
                 return;
             }
             System.out.println("Missing data in command line.");
@@ -142,9 +167,84 @@ public class TuitionManager {
                         if (isValidCreditString(creditsCompletedString)) {
                             int creditsCompleted = Integer.
                                     parseInt(creditsCompletedString);
-                            isValidCredit(roster,firstName,lastName,
-                                    dateOfBirth,creditsCompleted,
-                                    majorName);
+                            if (creditsCompleted >= 0) {
+                                Student student =
+                                        new TriState(new Profile(lastName
+                                                , firstName,
+                                                new Date(dateOfBirth)),
+                                                majorName,
+                                                creditsCompleted,state);
+                                roster.add(student);
+                                System.out.println(firstName + " " +
+                                        lastName + " " + dateOfBirth +
+                                        " added to the roster.");
+                            } else {
+                                System.out.println("Credits completed " +
+                                        "invalid: cannot be negative!");
+                            }
+                        } else {
+                            System.out.println("Credits completed " +
+                                    "invalid: not an integer!");
+                        }
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " is already in the roster.");
+                }
+            } else {
+                System.out.println("DOB invalid: " + dob + " younger " +
+                        "than 16 years old.");
+            }
+        } else {
+            System.out.println("DOB invalid: " + dob + " not a valid " +
+                    "calendar date!");
+        }
+    }
+
+    private void addInternational(Roster roster, String[] inputLine) {
+        if (inputLine.length < 6) { // replace magic number
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String major = inputLine[4];
+        String creditsCompletedString = inputLine[5];
+        String studyAbroad = null;
+        try {
+            studyAbroad = inputLine[6];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            studyAbroad = "false";
+        }
+        boolean isStudyAbroad = Boolean.parseBoolean(studyAbroad);
+        International studentProfile = new International(new Profile(lastName,
+                firstName, new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        if (dob.isValid()) {
+            if (dob.isValidStudent()) {
+                if (!roster.contains(studentProfile)) {
+                    Major majorName = checkMajor(major);
+                    if (majorName != null) {
+                        if (isValidCreditString(creditsCompletedString)) {
+                            int creditsCompleted = Integer.
+                                    parseInt(creditsCompletedString);
+                            if (creditsCompleted >= 0) {
+                                Student student =
+                                        new International(new Profile(lastName
+                                                , firstName,
+                                                new Date(dateOfBirth)),
+                                                majorName,
+                                                creditsCompleted,isStudyAbroad);
+                                roster.add(student);
+                                System.out.println(firstName + " " +
+                                        lastName + " " + dateOfBirth +
+                                        " added to the roster.");
+                            } else {
+                                System.out.println("Credits completed " +
+                                        "invalid: cannot be negative!");
+                            }
                         } else {
                             System.out.println("Credits completed " +
                                     "invalid: not an integer!");
@@ -258,13 +358,13 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
-    /*
+
     private void removeStudent(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
 
-        Student student = new Student(new Profile(lastName, firstName,
+        Student student = new Resident(new Profile(lastName, firstName,
                 new Date(dateOfBirth)));
         if (roster.contains(student)) {
             roster.remove(student);
@@ -276,7 +376,7 @@ public class TuitionManager {
         }
     }
 
-     */
+
 
     /**
      * Change the major of a student in the roster
@@ -284,14 +384,14 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
-    /*
+
     private void changeMajor(Roster roster, String[] inputLine) {
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
 
-        Student student = new Student(new Profile(lastName, firstName,
+        Student student = new Resident(new Profile(lastName, firstName,
                 new Date(dateOfBirth)));
         if (roster.contains(student)) {
             int studentIndex = roster.find(student);
@@ -307,8 +407,6 @@ public class TuitionManager {
                     dateOfBirth + " is not in the roster.");
         }
     }
-
-     */
 
     /**
      * Checks string user inputted for the major and sees if it's valid
@@ -386,6 +484,8 @@ public class TuitionManager {
      * @param majorName major of student entered by user
      */
 
+    // Can't use this method anymore, different types of students
+    /*
     private void isValidCredit (Roster roster, String firstName, String
             lastName, String dateOfBirth, int creditsCompleted, Major
             majorName) {
@@ -405,13 +505,6 @@ public class TuitionManager {
                     "invalid: cannot be negative!");
         }
     }
-
-    private void inputText (){
-        Scanner scanner = new Scanner(new File("studentList.txt"));
-
-    }
-
-
 
 
 
@@ -434,9 +527,11 @@ public class TuitionManager {
             } else if (command.equals("AN")) {
                 addNonResident(roster,inputLine);
             } else if (command.equals("AT")) {
-                addTristate(roster,inputLine);
+                addTriState(roster,inputLine);
+            } else if (command.equals("AI")){
+                addInternational(roster,inputLine);
             } else if (command.equals("R")) {
-                //removeStudent(roster, inputLine);
+                removeStudent(roster, inputLine);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
@@ -451,6 +546,7 @@ public class TuitionManager {
                 //izk
             } else if (command.equals("LS")) {
                 // expected input file
+                changeMajor(roster, inputLine);
             } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {

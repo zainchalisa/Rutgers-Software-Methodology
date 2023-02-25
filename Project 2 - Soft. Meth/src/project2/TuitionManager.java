@@ -264,6 +264,34 @@ public class TuitionManager {
         }
     }
 
+    private void enrollStudent(Roster roster, String[] inputLine, Enrollment enrollment) {
+        if (inputLine.length != 5) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String creditsCompletedString = inputLine[4];
+
+        if (isValidCreditString(creditsCompletedString)) {
+            int creditsEnrolled = Integer.parseInt(creditsCompletedString);
+            Student student = new International(new Profile(lastName,firstName,new Date(dateOfBirth)));
+            if (roster.contains(student)) {
+                int studentIndex = roster.find(student);
+                student = roster.getRoster()[studentIndex];
+                if (student.isValid(creditsEnrolled)) {
+                    EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)),creditsEnrolled);
+                    enrollment.add(newStudent);
+                }
+            } else {
+                System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+            }
+        } else {
+            System.out.println("Credits enrolled is not an integer.");
+        }
+    }
+
     /* Helper method to check tokens
     private boolean isValidTokens(String[] inputLine) {
         String command = inputLine[0];
@@ -517,6 +545,7 @@ public class TuitionManager {
         Scanner scanner = new Scanner(System.in);
         String dataToken = "";
         Roster roster = new Roster();
+        Enrollment enrollment = new Enrollment();
 
         while (!dataToken.equals("Q")) {
             dataToken = scanner.nextLine();
@@ -533,9 +562,8 @@ public class TuitionManager {
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("E")) {
-
-            }
-            else if (command.equals("P")) {
+                enrollStudent(roster,inputLine, enrollment);
+            } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
                 roster.printByStanding();

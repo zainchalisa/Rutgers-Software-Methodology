@@ -5,6 +5,11 @@ public class Enrollment {
     private int size;
 
     public static final int ARRAY_ADDITIVE = 1;
+
+    public Enrollment() {
+        this.enrollStudents = new EnrollStudent[4];
+        this.size = 0;
+    }
     public void add(EnrollStudent enrollStudent){
         EnrollStudent[] newEnrollment = new EnrollStudent[enrollStudents.length + ARRAY_ADDITIVE];
         for (int i = 0; i < newEnrollment.length - 1; i++) {
@@ -12,7 +17,7 @@ public class Enrollment {
         }
 
         this.enrollStudents = newEnrollment;
-        enrollStudent[size] = enrollStudent;
+        enrollStudents[size] = enrollStudent;
         size++;
 
     } //add to the end of array

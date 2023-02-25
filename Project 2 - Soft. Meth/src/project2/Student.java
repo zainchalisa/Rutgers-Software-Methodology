@@ -50,6 +50,7 @@ public abstract class Student implements Comparable {
         return this.creditCompleted;
     }
 
+
     /**
      * Provides the standing of thr student depending on credits completed
      * @return returns the standing of the student

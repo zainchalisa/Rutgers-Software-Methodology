@@ -317,17 +317,17 @@ public class TuitionManager {
     }
 
     private void grantScholarship(Roster roster, String[] inputLine, Enrollment enrollment) {
-        if (inputLine.length != 5) {
+        if (inputLine.length < 4) {
             System.out.println("Missing data in command line.");
             return;
         } // change order of checking input
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
-        String scholarshipString = inputLine[4];
+        String scholarshipString = null;
 
-        if (isValidCreditString(scholarshipString)) {
-            int scholarship = Integer.parseInt(scholarshipString);
+        //if (isValidCreditString(scholarshipString)) {
+            //int scholarship = Integer.parseInt(scholarshipString);
             Student student = new Resident(new Profile(lastName,firstName,new Date(dateOfBirth)));
             if (roster.contains(student)) {
                 int studentIndex = roster.find(student);
@@ -337,11 +337,22 @@ public class TuitionManager {
                     int index = enrollment.find(checkStudent);
                     checkStudent = enrollment.getEnrollStudents()[index];
                     if (!checkStudent.isPartTime()) {
-                        if (((Resident) student).isValidScholarship(scholarship)) {
-                            ((Resident) student).setScholarship(scholarship);
-                            System.out.println(firstName + " " + lastName + " " + dateOfBirth + ": scholarship amount updated.");
+                        try {
+                            scholarshipString = inputLine[4];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Missing data in command line.");
+                            return;
+                        }
+                        if(isValidCreditString(scholarshipString)){
+                            int scholarship = Integer.parseInt(scholarshipString);
+                            if (((Resident) student).isValidScholarship(scholarship)) {
+                                ((Resident) student).setScholarship(scholarship);
+                                System.out.println(firstName + " " + lastName + " " + dateOfBirth + ": scholarship amount updated.");
+                            } else {
+                                System.out.println(scholarship + ": invalid amount.");
+                            }
                         } else {
-                            System.out.println(scholarship + ": invalid amount.");
+                            System.out.println("Amount is not an integer.");
                         }
                     } else {
                         System.out.println(firstName + " " + lastName + " "
@@ -354,9 +365,7 @@ public class TuitionManager {
             } else {
                 System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
             }
-        } else {
-            System.out.println("Amount is not an integer.");
-        }
+
     }
 
     /* Helper method to check tokens

@@ -1,5 +1,6 @@
 package project2;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.File;
 
@@ -537,7 +538,31 @@ public class TuitionManager {
         }
     }
 
+     */
 
+    public void loadRoster(Roster roster){
+        try{
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/project2/studentList.txt"));
+            while(fileScanner.hasNextLine()){
+                String line = fileScanner.nextLine();
+                String[] inputLine = line.split(",");
+                String command = inputLine[0];
+                if(command.equals("R")){
+                    addResident(roster, inputLine);
+                } else if(command.equals("I")){
+                    addInternational(roster, inputLine);
+                } else if (command.equals("T")){
+                    addTriState(roster, inputLine);
+                } else if (command.equals("N")){
+                    addNonResident(roster, inputLine);
+                }
+            }
+            fileScanner.close();
+        } catch(FileNotFoundException e){
+            System.out.println("** File not found **");
+        }
+
+    }
 
     /**
      * This method reads input from the command line and executes commands
@@ -579,7 +604,7 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                // expected input file
+                loadRoster(roster);
             } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {
@@ -591,3 +616,4 @@ public class TuitionManager {
         System.out.println("Tuition Manager terminated.");
     }
 }
+

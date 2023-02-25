@@ -616,16 +616,20 @@ public class TuitionManager {
     }
 
     public void printEnrollment(Enrollment enrollment){
+        System.out.println("** Enrollment **");
         for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
-            System.out.println(enrollment.getEnrollStudents()[i]);
+            if(enrollment.getEnrollStudents()[i] != null){
+                System.out.println(enrollment.getEnrollStudents()[i] + ": credits enrolled: " + enrollment.getEnrollStudents()[i].getCreditsEnrolled());
+            }
         }
+        System.out.println("* end of enrollment *");
     }
 
     public void printTuitionDue(Roster roster, Enrollment enrollment){
         for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
             if (enrollStudent != null) {
                 Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
-                System.out.println(student.tuitionDue(enrollStudent.getCreditsEnrolled()));
+                System.out.println(""+ student.getProfile() + " enrolled" + enrollStudent.getCreditsEnrolled() + "credits: tuition due: $" + student.tuitionDue(enrollStudent.getCreditsEnrolled()));
             }
         }
     }

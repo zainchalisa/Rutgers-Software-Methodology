@@ -33,7 +33,15 @@ public class Resident extends Student {
            int leftOverCredits = creditsEnrolled - MAX_CREDITS;
            return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE + (leftOverCredits * PART_RESIDENT_CREDIT);
        }
+    }
 
+    @Override
+    public boolean isValid(int creditsEnrolled){
+        if(creditsEnrolled < 3 || creditsEnrolled > 24){
+            return false;
+        } else{
+            return true;
+        }
     }
 
     @Override

@@ -565,10 +565,16 @@ public class TuitionManager {
                 }
             }
             fileScanner.close();
+            System.out.println("Students loaded to the roster.");
         } catch(FileNotFoundException e){
             System.out.println("** File not found **");
         }
+    }
 
+    public void printEnrollment(Enrollment enrollment){
+        for (int i = 0; i < enrollment.getEnrollStudents().length ; i++) {
+            System.out.println(enrollment.getEnrollStudents()[i]);
+        }
     }
 
     /**
@@ -612,11 +618,15 @@ public class TuitionManager {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
                 loadRoster(roster);
-            } else if (command.equals("")) {
+            } else if (command.equals("PE")) {
+                printEnrollment(enrollment);
+            } else if (command.equals("PT")) {
+
+            } else if(command.equals("")){
                 continue;
-            } else if (command.equals("Q")) {
+            } else if(command.equals("Q")){
                 break;
-            } else {
+            } else{
                 System.out.println(command + " is an invalid command!");
             }
         }

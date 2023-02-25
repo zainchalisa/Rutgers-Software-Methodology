@@ -32,8 +32,6 @@ public class NonResident extends Student {
     public boolean isValid(int creditsEnrolled){
         if(creditsEnrolled < 3 || creditsEnrolled > 24){
             return false;
-        } else if(creditsEnrolled < 12 ) {
-            return false;
         } else{
             return true;
         }

@@ -316,18 +316,44 @@ public class TuitionManager {
         }
     }
 
-    private void grantScholarship(Roster roster, String[] inputLine) {
+    private void grantScholarship(Roster roster, String[] inputLine, Enrollment enrollment) {
         if (inputLine.length != 5) {
             System.out.println("Missing data in command line.");
             return;
-        }
+        } // change order of checking input
         String firstName = inputLine[1];
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
         String scholarshipString = inputLine[4];
 
         if (isValidCreditString(scholarshipString)) {
-
+            int scholarship = Integer.parseInt(scholarshipString);
+            Student student = new Resident(new Profile(lastName,firstName,new Date(dateOfBirth)));
+            if (roster.contains(student)) {
+                int studentIndex = roster.find(student);
+                student = roster.getRoster()[studentIndex];
+                if (student instanceof Resident) {
+                    EnrollStudent checkStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)));
+                    int index = enrollment.find(checkStudent);
+                    checkStudent = enrollment.getEnrollStudents()[index];
+                    if (!checkStudent.isPartTime()) {
+                        if (((Resident) student).isValidScholarship(scholarship)) {
+                            ((Resident) student).setScholarship(scholarship);
+                            System.out.println(firstName + " " + lastName + " " + dateOfBirth + ": scholarship amount updated.");
+                        } else {
+                            System.out.println(scholarship + ": invalid amount.");
+                        }
+                    } else {
+                        System.out.println(firstName + " " + lastName + " "
+                                + dateOfBirth + " part time student is not eligible for the scholarship.");
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " (" + student.getClass().getSimpleName() + ") is not eligible for the scholarship.");
+                }
+            } else {
+                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+            }
         } else {
             System.out.println("Amount is not an integer.");
         }
@@ -642,7 +668,7 @@ public class TuitionManager {
             } else if (command.equals("D")) {
                 dropStudent(roster,inputLine, enrollment);
             } else if (command.equals("S")) {
-                grantScholarship(roster,inputLine);
+                grantScholarship(roster,inputLine,enrollment);
             }
             else if (command.equals("C")) {
                 changeMajor(roster, inputLine);

@@ -48,4 +48,15 @@ public class Resident extends Student {
     public boolean isResident() {
         return true;
     }
+
+    public boolean isValidScholarship(int scholarship) {
+        if (scholarship <= 0 || scholarship > 10000) {
+            return false;
+        }
+        return true;
+    }
+
+    public void setScholarship(int scholarship) {
+        this.scholarship = scholarship;
+    }
 }

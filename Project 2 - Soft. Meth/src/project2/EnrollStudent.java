@@ -21,6 +21,13 @@ public class EnrollStudent {
         return profile;
     }
 
+    public boolean isPartTime() {
+        if (this.creditsEnrolled < 12) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object obj){
         if (obj instanceof EnrollStudent) {

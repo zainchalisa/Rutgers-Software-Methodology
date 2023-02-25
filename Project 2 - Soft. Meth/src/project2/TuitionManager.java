@@ -21,7 +21,7 @@ public class TuitionManager {
 
     private void addResident(Roster roster,String[] inputLine) {
         if (inputLine.length != 6) {
-            System.out.println("Missing data in command line.");
+            System.out.println("Missing data in line command.");
             return;
         }
         String firstName = inputLine[1];
@@ -285,8 +285,10 @@ public class TuitionManager {
                     EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)),creditsEnrolled);
                     enrollment.add(newStudent);
                     System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
-                } else {
-                    System.out.println("(" + student.getClass().getSimpleName() + ") " + creditsEnrolled + ": invalid credit hours.");
+                } else if ( student.getClass().getSimpleName().equals(("International")) && ((International)student).isStudyAbroad()){
+                    System.out.println("(" + student.getClass().getSimpleName() + "studentstudy abroad) " + creditsEnrolled + ": invalid credit hours.");
+                } else{
+                    System.out.println("(" + student.getClass().getSimpleName() + "student) " + creditsEnrolled + ": invalid credit hours.");
                 }
             } else {
                 System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
@@ -298,7 +300,7 @@ public class TuitionManager {
 
     private void dropStudent(Roster roster, String[] inputLine, Enrollment enrollment) {
         if (inputLine.length != 4) {
-            System.out.println("Missing data in command line.");
+            System.out.println("Missing data in line command.");
             return;
         }
         String firstName = inputLine[1];
@@ -608,7 +610,7 @@ public class TuitionManager {
 
     private void loadRoster(Roster roster){
         try{
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/project2/studentList.txt")); //need to fix path
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/studentList.txt")); //need to fix path
             while(fileScanner.hasNextLine()){
                 String line = fileScanner.nextLine();
                 String[] inputLine = line.split(",");
@@ -630,14 +632,20 @@ public class TuitionManager {
         }
     }
 
-    private void printEnrollment(Enrollment enrollment){
-        System.out.println("** Enrollment **");
-        for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
-            if(enrollment.getEnrollStudents()[i] != null){
-                System.out.println(enrollment.getEnrollStudents()[i] + ": credits enrolled: " + enrollment.getEnrollStudents()[i].getCreditsEnrolled());
+
+    public void printEnrollment(Enrollment enrollment){
+        if(enrollment.getEnrollStudents()[0] == null){
+            System.out.println("Enrollment is empty!");
+        } else{
+            System.out.println("** Enrollment **");
+            for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
+                if(enrollment.getEnrollStudents()[i] != null){
+                    System.out.println(enrollment.getEnrollStudents()[i] + ": credits enrolled: " + enrollment.getEnrollStudents()[i].getCreditsEnrolled());
+                }
             }
+            System.out.println("* end of enrollment *");
         }
-        System.out.println("* end of enrollment *");
+
     }
 
     private void printTuitionDue(Roster roster, Enrollment enrollment){

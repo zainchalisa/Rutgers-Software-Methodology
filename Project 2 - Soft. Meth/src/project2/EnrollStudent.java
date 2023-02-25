@@ -5,6 +5,9 @@ public class EnrollStudent {
     private Profile profile;
     private int creditsEnrolled;
 
+    public EnrollStudent (Profile profile) {
+        this.profile = profile;
+    }
     public EnrollStudent (Profile profile, int creditsEnrolled){
         this.profile = profile;
         this.creditsEnrolled = creditsEnrolled;
@@ -22,7 +25,7 @@ public class EnrollStudent {
     public boolean equals(Object obj){
         if (obj instanceof EnrollStudent) {
             EnrollStudent enrollStudent = (EnrollStudent) obj;
-            return (enrollStudent.equals(this.profile));
+            return (enrollStudent.profile.equals(this.profile));
         } else {
             return false;
         }
@@ -30,7 +33,7 @@ public class EnrollStudent {
 
     @Override
     public String toString(){
-        return profile + " " + creditsEnrolled;
+        return profile + " " ;
     }
 }
 

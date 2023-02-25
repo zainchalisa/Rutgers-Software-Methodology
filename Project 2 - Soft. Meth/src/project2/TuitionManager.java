@@ -361,13 +361,19 @@ public class TuitionManager {
                                 + dateOfBirth + " part time student is not eligible for the scholarship.");
                     }
                 } else {
-                    System.out.println(firstName + " " + lastName + " " +
-                            dateOfBirth + " (" + student.getClass().getSimpleName() + ") is not eligible for the scholarship.");
+                    if (student instanceof NonResident) {
+                        if (student.getClass().getSimpleName().equals("NonResident")) {
+                            System.out.println(firstName + " " + lastName + " " +
+                                    dateOfBirth + " (" + "Non-Resident" + ") is not eligible for the scholarship.");
+                        }
+                    } else {
+                        System.out.println(firstName + " " + lastName + " " +
+                                dateOfBirth + " (" + student.getClass().getSimpleName() + ") is not eligible for the scholarship.");
+                    }
                 }
             } else {
                 System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
             }
-
     }
 
     /* Helper method to check tokens

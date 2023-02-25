@@ -280,9 +280,12 @@ public class TuitionManager {
             if (roster.contains(student)) {
                 int studentIndex = roster.find(student);
                 student = roster.getRoster()[studentIndex];
-                if (student.isValid(creditsEnrolled)) {
+                if (student.isValid(creditsEnrolled)) { // each valid class must return error message
                     EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)),creditsEnrolled);
                     enrollment.add(newStudent);
+                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
+                } else {
+                    // some error message if credits arent valid for that kind of student
                 }
             } else {
                 System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");

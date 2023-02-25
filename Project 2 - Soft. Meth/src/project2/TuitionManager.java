@@ -587,7 +587,7 @@ public class TuitionManager {
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("E")) {
-
+                enrollStudent(roster,inputLine, enrollment);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {

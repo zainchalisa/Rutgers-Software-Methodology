@@ -265,7 +265,7 @@ public class TuitionManager {
         }
     }
 
-    private void enrollStudent(Roster roster, String[] inputLine, Enrollment enrollment) {
+    private void enrollStudent(Roster roster,String[] inputLine, Enrollment enrollment) {
         if (inputLine.length != 5) {
             System.out.println("Missing data in command line.");
             return;
@@ -313,6 +313,23 @@ public class TuitionManager {
             System.out.println(firstName + " " + lastName + " " + dateOfBirth + " dropped.");
         } else {
             System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not enrolled.");
+        }
+    }
+
+    private void grantScholarship(Roster roster, String[] inputLine) {
+        if (inputLine.length != 5) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+        String scholarshipString = inputLine[4];
+
+        if (isValidCreditString(scholarshipString)) {
+
+        } else {
+            System.out.println("Amount is not an integer.");
         }
     }
 
@@ -604,7 +621,7 @@ public class TuitionManager {
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("E")) {
-                enrollStudent(roster,inputLine, enrollment);
+                enrollStudent(roster,inputLine,enrollment);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
@@ -615,7 +632,10 @@ public class TuitionManager {
                 listSchool(roster,inputLine);
             } else if (command.equals("D")) {
                 dropStudent(roster,inputLine, enrollment);
-            } else if (command.equals("C")) {
+            } else if (command.equals("S")) {
+                grantScholarship(roster,inputLine);
+            }
+            else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
                 loadRoster(roster);

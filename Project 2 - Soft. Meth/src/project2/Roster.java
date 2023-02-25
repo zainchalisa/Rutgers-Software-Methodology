@@ -111,7 +111,6 @@ public class Roster {
             } else {
                 roster[size] = null;
             }
-
         }
         size--;
         return true;

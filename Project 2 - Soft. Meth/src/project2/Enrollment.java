@@ -24,7 +24,9 @@ public class Enrollment {
     //move the last one in the array to replace the deleting index position
     public void remove(EnrollStudent enrollStudent){
 
-        if(enrollStudents.contains(enrollStudent)){
+        int indexHolder = 0;
+
+        if(contains(enrollStudent)){
             for (int i = 0; i < size; i++) {
                 if(enrollStudents[i] == enrollStudent){
                     indexHolder = i;
@@ -35,13 +37,14 @@ public class Enrollment {
 
         for (int i = indexHolder; i < size - 1; i++) {
             if (i + 1 < size) {
-                roster[i] = roster[i + 1];
+                enrollStudents[i] = enrollStudents[i + 1];
             } else {
-                roster[size] = null;
+                enrollStudents[size] = null;
             }
         }
         size--;
     }
+
     public boolean contains(EnrollStudent enrollStudent){
         for (int i = 0; i < size; i++) {
             if(enrollStudents[i] == enrollStudent){

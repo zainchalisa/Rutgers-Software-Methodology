@@ -574,10 +574,9 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 //changeMajor(roster, inputLine);
             } else if (command.equals("C")) {
-                //izk
+                changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
                 // expected input file
-                changeMajor(roster, inputLine);
             } else if (command.equals("")) {
                 continue;
             } else if (command.equals("Q")) {

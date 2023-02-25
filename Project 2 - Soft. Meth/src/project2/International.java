@@ -44,11 +44,13 @@ public class International extends NonResident {
     }
 
     public boolean isValid(int creditsEnrolled){
-        if(creditsEnrolled < 3 || creditsEnrolled > 24){
+        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
             return false;
-        } else if(isStudyAbroad == false && creditsEnrolled < 12 ) {
+        } else if (isStudyAbroad == false && creditsEnrolled < 12 ) {
             return false;
-        } else{
+        } else if (isStudyAbroad == true && creditsEnrolled > 12 ) {
+            return false;
+        } else {
             return true;
         }
     }

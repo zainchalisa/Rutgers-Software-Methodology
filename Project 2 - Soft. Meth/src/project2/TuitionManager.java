@@ -286,7 +286,7 @@ public class TuitionManager {
                     enrollment.add(newStudent);
                     System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
                 } else {
-                    // some error message if credits arent valid for that kind of student
+                    System.out.println("(" + student.getClass().getSimpleName() + ") " + creditsEnrolled + ": invalid credit hours.");
                 }
             } else {
                 System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
@@ -506,15 +506,7 @@ public class TuitionManager {
         System.out.println("* end of list **");
     }
 
-    /**
-     * Checks if credits enter by user are non-negative
-     * @param roster object to hold a list of students
-     * @param firstName string entered by user for the student's first name
-     * @param lastName string entered by user for the student's last name
-     * @param dateOfBirth string entered by user for the student's DOB
-     * @param creditsCompleted number of credits entered by user
-     * @param majorName major of student entered by user
-     */
+
 
     // Can't use this method anymore, different types of students
     /*

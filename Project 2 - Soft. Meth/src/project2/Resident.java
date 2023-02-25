@@ -56,6 +56,14 @@ public class Resident extends Student {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
+                major + " " + getMajor().getSchool() + ") " +
+                "credits completed: " + creditCompleted + " (" +
+                getStanding() + ")" + "(resident)";
+    }
+
     public void setScholarship(int scholarship) {
         this.scholarship = scholarship;
     }

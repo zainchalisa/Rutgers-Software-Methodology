@@ -55,6 +55,25 @@ public class International extends NonResident {
         }
     }
 
+    public boolean isStudyAbroad() {
+        return isStudyAbroad;
+    }
+
+    @Override
+    public String toString(){
+        if(isStudyAbroad()){
+            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
+                    major + " " + getMajor().getSchool() + ") " +
+                    "credits completed: " + creditCompleted + " (" +
+                    getStanding() + ")"+"(non-resident)"+"(international:study abroad)";
+        } else{
+            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
+                    major + " " + getMajor().getSchool() + ") " +
+                    "credits completed: " + creditCompleted + " (" +
+                    getStanding() + ")"+"(non-resident)"+"(international)";
+        }
+    }
+
     public static void main(String[] args) {
         International student1 = new International(new Profile("Chalisa", "Zain", new Date("01/02/2002")), Major.CS, 99);
         System.out.println(student1.isValid(12));

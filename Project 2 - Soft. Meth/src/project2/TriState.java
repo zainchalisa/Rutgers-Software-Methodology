@@ -15,11 +15,20 @@ public class TriState extends NonResident {
     }
 
     public String getState() {
-        return state;
+
+        return state.toUpperCase();
     }
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
+                major + " " + getMajor().getSchool() + ") " +
+                "credits completed: " + creditCompleted + " (" +
+                getStanding() + ")" + "(non-resident)"+"(tri-state:" + getState() + ")";
     }
 
     @Override

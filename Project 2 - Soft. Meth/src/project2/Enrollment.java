@@ -71,7 +71,7 @@ public class Enrollment {
 
     public boolean contains(EnrollStudent enrollStudent){
         for (int i = 0; i < size; i++) {
-            if(enrollStudents[i] == enrollStudent){
+            if(enrollStudents[i].equals(enrollStudent)){
                 return true;
             }
         }

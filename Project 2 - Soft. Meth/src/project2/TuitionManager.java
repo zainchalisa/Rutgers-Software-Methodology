@@ -307,7 +307,8 @@ public class TuitionManager {
 
         EnrollStudent student = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)));
         if (enrollment.contains(student)) {
-
+            int studentIndex = enrollment.find(student);
+            student = enrollment.getEnrollStudents()[studentIndex];
             enrollment.remove(student);
             System.out.println(firstName + " " + lastName + " " + dateOfBirth + " dropped.");
         } else {

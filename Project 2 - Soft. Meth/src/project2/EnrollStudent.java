@@ -17,13 +17,13 @@ public class EnrollStudent {
     public boolean equals(Object obj){
         if (obj instanceof EnrollStudent) {
             EnrollStudent enrollStudent = (EnrollStudent) obj;
-            return (enrollStudent.equals(this.profile));
+            return (enrollStudent.profile.equals(this.profile));
         } else {
             return false;
         }
     }
     @Override
     public String toString(){
-        return profile + " " + creditsEnrolled;
+        return profile + " " ;
     }
 }

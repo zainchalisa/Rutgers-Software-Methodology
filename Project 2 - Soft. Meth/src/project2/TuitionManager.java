@@ -606,7 +606,7 @@ public class TuitionManager {
 
      */
 
-    public void loadRoster(Roster roster){
+    private void loadRoster(Roster roster){
         try{
             Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/project2/studentList.txt")); //need to fix path
             while(fileScanner.hasNextLine()){
@@ -630,7 +630,7 @@ public class TuitionManager {
         }
     }
 
-    public void printEnrollment(Enrollment enrollment){
+    private void printEnrollment(Enrollment enrollment){
         System.out.println("** Enrollment **");
         for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
             if(enrollment.getEnrollStudents()[i] != null){
@@ -640,7 +640,7 @@ public class TuitionManager {
         System.out.println("* end of enrollment *");
     }
 
-    public void printTuitionDue(Roster roster, Enrollment enrollment){
+    private void printTuitionDue(Roster roster, Enrollment enrollment){
         for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
             if (enrollStudent != null) {
                 Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
@@ -648,6 +648,12 @@ public class TuitionManager {
             }
         }
     }
+
+    private void printEligibleGraduates(Roster roster, Enrollment enrollment) {
+
+    }
+
+
 
     /**
      * This method reads input from the command line and executes commands
@@ -688,8 +694,9 @@ public class TuitionManager {
                 dropStudent(roster,inputLine, enrollment);
             } else if (command.equals("S")) {
                 grantScholarship(roster,inputLine,enrollment);
-            }
-            else if (command.equals("C")) {
+            } else if (command.equals("SE")) {
+                printEligibleGraduates(roster,enrollment);
+            } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
                 loadRoster(roster);

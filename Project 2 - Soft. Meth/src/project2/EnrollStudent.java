@@ -10,6 +10,14 @@ public class EnrollStudent {
         this.creditsEnrolled = creditsEnrolled;
     }
 
+    public int getCreditsEnrolled() {
+        return creditsEnrolled;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
     @Override
     public boolean equals(Object obj){
         if (obj instanceof EnrollStudent) {
@@ -19,8 +27,10 @@ public class EnrollStudent {
             return false;
         }
     }
+
     @Override
     public String toString(){
         return profile + " " + creditsEnrolled;
     }
 }
+

@@ -39,6 +39,10 @@ public class Roster {
         return size;
     }
 
+    public Student getStudent(Student student){
+        return roster[find(student)];
+    }
+
     /**
      * This method finds the index for the student you're looking for
      * @param student student you're looking for in the roster array

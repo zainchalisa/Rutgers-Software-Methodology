@@ -557,8 +557,17 @@ public class TuitionManager {
     }
 
     public void printEnrollment(Enrollment enrollment){
-        for (int i = 0; i < enrollment.getEnrollStudents().length ; i++) {
+        for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
             System.out.println(enrollment.getEnrollStudents()[i]);
+        }
+    }
+
+    public void printTuitionDue(Roster roster, Enrollment enrollment){
+        for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
+            if (enrollStudent != null) {
+                Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
+                System.out.println(student.tuitionDue(enrollStudent.getCreditsEnrolled()));
+            }
         }
     }
 
@@ -606,7 +615,7 @@ public class TuitionManager {
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {
-
+                printTuitionDue(roster, enrollment);
             } else if(command.equals("")){
                 continue;
             } else if(command.equals("Q")){

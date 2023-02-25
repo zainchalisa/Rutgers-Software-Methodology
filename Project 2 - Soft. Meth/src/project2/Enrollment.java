@@ -4,28 +4,19 @@ public class Enrollment {
     private EnrollStudent[] enrollStudents;
     private int size;
 
-    public static final int ARRAY_ADDITIVE = 1;
+    public static final int ARRAY_GROWTH = 4;
+    public static final int NOT_FOUND = -1;
+    public static final int GREATER = 1;
+    public static final int EQUAL = 0;
 
     public Enrollment() {
         this.enrollStudents = new EnrollStudent[4];
         this.size = 0;
     }
-    public void add(EnrollStudent enrollStudent){
-        EnrollStudent[] newEnrollment = new EnrollStudent[enrollStudents.length + ARRAY_ADDITIVE];
-        for (int i = 0; i < newEnrollment.length - 1; i++) {
-            newEnrollment[i] = this.enrollStudents[i];
-        }
-
-        this.enrollStudents = newEnrollment;
-        enrollStudents[size] = enrollStudent;
-        size++;
-
-    } //add to the end of array
+    //add to the end of array
     //move the last one in the array to replace the deleting index position
     public void remove(EnrollStudent enrollStudent){
-
         int indexHolder = 0;
-
         if(contains(enrollStudent)){
             for (int i = 0; i < size; i++) {
                 if(enrollStudents[i] == enrollStudent){
@@ -45,6 +36,39 @@ public class Enrollment {
         size--;
     }
 
+    public boolean add(EnrollStudent student) {
+        if (size >= enrollStudents.length) {
+            grow();
+        }
+
+        if (find(student) != NOT_FOUND) {
+            return false;
+        }
+
+        enrollStudents[size] = student;
+        size++;
+        return true;
+    }
+
+    private void grow() { //increase the array capacity by 4
+        EnrollStudent[] newEnrollment = new EnrollStudent[enrollStudents.length + ARRAY_GROWTH];
+        for (int i = 0; i < size; i++) {
+            newEnrollment[i] = this.enrollStudents[i];
+        }
+        this.enrollStudents = newEnrollment;
+    }
+
+    public int find(EnrollStudent student) { //search the given student in roster
+        int studentFinder = 0;
+        for (int i = 0; i < size; i++) {
+            if (student.equals(enrollStudents[i])) {
+                studentFinder = i;
+                return studentFinder;
+            }
+        }
+        return NOT_FOUND;
+    }
+
     public boolean contains(EnrollStudent enrollStudent){
         for (int i = 0; i < size; i++) {
             if(enrollStudents[i] == enrollStudent){
@@ -53,6 +77,11 @@ public class Enrollment {
         }
         return false;
     }
+
+    public EnrollStudent[] getEnrollStudents() {
+        return enrollStudents;
+    }
+
     public void print() {
         for (int i = 0; i < size; i++){
             System.out.println(enrollStudents[i]);

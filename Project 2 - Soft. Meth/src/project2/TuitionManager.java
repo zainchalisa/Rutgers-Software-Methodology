@@ -277,7 +277,7 @@ public class TuitionManager {
 
         if (isValidCreditString(creditsCompletedString)) {
             int creditsEnrolled = Integer.parseInt(creditsCompletedString);
-            Student student = new International(new Profile(lastName,firstName,new Date(dateOfBirth)));
+            Student student = new Resident(new Profile(lastName,firstName,new Date(dateOfBirth)));
             if (roster.contains(student)) {
                 int studentIndex = roster.find(student);
                 student = roster.getRoster()[studentIndex];
@@ -293,6 +293,25 @@ public class TuitionManager {
             }
         } else {
             System.out.println("Credits enrolled is not an integer.");
+        }
+    }
+
+    private void dropStudent(Roster roster, String[] inputLine, Enrollment enrollment) {
+        if (inputLine.length != 4) {
+            System.out.println("Missing data in command line.");
+            return;
+        }
+        String firstName = inputLine[1];
+        String lastName = inputLine[2];
+        String dateOfBirth = inputLine[3];
+
+        EnrollStudent student = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)));
+        if (enrollment.contains(student)) {
+
+            enrollment.remove(student);
+            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " dropped.");
+        } else {
+            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not enrolled.");
         }
     }
 
@@ -408,8 +427,6 @@ public class TuitionManager {
         }
     }
 
-
-
     /**
      * Change the major of a student in the roster
      * @param roster object to hold a list of students
@@ -506,8 +523,6 @@ public class TuitionManager {
         System.out.println("* end of list **");
     }
 
-
-
     // Can't use this method anymore, different types of students
     /*
     private void isValidCredit (Roster roster, String firstName, String
@@ -534,7 +549,7 @@ public class TuitionManager {
 
     public void loadRoster(Roster roster){
         try{
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/project2/studentList.txt"));
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/project2/studentList.txt")); //need to fix path
             while(fileScanner.hasNextLine()){
                 String line = fileScanner.nextLine();
                 String[] inputLine = line.split(",");
@@ -591,8 +606,8 @@ public class TuitionManager {
                 roster.printBySchoolMajor();
             } else if (command.equals("L")) {
                 listSchool(roster,inputLine);
-            } else if (command.equals("C")) {
-                //changeMajor(roster, inputLine);
+            } else if (command.equals("D")) {
+                dropStudent(roster,inputLine, enrollment);
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {

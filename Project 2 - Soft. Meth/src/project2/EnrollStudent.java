@@ -5,6 +5,9 @@ public class EnrollStudent {
     private Profile profile;
     private int creditsEnrolled;
 
+    public EnrollStudent (Profile profile) {
+        this.profile = profile;
+    }
     public EnrollStudent (Profile profile, int creditsEnrolled){
         this.profile = profile;
         this.creditsEnrolled = creditsEnrolled;

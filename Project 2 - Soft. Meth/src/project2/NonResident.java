@@ -37,6 +37,14 @@ public class NonResident extends Student {
         }
     }
 
+    @Override
+    public String toString() {
+        return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
+                major + " " + getMajor().getSchool() + ") " +
+                "credits completed: " + creditCompleted + " (" +
+                getStanding() + ")" + "(non-resident)";
+    }
+
 
     @Override
     public boolean isResident() {

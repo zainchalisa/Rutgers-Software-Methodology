@@ -1,0 +1,14 @@
+AR Jane Doe 5/1/1996 CS 30
+AR John Doe 1/2/2007 EE 20
+AI April March 3/31/2000 BAIT 0 true
+AI Mary Lindsey 12/1/2001 BAIT 89 false
+AT Duke Ellington 2/29/2004 math 46 NY
+AT Roy Brooks 8/8/1999 math 111 CT
+AN Roy Brooks 9/9/1999 iti 100
+AN Kate Lindsey 7/15/2002 ITI 59
+AR Carl Brown 10/7/2004 cs 75
+AR Paul Siegel 5/1/2000 CS 90
+AI Bill Scanlan 5/1/1999 CS 120 false
+AI John Doe 4/3/2003 CS 29 false
+AT John Doe 12/20/2004 EE 45 NY
+AN John Doe 1/20/2003 bait 60

@@ -78,6 +78,10 @@ public class Enrollment {
         return false;
     }
 
+    public EnrollStudent getEnrollStudent(EnrollStudent enrollStudent){
+        return getEnrollStudents()[find(enrollStudent)];
+    }
+
     public EnrollStudent[] getEnrollStudents() {
         return enrollStudents;
     }

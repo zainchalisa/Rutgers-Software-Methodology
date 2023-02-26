@@ -8,6 +8,7 @@ public class EnrollStudent {
     public EnrollStudent (Profile profile) {
         this.profile = profile;
     }
+
     public EnrollStudent (Profile profile, int creditsEnrolled){
         this.profile = profile;
         this.creditsEnrolled = creditsEnrolled;
@@ -27,6 +28,11 @@ public class EnrollStudent {
         }
         return false;
     }
+
+    public void setCreditsEnrolled(int creditsEnrolled) {
+        this.creditsEnrolled = creditsEnrolled;
+    }
+
 
     @Override
     public boolean equals(Object obj){

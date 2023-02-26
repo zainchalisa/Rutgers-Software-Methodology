@@ -22,13 +22,10 @@ public class TuitionManager {
      *                  student information
      */
 
-<<<<<<< HEAD
-    private void addResident(Roster roster,String[] inputLine, boolean printRoster) {
-=======
+
 
     private void addResident(Roster roster, String[] inputLine,
                              boolean printRoster) {
->>>>>>> 020b67678ee87f2a4efea5f084869a92075fc53d
         if (inputLine.length != 6) {
             System.out.println("Missing data in line command.");
             return;

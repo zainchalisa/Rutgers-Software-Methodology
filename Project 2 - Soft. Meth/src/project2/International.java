@@ -7,7 +7,7 @@ public class International extends NonResident {
     public static final int INTERNATIONAL_UNIVERSITY_FEE = 3268;
     public static final int INTERNATIONAL_CREDIT_HOUR = 966;
     public static final double UNIVERSITY_FEE_DISCOUNT = .8;
-    public static final int MAX_CREDITS = 24;
+    public static final int MAX_CREDITS = 16;
     public static final int MIN_FULL_TIME_CREDITS = 12;
     public static final int MIN_STUDY_ABROAD_CREDITS = 3;
     public static final int MAX_STUDY_ABROAD_CREDITS = 12;
@@ -31,18 +31,17 @@ public class International extends NonResident {
     @Override
     public double tuitionDue(int creditsEnrolled) {
         if(!isStudyAbroad){
-            if(creditsEnrolled <= MAX_CREDITS){
-                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
-            } else if (creditsEnrolled < MIN_FULL_TIME_CREDITS) {
-                return (creditsEnrolled * INTERNATIONAL_CREDIT_HOUR) + (INTERNATIONAL_UNIVERSITY_FEE * UNIVERSITY_FEE_DISCOUNT);
-            } else{
+            if(creditsEnrolled > MAX_CREDITS){
                 int leftOverCredits = creditsEnrolled - MAX_CREDITS;
                 return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + (leftOverCredits * INTERNATIONAL_CREDIT_HOUR) + INTERNATIONAL_HEALTH_CARE;
+            } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS && creditsEnrolled <= MAX_CREDITS){
+                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
+            } else{
+                return (creditsEnrolled * INTERNATIONAL_CREDIT_HOUR) + (INTERNATIONAL_UNIVERSITY_FEE * UNIVERSITY_FEE_DISCOUNT);
             }
         } else{
             return INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
         }
-
     }
 
     public boolean isValid(int creditsEnrolled){

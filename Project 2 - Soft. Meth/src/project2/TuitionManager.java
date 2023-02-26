@@ -305,9 +305,11 @@ public class TuitionManager {
                     }
                     System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
                 } else if ( student.getClass().getSimpleName().equals(("International")) && ((International)student).isStudyAbroad()){
-                    System.out.println("(" + student.getClass().getSimpleName() + "studentstudy abroad) " + creditsEnrolled + ": invalid credit hours.");
-                } else{
+                    System.out.println("(" + student.getClass().getSimpleName() + " studentstudy abroad) " + creditsEnrolled + ": invalid credit hours.");
+                } else if (student.getClass().getSimpleName().equals(("International"))){
                     System.out.println("(" + student.getClass().getSimpleName() + "student) " + creditsEnrolled + ": invalid credit hours.");
+                } else{
+                    System.out.println("(" + student.getClass().getSimpleName() + ") " + creditsEnrolled + ": invalid credit hours.");
                 }
             } else {
                 System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
@@ -672,28 +674,32 @@ public class TuitionManager {
 
     private void printTuitionDue(Roster roster, Enrollment enrollment){
         DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
-        System.out.println("** Tuition due **");
-        for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
-            if (enrollStudent != null) {
-                Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
-                double tuitionDue = student.tuitionDue(enrollStudent.getCreditsEnrolled());
-                if(student.getClass().getSimpleName().equals("International")){
-                    if(((International) student).isStudyAbroad()){
-                        System.out.println(""+ student.getProfile() + " (International Student - Study Abroad) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-                    } else{
-                        System.out.println(""+ student.getProfile() + " (International Student) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+        if(enrollment.getEnrollStudents()[0] != null) {
+            System.out.println("** Tuition due **");
+            for (EnrollStudent enrollStudent : enrollment.getEnrollStudents()) {
+                if (enrollStudent != null) {
+                    Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
+                    double tuitionDue = student.tuitionDue(enrollStudent.getCreditsEnrolled());
+                    if (student.getClass().getSimpleName().equals("International")) {
+                        if (((International) student).isStudyAbroad()) {
+                            System.out.println("" + student.getProfile() + " (International studentstudy abroad) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                        } else {
+                            System.out.println("" + student.getProfile() + " (International student) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                        }
+                    } else if (student.getClass().getSimpleName().equals("TriState")) {
+                        System.out.println("" + student.getProfile() + " (Tri-state " + ((TriState) student).getState() + ") enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                    } else if (student.getClass().getSimpleName().equals("NonResident")) {
+                        System.out.println("" + student.getProfile() + " (Non-Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                    } else if (student.getClass().getSimpleName().equals("Resident")) {
+                        System.out.println("" + student.getProfile() + " (Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
                     }
-                } else if (student.getClass().getSimpleName().equals("TriState")){
-                    System.out.println(""+ student.getProfile() + " (Tri-State " + ((TriState) student).getState() + ") enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-                } else if (student.getClass().getSimpleName().equals("NonResident")){
-                    System.out.println(""+ student.getProfile() + " (Non-Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-                } else if (student.getClass().getSimpleName().equals("Resident")){
-                    System.out.println(""+ student.getProfile() + " (Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-
                 }
             }
+            System.out.println("* end of tuition due *");
+        } else{
+            System.out.println("Student roster is empty!");
         }
-        System.out.println("* end of tuition due *");
+
     }
 
     private void printEligibleGraduates(Roster roster, Enrollment enrollment) {
@@ -716,22 +722,22 @@ public class TuitionManager {
                             " (" + student.getMajor().getCoreCode() + " " +
                             student.getMajor().name() + " " + student.getMajor().getSchool() +
                             ") credits completed: " + student.creditCompleted +
-                            " (" + student.getStanding().name() + ") (non-resident) (" +
-                            student.getClass().getSimpleName().toLowerCase() + ") ");
+                            " (" + student.getStanding().name() + ")(non-resident)(" +
+                            student.getClass().getSimpleName().toLowerCase() + ")");
                 } else if (student instanceof TriState) {
                     System.out.println(student.getProfile().toString() +
                             " (" + student.getMajor().getCoreCode() + " " +
                             student.getMajor().name() + " " + student.getMajor().getSchool() +
                             ") credits completed: " + student.creditCompleted +
-                            " (" + student.getStanding().name() + ") (non-resident) (" +
-                            student.getClass().getSimpleName().toLowerCase() + ":" + ((TriState) student).getState() + ")");
+                            " (" + student.getStanding().name() + ")(non-resident)(" +
+                            "tri-state" + ":" + ((TriState) student).getState() + ")");
                 } else {
                     System.out.println(student.getProfile().toString() +
                             " (" + student.getMajor().getCoreCode() + " " +
                             student.getMajor().name() + " " + student.getMajor().getSchool() +
-                            ") credits completed: " + student.creditCompleted +
-                            " (" + student.getStanding().name() + ") (" +
-                            student.getClass().getSimpleName() + ") ");
+                            ")credits completed: " + student.creditCompleted +
+                            "(" + student.getStanding().name() + ")(" +
+                            student.getClass().getSimpleName() + ")");
                 }
             }
         }

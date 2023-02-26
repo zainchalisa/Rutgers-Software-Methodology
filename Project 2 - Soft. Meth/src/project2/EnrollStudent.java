@@ -46,7 +46,7 @@ public class EnrollStudent {
 
     @Override
     public String toString(){
-        return profile + " " ;
+        return profile + "" ;
     }
 }
 

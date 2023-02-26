@@ -16,6 +16,14 @@ public class NonResident extends Student {
         super(profile, major, creditCompleted);
     }
 
+    public boolean isFullTimeStudent(int creditsEnrolled){
+        if(creditsEnrolled > 12){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     @Override
     public double tuitionDue(int creditsEnrolled) {
         if(creditsEnrolled > MAX_CREDITS){

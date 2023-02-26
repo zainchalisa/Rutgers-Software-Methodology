@@ -190,44 +190,15 @@ public class TuitionManager {
                 firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (state.equalsIgnoreCase("NY") || state.equalsIgnoreCase("CT")) {
-            studentProfile.setState(state);
-        } else {
-            System.out.println(state + ": Invalid state code.");
-            return;
-        }
-
-        // Can make this whole block a method because it's reused 4 times
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
-                        if (isValidCreditString(creditsCompletedString)) {
-                            int creditsCompleted = Integer.
-                                    parseInt(creditsCompletedString);
-                            if (creditsCompleted >= 0) {
-                                Student student =
-                                        new TriState(new Profile(lastName
-                                                , firstName,
-                                                new Date(dateOfBirth)),
-                                                majorName,
-                                                creditsCompleted, state);
-                                roster.add(student);
-                                if (printRoster) {
-                                    System.out.println(firstName + " " +
-                                            lastName + " " + dateOfBirth +
-                                            " added to the roster.");
-                                }
-
-                            } else {
-                                System.out.println("Credits completed " +
-                                        "invalid: cannot be negative!");
-                            }
-                        } else {
-                            System.out.println("Credits completed " +
-                                    "invalid: not an integer!");
-                        }
+                        validTriState(roster,firstName,lastName,
+                                dateOfBirth,majorName,
+                                creditsCompletedString,state,
+                                printRoster,studentProfile);
                     }
                 } else {
                     System.out.println(firstName + " " + lastName + " " +
@@ -243,6 +214,45 @@ public class TuitionManager {
         }
     }
 
+    private void validTriState(Roster roster, String firstName,
+                                  String lastName, String dateOfBirth,
+                                  Major majorName,
+                                  String creditsCompletedString,
+                               String state, boolean printRoster,
+                               TriState studentProfile) {
+        if (state.equalsIgnoreCase("NY") ||
+                state.equalsIgnoreCase("CT")) {
+            studentProfile.setState(state);
+        } else {
+            System.out.println(state + ": Invalid state code.");
+            return;
+        }
+        if (isValidCreditString(creditsCompletedString)) {
+            int creditsCompleted = Integer.
+                    parseInt(creditsCompletedString);
+            if (creditsCompleted >= 0) {
+                Student student =
+                        new TriState(new Profile(lastName
+                                , firstName,
+                                new Date(dateOfBirth)),
+                                majorName,
+                                creditsCompleted, state);
+                roster.add(student);
+                if (printRoster) {
+                    System.out.println(firstName + " " +
+                            lastName + " " + dateOfBirth +
+                            " added to the roster.");
+                }
+            } else {
+                System.out.println("Credits completed " +
+                        "invalid: cannot be negative!");
+            }
+        } else {
+            System.out.println("Credits completed " +
+                    "invalid: not an integer!");
+        }
+    }
+
     private void addInternational(Roster roster, String[] inputLine,
                                   boolean printRoster) {
         if (inputLine.length < 6) { // replace magic number
@@ -254,12 +264,7 @@ public class TuitionManager {
         String dateOfBirth = inputLine[3];
         String major = inputLine[4];
         String creditsCompletedString = inputLine[5];
-        String studyAbroad = null;
-        try {
-            studyAbroad = inputLine[6];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            studyAbroad = "false";
-        }
+        String studyAbroad = validStudyAbroad(inputLine);
         boolean isStudyAbroad = Boolean.parseBoolean(studyAbroad);
         International studentProfile =
                 new International(new Profile(lastName,
@@ -271,34 +276,10 @@ public class TuitionManager {
                 if (!roster.contains(studentProfile)) {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
-                        if (isValidCreditString(creditsCompletedString)) {
-                            int creditsCompleted = Integer.
-                                    parseInt(creditsCompletedString);
-                            if (creditsCompleted >= 0) {
-                                Student student =
-                                        new International(
-                                                new Profile(lastName
-                                                        , firstName,
-                                                        new Date(
-                                                                dateOfBirth)),
-                                                majorName,
-                                                creditsCompleted,
-                                                isStudyAbroad);
-                                roster.add(student);
-                                if (printRoster) {
-                                    System.out.println(firstName + " " +
-                                            lastName + " " + dateOfBirth +
-                                            " added to the roster.");
-                                }
-
-                            } else {
-                                System.out.println("Credits completed " +
-                                        "invalid: cannot be negative!");
-                            }
-                        } else {
-                            System.out.println("Credits completed " +
-                                    "invalid: not an integer!");
-                        }
+                        validInternational(roster,firstName,lastName,
+                                dateOfBirth,majorName,
+                                creditsCompletedString,isStudyAbroad,
+                                printRoster);
                     }
                 } else {
                     System.out.println(firstName + " " + lastName + " " +
@@ -311,6 +292,52 @@ public class TuitionManager {
         } else {
             System.out.println("DOB invalid: " + dob + " not a valid " +
                     "calendar date!");
+        }
+    }
+
+    private String validStudyAbroad(String[] inputLine) {
+        String studyAbroad = null;
+        try {
+            studyAbroad = inputLine[6];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            studyAbroad = "false";
+        }
+        return studyAbroad;
+    }
+
+    private void validInternational(Roster roster, String firstName,
+                                  String lastName, String dateOfBirth,
+                                  Major majorName,
+                                    String creditsCompletedString,
+                                  boolean isStudyAbroad,
+                                  boolean printRoster) {
+        if (isValidCreditString(creditsCompletedString)) {
+            int creditsCompleted = Integer.
+                    parseInt(creditsCompletedString);
+            if (creditsCompleted >= 0) {
+                Student student =
+                        new International(
+                                new Profile(lastName
+                                        , firstName,
+                                        new Date(
+                                                dateOfBirth)),
+                                majorName,
+                                creditsCompleted,
+                                isStudyAbroad);
+                roster.add(student);
+                if (printRoster) {
+                    System.out.println(firstName + " " +
+                            lastName + " " + dateOfBirth +
+                            " added to the roster.");
+                }
+
+            } else {
+                System.out.println("Credits completed " +
+                        "invalid: cannot be negative!");
+            }
+        } else {
+            System.out.println("Credits completed " +
+                    "invalid: not an integer!");
         }
     }
 

@@ -615,14 +615,13 @@ public class TuitionManager {
 
      */
 
-    private void loadRoster(Roster roster, String[] inputLine){
-
-        String command = inputLine[0];
-        String filename = inputLine[1];
+    private void loadRoster(Roster roster){
         try{
-            Scanner fileScanner = new Scanner(new File(filename));
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/studentList.txt"));
             while(fileScanner.hasNextLine()){
-
+                String line = fileScanner.nextLine();
+                String[] inputLine = line.split(",");
+                String command = inputLine[0];
                 if(command.equals("R")){
                     addResident(roster, inputLine);
                 } else if(command.equals("I")){
@@ -771,7 +770,7 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                loadRoster(roster,inputLine);
+                loadRoster(roster);
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {

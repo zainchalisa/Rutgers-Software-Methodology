@@ -1,5 +1,12 @@
 package project2;
 
+/**
+ * This class creates International Students and validates them
+ * and their tuition costs
+ *
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class International extends NonResident {
 
     private boolean isStudyAbroad;
@@ -13,70 +20,108 @@ public class International extends NonResident {
     public static final int MAX_STUDY_ABROAD_CREDITS = 12;
     public static final int INTERNATIONAL_HEALTH_CARE = 2650;
 
+    /**
+     * This constructor sets the profile of a enroll student
+     *
+     * @param profile is the profile of an enroll student
+     */
     public International(Profile profile) {
         super(profile);
     }
-    public International(Profile profile, Major major,
-                         int creditCompleted) {
+
+    /**
+     * This constructor sets the profile, major, and creditsCompleted of
+     * an international student
+     *
+     * @param profile         is the profile of an international student
+     * @param major           is the major of an international student
+     * @param creditCompleted is the credits completed of an
+     *                        international student
+     */
+    public International(Profile profile, Major major, int creditCompleted) {
         super(profile, major, creditCompleted);
     }
 
-
-    public International(Profile profile, Major major,
-                         int creditCompleted, boolean isStudyAbroad) {
+    /**
+     * This constructor sets the profile, major, creditsCompleted, and
+     * studyAbroad of an international student
+     *
+     * @param profile         is the profile of an international student
+     * @param major           is the major of an international student
+     * @param creditCompleted is the credits completed of an
+     *                        *                 international student
+     * @param isStudyAbroad   is the boolean to see if the student is
+     *                        studying abroad
+     */
+    public International(Profile profile, Major major, int creditCompleted, boolean isStudyAbroad) {
         super(profile, major, creditCompleted);
         this.isStudyAbroad = isStudyAbroad;
     }
 
+    /**
+     * The override tuitionDue method for International students which
+     * fetches how much the student owes
+     * @param creditsEnrolled is the amount of credits they will
+     *                        enroll for the semester
+     * @return returns the amount students owe in tuition
+     */
     @Override
     public double tuitionDue(int creditsEnrolled) {
-        if(!isStudyAbroad){
-            if(creditsEnrolled > MAX_CREDITS){
+        if (!isStudyAbroad) {
+            if (creditsEnrolled > MAX_CREDITS) {
                 int leftOverCredits = creditsEnrolled - MAX_CREDITS;
                 return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + (leftOverCredits * INTERNATIONAL_CREDIT_HOUR) + INTERNATIONAL_HEALTH_CARE;
-            } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS && creditsEnrolled <= MAX_CREDITS){
+            } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS && creditsEnrolled <= MAX_CREDITS) {
                 return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
-            } else{
+            } else {
                 return (creditsEnrolled * INTERNATIONAL_CREDIT_HOUR) + (INTERNATIONAL_UNIVERSITY_FEE * UNIVERSITY_FEE_DISCOUNT);
             }
-        } else{
+        } else {
             return INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
         }
     }
 
-    public boolean isValid(int creditsEnrolled){
+    /**
+     * This method checks if the international student is a valid student
+     * as per the schools standards
+     * @param creditsEnrolled is the amount of credits they will
+     *                        enroll for the semester
+     * @return returns if the student is valid
+     */
+    public boolean isValid(int creditsEnrolled) {
         if (creditsEnrolled < 3 || creditsEnrolled > 24) {
             return false;
-        } else if (isStudyAbroad == false && creditsEnrolled < 12 ) {
+        } else if (isStudyAbroad == false && creditsEnrolled < 12) {
             return false;
-        } else if (isStudyAbroad == true && creditsEnrolled > 12 ) {
+        } else if (isStudyAbroad == true && creditsEnrolled > 12) {
             return false;
         } else {
             return true;
         }
     }
 
+    /**
+     * This method checks if the international student is study abroad
+     *
+     * @return returns true or false depending on if the student is
+     * studying abroad
+     */
     public boolean isStudyAbroad() {
         return isStudyAbroad;
     }
 
+    /**
+     * This overrides the toString() for the international student method
+     * @return returns the appropriate string depending on the type of
+     * international student
+     */
     @Override
-    public String toString(){
-        if(isStudyAbroad()){
-            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
-                    major + " " + getMajor().getSchool() + ") " +
-                    "credits completed: " + creditCompleted + " (" +
-                    getStanding() + ")"+"(non-resident)"+"(international:study abroad)";
-        } else{
-            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " +
-                    major + " " + getMajor().getSchool() + ") " +
-                    "credits completed: " + creditCompleted + " (" +
-                    getStanding() + ")"+"(non-resident)"+"(international)";
+    public String toString() {
+        if (isStudyAbroad()) {
+            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")" + "(non-resident)" + "(international:study abroad)";
+        } else {
+            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")" + "(non-resident)" + "(international)";
         }
     }
-
-    public static void main(String[] args) {
-        International student1 = new International(new Profile("Chalisa", "Zain", new Date("01/02/2002")), Major.CS, 99);
-        System.out.println(student1.isValid(12));
-    }
 }
+

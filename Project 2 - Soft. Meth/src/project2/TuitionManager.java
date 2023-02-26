@@ -23,6 +23,7 @@ public class TuitionManager {
      */
 
 
+
     private void addResident(Roster roster, String[] inputLine,
                              boolean printRoster) {
         if (inputLine.length != 6) {

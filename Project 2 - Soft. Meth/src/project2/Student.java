@@ -1,7 +1,11 @@
 package project2;
 
-
-
+/**
+ * This class creates student objects with the given fields Profile, Major,
+ * and Date.
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public abstract class Student implements Comparable {
 
     // Made visibility type protected so subclasses can access
@@ -134,24 +138,6 @@ public abstract class Student implements Comparable {
         } else {
             return false;
         }
-    }
-
-
-    public static void main(String[] args) {
-        /*
-        Student firstStudent = new Student(new Profile("Chalisa",
-                "Zain", (new Date("01/02/2002"))));
-        Student secondStudent = new Student(new Profile("Afriyie",
-                "Nana", (new Date("10/24/2002"))));
-        System.out.println("Comparing two students which are equal " +
-                "to each other: " + firstStudent.compareTo(firstStudent));
-        System.out.println("Comparing two students where one is " +
-                "greater than the other: " + firstStudent.compareTo
-                (secondStudent));
-        System.out.println("Comparing two students where one " +
-                "is less than the other: " + secondStudent.compareTo
-                (firstStudent));
-         */
     }
 
 }

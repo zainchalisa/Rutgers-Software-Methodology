@@ -20,8 +20,6 @@ public class TuitionManager {
      * student information
      */
 
-
-
     private void addResident(Roster roster,String[] inputLine, boolean printRoster) {
         if (inputLine.length != 6) {
             System.out.println("Missing data in line command.");

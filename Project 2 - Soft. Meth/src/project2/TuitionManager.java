@@ -615,21 +615,23 @@ public class TuitionManager {
 
      */
 
-    private void loadRoster(Roster roster){
+
+    private void loadRoster(Roster roster, String[] inputLine){
         try{
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/studentList.txt"));
+            String filename = inputLine[1];
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/" + filename));
             while(fileScanner.hasNextLine()){
                 String line = fileScanner.nextLine();
-                String[] inputLine = line.split(",");
-                String command = inputLine[0];
+                String[] inputLines = line.split(",");
+                String command = inputLines[0];
                 if(command.equals("R")){
-                    addResident(roster, inputLine);
+                    addResident(roster, inputLines);
                 } else if(command.equals("I")){
-                    addInternational(roster, inputLine);
+                    addInternational(roster, inputLines);
                 } else if (command.equals("T")){
-                    addTriState(roster, inputLine);
+                    addTriState(roster, inputLines);
                 } else if (command.equals("N")){
-                    addNonResident(roster, inputLine);
+                    addNonResident(roster, inputLines);
                 }
             }
             fileScanner.close();
@@ -770,7 +772,7 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                loadRoster(roster);
+                loadRoster(roster,inputLine);
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {

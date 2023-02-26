@@ -641,7 +641,6 @@ public class TuitionManager {
         }
     }
 
-
     public void printEnrollment(Enrollment enrollment){
         if(enrollment.getEnrollStudents()[0] == null){
             System.out.println("Enrollment is empty!");
@@ -659,6 +658,7 @@ public class TuitionManager {
 
     private void printTuitionDue(Roster roster, Enrollment enrollment){
         DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+        System.out.println("** Tuition due **");
         for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
             if (enrollStudent != null) {
                 Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
@@ -679,6 +679,7 @@ public class TuitionManager {
                 }
             }
         }
+        System.out.println("* end of tuition due *");
     }
 
     private void printEligibleGraduates(Roster roster, Enrollment enrollment) {

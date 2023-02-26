@@ -12,3 +12,12 @@ AI Bill Scanlan 5/1/1999 CS 120 false
 AI John Doe 4/3/2003 CS 29 false
 AT John Doe 12/20/2004 EE 45 NY
 AN John Doe 1/20/2003 bait 60
+
+AN Roy Brooks 9/9/1999 iti 110
+AT John Doe 1/2/2007 EE 200 NY
+AR Carl Brown 10/7/2004 cs 140
+AI Bill Scanlan 5/1/1999 CS 120 false
+
+E Roy Brooks 9/9/1999 15
+E John Doe 1/2/2007 10
+E Carl Brown 10/7/2004 15

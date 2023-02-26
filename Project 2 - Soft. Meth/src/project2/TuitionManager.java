@@ -22,7 +22,7 @@ public class TuitionManager {
 
 
 
-    private void addResident(Roster roster,String[] inputLine) {
+    private void addResident(Roster roster,String[] inputLine, boolean printRoster) {
         if (inputLine.length != 6) {
             System.out.println("Missing data in line command.");
             return;
@@ -53,9 +53,12 @@ public class TuitionManager {
                                                 majorName,
                                                 creditsCompleted,defaultScholarship);
                                 roster.add(student);
-                                System.out.println(firstName + " " +
-                                        lastName + " " + dateOfBirth +
-                                        " added to the roster.");
+                                if (printRoster) {
+                                    System.out.println(firstName + " " +
+                                            lastName + " " + dateOfBirth +
+                                            " added to the roster.");
+                                }
+
                             } else {
                                 System.out.println("Credits completed " +
                                         "invalid: cannot be negative!");
@@ -80,7 +83,7 @@ public class TuitionManager {
 
     }
 
-    private void addNonResident(Roster roster,String[] inputLine) {
+    private void addNonResident(Roster roster,String[] inputLine,boolean printRoster) {
         if (inputLine.length != 6) {
             System.out.println("Missing data in command line.");
             return;
@@ -110,9 +113,12 @@ public class TuitionManager {
                                                 majorName,
                                                 creditsCompleted);
                                 roster.add(student);
-                                System.out.println(firstName + " " +
-                                        lastName + " " + dateOfBirth +
-                                        " added to the roster.");
+                                if (printRoster) {
+                                    System.out.println(firstName + " " +
+                                            lastName + " " + dateOfBirth +
+                                            " added to the roster.");
+                                }
+
                             } else {
                                 System.out.println("Credits completed " +
                                         "invalid: cannot be negative!");
@@ -136,7 +142,7 @@ public class TuitionManager {
         }
     }
 
-    private void addTriState(Roster roster, String[] inputLine) {
+    private void addTriState(Roster roster, String[] inputLine, boolean printRoster) {
         if (inputLine.length != 7) {
             if (inputLine.length == 6) {
                 System.out.println("Missing the state code.");
@@ -179,9 +185,12 @@ public class TuitionManager {
                                                 majorName,
                                                 creditsCompleted,state);
                                 roster.add(student);
-                                System.out.println(firstName + " " +
-                                        lastName + " " + dateOfBirth +
-                                        " added to the roster.");
+                                if (printRoster) {
+                                    System.out.println(firstName + " " +
+                                            lastName + " " + dateOfBirth +
+                                            " added to the roster.");
+                                }
+
                             } else {
                                 System.out.println("Credits completed " +
                                         "invalid: cannot be negative!");
@@ -205,7 +214,7 @@ public class TuitionManager {
         }
     }
 
-    private void addInternational(Roster roster, String[] inputLine) {
+    private void addInternational(Roster roster, String[] inputLine,boolean printRoster) {
         if (inputLine.length < 6) { // replace magic number
             System.out.println("Missing data in command line.");
             return;
@@ -242,9 +251,12 @@ public class TuitionManager {
                                                 majorName,
                                                 creditsCompleted,isStudyAbroad);
                                 roster.add(student);
-                                System.out.println(firstName + " " +
-                                        lastName + " " + dateOfBirth +
-                                        " added to the roster.");
+                                if (printRoster) {
+                                    System.out.println(firstName + " " +
+                                            lastName + " " + dateOfBirth +
+                                            " added to the roster.");
+                                }
+
                             } else {
                                 System.out.println("Credits completed " +
                                         "invalid: cannot be negative!");
@@ -616,7 +628,8 @@ public class TuitionManager {
      */
 
 
-    private void loadRoster(Roster roster, String[] inputLine){
+    private void loadRoster(Roster roster, String[] inputLine,boolean printRoster){
+        printRoster = false;
         try{
             String filename = inputLine[1];
             Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/" + filename));
@@ -625,13 +638,13 @@ public class TuitionManager {
                 String[] inputLines = line.split(",");
                 String command = inputLines[0];
                 if(command.equals("R")){
-                    addResident(roster, inputLines);
+                    addResident(roster, inputLines,printRoster);
                 } else if(command.equals("I")){
-                    addInternational(roster, inputLines);
+                    addInternational(roster, inputLines,printRoster);
                 } else if (command.equals("T")){
-                    addTriState(roster, inputLines);
+                    addTriState(roster, inputLines,printRoster);
                 } else if (command.equals("N")){
-                    addNonResident(roster, inputLines);
+                    addNonResident(roster, inputLines,printRoster);
                 }
             }
             fileScanner.close();
@@ -743,14 +756,15 @@ public class TuitionManager {
             dataToken = scanner.nextLine();
             String[] inputLine = dataToken.split("\\s+");
             String command = inputLine[0];
+            boolean printRoster = true;
             if (command.equals("AR")) {
-                addResident(roster, inputLine);
+                addResident(roster, inputLine,printRoster);
             } else if (command.equals("AN")) {
-                addNonResident(roster,inputLine);
+                addNonResident(roster,inputLine,printRoster);
             } else if (command.equals("AT")) {
-                addTriState(roster,inputLine);
+                addTriState(roster,inputLine,printRoster);
             } else if (command.equals("AI")){
-                addInternational(roster,inputLine);
+                addInternational(roster,inputLine,printRoster);
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("E")) {
@@ -772,7 +786,7 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                loadRoster(roster,inputLine);
+                loadRoster(roster,inputLine,printRoster);
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {

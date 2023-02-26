@@ -8,6 +8,7 @@ import java.io.File;
 /**
  * This class creates a user interface to process command line arguments
  * entered in the terminal and display results
+ *
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -15,14 +16,15 @@ public class TuitionManager {
 
     /**
      * This method adds a student to the roster.
-     * @param roster object to hold a list of students
+     *
+     * @param roster    object to hold a list of students
      * @param inputLine command line arguments from user input to access
-     * student information
+     *                  student information
      */
 
 
-
-    private void addResident(Roster roster,String[] inputLine, boolean printRoster) {
+    private void addResident(Roster roster, String[] inputLine,
+                             boolean printRoster) {
         if (inputLine.length != 6) {
             System.out.println("Missing data in line command.");
             return;
@@ -34,7 +36,7 @@ public class TuitionManager {
         String creditsCompletedString = inputLine[5];
         int defaultScholarship = 0;
         Resident studentProfile = new Resident(new Profile(lastName,
-                      firstName, new Date(dateOfBirth)));
+                firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
         if (dob.isValid()) {
@@ -42,31 +44,10 @@ public class TuitionManager {
                 if (!roster.contains(studentProfile)) {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
-                        if (isValidCreditString(creditsCompletedString)) {
-                            int creditsCompleted = Integer.
-                                    parseInt(creditsCompletedString);
-                            if (creditsCompleted >= 0) {
-                                Student student =
-                                        new Resident(new Profile(lastName
-                                                , firstName,
-                                                new Date(dateOfBirth)),
-                                                majorName,
-                                                creditsCompleted,defaultScholarship);
-                                roster.add(student);
-                                if (printRoster) {
-                                    System.out.println(firstName + " " +
-                                            lastName + " " + dateOfBirth +
-                                            " added to the roster.");
-                                }
-
-                            } else {
-                                System.out.println("Credits completed " +
-                                        "invalid: cannot be negative!");
-                            }
-                        } else {
-                            System.out.println("Credits completed " +
-                                    "invalid: not an integer!");
-                        }
+                        validResident(roster,firstName,lastName,
+                                dateOfBirth,majorName,
+                                creditsCompletedString,defaultScholarship,
+                                printRoster);
                     }
                 } else {
                     System.out.println(firstName + " " + lastName + " " +
@@ -80,10 +61,44 @@ public class TuitionManager {
             System.out.println("DOB invalid: " + dob + " not a valid " +
                     "calendar date!");
         }
-
     }
 
-    private void addNonResident(Roster roster,String[] inputLine,boolean printRoster) {
+    private void validResident(Roster roster, String firstName,
+                               String lastName, String dateOfBirth,
+                               Major majorName,
+                               String creditsCompletedString,
+                               int defaultScholarship,
+                               boolean printRoster) {
+        if (isValidCreditString(creditsCompletedString)) {
+            int creditsCompleted = Integer.
+                    parseInt(creditsCompletedString);
+            if (creditsCompleted >= 0) {
+                Student student =
+                        new Resident(new Profile(lastName
+                                , firstName,
+                                new Date(dateOfBirth)),
+                                majorName,
+                                creditsCompleted,
+                                defaultScholarship);
+                roster.add(student);
+                if (printRoster) {
+                    System.out.println(firstName + " " +
+                            lastName + " " + dateOfBirth +
+                            " added to the roster.");
+                }
+
+            } else {
+                System.out.println("Credits completed " +
+                        "invalid: cannot be negative!");
+            }
+        } else {
+            System.out.println("Credits completed " +
+                    "invalid: not an integer!");
+        }
+    }
+
+    private void addNonResident(Roster roster, String[] inputLine,
+                                boolean printRoster) {
         if (inputLine.length != 6) {
             System.out.println("Missing data in command line.");
             return;
@@ -102,31 +117,9 @@ public class TuitionManager {
                 if (!roster.contains(studentProfile)) {
                     Major majorName = checkMajor(major);
                     if (majorName != null) {
-                        if (isValidCreditString(creditsCompletedString)) {
-                            int creditsCompleted = Integer.
-                                    parseInt(creditsCompletedString);
-                            if (creditsCompleted >= 0) {
-                                Student student =
-                                        new NonResident(new Profile(lastName
-                                                , firstName,
-                                                new Date(dateOfBirth)),
-                                                majorName,
-                                                creditsCompleted);
-                                roster.add(student);
-                                if (printRoster) {
-                                    System.out.println(firstName + " " +
-                                            lastName + " " + dateOfBirth +
-                                            " added to the roster.");
-                                }
-
-                            } else {
-                                System.out.println("Credits completed " +
-                                        "invalid: cannot be negative!");
-                            }
-                        } else {
-                            System.out.println("Credits completed " +
-                                    "invalid: not an integer!");
-                        }
+                        validNonResident(roster,firstName,lastName,
+                                dateOfBirth,majorName,
+                                creditsCompletedString,printRoster);
                     }
                 } else {
                     System.out.println(firstName + " " + lastName + " " +
@@ -142,7 +135,43 @@ public class TuitionManager {
         }
     }
 
-    private void addTriState(Roster roster, String[] inputLine, boolean printRoster) {
+    private void validNonResident(Roster roster, String firstName,
+                                  String lastName, String dateOfBirth,
+                                  Major majorName,
+                                  String creditsCompletedString,
+                                  boolean printRoster) {
+        if (isValidCreditString(creditsCompletedString)) {
+            int creditsCompleted = Integer.
+                    parseInt(creditsCompletedString);
+            if (creditsCompleted >= 0) {
+                Student student =
+                        new NonResident(
+                                new Profile(lastName
+                                        , firstName,
+                                        new Date(
+                                                dateOfBirth
+                                        )),
+                                majorName,
+                                creditsCompleted);
+                roster.add(student);
+                if (printRoster) {
+                    System.out.println(firstName + " " +
+                            lastName + " " + dateOfBirth +
+                            " added to the roster.");
+                }
+
+            } else {
+                System.out.println("Credits completed " +
+                        "invalid: cannot be negative!");
+            }
+        } else {
+            System.out.println("Credits completed " +
+                    "invalid: not an integer!");
+        }
+    }
+
+    private void addTriState(Roster roster, String[] inputLine,
+                             boolean printRoster) {
         if (inputLine.length != 7) {
             if (inputLine.length == 6) {
                 System.out.println("Missing the state code.");
@@ -161,7 +190,7 @@ public class TuitionManager {
                 firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (state.equalsIgnoreCase("NY") || state.equalsIgnoreCase("CT")){
+        if (state.equalsIgnoreCase("NY") || state.equalsIgnoreCase("CT")) {
             studentProfile.setState(state);
         } else {
             System.out.println(state + ": Invalid state code.");
@@ -183,7 +212,7 @@ public class TuitionManager {
                                                 , firstName,
                                                 new Date(dateOfBirth)),
                                                 majorName,
-                                                creditsCompleted,state);
+                                                creditsCompleted, state);
                                 roster.add(student);
                                 if (printRoster) {
                                     System.out.println(firstName + " " +
@@ -214,7 +243,8 @@ public class TuitionManager {
         }
     }
 
-    private void addInternational(Roster roster, String[] inputLine,boolean printRoster) {
+    private void addInternational(Roster roster, String[] inputLine,
+                                  boolean printRoster) {
         if (inputLine.length < 6) { // replace magic number
             System.out.println("Missing data in command line.");
             return;
@@ -231,8 +261,9 @@ public class TuitionManager {
             studyAbroad = "false";
         }
         boolean isStudyAbroad = Boolean.parseBoolean(studyAbroad);
-        International studentProfile = new International(new Profile(lastName,
-                firstName, new Date(dateOfBirth)));
+        International studentProfile =
+                new International(new Profile(lastName,
+                        firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
         if (dob.isValid()) {
@@ -245,11 +276,14 @@ public class TuitionManager {
                                     parseInt(creditsCompletedString);
                             if (creditsCompleted >= 0) {
                                 Student student =
-                                        new International(new Profile(lastName
-                                                , firstName,
-                                                new Date(dateOfBirth)),
+                                        new International(
+                                                new Profile(lastName
+                                                        , firstName,
+                                                        new Date(
+                                                                dateOfBirth)),
                                                 majorName,
-                                                creditsCompleted,isStudyAbroad);
+                                                creditsCompleted,
+                                                isStudyAbroad);
                                 roster.add(student);
                                 if (printRoster) {
                                     System.out.println(firstName + " " +
@@ -280,7 +314,8 @@ public class TuitionManager {
         }
     }
 
-    private void enrollStudent(Roster roster,String[] inputLine, Enrollment enrollment) {
+    private void enrollStudent(Roster roster, String[] inputLine,
+                               Enrollment enrollment) {
         if (inputLine.length != 5) {
             System.out.println("Missing data in command line.");
             return;
@@ -292,34 +327,59 @@ public class TuitionManager {
 
         if (isValidCreditString(creditsCompletedString)) {
             int creditsEnrolled = Integer.parseInt(creditsCompletedString);
-            Student student = new Resident(new Profile(lastName,firstName,new Date(dateOfBirth)));
+            Student student = new Resident(new Profile(lastName,
+                    firstName, new Date(dateOfBirth)));
             if (roster.contains(student)) {
                 int studentIndex = roster.find(student);
                 student = roster.getRoster()[studentIndex];
-                if (student.isValid(creditsEnrolled)) { // each valid class must return error message
-                    EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)), creditsEnrolled);
-                    if(enrollment.contains(newStudent)){
-                        enrollment.getEnrollStudent(newStudent).setCreditsEnrolled(creditsEnrolled);
-                    } else{
+                if (student.isValid(creditsEnrolled)) { // each valid
+                    // class must return error message
+                    EnrollStudent newStudent =
+                            new EnrollStudent(new Profile(lastName,
+                                    firstName, new Date(dateOfBirth)),
+                                    creditsEnrolled);
+                    if (enrollment.contains(newStudent)) {
+                        enrollment.getEnrollStudent(newStudent)
+                                .setCreditsEnrolled(creditsEnrolled);
+                    } else {
                         enrollment.add(newStudent);
                     }
-                    System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
-                } else if ( student.getClass().getSimpleName().equals(("International")) && ((International)student).isStudyAbroad()){
-                    System.out.println("(" + student.getClass().getSimpleName() + " studentstudy abroad) " + creditsEnrolled + ": invalid credit hours.");
-                } else if (student.getClass().getSimpleName().equals(("International"))){
-                    System.out.println("(" + student.getClass().getSimpleName() + "student) " + creditsEnrolled + ": invalid credit hours.");
-                } else{
-                    System.out.println("(" + student.getClass().getSimpleName() + ") " + creditsEnrolled + ": invalid credit hours.");
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " enrolled " + creditsEnrolled +
+                            " credits");
+                } else if (student.getClass().getSimpleName().equals((
+                        "International")) &&
+                        ((International) student).isStudyAbroad()) {
+                    System.out.println(
+                            "(" + student.getClass().getSimpleName() +
+                                    " studentstudy abroad) " +
+                                    creditsEnrolled +
+                                    ": invalid credit hours.");
+                } else if (student.getClass().getSimpleName().equals((
+                        "International"))) {
+                    System.out.println(
+                            "(" + student.getClass().getSimpleName() +
+                                    "student) " + creditsEnrolled +
+                                    ": invalid credit hours.");
+                } else {
+                    System.out.println(
+                            "(" + student.getClass().getSimpleName() +
+                                    ") " + creditsEnrolled +
+                                    ": invalid credit hours.");
                 }
             } else {
-                System.out.println("Cannot enroll: " + firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+                System.out.println(
+                        "Cannot enroll: " + firstName + " " + lastName +
+                                " " + dateOfBirth +
+                                " is not in the roster.");
             }
         } else {
             System.out.println("Credits enrolled is not an integer.");
         }
     }
 
-    private void dropStudent(Roster roster, String[] inputLine, Enrollment enrollment) {
+    private void dropStudent(Roster roster, String[] inputLine,
+                             Enrollment enrollment) {
         if (inputLine.length != 4) {
             System.out.println("Missing data in line command.");
             return;
@@ -328,18 +388,24 @@ public class TuitionManager {
         String lastName = inputLine[2];
         String dateOfBirth = inputLine[3];
 
-        EnrollStudent student = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)));
+        EnrollStudent student = new EnrollStudent(new Profile(lastName,
+                firstName, new Date(dateOfBirth)));
         if (enrollment.contains(student)) {
             int studentIndex = enrollment.find(student);
             student = enrollment.getEnrollStudents()[studentIndex];
             enrollment.remove(student);
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " dropped.");
+            System.out.println(
+                    firstName + " " + lastName + " " + dateOfBirth +
+                            " dropped.");
         } else {
-            System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not enrolled.");
+            System.out.println(
+                    firstName + " " + lastName + " " + dateOfBirth +
+                            " is not enrolled.");
         }
     }
 
-    private void grantScholarship(Roster roster, String[] inputLine, Enrollment enrollment) {
+    private void grantScholarship(Roster roster, String[] inputLine,
+                                  Enrollment enrollment) {
         if (inputLine.length < 4) {
             System.out.println("Missing data in command line.");
             return;
@@ -350,51 +416,71 @@ public class TuitionManager {
         String scholarshipString = null;
 
         //if (isValidCreditString(scholarshipString)) {
-            //int scholarship = Integer.parseInt(scholarshipString);
-            Student student = new Resident(new Profile(lastName,firstName,new Date(dateOfBirth)));
-            if (roster.contains(student)) {
-                int studentIndex = roster.find(student);
-                student = roster.getRoster()[studentIndex];
-                if (student instanceof Resident) {
-                    EnrollStudent checkStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)));
-                    int index = enrollment.find(checkStudent);
-                    checkStudent = enrollment.getEnrollStudents()[index];
-                    if (!checkStudent.isPartTime()) {
-                        try {
-                            scholarshipString = inputLine[4];
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            System.out.println("Missing data in command line.");
-                            return;
-                        }
-                        if(isValidCreditString(scholarshipString)){
-                            int scholarship = Integer.parseInt(scholarshipString);
-                            if (((Resident) student).isValidScholarship(scholarship)) {
-                                ((Resident) student).setScholarship(scholarship);
-                                System.out.println(firstName + " " + lastName + " " + dateOfBirth + ": scholarship amount updated.");
-                            } else {
-                                System.out.println(scholarship + ": invalid amount.");
-                            }
+        //int scholarship = Integer.parseInt(scholarshipString);
+        Student student = new Resident(new Profile(lastName, firstName,
+                new Date(dateOfBirth)));
+        if (roster.contains(student)) {
+            int studentIndex = roster.find(student);
+            student = roster.getRoster()[studentIndex];
+            if (student instanceof Resident) {
+                EnrollStudent checkStudent =
+                        new EnrollStudent(new Profile(lastName,
+                                firstName, new Date(dateOfBirth)));
+                int index = enrollment.find(checkStudent);
+                checkStudent = enrollment.getEnrollStudents()[index];
+                if (!checkStudent.isPartTime()) {
+                    try {
+                        scholarshipString = inputLine[4];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Missing data in command line" +
+                                ".");
+                        return;
+                    }
+                    if (isValidCreditString(scholarshipString)) {
+                        int scholarship =
+                                Integer.parseInt(scholarshipString);
+                        if (((Resident) student).isValidScholarship(
+                                scholarship)) {
+                            ((Resident) student).setScholarship(
+                                    scholarship);
+                            System.out.println(
+                                    firstName + " " + lastName + " " +
+                                            dateOfBirth +
+                                            ": scholarship amount " +
+                                            "updated.");
                         } else {
-                            System.out.println("Amount is not an integer.");
+                            System.out.println(scholarship + ": invalid " +
+                                    "amount.");
                         }
                     } else {
-                        System.out.println(firstName + " " + lastName + " "
-                                + dateOfBirth + " part time student is not eligible for the scholarship.");
+                        System.out.println("Amount is not an integer.");
                     }
                 } else {
-                    if (student instanceof NonResident) {
-                        if (student.getClass().getSimpleName().equals("NonResident")) {
-                            System.out.println(firstName + " " + lastName + " " +
-                                    dateOfBirth + " (" + "Non-Resident" + ") is not eligible for the scholarship.");
-                        }
-                    } else {
-                        System.out.println(firstName + " " + lastName + " " +
-                                dateOfBirth + " (" + student.getClass().getSimpleName() + ") is not eligible for the scholarship.");
-                    }
+                    System.out.println(firstName + " " + lastName + " "
+                            + dateOfBirth + " part time student is not " +
+                            "eligible for the scholarship.");
                 }
             } else {
-                System.out.println(firstName + " " + lastName + " " + dateOfBirth + " is not in the roster.");
+                if (student instanceof NonResident) {
+                    if (student.getClass().getSimpleName().equals(
+                            "NonResident")) {
+                        System.out.println(firstName + " " + lastName +
+                                " " +
+                                dateOfBirth + " (" + "Non-Resident" + ")" +
+                                " is not eligible for the scholarship.");
+                    }
+                } else {
+                    System.out.println(firstName + " " + lastName + " " +
+                            dateOfBirth + " (" +
+                            student.getClass().getSimpleName() +
+                            ") is not eligible for the scholarship.");
+                }
             }
+        } else {
+            System.out.println(
+                    firstName + " " + lastName + " " + dateOfBirth +
+                            " is not in the roster.");
+        }
     }
 
     /* Helper method to check tokens
@@ -472,8 +558,9 @@ public class TuitionManager {
 
     /**
      * Checks to make sure credits entered by user is an integer
+     *
      * @param creditsCompletedString string entered by user to show how
-     * many credits student has
+     *                               many credits student has
      * @return returns whether or not credit value entered by user is valid
      */
     private boolean isValidCreditString(String creditsCompletedString) {
@@ -487,7 +574,8 @@ public class TuitionManager {
 
     /**
      * Removes student from the roster
-     * @param roster object to hold a list of students
+     *
+     * @param roster    object to hold a list of students
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
@@ -511,7 +599,8 @@ public class TuitionManager {
 
     /**
      * Change the major of a student in the roster
-     * @param roster object to hold a list of students
+     *
+     * @param roster    object to hold a list of students
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
@@ -541,6 +630,7 @@ public class TuitionManager {
 
     /**
      * Checks string user inputted for the major and sees if it's valid
+     *
      * @param major string entered by user for the major
      * @return returns corresponding major from enum class
      */
@@ -564,6 +654,7 @@ public class TuitionManager {
 
     /**
      * Checks if school enter by user for list command is valid
+     *
      * @param school string entered by user to a call the list of a school
      * @return returns true if school entered by student is valid
      */
@@ -578,7 +669,8 @@ public class TuitionManager {
 
     /**
      * Lists all students in a specific school
-     * @param roster object to hold a list of students
+     *
+     * @param roster    object to hold a list of students
      * @param inputLine command line arguments from user input to access
      *                  student information
      */
@@ -630,41 +722,46 @@ public class TuitionManager {
      */
 
 
-    private void loadRoster(Roster roster, String[] inputLine,boolean printRoster){
+    private void loadRoster(Roster roster, String[] inputLine,
+                            boolean printRoster) {
         printRoster = false;
-        try{
+        try {
             String filename = inputLine[1];
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/" + filename));
-            while(fileScanner.hasNextLine()){
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft" +
+                    ". Meth/" + filename));
+            while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] inputLines = line.split(",");
                 String command = inputLines[0];
-                if(command.equals("R")){
-                    addResident(roster, inputLines,printRoster);
-                } else if(command.equals("I")){
-                    addInternational(roster, inputLines,printRoster);
-                } else if (command.equals("T")){
-                    addTriState(roster, inputLines,printRoster);
-                } else if (command.equals("N")){
-                    addNonResident(roster, inputLines,printRoster);
+                if (command.equals("R")) {
+                    addResident(roster, inputLines, printRoster);
+                } else if (command.equals("I")) {
+                    addInternational(roster, inputLines, printRoster);
+                } else if (command.equals("T")) {
+                    addTriState(roster, inputLines, printRoster);
+                } else if (command.equals("N")) {
+                    addNonResident(roster, inputLines, printRoster);
                 }
             }
             fileScanner.close();
             System.out.println("Students loaded to the roster.");
-        } catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("** File not found **");
             System.out.println(e);
         }
     }
 
-    public void printEnrollment(Enrollment enrollment){
-        if(enrollment.getEnrollStudents()[0] == null){
+    public void printEnrollment(Enrollment enrollment) {
+        if (enrollment.getEnrollStudents()[0] == null) {
             System.out.println("Enrollment is empty!");
-        } else{
+        } else {
             System.out.println("** Enrollment **");
-            for (int i = 0; i < enrollment.getEnrollStudents().length; i++) {
-                if(enrollment.getEnrollStudents()[i] != null){
-                    System.out.println(enrollment.getEnrollStudents()[i] + ": credits enrolled: " + enrollment.getEnrollStudents()[i].getCreditsEnrolled());
+            for (int i = 0; i < enrollment.getEnrollStudents().length;
+                 i++) {
+                if (enrollment.getEnrollStudents()[i] != null) {
+                    System.out.println(enrollment.getEnrollStudents()[i] +
+                            ": credits enrolled: " +
+                            enrollment.getEnrollStudents()[i].getCreditsEnrolled());
                 }
             }
             System.out.println("* end of enrollment *");
@@ -672,77 +769,122 @@ public class TuitionManager {
 
     }
 
-    private void printTuitionDue(Roster roster, Enrollment enrollment){
+    private void printTuitionDue(Roster roster, Enrollment enrollment) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
-        if(enrollment.getEnrollStudents()[0] != null) {
+        if (enrollment.getEnrollStudents()[0] != null) {
             System.out.println("** Tuition due **");
-            for (EnrollStudent enrollStudent : enrollment.getEnrollStudents()) {
+            for (EnrollStudent enrollStudent :
+                    enrollment.getEnrollStudents()) {
                 if (enrollStudent != null) {
-                    Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
-                    double tuitionDue = student.tuitionDue(enrollStudent.getCreditsEnrolled());
-                    if (student.getClass().getSimpleName().equals("International")) {
+                    Student student =
+                            roster.getStudent(new NonResident(
+                                    enrollStudent.getProfile(), null, 0));
+                    double tuitionDue =
+                            student.tuitionDue(
+                                    enrollStudent.getCreditsEnrolled());
+                    if (student.getClass().getSimpleName().equals(
+                            "International")) {
                         if (((International) student).isStudyAbroad()) {
-                            System.out.println("" + student.getProfile() + " (International studentstudy abroad) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                            System.out.println("" + student.getProfile() +
+                                    " (International studentstudy " +
+                                    "abroad) enrolled " +
+                                    enrollStudent.getCreditsEnrolled() +
+                                    " credits: tuition due: $" +
+                                    decimalFormat.format(tuitionDue));
                         } else {
-                            System.out.println("" + student.getProfile() + " (International student) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                            System.out.println("" + student.getProfile() +
+                                    " (International student) enrolled " +
+                                    enrollStudent.getCreditsEnrolled() +
+                                    " credits: tuition due: $" +
+                                    decimalFormat.format(tuitionDue));
                         }
-                    } else if (student.getClass().getSimpleName().equals("TriState")) {
-                        System.out.println("" + student.getProfile() + " (Tri-state " + ((TriState) student).getState() + ") enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-                    } else if (student.getClass().getSimpleName().equals("NonResident")) {
-                        System.out.println("" + student.getProfile() + " (Non-Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
-                    } else if (student.getClass().getSimpleName().equals("Resident")) {
-                        System.out.println("" + student.getProfile() + " (Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                    } else if (student.getClass().getSimpleName()
+                            .equals("TriState")) {
+                        System.out.println("" + student.getProfile() +
+                                " (Tri-state " +
+                                ((TriState) student).getState() +
+                                ") enrolled " +
+                                enrollStudent.getCreditsEnrolled() +
+                                " credits: tuition due: $" +
+                                decimalFormat.format(tuitionDue));
+                    } else if (student.getClass().getSimpleName()
+                            .equals("NonResident")) {
+                        System.out.println("" + student.getProfile() +
+                                " (Non-Resident) enrolled " +
+                                enrollStudent.getCreditsEnrolled() +
+                                " credits: tuition due: $" +
+                                decimalFormat.format(tuitionDue));
+                    } else if (student.getClass().getSimpleName()
+                            .equals("Resident")) {
+                        System.out.println("" + student.getProfile() +
+                                " (Resident) enrolled " +
+                                enrollStudent.getCreditsEnrolled() +
+                                " credits: tuition due: $" +
+                                decimalFormat.format(tuitionDue));
                     }
                 }
             }
             System.out.println("* end of tuition due *");
-        } else{
+        } else {
             System.out.println("Student roster is empty!");
         }
 
     }
 
-    private void printEligibleGraduates(Roster roster, Enrollment enrollment) {
+    private void printEligibleGraduates(Roster roster,
+                                        Enrollment enrollment) {
         for (int i = 0; i < roster.getSize(); i++) {
             Student student = roster.getRoster()[i];
-            EnrollStudent enrollStudent = new EnrollStudent(student.getProfile());
+            EnrollStudent enrollStudent =
+                    new EnrollStudent(student.getProfile());
             if (enrollment.contains(enrollStudent)) {
                 int index = enrollment.find(enrollStudent);
-                student.creditCompleted += enrollment.getEnrollStudents()[index].getCreditsEnrolled();
+                student.creditCompleted +=
+                        enrollment.getEnrollStudents()[index].getCreditsEnrolled();
             }
         }
         System.out.println("Credit completed has been updated.");
 
-        System.out.println("** list of students eligible for graduation **");
+        System.out.println("** list of students eligible for graduation " +
+                "**");
         for (int i = 0; i < roster.getSize(); i++) {
             Student student = roster.getRoster()[i];
             if (student.creditCompleted >= 120) {
                 if (student instanceof International) {
                     System.out.println(student.getProfile().toString() +
                             " (" + student.getMajor().getCoreCode() + " " +
-                            student.getMajor().name() + " " + student.getMajor().getSchool() +
-                            ") credits completed: " + student.creditCompleted +
-                            " (" + student.getStanding().name() + ")(non-resident)(" +
-                            student.getClass().getSimpleName().toLowerCase() + ")");
+                            student.getMajor().name() + " " +
+                            student.getMajor().getSchool() +
+                            ") credits completed: " +
+                            student.creditCompleted +
+                            " (" + student.getStanding().name() + ")(non" +
+                            "-resident)(" +
+                            student.getClass().getSimpleName()
+                                    .toLowerCase() + ")");
                 } else if (student instanceof TriState) {
                     System.out.println(student.getProfile().toString() +
                             " (" + student.getMajor().getCoreCode() + " " +
-                            student.getMajor().name() + " " + student.getMajor().getSchool() +
-                            ") credits completed: " + student.creditCompleted +
-                            " (" + student.getStanding().name() + ")(non-resident)(" +
-                            "tri-state" + ":" + ((TriState) student).getState() + ")");
+                            student.getMajor().name() + " " +
+                            student.getMajor().getSchool() +
+                            ") credits completed: " +
+                            student.creditCompleted +
+                            " (" + student.getStanding().name() + ")(non" +
+                            "-resident)(" +
+                            "tri-state" + ":" +
+                            ((TriState) student).getState() + ")");
                 } else {
                     System.out.println(student.getProfile().toString() +
                             " (" + student.getMajor().getCoreCode() + " " +
-                            student.getMajor().name() + " " + student.getMajor().getSchool() +
-                            ")credits completed: " + student.creditCompleted +
+                            student.getMajor().name() + " " +
+                            student.getMajor().getSchool() +
+                            ")credits completed: " +
+                            student.creditCompleted +
                             "(" + student.getStanding().name() + ")(" +
                             student.getClass().getSimpleName() + ")");
                 }
             }
         }
     }
-
 
 
     /**
@@ -756,7 +898,8 @@ public class TuitionManager {
         Roster roster = new Roster();
         Enrollment enrollment = new Enrollment();
 
-        // Can add boolean variable to see if added method successfully added student to roster
+        // Can add boolean variable to see if added method successfully
+        // added student to roster
         // If so, print the in the run method
 
         while (!dataToken.equals("Q")) {
@@ -765,17 +908,17 @@ public class TuitionManager {
             String command = inputLine[0];
             boolean printRoster = true;
             if (command.equals("AR")) {
-                addResident(roster, inputLine,printRoster);
+                addResident(roster, inputLine, printRoster);
             } else if (command.equals("AN")) {
-                addNonResident(roster,inputLine,printRoster);
+                addNonResident(roster, inputLine, printRoster);
             } else if (command.equals("AT")) {
-                addTriState(roster,inputLine,printRoster);
-            } else if (command.equals("AI")){
-                addInternational(roster,inputLine,printRoster);
+                addTriState(roster, inputLine, printRoster);
+            } else if (command.equals("AI")) {
+                addInternational(roster, inputLine, printRoster);
             } else if (command.equals("R")) {
                 removeStudent(roster, inputLine);
             } else if (command.equals("E")) {
-                enrollStudent(roster,inputLine,enrollment);
+                enrollStudent(roster, inputLine, enrollment);
             } else if (command.equals("P")) {
                 roster.print();
             } else if (command.equals("PS")) {
@@ -783,26 +926,26 @@ public class TuitionManager {
             } else if (command.equals("PC")) {
                 roster.printBySchoolMajor();
             } else if (command.equals("L")) {
-                listSchool(roster,inputLine);
+                listSchool(roster, inputLine);
             } else if (command.equals("D")) {
-                dropStudent(roster,inputLine, enrollment);
+                dropStudent(roster, inputLine, enrollment);
             } else if (command.equals("S")) {
-                grantScholarship(roster,inputLine,enrollment);
+                grantScholarship(roster, inputLine, enrollment);
             } else if (command.equals("SE")) {
-                printEligibleGraduates(roster,enrollment);
+                printEligibleGraduates(roster, enrollment);
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                loadRoster(roster,inputLine,printRoster);
+                loadRoster(roster, inputLine, printRoster);
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {
                 printTuitionDue(roster, enrollment);
-            } else if(command.equals("")){
+            } else if (command.equals("")) {
                 continue;
-            } else if(command.equals("Q")){
+            } else if (command.equals("Q")) {
                 break;
-            } else{
+            } else {
                 System.out.println(command + " is an invalid command!");
             }
         }

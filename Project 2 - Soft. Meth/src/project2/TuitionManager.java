@@ -610,7 +610,7 @@ public class TuitionManager {
 
     private void loadRoster(Roster roster){
         try{
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/src/studentList.txt")); //need to fix path
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/studentList.txt")); //need to fix path
             while(fileScanner.hasNextLine()){
                 String line = fileScanner.nextLine();
                 String[] inputLine = line.split(",");
@@ -658,7 +658,44 @@ public class TuitionManager {
     }
 
     private void printEligibleGraduates(Roster roster, Enrollment enrollment) {
+        for (int i = 0; i < roster.getSize(); i++) {
+            Student student = roster.getRoster()[i];
+            EnrollStudent enrollStudent = new EnrollStudent(student.getProfile());
+            if (enrollment.contains(enrollStudent)) {
+                int index = enrollment.find(enrollStudent);
+                student.creditCompleted += enrollment.getEnrollStudents()[index].getCreditsEnrolled();
+            }
+        }
+        System.out.println("Credit completed has been updated.");
 
+        System.out.println("** list of students eligible for graduation **");
+        for (int i = 0; i < roster.getSize(); i++) {
+            Student student = roster.getRoster()[i];
+            if (student.creditCompleted >= 120) {
+                if (student instanceof International) {
+                    System.out.println(student.getProfile().toString() +
+                            " (" + student.getMajor().getCoreCode() + " " +
+                            student.getMajor().name() + " " + student.getMajor().getSchool() +
+                            ") credits completed: " + student.creditCompleted +
+                            " (" + student.getStanding().name() + ") (non-resident) (" +
+                            student.getClass().getSimpleName().toLowerCase() + ") ");
+                } else if (student instanceof TriState) {
+                    System.out.println(student.getProfile().toString() +
+                            " (" + student.getMajor().getCoreCode() + " " +
+                            student.getMajor().name() + " " + student.getMajor().getSchool() +
+                            ") credits completed: " + student.creditCompleted +
+                            " (" + student.getStanding().name() + ") (non-resident) (" +
+                            student.getClass().getSimpleName().toLowerCase() + ":" + ((TriState) student).getState() + ")");
+                } else {
+                    System.out.println(student.getProfile().toString() +
+                            " (" + student.getMajor().getCoreCode() + " " +
+                            student.getMajor().name() + " " + student.getMajor().getSchool() +
+                            ") credits completed: " + student.creditCompleted +
+                            " (" + student.getStanding().name() + ") (" +
+                            student.getClass().getSimpleName() + ") ");
+                }
+            }
+        }
     }
 
 
@@ -673,6 +710,9 @@ public class TuitionManager {
         String dataToken = "";
         Roster roster = new Roster();
         Enrollment enrollment = new Enrollment();
+
+        // Can add boolean variable to see if added method successfully added student to roster
+        // If so, print the in the run method
 
         while (!dataToken.equals("Q")) {
             dataToken = scanner.nextLine();

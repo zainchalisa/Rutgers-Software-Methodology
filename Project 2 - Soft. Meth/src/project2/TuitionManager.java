@@ -616,21 +616,21 @@ public class TuitionManager {
      */
 
     private void loadRoster(Roster roster, String[] inputLine){
-
-        String command = inputLine[0];
-        String filename = inputLine[1];
         try{
-            Scanner fileScanner = new Scanner(new File(filename));
+            String filename = inputLine[1];
+            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/" + filename));
             while(fileScanner.hasNextLine()){
-
+                String line = fileScanner.nextLine();
+                String[] inputLines = line.split(",");
+                String command = inputLines[0];
                 if(command.equals("R")){
-                    addResident(roster, inputLine);
+                    addResident(roster, inputLines);
                 } else if(command.equals("I")){
-                    addInternational(roster, inputLine);
+                    addInternational(roster, inputLines);
                 } else if (command.equals("T")){
-                    addTriState(roster, inputLine);
+                    addTriState(roster, inputLines);
                 } else if (command.equals("N")){
-                    addNonResident(roster, inputLine);
+                    addNonResident(roster, inputLines);
                 }
             }
             fileScanner.close();

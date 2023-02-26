@@ -615,13 +615,14 @@ public class TuitionManager {
 
      */
 
-    private void loadRoster(Roster roster){
+    private void loadRoster(Roster roster, String[] inputLine){
+
+        String command = inputLine[0];
+        String filename = inputLine[1];
         try{
-            Scanner fileScanner = new Scanner(new File("Project 2 - Soft. Meth/studentList.txt")); //need to fix path
+            Scanner fileScanner = new Scanner(new File(filename));
             while(fileScanner.hasNextLine()){
-                String line = fileScanner.nextLine();
-                String[] inputLine = line.split(",");
-                String command = inputLine[0];
+
                 if(command.equals("R")){
                     addResident(roster, inputLine);
                 } else if(command.equals("I")){
@@ -636,6 +637,7 @@ public class TuitionManager {
             System.out.println("Students loaded to the roster.");
         } catch(FileNotFoundException e){
             System.out.println("** File not found **");
+            System.out.println(e);
         }
     }
 
@@ -769,7 +771,7 @@ public class TuitionManager {
             } else if (command.equals("C")) {
                 changeMajor(roster, inputLine);
             } else if (command.equals("LS")) {
-                loadRoster(roster);
+                loadRoster(roster,inputLine);
             } else if (command.equals("PE")) {
                 printEnrollment(enrollment);
             } else if (command.equals("PT")) {

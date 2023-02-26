@@ -1,6 +1,7 @@
 package project2;
 
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.io.File;
 
@@ -18,6 +19,8 @@ public class TuitionManager {
      * @param inputLine command line arguments from user input to access
      * student information
      */
+
+
 
     private void addResident(Roster roster,String[] inputLine) {
         if (inputLine.length != 6) {
@@ -282,8 +285,12 @@ public class TuitionManager {
                 int studentIndex = roster.find(student);
                 student = roster.getRoster()[studentIndex];
                 if (student.isValid(creditsEnrolled)) { // each valid class must return error message
-                    EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)),creditsEnrolled);
-                    enrollment.add(newStudent);
+                    EnrollStudent newStudent = new EnrollStudent(new Profile(lastName,firstName,new Date(dateOfBirth)), creditsEnrolled);
+                    if(enrollment.contains(newStudent)){
+                        enrollment.getEnrollStudent(newStudent).setCreditsEnrolled(creditsEnrolled);
+                    } else{
+                        enrollment.add(newStudent);
+                    }
                     System.out.println(firstName + " " + lastName + " " + dateOfBirth + " enrolled " + creditsEnrolled + " credits");
                 } else if ( student.getClass().getSimpleName().equals(("International")) && ((International)student).isStudyAbroad()){
                     System.out.println("(" + student.getClass().getSimpleName() + "studentstudy abroad) " + creditsEnrolled + ": invalid credit hours.");
@@ -649,10 +656,25 @@ public class TuitionManager {
     }
 
     private void printTuitionDue(Roster roster, Enrollment enrollment){
+        DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
         for (EnrollStudent enrollStudent: enrollment.getEnrollStudents()) {
             if (enrollStudent != null) {
                 Student student = roster.getStudent(new NonResident(enrollStudent.getProfile(), null, 0));
-                System.out.println(""+ student.getProfile() + " enrolled" + enrollStudent.getCreditsEnrolled() + "credits: tuition due: $" + student.tuitionDue(enrollStudent.getCreditsEnrolled()));
+                double tuitionDue = student.tuitionDue(enrollStudent.getCreditsEnrolled());
+                if(student.getClass().getSimpleName().equals("International")){
+                    if(((International) student).isStudyAbroad()){
+                        System.out.println(""+ student.getProfile() + " (International Student - Study Abroad) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                    } else{
+                        System.out.println(""+ student.getProfile() + " (International Student) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                    }
+                } else if (student.getClass().getSimpleName().equals("TriState")){
+                    System.out.println(""+ student.getProfile() + " (Tri-State " + ((TriState) student).getState() + ") enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                } else if (student.getClass().getSimpleName().equals("NonResident")){
+                    System.out.println(""+ student.getProfile() + " (Non-Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+                } else if (student.getClass().getSimpleName().equals("Resident")){
+                    System.out.println(""+ student.getProfile() + " (Resident) enrolled " + enrollStudent.getCreditsEnrolled() + " credits: tuition due: $" + decimalFormat.format(tuitionDue));
+
+                }
             }
         }
     }

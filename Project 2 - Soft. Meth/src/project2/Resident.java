@@ -25,7 +25,7 @@ public class Resident extends Student {
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
-       if(creditsEnrolled == MAX_CREDITS){
+       if( creditsEnrolled >= MIN_FULL_TIME_CREDITS|| creditsEnrolled <= MAX_CREDITS){
            return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE;
        } else if (creditsEnrolled < MIN_FULL_TIME_CREDITS) {
            return (creditsEnrolled * PART_RESIDENT_CREDIT) + (FULL_RESIDENT_UNIVERSITY_FEE *UNIVERSITY_FEE_DISCOUNT);

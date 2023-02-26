@@ -5,11 +5,10 @@ package project2;
 public class Resident extends Student {
 
     private int scholarship;
-
     public static final int FULL_RESIDENT_TUITION = 12536;
     public static final int FULL_RESIDENT_UNIVERSITY_FEE = 3268;
     public static final int PART_RESIDENT_CREDIT = 404;
-    public static final double UNIVERSITY_FEE_DISCOUNT = .8;
+    public static final double UNIVERSITY_FEE_DISCOUNT = 0.8;
     public static final int MAX_CREDITS = 16;
     public static final int MIN_FULL_TIME_CREDITS = 12;
 
@@ -25,14 +24,16 @@ public class Resident extends Student {
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
-       if( creditsEnrolled >= MIN_FULL_TIME_CREDITS|| creditsEnrolled <= MAX_CREDITS){
-           return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE;
-       } else if (creditsEnrolled < MIN_FULL_TIME_CREDITS) {
-           return (creditsEnrolled * PART_RESIDENT_CREDIT) + (FULL_RESIDENT_UNIVERSITY_FEE *UNIVERSITY_FEE_DISCOUNT);
+        if(creditsEnrolled > 16){
+            return (FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE) + ((creditsEnrolled - MAX_CREDITS) * PART_RESIDENT_CREDIT) - scholarship;
+       } else if (creditsEnrolled >= 12 && creditsEnrolled <= 16){
+           return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE - scholarship;
        } else{
-           int leftOverCredits = creditsEnrolled - MAX_CREDITS;
-           return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE + (leftOverCredits * PART_RESIDENT_CREDIT);
+           return (creditsEnrolled * PART_RESIDENT_CREDIT) + (FULL_RESIDENT_UNIVERSITY_FEE *UNIVERSITY_FEE_DISCOUNT) - scholarship;
        }
+
+
+
     }
 
     @Override
@@ -68,3 +69,5 @@ public class Resident extends Student {
         this.scholarship = scholarship;
     }
 }
+
+

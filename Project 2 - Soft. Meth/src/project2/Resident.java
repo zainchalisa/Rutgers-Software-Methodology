@@ -17,6 +17,11 @@ public class Resident extends Student {
     public static final double UNIVERSITY_FEE_DISCOUNT = 0.8;
     public static final int MAX_CREDITS = 16;
     public static final int MIN_FULL_TIME_CREDITS = 12;
+    public static final int MIN_CREDITS = 3;
+    public static final int SUPER_MAX_CREDITS = 24;
+    public static final int MIN_SCHOLARSHIP = 0;
+    public static final int MAX_SCHOLARSHIP = 10000;
+
 
     /**
      * This constructor sets the profile for the resident student
@@ -54,12 +59,13 @@ public class Resident extends Student {
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
-        if (creditsEnrolled > 16) {
+        if (creditsEnrolled > MAX_CREDITS) {
             return (FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE) +
                     ((creditsEnrolled - MAX_CREDITS) *
                             PART_RESIDENT_CREDIT)
                     - scholarship;
-        } else if (creditsEnrolled >= 12 && creditsEnrolled <= 16) {
+        } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS &&
+                creditsEnrolled <= MAX_CREDITS) {
             return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE
                     - scholarship;
         } else {
@@ -79,7 +85,8 @@ public class Resident extends Student {
      */
     @Override
     public boolean isValid(int creditsEnrolled) {
-        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
+        if (creditsEnrolled < MIN_CREDITS || creditsEnrolled >
+                SUPER_MAX_CREDITS) {
             return false;
         } else {
             return true;
@@ -107,7 +114,8 @@ public class Resident extends Student {
      * student
      */
     public boolean isValidScholarship(int scholarship) {
-        if (scholarship <= 0 || scholarship > 10000) {
+        if (scholarship <= MIN_SCHOLARSHIP || scholarship >
+                MAX_SCHOLARSHIP) {
             return false;
         }
         return true;

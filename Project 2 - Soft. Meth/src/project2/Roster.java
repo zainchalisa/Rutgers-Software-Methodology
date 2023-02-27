@@ -20,7 +20,7 @@ public class Roster {
      * This constructor is used to create an starting array for the roster
      */
     public Roster() {
-        this.roster = new Student[4];
+        this.roster = new Student[ARRAY_GROWTH];
         this.size = 0;
     }
 
@@ -116,9 +116,9 @@ public class Roster {
 
         int studentIndex = find(student);
 
-        for (int i = studentIndex; i < size - 1; i++) {
-            if (i + 1 < size) {
-                roster[i] = roster[i + 1];
+        for (int i = studentIndex; i < size - GREATER; i++) {
+            if (i + GREATER < size) {
+                roster[i] = roster[i + GREATER];
             } else {
                 roster[size] = null;
             }
@@ -170,11 +170,12 @@ public class Roster {
         for (int i = 0; i < roster.length; i++) {
             int j = i;
             if (roster[j] != null) {
-                while (j > 0 && roster[j - 1].compareTo(roster[j]) ==
+                while (j > EQUAL && roster[j - GREATER].
+                        compareTo(roster[j]) ==
                         GREATER) {
                     Student temp = roster[j];
-                    roster[j] = roster[j - 1];
-                    roster[j - 1] = temp;
+                    roster[j] = roster[j - GREATER];
+                    roster[j - GREATER] = temp;
                     j--;
                 }
             }
@@ -189,11 +190,11 @@ public class Roster {
     public void insertionSort(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
-            while (j > 0 && roster[j - 1].compareTo(roster[j]) ==
+            while (j > EQUAL && roster[j - GREATER].compareTo(roster[j]) ==
                     GREATER) {
                 Student temp = roster[j];
-                roster[j] = roster[j - 1];
-                roster[j - 1] = temp;
+                roster[j] = roster[j - GREATER];
+                roster[j - GREATER] = temp;
                 j--;
             }
         }
@@ -207,20 +208,22 @@ public class Roster {
     public void insertionSortMajor(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
-            while (j > 0) {
-                if (roster[j - 1].getMajor().getSchool().compareTo(roster
+            while (j > EQUAL) {
+                if (roster[j - GREATER].
+                        getMajor().getSchool().compareTo(roster
                         [j].getMajor().getSchool()) > EQUAL) {
                     Student temp = roster[j];
-                    roster[j] = roster[j - 1];
-                    roster[j - 1] = temp;
+                    roster[j] = roster[j - GREATER];
+                    roster[j - GREATER] = temp;
                 }
-                if (roster[j - 1].getMajor().getSchool().compareTo(roster
+                if (roster[j - GREATER].getMajor().getSchool().
+                        compareTo(roster
                         [j].getMajor().getSchool()) == EQUAL &&
-                        roster[j - 1].getMajor().name().compareTo
+                        roster[j - GREATER].getMajor().name().compareTo
                                 (roster[j].getMajor().name()) > EQUAL) {
                     Student temp = roster[j];
-                    roster[j] = roster[j - 1];
-                    roster[j - 1] = temp;
+                    roster[j] = roster[j - GREATER];
+                    roster[j - GREATER] = temp;
                 }
                 j--;
             }
@@ -236,11 +239,12 @@ public class Roster {
         for (int i = 0; i < size; i++) {
             int j = i;
             while (j > 0) {
-                if (roster[j - 1].getStanding().name().compareTo(roster[j].
+                if (roster[j - GREATER].getStanding().name().
+                        compareTo(roster[j].
                         getStanding().name()) > GREATER) {
                     Student temp = roster[j];
-                    roster[j] = roster[j - 1];
-                    roster[j - 1] = temp;
+                    roster[j] = roster[j - GREATER];
+                    roster[j - GREATER] = temp;
                 }
 
                 j--;
@@ -252,7 +256,7 @@ public class Roster {
      * This constructor prints the student by first name, last name, DOB
      */
     public void print() { //print roster sorted by profiles
-        if (size == 0) {
+        if (size == EQUAL) {
             System.out.println("Student roster is empty!");
             return;
         }
@@ -269,7 +273,7 @@ public class Roster {
      * This constructor prints the roster in order of majors
      */
     public void printBySchoolMajor() {
-        if (size == 0) {
+        if (size == EQUAL) {
             System.out.println("Student roster is empty!");
             return;
         }
@@ -285,7 +289,7 @@ public class Roster {
      * This constructor prints the roster in order of standings
      */
     public void printByStanding() {
-        if (size == 0) {
+        if (size == EQUAL) {
             System.out.println("Student roster is empty!");
             return;
         }

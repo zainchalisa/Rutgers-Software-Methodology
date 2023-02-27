@@ -15,6 +15,12 @@ public abstract class Student implements Comparable {
     protected Major major;
     protected int creditCompleted;
 
+    public static final int THIRTY = 30;
+    public static final int SIXTY = 60;
+    public static final int NINETY = 90;
+    public static final int MIN_CREDITS = 3;
+    public static final int SUPER_MAX_CREDITS = 24;
+
     // Superclass needs default constructor for subclass to call on
 
     /**
@@ -40,7 +46,8 @@ public abstract class Student implements Comparable {
     }
 
     public boolean isValid(int creditEnrolled) {
-        if (creditEnrolled < 3 || creditEnrolled > 24) {
+        if (creditEnrolled < MIN_CREDITS || creditEnrolled >
+                SUPER_MAX_CREDITS) {
             return false;
         } else {
             return true;
@@ -70,11 +77,11 @@ public abstract class Student implements Comparable {
     public Standing getStanding() {
 
         int credits = this.creditCompleted;
-        if (credits < 30) {
+        if (credits < THIRTY) {
             return Standing.Freshman;
-        } else if (credits >= 30 && credits < 60) {
+        } else if (credits >= THIRTY && credits < SIXTY) {
             return Standing.Sophomore;
-        } else if (credits >= 60 && credits < 90) {
+        } else if (credits >= SIXTY && credits < NINETY) {
             return Standing.Junior;
         } else {
             return Standing.Senior;

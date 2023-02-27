@@ -18,6 +18,7 @@ public class International extends NonResident {
     public static final int MIN_FULL_TIME_CREDITS = 12;
     public static final int MIN_STUDY_ABROAD_CREDITS = 3;
     public static final int MAX_STUDY_ABROAD_CREDITS = 12;
+    public static final int SUPER_MAX_CREDITS = 24;
     public static final int INTERNATIONAL_HEALTH_CARE = 2650;
 
     /**
@@ -99,11 +100,14 @@ public class International extends NonResident {
      * @return returns if the student is valid
      */
     public boolean isValid(int creditsEnrolled) {
-        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
+        if (creditsEnrolled < MIN_STUDY_ABROAD_CREDITS ||
+                creditsEnrolled > SUPER_MAX_CREDITS) {
             return false;
-        } else if (isStudyAbroad == false && creditsEnrolled < 12) {
+        } else if (isStudyAbroad == false && creditsEnrolled <
+                MAX_STUDY_ABROAD_CREDITS) {
             return false;
-        } else if (isStudyAbroad == true && creditsEnrolled > 12) {
+        } else if (isStudyAbroad == true && creditsEnrolled >
+                MAX_STUDY_ABROAD_CREDITS) {
             return false;
         } else {
             return true;

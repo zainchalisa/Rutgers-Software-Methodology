@@ -11,9 +11,11 @@ public class EnrollStudent {
     private Profile profile;
     private int creditsEnrolled;
 
+    public static final int CREDITS = 12;
+
+
     /**
      * This contructor sets the profile of the enroll student
-     *
      * @param profile the profile of the enroll student
      */
     public EnrollStudent(Profile profile) {
@@ -57,7 +59,7 @@ public class EnrollStudent {
      * @return returns a boolean if the student is part-time or not
      */
     public boolean isPartTime() {
-        if (this.creditsEnrolled < 12) {
+        if (this.creditsEnrolled < CREDITS) {
             return true;
         }
         return false;

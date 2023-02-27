@@ -24,7 +24,11 @@ public class Date implements Comparable {
     public static final int GREATER = 1;
     public static final int SMALLER = -1;
     public static final int EQUAL = 0;
-    public static final int minAge = 16;
+    public static final int MIN_AGE = 16;
+    public static final int MAX_MONTH = 12;
+    public static final int MIN_MONTH = 1;
+
+
 
     /**
      * This is a constructor which fetches the current date
@@ -63,7 +67,7 @@ public class Date implements Comparable {
         int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        if (this.month > 12 || this.month < 1) {
+        if (this.month > MAX_MONTH || this.month < MIN_MONTH) {
             return false;
         }
 
@@ -95,7 +99,7 @@ public class Date implements Comparable {
         int month = calendar.get(Calendar.MONTH) + MONTH_ADDITIVE;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int minYear = year - minAge;
+        int minYear = year - MIN_AGE;
 
         if (this.year < minYear) {
             return true;
@@ -126,9 +130,9 @@ public class Date implements Comparable {
      */
     private boolean isLeapYear() {
 
-        if (this.year % QUADRENNIAL == 0) {
-            if (this.year % CENTENNIAL == 0) {
-                if (this.year % QUATERCENTENNIAL == 0) {
+        if (this.year % QUADRENNIAL == EQUAL) {
+            if (this.year % CENTENNIAL == EQUAL) {
+                if (this.year % QUATERCENTENNIAL == EQUAL) {
                     return true;
                 } else {
                     return false;

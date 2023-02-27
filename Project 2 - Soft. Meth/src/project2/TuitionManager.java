@@ -8,7 +8,6 @@ import java.io.File;
 /**
  * This class creates a user interface to process command line arguments
  * entered in the terminal and display results
- *
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -762,9 +761,7 @@ public class TuitionManager {
         printRoster = false;
         try {
             String filename = inputLine[1];
-            Scanner fileScanner = new Scanner(new File(
-                    "Project 2 - " +
-                    "Soft" + ". Meth/" + filename));
+            Scanner fileScanner = new Scanner(new File(filename));
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] inputLines = line.split(",");

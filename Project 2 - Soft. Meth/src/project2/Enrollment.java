@@ -21,8 +21,8 @@ public class Enrollment {
      * beginning size of 4
      */
     public Enrollment() {
-        this.enrollStudents = new EnrollStudent[4];
-        this.size = 0;
+        this.enrollStudents = new EnrollStudent[ARRAY_GROWTH];
+        this.size = EQUAL;
     }
 
     /**
@@ -41,9 +41,9 @@ public class Enrollment {
             }
         }
 
-        for (int i = indexHolder; i < size - 1; i++) {
+        for (int i = indexHolder; i < size - GREATER; i++) {
             if (i + 1 < size) {
-                enrollStudents[i] = enrollStudents[i + 1];
+                enrollStudents[i] = enrollStudents[i + GREATER];
             } else {
                 enrollStudents[size] = null;
             }
@@ -95,7 +95,7 @@ public class Enrollment {
      */
     public int find(EnrollStudent student) { //search the given student
         // in roster
-        int studentFinder = 0;
+        int studentFinder = EQUAL;
         for (int i = 0; i < size; i++) {
             if (student.equals(enrollStudents[i])) {
                 studentFinder = i;

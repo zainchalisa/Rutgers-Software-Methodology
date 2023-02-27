@@ -10,6 +10,8 @@ public class TriState extends NonResident {
     private String state;
     public static final int NEW_YORK_DISCOUNT = 4000;
     public static final int CONNECTICUT_DISCOUNT = 5000;
+    public static final int MIN_CREDIT = 3;
+    public static final int MAX_CREDIT = 24;
 
     /**
      * This constructor creates the profile for the tri-state student
@@ -78,7 +80,7 @@ public class TriState extends NonResident {
      */
     @Override
     public boolean isValid(int creditsEnrolled) {
-        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
+        if (creditsEnrolled < MIN_CREDIT || creditsEnrolled > MAX_CREDIT) {
             return false;
         } else {
             return true;

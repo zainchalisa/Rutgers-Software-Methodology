@@ -42,7 +42,6 @@ public class Profile implements Comparable { // implements Comparable
 
     /**
      * Overrides the compareTo() method for the Profile class
-     *
      * @param obj the object to be compared.
      * @return returns if profile is less, greater, or equal to another
      */
@@ -59,19 +58,19 @@ public class Profile implements Comparable { // implements Comparable
         String compareLastName = profile.lname;
         Date compareDate = profile.dob;
 
-        if (lName.compareTo(compareLastName) < 0) {
+        if (lName.compareTo(compareLastName) < EQUAL) {
             return SMALLER;
-        } else if (lName.compareTo(compareLastName) > 0) {
+        } else if (lName.compareTo(compareLastName) > EQUAL) {
             return GREATER;
         } else {
-            if (fName.compareTo(compareFirstName) < 0) {
+            if (fName.compareTo(compareFirstName) < EQUAL) {
                 return SMALLER;
-            } else if (fName.compareTo(compareFirstName) > 0) {
+            } else if (fName.compareTo(compareFirstName) > EQUAL) {
                 return GREATER;
             } else {
-                if (dob.compareTo(compareDate) < 0) {
+                if (dob.compareTo(compareDate) < EQUAL) {
                     return SMALLER;
-                } else if (dob.compareTo(compareDate) > 0) {
+                } else if (dob.compareTo(compareDate) > EQUAL) {
                     return GREATER;
                 } else {
                     return EQUAL;

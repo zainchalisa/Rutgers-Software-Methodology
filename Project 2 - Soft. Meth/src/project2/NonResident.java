@@ -14,6 +14,9 @@ public class NonResident extends Student {
     public static final double UNIVERSITY_FEE_DISCOUNT = .8;
     public static final int MAX_CREDITS = 16;
     public static final int MIN_FULL_TIME_CREDITS = 12;
+    public static final int MIN_CREDITS = 3;
+    public static final int SUPER_MAX_CREDITS = 24;
+
 
     /**
      * This constructor sets the profile of the non-resident student
@@ -46,7 +49,7 @@ public class NonResident extends Student {
      * full time or not
      */
     public boolean isFullTimeStudent(int creditsEnrolled) {
-        if (creditsEnrolled > 12) {
+        if (creditsEnrolled > MIN_FULL_TIME_CREDITS) {
             return true;
         } else {
             return false;
@@ -87,7 +90,8 @@ public class NonResident extends Student {
      */
     @Override
     public boolean isValid(int creditsEnrolled) {
-        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
+        if (creditsEnrolled < MIN_CREDITS || creditsEnrolled >
+                SUPER_MAX_CREDITS) {
             return false;
         } else {
             return true;

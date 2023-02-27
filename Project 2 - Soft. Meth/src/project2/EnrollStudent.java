@@ -2,6 +2,7 @@ package project2;
 
 /**
  * This class is creating enrollStudent objects for the enrollment array
+ *
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -12,19 +13,21 @@ public class EnrollStudent {
 
     /**
      * This contructor sets the profile of the enroll student
+     *
      * @param profile the profile of the enroll student
      */
-    public EnrollStudent (Profile profile) {
+    public EnrollStudent(Profile profile) {
         this.profile = profile;
     }
 
     /**
      * This constuctor sets the profile of the enroll student
      * and the credits they're enrolled for
-     * @param profile the profile of the enroll student
+     *
+     * @param profile         the profile of the enroll student
      * @param creditsEnrolled the creditsEnrolled for the enroll student
      */
-    public EnrollStudent (Profile profile, int creditsEnrolled){
+    public EnrollStudent(Profile profile, int creditsEnrolled) {
         this.profile = profile;
         this.creditsEnrolled = creditsEnrolled;
     }
@@ -32,6 +35,7 @@ public class EnrollStudent {
     /**
      * This getter method gets the credits the enroll student is
      * enrolled for
+     *
      * @return returns the credits the student is enrolled for
      */
     public int getCreditsEnrolled() {
@@ -40,6 +44,7 @@ public class EnrollStudent {
 
     /**
      * This getter method gets the profile of the enroll student
+     *
      * @return returns the profile of the enroll student
      */
     public Profile getProfile() {
@@ -48,6 +53,7 @@ public class EnrollStudent {
 
     /**
      * This method checks if a student is a part-time student
+     *
      * @return returns a boolean if the student is part-time or not
      */
     public boolean isPartTime() {
@@ -60,8 +66,9 @@ public class EnrollStudent {
     /**
      * This method sets the student is enrolled for if they re-enroll with
      * a different credit amount
+     *
      * @param creditsEnrolled is the credit amount the return is
-     * re-enrolling with
+     *                        re-enrolling with
      */
 
     public void setCreditsEnrolled(int creditsEnrolled) {
@@ -70,11 +77,12 @@ public class EnrollStudent {
 
     /**
      * Overrides the equals() method for the EnrollStudent object
+     *
      * @param obj compared to another enrollStudent object
      * @return returns true or false depending on the comparison
      */
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (obj instanceof EnrollStudent) {
             EnrollStudent enrollStudent = (EnrollStudent) obj;
             return (enrollStudent.profile.equals(this.profile));
@@ -85,11 +93,12 @@ public class EnrollStudent {
 
     /**
      * Overrides the toString() method for the EnrollStudent object
+     *
      * @return returns the string for an enrollStudent
      */
     @Override
-    public String toString(){
-        return profile + "" ;
+    public String toString() {
+        return profile + "";
     }
 }
 

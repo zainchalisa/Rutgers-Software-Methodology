@@ -38,7 +38,8 @@ public class International extends NonResident {
      * @param creditCompleted is the credits completed of an
      *                        international student
      */
-    public International(Profile profile, Major major, int creditCompleted) {
+    public International(Profile profile, Major major,
+                         int creditCompleted) {
         super(profile, major, creditCompleted);
     }
 
@@ -53,7 +54,8 @@ public class International extends NonResident {
      * @param isStudyAbroad   is the boolean to see if the student is
      *                        studying abroad
      */
-    public International(Profile profile, Major major, int creditCompleted, boolean isStudyAbroad) {
+    public International(Profile profile, Major major,
+                         int creditCompleted, boolean isStudyAbroad) {
         super(profile, major, creditCompleted);
         this.isStudyAbroad = isStudyAbroad;
     }
@@ -61,6 +63,7 @@ public class International extends NonResident {
     /**
      * The override tuitionDue method for International students which
      * fetches how much the student owes
+     *
      * @param creditsEnrolled is the amount of credits they will
      *                        enroll for the semester
      * @return returns the amount students owe in tuition
@@ -70,11 +73,17 @@ public class International extends NonResident {
         if (!isStudyAbroad) {
             if (creditsEnrolled > MAX_CREDITS) {
                 int leftOverCredits = creditsEnrolled - MAX_CREDITS;
-                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + (leftOverCredits * INTERNATIONAL_CREDIT_HOUR) + INTERNATIONAL_HEALTH_CARE;
-            } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS && creditsEnrolled <= MAX_CREDITS) {
-                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
+                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE
+                        + (leftOverCredits * INTERNATIONAL_CREDIT_HOUR) +
+                        INTERNATIONAL_HEALTH_CARE;
+            } else if (creditsEnrolled >= MIN_FULL_TIME_CREDITS &&
+                    creditsEnrolled <= MAX_CREDITS) {
+                return INTERNATIONAL_TUITION + INTERNATIONAL_UNIVERSITY_FEE
+                        + INTERNATIONAL_HEALTH_CARE;
             } else {
-                return (creditsEnrolled * INTERNATIONAL_CREDIT_HOUR) + (INTERNATIONAL_UNIVERSITY_FEE * UNIVERSITY_FEE_DISCOUNT);
+                return (creditsEnrolled * INTERNATIONAL_CREDIT_HOUR) +
+                        (INTERNATIONAL_UNIVERSITY_FEE *
+                                UNIVERSITY_FEE_DISCOUNT);
             }
         } else {
             return INTERNATIONAL_UNIVERSITY_FEE + INTERNATIONAL_HEALTH_CARE;
@@ -84,6 +93,7 @@ public class International extends NonResident {
     /**
      * This method checks if the international student is a valid student
      * as per the schools standards
+     *
      * @param creditsEnrolled is the amount of credits they will
      *                        enroll for the semester
      * @return returns if the student is valid
@@ -112,15 +122,24 @@ public class International extends NonResident {
 
     /**
      * This overrides the toString() for the international student method
+     *
      * @return returns the appropriate string depending on the type of
      * international student
      */
     @Override
     public String toString() {
         if (isStudyAbroad()) {
-            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")" + "(non-resident)" + "(international:study abroad)";
+            return "" + getProfile() + " (" + getMajor().getCoreCode() +
+                    " " + major + " " + getMajor().getSchool() + ") " +
+                    "credits completed: " + creditCompleted + " ("
+                    + getStanding() + ")" + "(non-resident)" +
+                    "(international:study abroad)";
         } else {
-            return "" + getProfile() + " (" + getMajor().getCoreCode() + " " + major + " " + getMajor().getSchool() + ") " + "credits completed: " + creditCompleted + " (" + getStanding() + ")" + "(non-resident)" + "(international)";
+            return "" + getProfile() + " (" + getMajor().getCoreCode() +
+                    " " + major + " " + getMajor().getSchool() + ") "
+                    + "credits completed: " + creditCompleted + " (" +
+                    getStanding() + ")" + "(non-resident)" +
+                    "(international)";
         }
     }
 }

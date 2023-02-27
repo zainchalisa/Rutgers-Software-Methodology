@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 /**
  * This class implements date processing and implementations
+ *
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -38,6 +39,7 @@ public class Date implements Comparable {
 
     /**
      * This method splits the date string inputted by the user
+     *
      * @param date is the inputted string by the user
      */
     public Date(String date) {
@@ -51,6 +53,7 @@ public class Date implements Comparable {
 
     /**
      * This method validates if the date string entered is valid
+     *
      * @return returns if the date is a valid date
      */
     public boolean isValid() { //check if a date is a valid calendar date
@@ -73,8 +76,8 @@ public class Date implements Comparable {
             return false;
         }
 
-        if(this.year > year && this.month > month && this.day > day ||
-                this.year < EQUAL){
+        if (this.year > year && this.month > month && this.day > day ||
+                this.year < EQUAL) {
             return false;
         }
         return true;
@@ -82,6 +85,7 @@ public class Date implements Comparable {
 
     /**
      * This method checks if the student is exactly 16 older or younger,
+     *
      * @return returns if the students is valid based on their age
      */
     public boolean isValidStudent() {
@@ -117,6 +121,7 @@ public class Date implements Comparable {
 
     /**
      * This method checks if the year is a leap year
+     *
      * @return if the year is a leap year or not
      */
     private boolean isLeapYear() {
@@ -138,6 +143,7 @@ public class Date implements Comparable {
 
     /**
      * Overrides the compareTo() method for the Date object
+     *
      * @param obj the object to be compared.
      * @return returns if the date is greater, smaller, or equal to another
      */
@@ -177,6 +183,7 @@ public class Date implements Comparable {
 
     /**
      * Overrides the equals() method for the Date object
+     *
      * @param obj compared to another date object
      * @return return false if the dates are not the same
      */
@@ -192,6 +199,7 @@ public class Date implements Comparable {
 
     /**
      * Overrides the toString() method for date objects
+     *
      * @return returns the date as a string
      */
     @Override
@@ -201,6 +209,7 @@ public class Date implements Comparable {
 
     /**
      * Main method tests the funtionality of the Date method
+     *
      * @param args takes in arguments to test the Date file
      */
     public static void main(String[] args) {

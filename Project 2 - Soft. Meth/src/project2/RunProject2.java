@@ -2,6 +2,7 @@ package project2;
 
 /**
  * This class runs the tuition manager for our project
+ *
  * @author zainchalisa
  * @author nanaafriyie
  */

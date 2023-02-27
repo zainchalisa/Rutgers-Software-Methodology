@@ -4,6 +4,7 @@ package project2;
 /**
  * This class creates a resident student, validates them, and calculates
  * the amount of tuition they owe
+ *
  * @author nanaafriyie
  * @author zainchalisa
  */
@@ -19,6 +20,7 @@ public class Resident extends Student {
 
     /**
      * This constructor sets the profile for the resident student
+     *
      * @param profile the profile of the resident student
      */
     public Resident(Profile profile) {
@@ -28,12 +30,15 @@ public class Resident extends Student {
     /**
      * This constructor sets the profile, major, creditsCompleted, and
      * scholarship award of the resident student
-     * @param profile the profile of the resident student
-     * @param major the major of the resident student
+     *
+     * @param profile         the profile of the resident student
+     * @param major           the major of the resident student
      * @param creditCompleted the creditsCompleted of the resident student
-     * @param scholarship the scholarship awarded to the resident student
+     * @param scholarship     the scholarship awarded to the resident
+     *                        student
      */
-    public Resident(Profile profile, Major major, int creditCompleted, int scholarship) {
+    public Resident(Profile profile, Major major, int creditCompleted,
+                    int scholarship) {
         super(profile, major, creditCompleted);
         this.scholarship = scholarship;
     }
@@ -41,6 +46,7 @@ public class Resident extends Student {
     /**
      * The override tuitionDue method for Resident students which
      * fetches how much the student owes
+     *
      * @param creditsEnrolled is the amount of credits they will
      *                        enroll for the semester
      * @return returns the amount the resident student owes in tuition
@@ -48,36 +54,41 @@ public class Resident extends Student {
     @Override
     public double tuitionDue(int creditsEnrolled) {
 
-        if(creditsEnrolled > 16){
-            return (FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE) + ((creditsEnrolled - MAX_CREDITS) * PART_RESIDENT_CREDIT) - scholarship;
-       } else if (creditsEnrolled >= 12 && creditsEnrolled <= 16){
-           return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE - scholarship;
-       } else{
-           return (creditsEnrolled * PART_RESIDENT_CREDIT) + (FULL_RESIDENT_UNIVERSITY_FEE *UNIVERSITY_FEE_DISCOUNT) - scholarship;
-       }
-
-
-
+        if (creditsEnrolled > 16) {
+            return (FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE) +
+                    ((creditsEnrolled - MAX_CREDITS) *
+                            PART_RESIDENT_CREDIT)
+                    - scholarship;
+        } else if (creditsEnrolled >= 12 && creditsEnrolled <= 16) {
+            return FULL_RESIDENT_TUITION + FULL_RESIDENT_UNIVERSITY_FEE
+                    - scholarship;
+        } else {
+            return (creditsEnrolled * PART_RESIDENT_CREDIT) +
+                    (FULL_RESIDENT_UNIVERSITY_FEE *
+                            UNIVERSITY_FEE_DISCOUNT) - scholarship;
+        }
     }
 
     /**
      * This method checks if the resident student is valid as per the
      * schools standards
+     *
      * @param creditsEnrolled is the amount of credits they will enroll
      *                        for in this semester
      * @return returns if the student is valid or not
      */
     @Override
-    public boolean isValid(int creditsEnrolled){
-        if(creditsEnrolled < 3 || creditsEnrolled > 24){
+    public boolean isValid(int creditsEnrolled) {
+        if (creditsEnrolled < 3 || creditsEnrolled > 24) {
             return false;
-        } else{
+        } else {
             return true;
         }
     }
 
     /**
      * This constuctor cheks if the student is a resident or not
+     *
      * @return returns true since the student is being checked in the
      * resident class
      */
@@ -89,6 +100,7 @@ public class Resident extends Student {
     /**
      * This method checks if the scholarship being awarded to the student
      * is valid
+     *
      * @param scholarship the amount of scholarship being awarded to
      *                    a student
      * @return returns the amount of scholarship being awarded to the
@@ -103,6 +115,7 @@ public class Resident extends Student {
 
     /**
      * This method overrides the toString() method for the resident class
+     *
      * @return returns the string for the resident student
      */
     @Override
@@ -115,6 +128,7 @@ public class Resident extends Student {
 
     /**
      * This method sets the scholarship amount for the student
+     *
      * @param scholarship is the amount of scholarship the resident
      *                    student is getting
      */

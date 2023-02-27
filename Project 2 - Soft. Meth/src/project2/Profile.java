@@ -17,9 +17,10 @@ public class Profile implements Comparable { // implements Comparable
 
     /**
      * Constructor is made to set the inputted first/last name and the dob
+     *
      * @param lname the last name of the student
      * @param fname the first name of the student
-     * @param dob the date of birth of the student
+     * @param dob   the date of birth of the student
      */
     public Profile(String lname, String fname, Date dob) {
         this.lname = lname;
@@ -29,18 +30,19 @@ public class Profile implements Comparable { // implements Comparable
 
     /**
      * Overrides the toString() method for the profile class
+     *
      * @return returns the profile string
      */
     @Override
     public String toString() {
-        return fname.substring(0, 1).toUpperCase() +
-                fname.substring(1) + " " +
-                lname.substring(0, 1).toUpperCase() +
-                lname.substring(1) + " " + dob;
+        return fname.substring(0, 1).toUpperCase() + fname.substring(
+                1) + " " + lname.substring(0, 1).toUpperCase()
+                + lname.substring(1) + " " + dob;
     }
 
     /**
      * Overrides the compareTo() method for the Profile class
+     *
      * @param obj the object to be compared.
      * @return returns if profile is less, greater, or equal to another
      */
@@ -80,6 +82,7 @@ public class Profile implements Comparable { // implements Comparable
 
     /**
      * Getter method used to get the date of birth of a student
+     *
      * @return returns the date of birth
      */
     public Date getDob() {
@@ -88,6 +91,7 @@ public class Profile implements Comparable { // implements Comparable
 
     /**
      * Overrides the equals method for the profile class
+     *
      * @param obj which object is checked if it's equal to another
      * @return returns false if the profiles are not the same
      */

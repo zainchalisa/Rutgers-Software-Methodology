@@ -4,6 +4,7 @@ package project2;
 /**
  * This class forms a roster based on the Students, Profiles,
  * Date, Majors, and Standings
+ *
  * @author zainchalisa
  * @author nanaafriyie
  */
@@ -25,6 +26,7 @@ public class Roster {
 
     /**
      * Getter method used to get the roster storing the students
+     *
      * @return returns the roster array
      */
     public Student[] getRoster() {
@@ -33,18 +35,20 @@ public class Roster {
 
     /**
      * Getter method which gets the size of the roster
+     *
      * @return returns the size of the array
      */
     public int getSize() {
         return size;
     }
 
-    public Student getStudent(Student student){
+    public Student getStudent(Student student) {
         return roster[find(student)];
     }
 
     /**
      * This method finds the index for the student you're looking for
+     *
      * @param student student you're looking for in the roster array
      * @return returns the index the student is located in the roster
      */
@@ -71,10 +75,12 @@ public class Roster {
         }
         this.roster = newRoster;
     }
+
     /**
      * This method is used to validate if the student can and should be
      * added to the array. This is based off the size and if the student
      * is already in the roster.
+     *
      * @param student object which the array is made up of
      * @return returns the if the student was added to the roster
      */
@@ -97,6 +103,7 @@ public class Roster {
     /**
      * This method is used to remove the student from the roster and also
      * reorganize the array after the student has been removed.
+     *
      * @param student object which is being removed from the array
      * @return returns if the student was removed from the array
      */
@@ -122,6 +129,7 @@ public class Roster {
 
     /**
      * This method checks if the student is in the roster
+     *
      * @param student the object which we're looking for in the roster
      * @return returns true if the student is in the roster and false if
      * not
@@ -137,6 +145,7 @@ public class Roster {
 
     /**
      * Overrides the toString() method for the Roster class
+     *
      * @return returns the student proceeding with a new line for the next
      */
     @Override
@@ -154,14 +163,15 @@ public class Roster {
 
     /**
      * Sorts the list by first name, last name, and DOB
+     *
      * @param roster the array holding all the different students
      */
     public void insertionSortList(Student[] roster) {
         for (int i = 0; i < roster.length; i++) {
             int j = i;
             if (roster[j] != null) {
-                while (j > 0 && roster[j - 1].
-                        compareTo(roster[j]) == GREATER) {
+                while (j > 0 && roster[j - 1].compareTo(roster[j]) ==
+                        GREATER) {
                     Student temp = roster[j];
                     roster[j] = roster[j - 1];
                     roster[j - 1] = temp;
@@ -173,12 +183,14 @@ public class Roster {
 
     /**
      * This method sorts the roster by last name, first name , and DOB
+     *
      * @param roster the roster of students
      */
     public void insertionSort(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
-            while (j > 0 && roster[j - 1].compareTo(roster[j]) == GREATER){
+            while (j > 0 && roster[j - 1].compareTo(roster[j]) ==
+                    GREATER) {
                 Student temp = roster[j];
                 roster[j] = roster[j - 1];
                 roster[j - 1] = temp;
@@ -189,20 +201,21 @@ public class Roster {
 
     /**
      * This method sorts the students by their majors in alphabetical order
+     *
      * @param roster the roster array of students
      */
     public void insertionSortMajor(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
             while (j > 0) {
-                if (roster[j - 1].getMajor().getSchool().compareTo
-                        (roster[j].getMajor().getSchool()) > EQUAL) {
+                if (roster[j - 1].getMajor().getSchool().compareTo(roster
+                        [j].getMajor().getSchool()) > EQUAL) {
                     Student temp = roster[j];
                     roster[j] = roster[j - 1];
                     roster[j - 1] = temp;
                 }
-                if (roster[j - 1].getMajor().getSchool().compareTo
-                        (roster[j].getMajor().getSchool()) == EQUAL &&
+                if (roster[j - 1].getMajor().getSchool().compareTo(roster
+                        [j].getMajor().getSchool()) == EQUAL &&
                         roster[j - 1].getMajor().name().compareTo
                                 (roster[j].getMajor().name()) > EQUAL) {
                     Student temp = roster[j];
@@ -216,14 +229,15 @@ public class Roster {
 
     /**
      * This method sorts the students by standing
+     *
      * @param roster the roster array of students being sorted
      */
     public void insertionSortStanding(Student[] roster) {
         for (int i = 0; i < size; i++) {
             int j = i;
-            while (j > 0){
-                if(roster[j - 1].getStanding().name().compareTo(roster[j].
-                        getStanding().name()) > GREATER){
+            while (j > 0) {
+                if (roster[j - 1].getStanding().name().compareTo(roster[j].
+                        getStanding().name()) > GREATER) {
                     Student temp = roster[j];
                     roster[j] = roster[j - 1];
                     roster[j - 1] = temp;
@@ -243,8 +257,8 @@ public class Roster {
             return;
         }
         insertionSort(roster);
-        System.out.println("* Student roster sorted by last name, first " +
-                "name, DOB **");
+        System.out.println("* Student roster sorted by last name, first "
+                + "name, DOB **");
         for (int i = 0; i < size; i++) {
             System.out.println(roster[i]);
         }

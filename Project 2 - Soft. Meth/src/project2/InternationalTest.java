@@ -6,12 +6,16 @@ import static org.junit.Assert.*;
 
 /**
  * This class checks the tuitionDue() method for International students
+ * @author zainchalisa
+ * @author nanaafriyie
  */
 public class InternationalTest {
 
     /**
      * This test check tuition due for non-study abroad international
      * students
+     * @author zainchalisa
+     * @author nanaafriyie
      */
     @Test
     public void tuitionDue_studyNotAbroad() {

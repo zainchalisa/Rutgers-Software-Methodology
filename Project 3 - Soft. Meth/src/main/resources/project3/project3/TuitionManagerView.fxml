@@ -9,163 +9,370 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<GridPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project3.project3.TuitionManagerController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.35716247558594" minWidth="10.0" prefWidth="127.528564453125" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.2845687866211" minWidth="10.0" prefWidth="333.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.75601196289062" minWidth="9.0" prefWidth="40.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="103.105712890625" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="136.73144149780273" minHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="351.5605773925781" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="373.3240509033203" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="453.9348602294922" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="551.6006164550781" minHeight="0.0" prefHeight="74.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="453.9348602294922" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="453.9348602294922" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
-   </rowConstraints>
-   <children>
-      <TextField GridPane.columnIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <DatePicker prefHeight="27.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="First Name:" textAlignment="CENTER">
-         <GridPane.margin>
-            <Insets left="45.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Last Name:" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="45.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Date of Birth:" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="40.0" />
-         </GridPane.margin>
-      </Label>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <children>
-            <RadioButton mnemonicParsing="false" text="CS">
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="EE">
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="ITI">
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="BAIT">
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" text="MATH">
-               <padding>
-                  <Insets left="10.0" top="10.0" />
-               </padding>
-            </RadioButton>
-         </children>
-      </HBox>
-      <Label text="Majors:" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="70.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Resident Type:" GridPane.rowIndex="5">
-         <GridPane.margin>
-            <Insets left="30.0" />
-         </GridPane.margin>
-         <padding>
-            <Insets bottom="40.0" />
-         </padding>
-      </Label>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-         <children>
-            <RadioButton mnemonicParsing="false" text="Resident">
-               <padding>
-                  <Insets top="5.0" />
-               </padding>
-            </RadioButton>
-            <HBox prefHeight="75.0" prefWidth="352.0">
-               <children>
-                  <RadioButton mnemonicParsing="false" text="Non-Resident">
-                     <padding>
-                        <Insets top="2.0" />
-                     </padding>
-                  </RadioButton>
-                  <VBox prefHeight="77.0" prefWidth="113.0">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Roster">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Tri-State">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </RadioButton>
-                        <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="108.0" text="International">
-                           <padding>
-                              <Insets left="10.0" top="5.0" />
-                           </padding>
-                        </RadioButton>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="56.0" prefWidth="115.0">
-                     <children>
-                        <HBox prefHeight="25.0" prefWidth="92.0">
+                        <GridPane layoutX="-7.0" layoutY="6.0" prefHeight="262.0" prefWidth="606.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="117.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="489.0" minWidth="10.0" prefWidth="489.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
                            <children>
-                              <RadioButton mnemonicParsing="false" text="NY" />
-                              <RadioButton mnemonicParsing="false" text="CT">
+                              <Label text="First Name:">
                                  <padding>
-                                    <Insets left="5.0" />
+                                    <Insets left="50.0" />
                                  </padding>
-                              </RadioButton>
+                              </Label>
+                              <Label text="Last Name:" GridPane.rowIndex="1">
+                                 <padding>
+                                    <Insets left="50.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Date of Birth:" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Major:" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="75.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Credits Competed:" GridPane.rowIndex="4">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Status:" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets left="70.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                              <TextArea prefHeight="28.0" prefWidth="445.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </TextArea>
+                              <DatePicker prefHeight="27.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <HBox prefHeight="36.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="BAIT">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="CS">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="ECE">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="ITI">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="MATH">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <RadioButton mnemonicParsing="false" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <HBox prefHeight="75.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Non - Resident" />
+                                    <VBox prefHeight="75.0" prefWidth="148.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Tri - State">
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </RadioButton>
+                                          <RadioButton mnemonicParsing="false" text="International">
+                                             <padding>
+                                                <Insets left="20.0" top="5.0" />
+                                             </padding>
+                                          </RadioButton>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <HBox prefHeight="24.0" prefWidth="100.0">
+                                             <children>
+                                                <CheckBox mnemonicParsing="false" text="NY" />
+                                                <CheckBox mnemonicParsing="false" text="CT">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" />
+                                                   </HBox.margin>
+                                                </CheckBox>
+                                             </children>
+                                          </HBox>
+                                          <CheckBox mnemonicParsing="false" text="Study Abroad" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="Add">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefWidth="86.0" text="Remove">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" text="Change Major">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Load from File">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                        <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="125.0" text="Study-Abroad">
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </CheckBox>
+                        </GridPane>
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <Label text="Credits Completed:" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets left="5.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField prefHeight="27.0" prefWidth="312.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-         <children>
-            <Button mnemonicParsing="false" text="Add">
-               <HBox.margin>
-                  <Insets left="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Remove">
-               <HBox.margin>
-                  <Insets left="10.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Change Major">
-               <HBox.margin>
-                  <Insets left="10.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" text="Load from File">
-               <HBox.margin>
-                  <Insets left="10.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </children>
-</GridPane>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Enroll/Drop">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="269.0" prefWidth="600.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="79.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.0" minWidth="10.0" prefWidth="521.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="First Name:">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Last Name:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Date of Birth:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="3.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Credits: " GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <DatePicker prefHeight="27.0" prefWidth="516.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </DatePicker>
+                              <TextField GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="27.0" prefWidth="495.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox prefHeight="44.0" prefWidth="521.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="200.0" text="Enroll">
+                                       <HBox.margin>
+                                          <Insets left="30.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefWidth="200.0" text="Drop">
+                                       <HBox.margin>
+                                          <Insets left="50.0" top="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Scholarship">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="269.0" prefWidth="600.0">
+                           <children>
+                              <Label text="First Name:">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Last Name:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Date of Birth:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="3.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Amount:" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <DatePicker prefHeight="27.0" prefWidth="516.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </DatePicker>
+                              <TextField GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <TextField prefHeight="27.0" prefWidth="495.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <HBox prefHeight="44.0" prefWidth="521.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefWidth="200.0" text="Update Scholarship Amount">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="79.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.0" minWidth="10.0" prefWidth="521.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Print">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="269.0" prefWidth="600.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="129.0" minHeight="2.0" prefHeight="92.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <SplitMenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="211.0" text="Roster Print">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Print by Profile" />
+                                  <MenuItem mnemonicParsing="false" text="Print by School and Major" />
+                                    <MenuItem mnemonicParsing="false" text="Print by Standing" />
+                                </items>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </SplitMenuButton>
+                              <SplitMenuButton mnemonicParsing="false" prefWidth="211.0" text="School/College Print" GridPane.rowIndex="1">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="RBS" />
+                                    <MenuItem mnemonicParsing="false" text="SAS" />
+                                    <MenuItem mnemonicParsing="false" text="SC&amp;I" />
+                                    <MenuItem mnemonicParsing="false" text="SOE" />
+                                 </items>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </SplitMenuButton>
+                              <SplitMenuButton mnemonicParsing="false" prefWidth="211.0" text="Enrollement Print" GridPane.rowIndex="2">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Print Enrolled Students" />
+                                    <MenuItem mnemonicParsing="false" text="Print Tuition Due" />
+                                    <MenuItem mnemonicParsing="false" text="Semester End" />
+                                 </items>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </SplitMenuButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

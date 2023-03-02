@@ -9,25 +9,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-
 <GridPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project3.project3.TuitionManagerController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.35716247558594" minWidth="10.0" prefWidth="127.528564453125" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.2845687866211" minWidth="10.0" prefWidth="352.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.75601196289062" minWidth="10.0" prefWidth="21.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.2845687866211" minWidth="10.0" prefWidth="333.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.75601196289062" minWidth="9.0" prefWidth="40.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="103.105712890625" minHeight="10.0" prefHeight="42.43085861206055" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="136.73144149780273" minHeight="7.756561279296875" prefHeight="41.715423583984375" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="351.5605773925781" minHeight="10.0" prefHeight="48.894287109375" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="373.3240509033203" minHeight="2.0651397705078125" prefHeight="40.25199890136719" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="551.6006164550781" minHeight="0.0" prefHeight="73.09555053710938" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="453.9348602294922" minHeight="10.0" prefHeight="355.9044494628906" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="103.105712890625" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="136.73144149780273" minHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="351.5605773925781" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="373.3240509033203" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="453.9348602294922" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="551.6006164550781" minHeight="0.0" prefHeight="74.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="453.9348602294922" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="453.9348602294922" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <TextField GridPane.columnIndex="1" />
       <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <DatePicker prefHeight="27.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="First Name:" textAlignment="CENTER">
          <GridPane.margin>
             <Insets left="45.0" />
@@ -77,12 +78,15 @@
             <Insets left="70.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Resident Type:" GridPane.rowIndex="4">
+      <Label text="Resident Type:" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="30.0" />
          </GridPane.margin>
+         <padding>
+            <Insets bottom="40.0" />
+         </padding>
       </Label>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <children>
             <RadioButton mnemonicParsing="false" text="Resident">
                <padding>
@@ -133,5 +137,35 @@
             </HBox>
          </children>
       </VBox>
+      <Label text="Credits Completed:" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField prefHeight="27.0" prefWidth="312.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <children>
+            <Button mnemonicParsing="false" text="Add">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Remove">
+               <HBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Change Major">
+               <HBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Load from File">
+               <HBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </GridPane>

@@ -1,7 +1,5 @@
 package project3.project3;
 
-import project2.EnrollStudent;
-
 /**
  * This class implements the enrollment of students into the enroll
  * students array

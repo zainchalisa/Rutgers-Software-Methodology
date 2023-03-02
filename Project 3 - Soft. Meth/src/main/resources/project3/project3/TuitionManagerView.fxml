@@ -64,12 +64,6 @@
                                     <Insets left="70.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                              <TextArea prefHeight="28.0" prefWidth="445.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                              </TextArea>
                               <DatePicker prefHeight="27.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <HBox prefHeight="36.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
@@ -163,6 +157,8 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <TextField GridPane.columnIndex="1" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>

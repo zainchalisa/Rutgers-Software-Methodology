@@ -11,10 +11,16 @@ import java.time.LocalDate;
 public class TuitionManagerController extends Application {
 
         @FXML
-        private Label welcomeText;
+        private Button addStudentButton;
 
         @FXML
-        private Button addStudentButton, removeStudentButton, changeMajorButton, loadFileButton;
+        private Button removeStudentButton;
+
+        @FXML
+        private Button changeMajorButton;
+
+        @FXML
+        private Button loadFromFileButton;
 
         @FXML
         private TextField firstName, lastName, creditsCompleted;
@@ -34,27 +40,22 @@ public class TuitionManagerController extends Application {
         private TextArea resultField;
 
 
-/*
         @FXML
         void addStudent(ActionEvent add){
 
                 try {
-                        String studentFirstName = String.valueOf(firstName);
-                        String studentLastName = String.valueOf(lastName);
+                        String studentFirstName = String.valueOf(firstName.getText());
+                        String studentLastName = String.valueOf(lastName.getText());
 
                         resultField.appendText(studentFirstName + studentLastName);
                 }
                 //Show the error message with a pop-up window.
                 catch (NumberFormatException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Invalid Data");
-                        alert.setHeaderText("Non-numeric data has been entered.");
-                        alert.setContentText("Please enter an integer.");
-                        alert.showAndWait();
+                        resultField.appendText("no");
                 }
 
         }
-*/
+
 
         @Override
         public void start(Stage stage) throws Exception {

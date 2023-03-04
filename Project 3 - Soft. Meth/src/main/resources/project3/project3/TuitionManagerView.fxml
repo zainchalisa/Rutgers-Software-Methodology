@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project3.project3.TuitionManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project3.project3.TuitionManagerController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -134,17 +134,17 @@
                               </HBox>
                               <HBox prefHeight="50.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <Button fx:id="addStudentButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="86.0" text="Add">
+                                    <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#addStudent" prefHeight="27.0" prefWidth="86.0" text="Add">
                                        <HBox.margin>
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="86.0" text="Remove">
+                                    <Button fx:id="removeStudentButton" mnemonicParsing="false" prefWidth="86.0" text="Remove">
                                        <HBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" text="Change Major">
+                                    <Button fx:id="changeMajorButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" text="Change Major">
                                        <HBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </HBox.margin>
@@ -368,6 +368,6 @@
       </TabPane>
    </center>
    <bottom>
-      <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="resultField" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

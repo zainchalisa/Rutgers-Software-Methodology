@@ -63,7 +63,7 @@
                                     <Insets left="70.0" />
                                  </GridPane.margin>
                               </Label>
-                              <DatePicker fx:id="dateOfBirth" prefHeight="27.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <DatePicker fx:id="dob" prefHeight="27.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <HBox prefHeight="36.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <RadioButton fx:id="BAIT" mnemonicParsing="false" text="BAIT">

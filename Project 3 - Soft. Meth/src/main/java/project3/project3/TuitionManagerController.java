@@ -2,6 +2,8 @@ package project3.project3;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -38,6 +40,27 @@ public class TuitionManagerController extends Application {
 
         @FXML
         private TextArea resultField;
+
+        // Enroll/Drop tab
+        @FXML
+        private Button enrollStudentButton;
+
+        @FXML
+        private Button dropStudentButton;
+
+        @FXML
+        private TextField enrollFirstName;
+
+        @FXML
+        private TextField enrollLastName;
+
+        @FXML
+        private DatePicker enrollDob;
+
+        @FXML
+        private TextField enrollCreditsCompleted;
+
+
 
         Roster roster = new Roster();
 
@@ -146,6 +169,76 @@ public class TuitionManagerController extends Application {
                         resultField.appendText("no");
                 }
 
+        }
+        // this method is called from the GUI, when the enrollStudentButton is clicked
+        @FXML
+        private void enrollStudent(ActionEvent enroll) {
+
+                /*
+                EventHandler handler = new EventHandler() {
+                        @Override
+                        public void handle(Event event) {
+
+                        }
+                }
+
+                 */
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String creditsCompletedString = inputLine[4];
+
+                if (isValidCreditString(creditsCompletedString)) {
+                        int creditsEnrolled = Integer.parseInt(creditsCompletedString);
+                        Student student = new Resident(new Profile(lastName,
+                                firstName, new Date(dateOfBirth)));
+                        if (roster.contains(student)) {
+                                int studentIndex = roster.find(student);
+                                student = roster.getRoster()[studentIndex];
+                                validEnrollStudent(student, creditsEnrolled, firstName,
+                                        lastName, dateOfBirth, enrollment);
+                        } else {
+                                System.out.println("Cannot enroll: " + firstName + " " +
+                                        lastName + " " + dateOfBirth + " " +
+                                        "is not in the roster.");
+                        }
+                } else {
+                        System.out.println("Credits enrolled is not an integer.");
+                }
+        }
+
+        // Stays private bc helper method?
+        private void validEnrollStudent(Student student, int creditsEnrolled
+                , String firstName, String lastName, String dateOfBirth,
+                                        Enrollment enrollment) {
+                if (student.isValid(creditsEnrolled)) {
+                        EnrollStudent newStudent =
+                                new EnrollStudent(new Profile(lastName, firstName,
+                                        new Date(dateOfBirth)), creditsEnrolled);
+                        if (enrollment.contains(newStudent)) {
+                                enrollment.getEnrollStudent(newStudent).setCreditsEnrolled
+                                        (creditsEnrolled);
+                        } else {
+                                enrollment.add(newStudent);
+                        }
+                        System.out.println(firstName + " " + lastName + " " +
+                                dateOfBirth + " enrolled " + creditsEnrolled +
+                                " credits");
+                } else if (student.getClass().getSimpleName().equals((
+                        "International")) && ((International) student).
+                        isStudyAbroad()) {
+                        System.out.println("(" + student.getClass().getSimpleName() +
+                                " studentstudy abroad) " + creditsEnrolled +
+                                ": invalid credit hours.");
+                } else if (student.getClass().getSimpleName().equals((
+                        "International"))) {
+                        System.out.println("(" + student.getClass().getSimpleName() +
+                                "student) " + creditsEnrolled +
+                                ": invalid credit hours.");
+                } else {
+                        System.out.println("(" + student.getClass().getSimpleName() +
+                                ") " + creditsEnrolled + ": invalid credit hours.");
+                }
         }
 
 

@@ -113,6 +113,7 @@ public class TuitionManagerController extends Application {
                 } else {
                         resultField.appendText("Credits completed " + "invalid: not an " +
                                 "integer!");
+                        // lalalallala
                 }
         }
 

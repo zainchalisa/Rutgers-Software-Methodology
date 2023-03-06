@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TuitionManagerController extends Application {
 
@@ -60,9 +61,27 @@ public class TuitionManagerController extends Application {
         @FXML
         private TextField enrollCreditsCompleted;
 
+        // Scholarship
+        @FXML
+        private TextField scholarFirstName;
+
+        @FXML
+        private TextField scholarLastName;
+
+        @FXML
+        private DatePicker scholarDob;
+
+        @FXML
+        private TextField scholarAmount;
+
+        @FXML
+        private Button updateScholarButton;
+
+
 
 
         Roster roster = new Roster();
+        Enrollment enrollment = new Enrollment();
 
         public Major getMajorButton(){
                 Major major = null;
@@ -82,7 +101,7 @@ public class TuitionManagerController extends Application {
                         major = Major.MATH;
                         return major;
                 } else{
-                        resultField.appendText("Please select a major.");
+                        resultField.appendText("Please select a major." + "\n");
                         return major;
                 }
 
@@ -104,15 +123,15 @@ public class TuitionManagerController extends Application {
                                 resultField.appendText("" + student.getProfile() + " (" + majorName.getCoreCode() + " " +
                                         majorName + " " + majorName.getSchool() + ") " +
                                         "credits completed: " + creditsCompletedString + " (" +
-                                        student.getStanding() + ")" + "(resident)");
+                                        student.getStanding() + ")" + "(resident)" + "\n");
 
                         } else {
                                 resultField.appendText("Credits completed " + "invalid: " +
-                                        "cannot be negative!");
+                                        "cannot be negative!" + "\n");
                         }
                 } else {
                         resultField.appendText("Credits completed " + "invalid: not an " +
-                                "integer!");
+                                "integer!" + "\n");
                         // lalalallala
                 }
         }
@@ -133,7 +152,8 @@ public class TuitionManagerController extends Application {
                 try {
                         String studentFirstName = String.valueOf(firstName.getText());
                         String studentLastName = String.valueOf(lastName.getText());
-                        String dateOfBirth = String.valueOf(dob.getValue());
+                        String dateOfBirth = dob.getValue().format(
+                                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                         String creditsCompletedString = String.valueOf(creditsCompleted.getText());
                         int defaultScholarship = 0;
 
@@ -153,15 +173,15 @@ public class TuitionManagerController extends Application {
                                                 }
                                         } else {
                                                 resultField.appendText(studentFirstName + " " + studentLastName + " " +
-                                                        dateOfBirth + " is already in the roster.");
+                                                        dateOfBirth + " is already in the roster." + "\n");
                                         }
                                 } else {
                                         resultField.appendText("DOB invalid: " + dateOfBirth + " younger " +
-                                                "than 16 years old.");
+                                                "than 16 years old." + "\n");
                                 }
                         } else {
                                 resultField.appendText("DOB invalid: " + dateOfBirth + " not a valid " +
-                                        "calendar date!");
+                                        "calendar date!" + "\n");
                         }
                         //resultField.appendText(studentFirstName + " " + studentLastName + " " + creditsCompletedString + " " + dateOfBirth + " " + studentsMajor);
                 }
@@ -173,21 +193,12 @@ public class TuitionManagerController extends Application {
         }
         // this method is called from the GUI, when the enrollStudentButton is clicked
         @FXML
-        private void enrollStudent(ActionEvent enroll) {
-
-                /*
-                EventHandler handler = new EventHandler() {
-                        @Override
-                        public void handle(Event event) {
-
-                        }
-                }
-
-                 */
-                String firstName = inputLine[1];
-                String lastName = inputLine[2];
-                String dateOfBirth = inputLine[3];
-                String creditsCompletedString = inputLine[4];
+        void enrollStudent(ActionEvent enroll) {
+                String firstName = String.valueOf(enrollFirstName.getText());
+                String lastName = String.valueOf(enrollLastName.getText());
+                String dateOfBirth = enrollDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String creditsCompletedString = String.valueOf(enrollCreditsCompleted.getText());
 
                 if (isValidCreditString(creditsCompletedString)) {
                         int creditsEnrolled = Integer.parseInt(creditsCompletedString);
@@ -199,12 +210,12 @@ public class TuitionManagerController extends Application {
                                 validEnrollStudent(student, creditsEnrolled, firstName,
                                         lastName, dateOfBirth, enrollment);
                         } else {
-                                System.out.println("Cannot enroll: " + firstName + " " +
+                                resultField.appendText("Cannot enroll: " + firstName + " " +
                                         lastName + " " + dateOfBirth + " " +
-                                        "is not in the roster.");
+                                        "is not in the roster." + "\n");
                         }
                 } else {
-                        System.out.println("Credits enrolled is not an integer.");
+                        resultField.appendText("Credits enrolled is not an integer." + "\n");
                 }
         }
 
@@ -222,23 +233,129 @@ public class TuitionManagerController extends Application {
                         } else {
                                 enrollment.add(newStudent);
                         }
-                        System.out.println(firstName + " " + lastName + " " +
+                        resultField.appendText(firstName + " " + lastName + " " +
                                 dateOfBirth + " enrolled " + creditsEnrolled +
-                                " credits");
+                                " credits" + "\n");
                 } else if (student.getClass().getSimpleName().equals((
                         "International")) && ((International) student).
                         isStudyAbroad()) {
-                        System.out.println("(" + student.getClass().getSimpleName() +
+                        resultField.appendText("(" + student.getClass().getSimpleName() +
                                 " studentstudy abroad) " + creditsEnrolled +
-                                ": invalid credit hours.");
+                                ": invalid credit hours." + "\n");
                 } else if (student.getClass().getSimpleName().equals((
                         "International"))) {
-                        System.out.println("(" + student.getClass().getSimpleName() +
+                        resultField.appendText("(" + student.getClass().getSimpleName() +
                                 "student) " + creditsEnrolled +
-                                ": invalid credit hours.");
+                                ": invalid credit hours." + "\n");
                 } else {
-                        System.out.println("(" + student.getClass().getSimpleName() +
-                                ") " + creditsEnrolled + ": invalid credit hours.");
+                        resultField.appendText("(" + student.getClass().getSimpleName() +
+                                ") " + creditsEnrolled + ": invalid credit hours." + "\n");
+                }
+        }
+
+        @FXML
+        void dropStudent(ActionEvent drop) {
+                String firstName = String.valueOf(enrollFirstName.getText());
+                String lastName = String.valueOf(enrollLastName.getText());
+                String dateOfBirth = enrollDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+                EnrollStudent student = new EnrollStudent(new Profile(lastName,
+                        firstName, new Date(dateOfBirth)));
+                if (enrollment.contains(student)) {
+                        int studentIndex = enrollment.find(student);
+                        student = enrollment.getEnrollStudents()[studentIndex];
+                        enrollment.remove(student);
+                        resultField.appendText(firstName + " " + lastName + " " +
+                                dateOfBirth + " dropped." + "\n");
+                } else {
+                        resultField.appendText(firstName + " " + lastName + " " +
+                                dateOfBirth + " is not enrolled." + "\n");
+                }
+        }
+
+        @FXML
+        void grantScholarship(ActionEvent updateScholarship) {
+                String firstName = String.valueOf(scholarFirstName.getText());
+                String lastName = String.valueOf(scholarLastName.getText());
+                String dateOfBirth = scholarDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String scholarshipString = String.valueOf(scholarAmount.getText());
+                Student student = new Resident(new Profile(lastName, firstName,
+                        new Date(dateOfBirth)));
+
+                if (roster.contains(student)) {
+                        int studentIndex = roster.find(student);
+                        student = roster.getRoster()[studentIndex];
+                        if (student instanceof Resident) {
+                                residentScholarship(student, firstName, lastName,
+                                        dateOfBirth, scholarshipString, enrollment);
+                        } else {
+                                if (student instanceof NonResident) {
+                                        if (student.getClass().getSimpleName().equals(
+                                                "NonResident")) {
+                                                resultField.appendText(firstName + " " + lastName +
+                                                        " " + dateOfBirth + " (" + "Non-Resident"
+                                                        + ")" + " is not eligible for the " +
+                                                        "scholarship." + "\n");
+                                        }
+                                } else {
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " (" + student.getClass().
+                                                getSimpleName() +
+                                                ") is not eligible for the scholarship." + "\n");
+                                }
+                        }
+                } else {
+                        resultField.appendText(firstName + " " + lastName + " "
+                                + dateOfBirth + " is not in the roster." + "\n");
+                }
+        }
+
+        private void residentScholarship(Student student, String firstName,
+                                         String lastName, String dateOfBirth
+                , String scholarshipString, Enrollment enrollment) {
+                EnrollStudent checkStudent =
+                        new EnrollStudent(new Profile(lastName, firstName,
+                                new Date(dateOfBirth)));
+                int index = 0;
+                if (enrollment.contains(checkStudent)) {
+                        index = enrollment.find(checkStudent);
+                } else {
+                        resultField.appendText(firstName + " " + lastName + " "
+                                + dateOfBirth + " is not enrolled." + "\n");
+                        return;
+                }
+                checkStudent = enrollment.getEnrollStudents()[index]; // error
+
+                if (!checkStudent.isPartTime()) {
+                        /*
+                        try {
+                                scholarshipString = inputLine[4];
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                                System.out.println("Missing data in command line" + ".");
+                                return;
+                        }
+
+                         */
+                        if (isValidCreditString(scholarshipString)) {
+                                int scholarship = Integer.parseInt(scholarshipString);
+                                if (((Resident) student).isValidScholarship(scholarship)) {
+                                        ((Resident) student).setScholarship(scholarship);
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + ": scholarship amount " +
+                                                "updated." + "\n");
+                                } else {
+                                        resultField.appendText(scholarship + ": invalid " +
+                                                "amount." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("Amount is not an integer." + "\n");
+                        }
+                } else {
+                        resultField.appendText(firstName + " " + lastName + " " +
+                                dateOfBirth + " part time student is not " +
+                                "eligible for the scholarship." + "\n");
                 }
         }
 

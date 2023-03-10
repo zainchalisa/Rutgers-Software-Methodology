@@ -97,10 +97,13 @@
                                  </children>
                               </HBox>
                               <TextField fx:id="creditsCompleted" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <RadioButton fx:id="resident" mnemonicParsing="false" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <RadioButton fx:id="resident" mnemonicParsing="false" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="studentType" />
+                                 </toggleGroup></RadioButton>
                               <HBox prefHeight="75.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <RadioButton fx:id="nonResident" mnemonicParsing="false" text="Non - Resident" />
+                                    <RadioButton fx:id="nonResident" mnemonicParsing="false" text="Non - Resident" toggleGroup="$studentType" />
                                     <VBox prefHeight="75.0" prefWidth="148.0">
                                        <children>
                                           <RadioButton fx:id="triState" mnemonicParsing="false" text="Tri - State">
@@ -134,7 +137,7 @@
                               </HBox>
                               <HBox prefHeight="50.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#addStudent" prefHeight="27.0" prefWidth="86.0" text="Add">
+                                    <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#addNonResident" prefHeight="27.0" prefWidth="86.0" text="Add">
                                        <HBox.margin>
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>

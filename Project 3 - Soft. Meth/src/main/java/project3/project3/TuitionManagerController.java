@@ -78,8 +78,6 @@ public class TuitionManagerController extends Application {
         private Button updateScholarButton;
 
 
-
-
         Roster roster = new Roster();
         Enrollment enrollment = new Enrollment();
 
@@ -107,6 +105,27 @@ public class TuitionManagerController extends Application {
 
         }
 
+        public String getStateButton(){
+                if(newYorkState.isSelected()){
+                        return "NY";
+                } else if (connecticutState.isSelected()){
+                        return "CT";
+                } else{
+                        resultField.appendText("Please select a state." + "\n");
+                        return "";
+
+                }
+        }
+
+        public boolean getStudyAbroadButton(){
+                if(studyAbroad.isSelected()){
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+
         private void validResident(Roster roster, String firstName,
                                    String lastName, String dateOfBirth,
                                    Major majorName,
@@ -132,7 +151,6 @@ public class TuitionManagerController extends Application {
                 } else {
                         resultField.appendText("Credits completed " + "invalid: not an " +
                                 "integer!" + "\n");
-                        // lalalallala
                 }
         }
 
@@ -145,11 +163,9 @@ public class TuitionManagerController extends Application {
                 }
         }
 
-
         @FXML
-        void addStudent(ActionEvent add){
+        void addResident(ActionEvent add){
 
-                try {
                         String studentFirstName = String.valueOf(firstName.getText());
                         String studentLastName = String.valueOf(lastName.getText());
                         String dateOfBirth = dob.getValue().format(
@@ -184,13 +200,256 @@ public class TuitionManagerController extends Application {
                                         "calendar date!" + "\n");
                         }
                         //resultField.appendText(studentFirstName + " " + studentLastName + " " + creditsCompletedString + " " + dateOfBirth + " " + studentsMajor);
+        }
+
+        @FXML
+        private void addNonResident(ActionEvent add) {
+
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                NonResident studentProfile =
+                        new NonResident(new Profile(studentLastName, studentFirstName,
+                                new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = getMajorButton();
+                                        if (majorName != null) {
+                                                validNonResident(roster, studentFirstName, studentLastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString);
+                                        }
+                                } else {
+                                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
                 }
-                //Show the error message with a pop-up window.
-                catch (NumberFormatException e) {
-                        resultField.appendText("no");
+        }
+
+        /**
+         * This method checks if the non-resident you're adding is valid
+         *
+         * @param roster                 the list of students
+         * @param firstName              the first name of the student
+         * @param lastName               the last name of the student
+         * @param dateOfBirth            the dob of the student
+         * @param majorName              the major of the student
+         * @param creditsCompletedString the credits completed by the student
+         */
+        private void validNonResident(Roster roster, String firstName,
+                                      String lastName, String dateOfBirth,
+                                      Major majorName,
+                                      String creditsCompletedString) {
+
+                if (isValidCreditString(creditsCompletedString)) {
+                        int creditsCompleted =
+                                Integer.parseInt(creditsCompletedString);
+                        if (creditsCompleted >= 0) {
+                                Student student = new NonResident(new Profile(lastName,
+                                        firstName, new Date(dateOfBirth)), majorName,
+                                        creditsCompleted);
+                                roster.add(student);
+                                resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " added to the roster." + "\n");
+
+
+                        } else {
+                                resultField.appendText("Credits completed " + "invalid: " +
+                                        "cannot be negative!" + "\n");
+                        }
+                } else {
+                        resultField.appendText("Credits completed " + "invalid: not an " +
+                                "integer!" + "\n");
+                }
+        }
+
+        @FXML
+        private void addTriState(ActionEvent add) {
+
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                String studentState = getStateButton();
+                TriState studentProfile = new TriState(new Profile(studentLastName,
+                        studentFirstName, new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = getMajorButton();
+                                        if (majorName != null) {
+                                                validTriState(roster, studentFirstName, studentLastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString, studentState,
+                                                        studentProfile);
+                                        }
+                                } else {
+                                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
+                }
+        }
+
+        /**
+         * This method checks if the student is a valid tri-state student
+         *
+         * @param roster                 the list of students
+         * @param firstName              the first name of the student
+         * @param lastName               the last name of the student
+         * @param dateOfBirth            the dob of the student
+         * @param majorName              the major of the student
+         * @param creditsCompletedString the credits completed by the student
+         * @param state                  the state the student is from
+         * @param studentProfile         the students profile
+         */
+        private void validTriState(Roster roster, String firstName,
+                                   String lastName, String dateOfBirth,
+                                   Major majorName,
+                                   String creditsCompletedString,
+                                   String state,
+                                   TriState studentProfile) {
+                if (state.equalsIgnoreCase("NY") || state.
+                        equalsIgnoreCase("CT")) {
+                        studentProfile.setState(state);
+                }
+
+                if (isValidCreditString(creditsCompletedString)) {
+                        int creditsCompleted =
+                                Integer.parseInt(creditsCompletedString);
+                        if (creditsCompleted >= 0) {
+                                Student student = new TriState(new Profile(lastName,
+                                        firstName, new Date(dateOfBirth)), majorName,
+                                        creditsCompleted, state);
+                                roster.add(student);
+                                resultField.appendText(firstName + " " + lastName + " " +
+                                        dateOfBirth + " added to the roster." + "\n");
+
+                        } else {
+                                resultField.appendText("Credits completed " + "invalid: " +
+                                        "cannot be negative!" + "\n");
+                        }
+                } else {
+                        resultField.appendText("Credits completed " + "invalid: not an " +
+                                "integer!" + "\n");
+                }
+        }
+
+        @FXML
+        private void addInternational(ActionEvent add) {
+
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                Boolean isStudyAbroad = getStudyAbroadButton();
+                International studentProfile =
+                        new International(new Profile(studentLastName, studentFirstName,
+                                new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = getMajorButton();
+                                        if (majorName != null) {
+                                                validInternational(roster, studentFirstName, studentLastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString, isStudyAbroad);
+                                        }
+                                } else {
+                                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
+                }
+        }
+
+
+
+        /**
+         * This method checks if a student is valid to be international
+         *
+         * @param roster                 the list of students
+         * @param firstName              the first name of the student
+         * @param lastName               the last name of the student
+         * @param dateOfBirth            the dob of the student
+         * @param majorName              the major of the student
+         * @param creditsCompletedString the credits completed by the student
+         * @param isStudyAbroad          if the student is studying abroad
+         */
+        private void validInternational(Roster roster, String firstName,
+                                        String lastName, String dateOfBirth,
+                                        Major majorName,
+                                        String creditsCompletedString,
+                                        boolean isStudyAbroad) {
+                if (isValidCreditString(creditsCompletedString)) {
+                        int creditsCompleted =
+                                Integer.parseInt(creditsCompletedString);
+                        if (creditsCompleted >= 0) {
+                                Student student = new International(new Profile(lastName
+                                        , firstName, new Date(dateOfBirth)), majorName,
+                                        creditsCompleted, isStudyAbroad);
+                                roster.add(student);
+                                resultField.appendText(firstName + " " + lastName + " " +
+                                        dateOfBirth + " added to the roster." + "\n");
+
+                        } else {
+                                resultField.appendText("Credits completed " + "invalid: " +
+                                        "cannot be negative!" + "\n");
+                        }
+                } else {
+                        resultField.appendText("Credits completed " + "invalid: not an " +
+                                "integer!" + "\n");
+                }
+        }
+
+
+        @FXML
+        void addStudent(ActionEvent event){
+                if(resident.isSelected()){
+                        addResident(event);
+                }
+                if(nonResident.isSelected()){
+                        addNonResident(event);
+                }
+                if(triState.isSelected()){
+                        addTriState(event);
+                }
+                if(international.isSelected()){
+                        addInternational(event);
                 }
 
         }
+
         // this method is called from the GUI, when the enrollStudentButton is clicked
         @FXML
         void enrollStudent(ActionEvent enroll) {

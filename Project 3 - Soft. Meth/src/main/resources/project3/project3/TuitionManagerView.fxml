@@ -73,23 +73,26 @@
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="majors" />
+                                       </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="CS" mnemonicParsing="false" text="CS">
+                                    <RadioButton fx:id="CS" mnemonicParsing="false" text="CS" toggleGroup="$majors">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
                                     </RadioButton>
-                                    <RadioButton fx:id="EE" mnemonicParsing="false" text="EE">
+                                    <RadioButton fx:id="EE" mnemonicParsing="false" text="EE" toggleGroup="$majors">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
                                     </RadioButton>
-                                    <RadioButton fx:id="ITI" mnemonicParsing="false" text="ITI">
+                                    <RadioButton fx:id="ITI" mnemonicParsing="false" text="ITI" toggleGroup="$majors">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
                                     </RadioButton>
-                                    <RadioButton fx:id="MATH" mnemonicParsing="false" text="MATH">
+                                    <RadioButton fx:id="MATH" mnemonicParsing="false" text="MATH" toggleGroup="$majors">
                                        <padding>
                                           <Insets left="5.0" />
                                        </padding>
@@ -97,7 +100,7 @@
                                  </children>
                               </HBox>
                               <TextField fx:id="creditsCompleted" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <RadioButton fx:id="resident" mnemonicParsing="false" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                              <RadioButton fx:id="resident" mnemonicParsing="false" onMouseClicked="#disableButtons" text="Resident" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="studentType" />
                                  </toggleGroup></RadioButton>
@@ -137,7 +140,7 @@
                               </HBox>
                               <HBox prefHeight="50.0" prefWidth="489.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                  <children>
-                                    <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#addNonResident" prefHeight="27.0" prefWidth="86.0" text="Add">
+                                    <Button fx:id="addStudentButton" mnemonicParsing="false" onAction="#addStudent" prefHeight="27.0" prefWidth="86.0" text="Add">
                                        <HBox.margin>
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>

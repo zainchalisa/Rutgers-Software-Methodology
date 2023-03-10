@@ -39,6 +39,7 @@ public class TuitionManagerController extends Application {
         @FXML
         private CheckBox newYorkState, connecticutState, studyAbroad;
 
+
         @FXML
         private TextArea resultField;
 
@@ -77,11 +78,34 @@ public class TuitionManagerController extends Application {
         @FXML
         private Button updateScholarButton;
 
+        @FXML
+        private void disableButtons(){
+                if(resident.isSelected()){
+                        triState.setDisable(true);
+                        international.setDisable(true);
+                        newYorkState.setDisable(true);
+                        connecticutState.setDisable(true);
+                        studyAbroad.setDisable(true);
+                }
+                if(nonResident.isSelected()){
+                        triState.setDisable(false);
+                        international.setDisable(false);
+                        newYorkState.setDisable(false);
+                        connecticutState.setDisable(false);
+                        studyAbroad.setDisable(false);
+                }
+                if(triState.isSelected()){
+                        international.setDisable(true);
+                        studyAbroad.setDisable(true);
+                        resident.setDisable(true);
+                }
+        }
+
 
         Roster roster = new Roster();
         Enrollment enrollment = new Enrollment();
 
-        public Major getMajorButton(){
+        private Major getMajorButton(){
                 Major major = null;
                 if(BAIT.isSelected()){
                         major = Major.BAIT;

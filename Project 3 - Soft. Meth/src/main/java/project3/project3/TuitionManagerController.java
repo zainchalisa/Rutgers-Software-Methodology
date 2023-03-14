@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -77,6 +78,41 @@ public class TuitionManagerController extends Application {
 
         @FXML
         private Button updateScholarButton;
+
+        // Print Tab
+
+        @FXML
+        private SplitMenuButton rosterPrintMenu; // might not need
+
+        @FXML
+        private MenuItem printProfileItem;
+
+        @FXML
+        private MenuItem printSchoolMajorItem;
+
+        @FXML
+        private MenuItem printStandingItem;
+
+        @FXML
+        private MenuItem printRBSItem;
+
+        @FXML
+        private MenuItem printSASItem;
+
+        @FXML
+        private MenuItem printSCIItem;
+
+        @FXML
+        private MenuItem printSOEItem;
+
+        @FXML
+        private MenuItem printEnrolledItem;
+
+        @FXML
+        private MenuItem printTuitionDueItem;
+
+        @FXML
+        private MenuItem printSemesterEndItem;
 
         @FXML
         private void disableButtons(){
@@ -189,6 +225,14 @@ public class TuitionManagerController extends Application {
 
         @FXML
         void addResident(ActionEvent add){
+                // has error when you add student for first time to roster,
+                // says added and it's already been added to roster
+                // Also, there is a bug in the GUI that if you try to add
+                // A resident after a non-resident, you can't add any more
+                // tristate or international students
+                // Another bug - add roster does not correctly add tristate
+                // or international students (marks them as only
+                // non-residents)
 
                         String studentFirstName = String.valueOf(firstName.getText());
                         String studentLastName = String.valueOf(lastName.getText());
@@ -642,6 +686,276 @@ public class TuitionManagerController extends Application {
                 }
         }
 
+        @FXML
+        void printProfile (ActionEvent event) {
+                roster.print(resultField);
+        }
+
+        @FXML
+        void printSchoolMajor (ActionEvent event) {
+                roster.printBySchoolMajor(resultField);
+        }
+
+        @FXML
+        void printStanding (ActionEvent event) {
+                roster.printByStanding(resultField);
+        }
+
+        @FXML
+        void listRBS(ActionEvent event) {
+                String school = "RBS";
+                Student[] sortedSchoolArray = new Student[roster.getSize()];
+                int counter = 0;
+
+                for (int i = 0; i < roster.getSize(); i++) {
+                        if (roster.getRoster()[i].getMajor().getSchool().
+                                equalsIgnoreCase(school)) {
+                                sortedSchoolArray[counter] = roster.getRoster()[i];
+                                counter++;
+                        }
+                }
+                roster.insertionSortList(sortedSchoolArray);
+                resultField.appendText("* Students in " + school + " *" + "\n");
+                for (int i = 0; i < counter; i++) {
+                        resultField.appendText(sortedSchoolArray[i] + "\n");
+                }
+                resultField.appendText("* end of list **" + "\n");
+        }
+
+        @FXML
+        void listSAS(ActionEvent event) {
+                String school = "SAS";
+                Student[] sortedSchoolArray = new Student[roster.getSize()];
+                int counter = 0;
+
+                for (int i = 0; i < roster.getSize(); i++) {
+                        if (roster.getRoster()[i].getMajor().getSchool().
+                                equalsIgnoreCase(school)) {
+                                sortedSchoolArray[counter] = roster.getRoster()[i];
+                                counter++;
+                        }
+                }
+                roster.insertionSortList(sortedSchoolArray);
+                resultField.appendText("* Students in " + school + " *" + "\n");
+                for (int i = 0; i < counter; i++) {
+                        resultField.appendText(sortedSchoolArray[i] + "\n");
+                }
+                resultField.appendText("* end of list **" + "\n");
+        }
+
+        @FXML
+        void listSCI(ActionEvent event) {
+                String school = "SC&I";
+                Student[] sortedSchoolArray = new Student[roster.getSize()];
+                int counter = 0;
+
+                for (int i = 0; i < roster.getSize(); i++) {
+                        if (roster.getRoster()[i].getMajor().getSchool().
+                                equalsIgnoreCase(school)) {
+                                sortedSchoolArray[counter] = roster.getRoster()[i];
+                                counter++;
+                        }
+                }
+                roster.insertionSortList(sortedSchoolArray);
+                resultField.appendText("* Students in " + school + " *" + "\n");
+                for (int i = 0; i < counter; i++) {
+                        resultField.appendText(sortedSchoolArray[i] + "\n");
+                }
+                resultField.appendText("* end of list **" + "\n");
+        }
+
+        @FXML
+        void listSOE(ActionEvent event) {
+                String school = "SOE";
+                Student[] sortedSchoolArray = new Student[roster.getSize()];
+                int counter = 0;
+
+                for (int i = 0; i < roster.getSize(); i++) {
+                        if (roster.getRoster()[i].getMajor().getSchool().
+                                equalsIgnoreCase(school)) {
+                                sortedSchoolArray[counter] = roster.getRoster()[i];
+                                counter++;
+                        }
+                }
+                roster.insertionSortList(sortedSchoolArray);
+                resultField.appendText("* Students in " + school + " *" + "\n");
+                for (int i = 0; i < counter; i++) {
+                        resultField.appendText(sortedSchoolArray[i] + "\n");
+                }
+                resultField.appendText("* end of list **" + "\n");
+        }
+
+        @FXML
+        void printEnrollment(ActionEvent event) {
+                if (enrollment.getEnrollStudents()[0] == null) {
+                        resultField.appendText("Enrollment is empty!" + "\n");
+                } else {
+                        resultField.appendText("** Enrollment **" + "\n");
+                        for (int i = 0; i < enrollment.getEnrollStudents().length;
+                             i++) {
+                                if (enrollment.getEnrollStudents()[i] != null) {
+                                        resultField.appendText(enrollment.getEnrollStudents()[i]
+                                                + ": credits enrolled: " + enrollment.
+                                                getEnrollStudents()[i].getCreditsEnrolled() + "\n");
+                                }
+                        }
+                        resultField.appendText("* end of enrollment *" + "\n");
+                }
+
+        }
+
+        @FXML
+        void printTuitionDue(ActionEvent event) {
+                DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+                if (enrollment.getEnrollStudents()[0] != null) {
+                        resultField.appendText("** Tuition due **" + "\n");
+                        for (EnrollStudent enrollStudent :
+                                enrollment.getEnrollStudents()) {
+                                if (enrollStudent != null) {
+                                        Student student =
+                                                roster.getStudent(new NonResident(enrollStudent
+                                                        .getProfile(), null,
+                                                        0));
+                                        double tuitionDue =
+                                                student.tuitionDue(enrollStudent.
+                                                        getCreditsEnrolled());
+                                        if (student.getClass().getSimpleName().equals(
+                                                "International")) {
+                                                tutitionInternational(student, enrollStudent,
+                                                        decimalFormat, tuitionDue);
+                                        } else if (student.getClass().getSimpleName().
+                                                equals("TriState")) {
+                                                tuitionTriState(student, enrollStudent,
+                                                        decimalFormat, tuitionDue);
+                                        } else if (student.getClass().getSimpleName().
+                                                equals("NonResident")) {
+                                                tuitionNonResident(student, enrollStudent,
+                                                        decimalFormat, tuitionDue);
+                                        } else if (student.getClass().getSimpleName().
+                                                equals("Resident")) {
+                                                tuitionResident(student, enrollStudent,
+                                                        decimalFormat, tuitionDue);
+                                        }
+                                }
+                        }
+                        resultField.appendText("* end of tuition due *" + "\n");
+                } else {
+                        resultField.appendText("Enrollment is empty!" + "\n");
+                }
+        }
+
+        private void tutitionInternational(Student student,
+                                           EnrollStudent enrollStudent,
+                                           DecimalFormat decimalFormat,
+                                           double tuitionDue) {
+                if (((International) student).isStudyAbroad()) {
+                        resultField.appendText("" + student.getProfile() + " " +
+                                "(International studentstudy " + "abroad) enrolled " +
+                                enrollStudent.getCreditsEnrolled() +
+                                " credits: tuition due: $" + decimalFormat.
+                                format(tuitionDue) + "\n");
+                } else {
+                        resultField.appendText("" + student.getProfile() + " " +
+                                "(International student) enrolled " +
+                                enrollStudent.getCreditsEnrolled() +
+                                " credits: tuition due: $" +
+                                decimalFormat.format(tuitionDue) + "\n");
+                }
+        }
+
+        private void tuitionTriState(Student student,
+                                     EnrollStudent enrollStudent,
+                                     DecimalFormat decimalFormat,
+                                     double tuitionDue) {
+                resultField.appendText("" + student.getProfile() + " (Tri-state " +
+                        ((TriState) student).getState() + ") enrolled " +
+                        enrollStudent.getCreditsEnrolled() +
+                        " credits: tuition due: $" +
+                        decimalFormat.format(tuitionDue) + "\n");
+        }
+
+        private void tuitionNonResident(Student student,
+                                        EnrollStudent enrollStudent,
+                                        DecimalFormat decimalFormat,
+                                        double tuitionDue) {
+                resultField.appendText("" + student.getProfile() + " (Non-Resident) " +
+                        "enrolled " + enrollStudent.getCreditsEnrolled() + " " +
+                        "credits: tuition due: $" +
+                        decimalFormat.format(tuitionDue) + "\n");
+        }
+
+        private void tuitionResident(Student student,
+                                     EnrollStudent enrollStudent,
+                                     DecimalFormat decimalFormat,
+                                     double tuitionDue) {
+                resultField.appendText("" + student.getProfile() + " (Resident) " +
+                        "enrolled " + enrollStudent.getCreditsEnrolled() + " " +
+                        "credits: tuition due: $" + decimalFormat.
+                        format(tuitionDue) + "\n");
+        }
+
+        @FXML
+        void printEligibleGraduates(ActionEvent event) {
+                updateCredits(roster, enrollment);
+
+                resultField.appendText("** list of students eligible for graduation "
+                        + "**" + "\n");
+                for (int i = 0; i < roster.getSize(); i++) {
+                        Student student = roster.getRoster()[i];
+                        if (student.creditCompleted >= 120) {
+                                if (student instanceof International) {
+                                        printInternationalGraduate(student);
+                                } else if (student instanceof TriState) {
+                                        printTriStateGraduate(student);
+                                } else {
+                                        resultField.appendText(student.getProfile().toString() +
+                                                " (" + student.getMajor().getCoreCode() + " " +
+                                                student.getMajor().name() + " " +
+                                                student.getMajor().getSchool() +
+                                                ") credits completed: " +
+                                                student.creditCompleted + "(" +
+                                                student.getStanding().name() + ")(" +
+                                                student.getClass().getSimpleName().
+                                                        toLowerCase() + ")" + "\n");
+                                }
+                        }
+                }
+        }
+
+        private void updateCredits(Roster roster, Enrollment enrollment) {
+                for (int i = 0; i < roster.getSize(); i++) {
+                        Student student = roster.getRoster()[i];
+                        EnrollStudent enrollStudent =
+                                new EnrollStudent(student.getProfile());
+                        if (enrollment.contains(enrollStudent)) {
+                                int index = enrollment.find(enrollStudent);
+                                student.creditCompleted += enrollment.getEnrollStudents()
+                                        [index].getCreditsEnrolled();
+                        }
+                }
+                resultField.appendText("Credit completed has been updated." + "\n");
+        }
+
+        private void printInternationalGraduate(Student student) {
+                resultField.appendText(student.getProfile().toString() + " (" +
+                        student.getMajor().getCoreCode() + " " +
+                        student.getMajor().name() + " " +
+                        student.getMajor().getSchool() +
+                        ") credits completed: " + student.creditCompleted +
+                        " (" + student.getStanding().name() +
+                        ")(non" + "-resident)(" + student.getClass().
+                        getSimpleName().toLowerCase() + ")" + "\n");
+        }
+
+        private void printTriStateGraduate(Student student) {
+                resultField.appendText(student.getProfile().toString() + " (" +
+                        student.getMajor().getCoreCode() + " " +
+                        student.getMajor().name() + " " + student.getMajor().
+                        getSchool() + ") credits completed: " +
+                        student.creditCompleted + " (" + student.getStanding().
+                        name() + ")(non" + "-resident)(" + "tri-state" + ":" +
+                        ((TriState) student).getState() + ")" + "\n");
+        }
 
         @Override
         public void start(Stage stage) throws Exception {

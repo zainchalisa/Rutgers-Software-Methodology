@@ -1,5 +1,7 @@
 package project3.project3;
 
+import javafx.scene.control.TextArea;
+
 /**
  * This class forms a roster based on the Students, Profiles,
  * Date, Majors, and Standings
@@ -254,49 +256,49 @@ public class Roster {
     /**
      * This constructor prints the student by first name, last name, DOB
      */
-    public void print() { //print roster sorted by profiles
+    public void print(TextArea resultField) { //print roster sorted by profiles
         if (size == EQUAL) {
-            System.out.println("Student roster is empty!");
+            resultField.appendText("Student roster is empty!" + "\n");
             return;
         }
         insertionSort(roster);
-        System.out.println("* Student roster sorted by last name, first "
-                + "name, DOB **");
+        resultField.appendText("* Student roster sorted by last name, first "
+                + "name, DOB **" + "\n");
         for (int i = 0; i < size; i++) {
-            System.out.println(roster[i]);
+            resultField.appendText(roster[i] + "\n");
         }
-        System.out.println("* end of roster **");
+        resultField.appendText("* end of roster **" + "\n");
     }
 
     /**
      * This constructor prints the roster in order of majors
      */
-    public void printBySchoolMajor() {
+    public void printBySchoolMajor(TextArea resultField) {
         if (size == EQUAL) {
-            System.out.println("Student roster is empty!");
+            resultField.appendText("Student roster is empty!" + "\n");
             return;
         }
         insertionSortMajor(roster);
-        System.out.println("* Student roster sorted by school, major **");
+        resultField.appendText("* Student roster sorted by school, major **" + "\n");
         for (int i = 0; i < size; i++) {
-            System.out.println(roster[i]);
+            resultField.appendText(roster[i] + "\n");
         }
-        System.out.println("* end of roster **");
+        resultField.appendText("* end of roster **" + "\n");
     }
 
     /**
      * This constructor prints the roster in order of standings
      */
-    public void printByStanding() {
+    public void printByStanding(TextArea resultField) {
         if (size == EQUAL) {
-            System.out.println("Student roster is empty!");
+            resultField.appendText("Student roster is empty!" + "\n");
             return;
         }
         insertionSortStanding(roster);
-        System.out.println("* Student roster sorted by standing **");
+        resultField.appendText("* Student roster sorted by standing **" + "\n");
         for (int i = 0; i < size; i++) {
-            System.out.println(roster[i]);
+            resultField.appendText(roster[i] + "\n");
         }
-        System.out.println("* end of roster **");
+        resultField.appendText("* end of roster **" + "\n");
     }
 }

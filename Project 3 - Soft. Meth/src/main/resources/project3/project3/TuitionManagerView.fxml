@@ -333,11 +333,11 @@
                             <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="95.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <SplitMenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="211.0" text="Roster Print">
+                              <SplitMenuButton fx:id="rosterPrintMenu" mnemonicParsing="false" prefHeight="27.0" prefWidth="211.0" text="Roster Print">
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="Print by Profile" />
-                                  <MenuItem mnemonicParsing="false" text="Print by School and Major" />
-                                    <MenuItem mnemonicParsing="false" text="Print by Standing" />
+                                  <MenuItem fx:id="printProfileItem" mnemonicParsing="false" onAction="#printProfile" text="Print by Profile" />
+                                  <MenuItem fx:id="printSchoolMajorItem" mnemonicParsing="false" onAction="#printSchoolMajor" text="Print by School and Major" />
+                                    <MenuItem fx:id="printStandingItem" mnemonicParsing="false" onAction="#printStanding" text="Print by Standing" />
                                 </items>
                                  <GridPane.margin>
                                     <Insets left="20.0" />
@@ -345,10 +345,10 @@
                               </SplitMenuButton>
                               <SplitMenuButton mnemonicParsing="false" prefWidth="211.0" text="School/College Print" GridPane.rowIndex="1">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" text="RBS" />
-                                    <MenuItem mnemonicParsing="false" text="SAS" />
-                                    <MenuItem mnemonicParsing="false" text="SC&amp;I" />
-                                    <MenuItem mnemonicParsing="false" text="SOE" />
+                                    <MenuItem fx:id="printRBSItem" mnemonicParsing="false" onAction="#listRBS" text="RBS" />
+                                    <MenuItem fx:id="printSASItem" mnemonicParsing="false" onAction="#listSAS" text="SAS" />
+                                    <MenuItem fx:id="printSCIItem" mnemonicParsing="false" onAction="#listSCI" text="SC&amp;I" />
+                                    <MenuItem fx:id="printSOEItem" mnemonicParsing="false" onAction="#listSOE" text="SOE" />
                                  </items>
                                  <GridPane.margin>
                                     <Insets left="20.0" />
@@ -356,9 +356,9 @@
                               </SplitMenuButton>
                               <SplitMenuButton mnemonicParsing="false" prefWidth="211.0" text="Enrollement Print" GridPane.rowIndex="2">
                                  <items>
-                                    <MenuItem mnemonicParsing="false" text="Print Enrolled Students" />
-                                    <MenuItem mnemonicParsing="false" text="Print Tuition Due" />
-                                    <MenuItem mnemonicParsing="false" text="Semester End" />
+                                    <MenuItem fx:id="printEnrolledItem" mnemonicParsing="false" onAction="#printEnrollment" text="Print Enrolled Students" />
+                                    <MenuItem fx:id="printTuitionDueItem" mnemonicParsing="false" onAction="#printTuitionDue" text="Print Tuition Due" />
+                                    <MenuItem fx:id="printSemesterEndItem" mnemonicParsing="false" onAction="#printEligibleGraduates" text="Semester End" />
                                  </items>
                                  <GridPane.margin>
                                     <Insets left="20.0" />

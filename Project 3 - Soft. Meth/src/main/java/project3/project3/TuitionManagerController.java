@@ -527,6 +527,9 @@ public class TuitionManagerController extends Application {
                         DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 String creditsCompletedString = String.valueOf(enrollCreditsCompleted.getText());
 
+                // Need to use TextFormatter and Listener to check input from user to ensure input is valid
+                // else display error message
+
                 if (isValidCreditString(creditsCompletedString)) {
                         int creditsEnrolled = Integer.parseInt(creditsCompletedString);
                         Student student = new Resident(new Profile(lastName,
@@ -920,6 +923,7 @@ public class TuitionManagerController extends Application {
                                 }
                         }
                 }
+                printSemesterEndItem.setDisable(true);
         }
 
         private void updateCredits(Roster roster, Enrollment enrollment) {

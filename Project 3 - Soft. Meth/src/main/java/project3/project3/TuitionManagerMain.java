@@ -15,7 +15,7 @@ public class TuitionManagerMain extends Application {
                         new FXMLLoader(TuitionManagerMain.class.getResource("Tuition" +
                                 "ManagerView.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 600, 500);
-                stage.setTitle("Tuition Manager - Project 3");
+                stage.setTitle("Tuition Manager");
                 stage.setScene(scene);
                 stage.show();
         }

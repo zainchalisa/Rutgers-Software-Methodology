@@ -8,9 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class TuitionManagerController extends Application {
 
@@ -117,6 +120,10 @@ public class TuitionManagerController extends Application {
         @FXML
         private void disableButtons(){
                 if(resident.isSelected()){
+                        triState.setSelected(false);
+                        international.setSelected(false);
+                        newYorkState.setSelected(false);
+                        connecticutState.setSelected(false);
                         triState.setDisable(true);
                         international.setDisable(true);
                         newYorkState.setDisable(true);
@@ -131,9 +138,24 @@ public class TuitionManagerController extends Application {
                         studyAbroad.setDisable(false);
                 }
                 if(triState.isSelected()){
-                        international.setDisable(true);
+                        international.setSelected(false);
+                        studyAbroad.setSelected(false);
                         studyAbroad.setDisable(true);
-                        resident.setDisable(true);
+                        newYorkState.setDisable(false);
+                        connecticutState.setDisable(false);
+                }
+
+                if(international.isSelected()){
+                        newYorkState.setSelected(false);
+                        connecticutState.setSelected(false);
+                        triState.setSelected(false);
+                        newYorkState.setDisable(true);
+                        connecticutState.setDisable(true);
+                        studyAbroad.setDisable(false);
+                }
+
+                if (connecticutState.isSelected()){
+                        newYorkState.setSelected(false);
                 }
         }
 
@@ -172,8 +194,7 @@ public class TuitionManagerController extends Application {
                         return "CT";
                 } else{
                         resultField.appendText("Please select a state." + "\n");
-                        return "";
-
+                        return null;
                 }
         }
 
@@ -199,11 +220,8 @@ public class TuitionManagerController extends Application {
                                         firstName, new Date(dateOfBirth)), majorName,
                                         creditsCompleted, defaultScholarship);
                                 roster.add(student);
-                                resultField.appendText("" + student.getProfile() + " (" + majorName.getCoreCode() + " " +
-                                        majorName + " " + majorName.getSchool() + ") " +
-                                        "credits completed: " + creditsCompletedString + " (" +
-                                        student.getStanding() + ")" + "(resident)" + "\n");
-
+                                resultField.appendText(firstName + " " + lastName + " " +
+                                        dateOfBirth + " added to the roster." + "\n");
                         } else {
                                 resultField.appendText("Credits completed " + "invalid: " +
                                         "cannot be negative!" + "\n");
@@ -223,51 +241,128 @@ public class TuitionManagerController extends Application {
                 }
         }
 
+        private void inputAddResident(Roster roster, String[] inputLine) {
+                if (inputLine.length != 6) {
+                        System.out.println("Missing data in line command." + "\n");
+                        return;
+                }
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+                int defaultScholarship = 0;
+                Resident studentProfile = new Resident(new Profile(lastName,
+                        firstName, new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = checkMajor(major);
+                                        if (majorName != null) {
+                                                validResident(roster, firstName, lastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString,
+                                                        defaultScholarship);
+                                        }
+                                } else {
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
+                }
+        }
+
         @FXML
         void addResident(ActionEvent add){
                 // has error when you add student for first time to roster,
                 // says added and it's already been added to roster
                 // Also, there is a bug in the GUI that if you try to add
-                // A resident after a non-resident, you can't add any more
+                // A resident after a non-resident, you can't add anymore
                 // tristate or international students
-                // Another bug - add roster does not correctly add tristate
+                // Another bug - add roster does not correctly add tri-state
                 // or international students (marks them as only
                 // non-residents)
 
-                        String studentFirstName = String.valueOf(firstName.getText());
-                        String studentLastName = String.valueOf(lastName.getText());
-                        String dateOfBirth = dob.getValue().format(
-                                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-                        String creditsCompletedString = String.valueOf(creditsCompleted.getText());
-                        int defaultScholarship = 0;
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                int defaultScholarship = 0;
 
-                        Resident studentProfile = new Resident(new Profile(studentLastName,
-                                studentFirstName, new Date(dateOfBirth)));
-                        Date dobObject = new Date(dateOfBirth);
+                Resident studentProfile = new Resident(new Profile(studentLastName,
+                        studentFirstName, new Date(dateOfBirth)));
+                Date dobObject = new Date(dateOfBirth);
 
-                        if (dobObject.isValid()) {
-                                if (dobObject.isValidStudent()) {
-                                        if (!roster.contains(studentProfile)) {
-                                                Major majorName = getMajorButton();
-                                                if (majorName != null) {
-                                                        validResident(roster, studentFirstName, studentLastName,
-                                                                dateOfBirth, majorName,
-                                                                creditsCompletedString,
-                                                                defaultScholarship);
-                                                }
-                                        } else {
-                                                resultField.appendText(studentFirstName + " " + studentLastName + " " +
-                                                        dateOfBirth + " is already in the roster." + "\n");
+                if (dobObject.isValid()) {
+                        if (dobObject.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = getMajorButton();
+                                        if (majorName != null) {
+                                                validResident(roster, studentFirstName, studentLastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString,
+                                                        defaultScholarship);
                                         }
                                 } else {
-                                        resultField.appendText("DOB invalid: " + dateOfBirth + " younger " +
-                                                "than 16 years old." + "\n");
+                                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
                                 }
                         } else {
-                                resultField.appendText("DOB invalid: " + dateOfBirth + " not a valid " +
-                                        "calendar date!" + "\n");
+                                resultField.appendText("DOB invalid: " + dateOfBirth + " younger " +
+                                        "than 16 years old." + "\n");
                         }
-                        //resultField.appendText(studentFirstName + " " + studentLastName + " " + creditsCompletedString + " " + dateOfBirth + " " + studentsMajor);
+                } else {
+                        resultField.appendText("DOB invalid: " + dateOfBirth + " not a valid " +
+                                "calendar date!" + "\n");
+                }
+                //resultField.appendText(studentFirstName + " " + studentLastName + " " + creditsCompletedString + " " + dateOfBirth + " " + studentsMajor);
+        }
+
+        private void inputAddNonResident(Roster roster, String[] inputLine) {
+                if (inputLine.length != 6) {
+                        System.out.println("Missing data in command line." + "\n");
+                        return;
+                }
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+                NonResident studentProfile =
+                        new NonResident(new Profile(lastName, firstName,
+                                new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = checkMajor(major);
+                                        if (majorName != null) {
+                                                validNonResident(roster, firstName, lastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString);
+                                        }
+                                } else {
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
+                }
         }
 
         @FXML
@@ -330,7 +425,7 @@ public class TuitionManagerController extends Application {
                                         creditsCompleted);
                                 roster.add(student);
                                 resultField.appendText(firstName + " " + lastName + " " +
-                                                dateOfBirth + " added to the roster." + "\n");
+                                        dateOfBirth + " added to the roster." + "\n");
 
 
                         } else {
@@ -340,6 +435,49 @@ public class TuitionManagerController extends Application {
                 } else {
                         resultField.appendText("Credits completed " + "invalid: not an " +
                                 "integer!" + "\n");
+                }
+        }
+
+        private void inputAddTriState(Roster roster, String[] inputLine) {
+                if (inputLine.length != 7) {
+                        if (inputLine.length == 6) {
+                                System.out.println("Missing the state code." + "\n");
+                                return;
+                        }
+                        System.out.println("Missing data in command line." + "\n");
+                        return;
+                }
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+                String state = inputLine[6];
+                TriState studentProfile = new TriState(new Profile(lastName,
+                        firstName, new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = checkMajor(major);
+                                        if (majorName != null) {
+                                                validTriState(roster, firstName, lastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString, state,
+                                                        studentProfile);
+                                        }
+                                } else {
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
+                        } else {
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
+                        }
+                } else {
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
                 }
         }
 
@@ -398,30 +536,81 @@ public class TuitionManagerController extends Application {
                                    String creditsCompletedString,
                                    String state,
                                    TriState studentProfile) {
-                if (state.equalsIgnoreCase("NY") || state.
-                        equalsIgnoreCase("CT")) {
+                if (state.equals("NY") || state.equals("CT")) {
                         studentProfile.setState(state);
+                        if (isValidCreditString(creditsCompletedString)) {
+                                int creditsCompleted =
+                                        Integer.parseInt(creditsCompletedString);
+                                if (creditsCompleted >= 0) {
+                                        Student student = new TriState(new Profile(lastName,
+                                                firstName, new Date(dateOfBirth)), majorName,
+                                                creditsCompleted, state);
+                                        roster.add(student);
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " added to the roster." + "\n");
+
+                                } else {
+                                        resultField.appendText("Credits completed " + "invalid: " +
+                                                "cannot be negative!" + "\n");
+                                }
+                        } else {
+                                resultField.appendText("Credits completed " + "invalid: not an " +
+                                        "integer!" + "\n");
+                        }
+                } else{
+                        resultField.appendText("Please select a state." + "\n");
                 }
 
-                if (isValidCreditString(creditsCompletedString)) {
-                        int creditsCompleted =
-                                Integer.parseInt(creditsCompletedString);
-                        if (creditsCompleted >= 0) {
-                                Student student = new TriState(new Profile(lastName,
-                                        firstName, new Date(dateOfBirth)), majorName,
-                                        creditsCompleted, state);
-                                roster.add(student);
-                                resultField.appendText(firstName + " " + lastName + " " +
-                                        dateOfBirth + " added to the roster." + "\n");
+        }
 
+        private void inputAddInternational(Roster roster, String[] inputLine) {
+                if (inputLine.length < 6) { // replace magic number
+                        System.out.println("Missing data in command line.");
+                        return;
+                }
+                String firstName = inputLine[1];
+                String lastName = inputLine[2];
+                String dateOfBirth = inputLine[3];
+                String major = inputLine[4];
+                String creditsCompletedString = inputLine[5];
+                String studyAbroad = validStudyAbroad(inputLine);
+                boolean isStudyAbroad = Boolean.parseBoolean(studyAbroad);
+                International studentProfile =
+                        new International(new Profile(lastName, firstName,
+                                new Date(dateOfBirth)));
+                Date dob = studentProfile.getProfile().getDob();
+
+                if (dob.isValid()) {
+                        if (dob.isValidStudent()) {
+                                if (!roster.contains(studentProfile)) {
+                                        Major majorName = checkMajor(major);
+                                        if (majorName != null) {
+                                                validInternational(roster, firstName, lastName,
+                                                        dateOfBirth, majorName,
+                                                        creditsCompletedString, isStudyAbroad);
+                                        }
+                                } else {
+                                        resultField.appendText(firstName + " " + lastName + " " +
+                                                dateOfBirth + " is already in the roster." + "\n");
+                                }
                         } else {
-                                resultField.appendText("Credits completed " + "invalid: " +
-                                        "cannot be negative!" + "\n");
+                                resultField.appendText("DOB invalid: " + dob + " younger " +
+                                        "than 16 years old." + "\n");
                         }
                 } else {
-                        resultField.appendText("Credits completed " + "invalid: not an " +
-                                "integer!" + "\n");
+                        resultField.appendText("DOB invalid: " + dob + " not a valid " +
+                                "calendar date!" + "\n");
                 }
+        }
+
+        private String validStudyAbroad(String[] inputLine) {
+                String studyAbroad = null;
+                try {
+                        studyAbroad = inputLine[6];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                        studyAbroad = "false";
+                }
+                return studyAbroad;
         }
 
         @FXML
@@ -503,19 +692,120 @@ public class TuitionManagerController extends Application {
 
         @FXML
         void addStudent(ActionEvent event){
-                if(resident.isSelected()){
-                        addResident(event);
-                }
-                if(nonResident.isSelected()){
-                        addNonResident(event);
-                }
                 if(triState.isSelected()){
                         addTriState(event);
-                }
-                if(international.isSelected()){
+                } else if(international.isSelected()){
                         addInternational(event);
+                } else if(resident.isSelected()){
+                        addResident(event);
+                } else if(nonResident.isSelected()){
+                        addNonResident(event);
                 }
+        }
 
+        @FXML
+        void removeStudent(ActionEvent event) {
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+                Student student = new Resident(new Profile(studentLastName, studentFirstName,
+                        new Date(dateOfBirth)));
+                if (roster.contains(student)) {
+                        roster.remove(student);
+                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                dateOfBirth + " removed from the roster." + "\n");
+                } else {
+                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                dateOfBirth + " is not in the roster." + "\n");
+                }
+        }
+
+        private Major checkMajor(String major) {
+                Major majorName = null;
+                if (major.equalsIgnoreCase("CS")) {
+                        majorName = Major.CS;
+                } else if (major.equalsIgnoreCase("MATH")) {
+                        majorName = Major.MATH;
+                } else if (major.equalsIgnoreCase("EE")) {
+                        majorName = Major.EE;
+                } else if (major.equalsIgnoreCase("ITI")) {
+                        majorName = Major.ITI;
+                } else if (major.equalsIgnoreCase("BAIT")) {
+                        majorName = Major.BAIT;
+                } else {
+                        resultField.appendText("Major code invalid: " + major + "\n");
+                }
+                return majorName;
+        }
+
+        @FXML
+        private void changeMajor(ActionEvent event) {
+                String studentFirstName = String.valueOf(firstName.getText());
+                String studentLastName = String.valueOf(lastName.getText());
+                String dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String major = getMajorButton().name();
+
+                Student student = new Resident(new Profile(studentLastName, studentFirstName,
+                        new Date(dateOfBirth)));
+                if (roster.contains(student)) {
+                        int studentIndex = roster.find(student);
+                        Major majorName = checkMajor(major);
+                        if(majorName != student.getMajor()){
+                                if (majorName != null) {
+                                        Student rosterStudent = roster.getRoster()[studentIndex];
+                                        rosterStudent.setMajor(majorName);
+                                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                                dateOfBirth + " major changed to " + major + "\n");
+                                }
+                        } else {
+                                resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                        dateOfBirth + " is not in the roster." + "\n");
+                        }
+                }
+        }
+
+        public void setMajor(String major){
+                if(major.equalsIgnoreCase("MATH")){
+                        MATH.setSelected(true);
+                } else if (major.equalsIgnoreCase("CS")){
+                        CS.setSelected(true);
+                } else if(major.equalsIgnoreCase("EE")){
+                        EE.setSelected(true);
+                } else if(major.equalsIgnoreCase("ITI")){
+                        ITI.setSelected(true);
+                } else if(major.equalsIgnoreCase("BAIT")){
+                        BAIT.setSelected(true);
+                }
+        }
+
+
+        @FXML
+        private void loadRoster(ActionEvent event) {
+                try {
+                        String filename = "studentList.txt";
+                        Scanner fileScanner = new Scanner(new File(filename));
+                        while (fileScanner.hasNextLine()) {
+                                String line = fileScanner.nextLine();
+                                String[] inputLines = line.split(",");
+                                String command = inputLines[0];
+                                if (command.equals("R")) {
+                                        inputAddResident(roster, inputLines);
+                                } else if (command.equals("I")) {
+                                        inputAddInternational(roster, inputLines);
+                                } else if (command.equals("T")) {
+                                        inputAddTriState(roster, inputLines);
+                                } else if (command.equals("N")) {
+                                        inputAddNonResident(roster, inputLines);
+                                }
+                        }
+                        fileScanner.close();
+                        resultField.appendText("Students loaded to the roster. " + "\n");
+                } catch (FileNotFoundException e) {
+                        resultField.appendText("** File not found **" + "\n");
+                }
         }
 
         // this method is called from the GUI, when the enrollStudentButton is clicked
@@ -526,9 +816,6 @@ public class TuitionManagerController extends Application {
                 String dateOfBirth = enrollDob.getValue().format(
                         DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 String creditsCompletedString = String.valueOf(enrollCreditsCompleted.getText());
-
-                // Need to use TextFormatter and Listener to check input from user to ensure input is valid
-                // else display error message
 
                 if (isValidCreditString(creditsCompletedString)) {
                         int creditsEnrolled = Integer.parseInt(creditsCompletedString);
@@ -923,7 +1210,6 @@ public class TuitionManagerController extends Application {
                                 }
                         }
                 }
-                printSemesterEndItem.setDisable(true);
         }
 
         private void updateCredits(Roster roster, Enrollment enrollment) {

@@ -767,20 +767,6 @@ public class TuitionManagerController extends Application {
                 }
         }
 
-        public void setMajor(String major){
-                if(major.equalsIgnoreCase("MATH")){
-                        MATH.setSelected(true);
-                } else if (major.equalsIgnoreCase("CS")){
-                        CS.setSelected(true);
-                } else if(major.equalsIgnoreCase("EE")){
-                        EE.setSelected(true);
-                } else if(major.equalsIgnoreCase("ITI")){
-                        ITI.setSelected(true);
-                } else if(major.equalsIgnoreCase("BAIT")){
-                        BAIT.setSelected(true);
-                }
-        }
-
 
         @FXML
         private void loadRoster(ActionEvent event) {

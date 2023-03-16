@@ -106,15 +106,18 @@
                                  </toggleGroup></RadioButton>
                               <HBox prefHeight="75.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <children>
-                                    <RadioButton fx:id="nonResident" mnemonicParsing="false" text="Non - Resident" toggleGroup="$studentType" />
+                                    <RadioButton fx:id="nonResident" mnemonicParsing="false" onMouseClicked="#disableButtons" text="Non - Resident" toggleGroup="$studentType" />
                                     <VBox prefHeight="75.0" prefWidth="148.0">
                                        <children>
-                                          <RadioButton fx:id="triState" mnemonicParsing="false" text="Tri - State">
+                                          <RadioButton fx:id="triState" mnemonicParsing="false" onMouseClicked="#disableButtons" text="Tri - State">
                                              <padding>
                                                 <Insets left="20.0" />
                                              </padding>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="fromWhere" />
+                                             </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton fx:id="international" mnemonicParsing="false" text="International">
+                                          <RadioButton fx:id="international" mnemonicParsing="false" onMouseClicked="#disableButtons" text="International" toggleGroup="$fromWhere">
                                              <padding>
                                                 <Insets left="20.0" top="5.0" />
                                              </padding>
@@ -125,15 +128,15 @@
                                        <children>
                                           <HBox prefHeight="24.0" prefWidth="100.0">
                                              <children>
-                                                <CheckBox fx:id="newYorkState" mnemonicParsing="false" text="NY" />
-                                                <CheckBox fx:id="connecticutState" mnemonicParsing="false" text="CT">
+                                                <CheckBox fx:id="newYorkState" mnemonicParsing="false" onMouseClicked="#disableButtons" text="NY" />
+                                                <CheckBox fx:id="connecticutState" mnemonicParsing="false" onMouseClicked="#disableButtons" text="CT">
                                                    <HBox.margin>
                                                       <Insets left="5.0" />
                                                    </HBox.margin>
                                                 </CheckBox>
                                              </children>
                                           </HBox>
-                                          <CheckBox fx:id="studyAbroad" mnemonicParsing="false" text="Study Abroad" />
+                                          <CheckBox fx:id="studyAbroad" mnemonicParsing="false" onMouseClicked="#disableButtons" text="Study Abroad" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -145,17 +148,17 @@
                                           <Insets left="5.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="removeStudentButton" mnemonicParsing="false" prefWidth="86.0" text="Remove">
+                                    <Button fx:id="removeStudentButton" mnemonicParsing="false" onAction="#removeStudent" prefWidth="86.0" text="Remove">
                                        <HBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="changeMajorButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" text="Change Major">
+                                    <Button fx:id="changeMajorButton" mnemonicParsing="false" onAction="#changeMajor" prefHeight="27.0" prefWidth="108.0" text="Change Major">
                                        <HBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="109.0" text="Load from File">
+                                    <Button mnemonicParsing="false" onAction="#loadRoster" prefHeight="27.0" prefWidth="109.0" text="Load from File">
                                        <HBox.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </HBox.margin>

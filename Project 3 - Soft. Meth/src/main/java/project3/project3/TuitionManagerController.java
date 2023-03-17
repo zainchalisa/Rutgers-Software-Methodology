@@ -117,6 +117,7 @@ public class TuitionManagerController extends Application {
         @FXML
         private MenuItem printSemesterEndItem;
 
+
         @FXML
         private void disableButtons(){
                 if(resident.isSelected()){
@@ -243,7 +244,7 @@ public class TuitionManagerController extends Application {
 
         private void inputAddResident(Roster roster, String[] inputLine) {
                 if (inputLine.length != 6) {
-                        System.out.println("Missing data in line command." + "\n");
+                        resultField.appendText("Missing data in line command." + "\n");
                         return;
                 }
                 String firstName = inputLine[1];
@@ -280,23 +281,49 @@ public class TuitionManagerController extends Application {
                 }
         }
 
+        /*
+        private void restrictNumericInput(TextField textField) {
+                TextFormatter<String> formatter = new TextFormatter<>(change -> {
+                        if (change.getText().matches("\\d")) { // only allow non-digit characters
+                                return null; // reject the change
+                        } else {
+                                return change; // accept the change
+                        }
+                });
+                textField.setTextFormatter(formatter);
+                textField.textProperty().addListener((observable, oldValue, newValue) -> {
+                        String filteredText = newValue.replaceAll("\\d", "");
+                        textField.setText(filteredText);
+                });
+        }
+
+         */
+
         @FXML
         void addResident(ActionEvent add){
-                // has error when you add student for first time to roster,
-                // says added and it's already been added to roster
-                // Also, there is a bug in the GUI that if you try to add
-                // A resident after a non-resident, you can't add anymore
-                // tristate or international students
-                // Another bug - add roster does not correctly add tri-state
-                // or international students (marks them as only
-                // non-residents)
+                // Can make helper method to check if textfields in roster have information inside
 
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String creditsCompletedString = String.valueOf(creditsCompleted.getText());
                 int defaultScholarship = 0;
+
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
                 Resident studentProfile = new Resident(new Profile(studentLastName,
                         studentFirstName, new Date(dateOfBirth)));
@@ -370,9 +397,23 @@ public class TuitionManagerController extends Application {
 
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 NonResident studentProfile =
                         new NonResident(new Profile(studentLastName, studentFirstName,
                                 new Date(dateOfBirth)));
@@ -483,12 +524,27 @@ public class TuitionManagerController extends Application {
 
         @FXML
         private void addTriState(ActionEvent add) {
+                // there is an error if user chooses to add tristate but doesn't give a state
 
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 String studentState = getStateButton();
                 TriState studentProfile = new TriState(new Profile(studentLastName,
                         studentFirstName, new Date(dateOfBirth)));
@@ -618,9 +674,23 @@ public class TuitionManagerController extends Application {
 
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String creditsCompletedString = String.valueOf(creditsCompleted.getText());
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 Boolean isStudyAbroad = getStudyAbroadButton();
                 International studentProfile =
                         new International(new Profile(studentLastName, studentFirstName,
@@ -707,15 +777,36 @@ public class TuitionManagerController extends Application {
         void removeStudent(ActionEvent event) {
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
+                String dateOfBirth;
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
                         DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
                 Student student = new Resident(new Profile(studentLastName, studentFirstName,
                         new Date(dateOfBirth)));
                 if (roster.contains(student)) {
-                        roster.remove(student);
-                        resultField.appendText(studentFirstName + " " + studentLastName + " " +
-                                dateOfBirth + " removed from the roster." + "\n");
+                        EnrollStudent enrollStudent = new EnrollStudent(new Profile(studentLastName, studentFirstName,
+                                new Date(dateOfBirth)));
+                        if (!enrollment.contains(enrollStudent)) {
+                                roster.remove(student);
+                                resultField.appendText(studentFirstName + " " + studentLastName + " " +
+                                        dateOfBirth + " removed from the roster" +
+                                                "." + "\n");
+                        } else {
+                                resultField.appendText("Can not remove " + studentFirstName + " " + studentLastName + " " + dateOfBirth + " because they are currently enrolled." + "\n");
+                        }
                 } else {
                         resultField.appendText(studentFirstName + " " + studentLastName + " " +
                                 dateOfBirth + " is not in the roster." + "\n");
@@ -744,7 +835,21 @@ public class TuitionManagerController extends Application {
         private void changeMajor(ActionEvent event) {
                 String studentFirstName = String.valueOf(firstName.getText());
                 String studentLastName = String.valueOf(lastName.getText());
-                String dateOfBirth = dob.getValue().format(
+                String dateOfBirth;
+                if (firstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (lastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (dob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits completed." + "\n");
+                        return;
+                }
+                dateOfBirth = dob.getValue().format(
                         DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 String major = getMajorButton().name();
 
@@ -794,15 +899,31 @@ public class TuitionManagerController extends Application {
                 }
         }
 
+
+
         // this method is called from the GUI, when the enrollStudentButton is clicked
         @FXML
         void enrollStudent(ActionEvent enroll) {
                 String firstName = String.valueOf(enrollFirstName.getText());
                 String lastName = String.valueOf(enrollLastName.getText());
-                String dateOfBirth = enrollDob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String creditsCompletedString = String.valueOf(enrollCreditsCompleted.getText());
 
+                if (enrollFirstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (enrollLastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (enrollDob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (enrollCreditsCompleted.getText().equalsIgnoreCase("")){
+                        resultField.appendText("Please enter credits to enroll." + "\n");
+                        return;
+                }
+                dateOfBirth = enrollDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 if (isValidCreditString(creditsCompletedString)) {
                         int creditsEnrolled = Integer.parseInt(creditsCompletedString);
                         Student student = new Resident(new Profile(lastName,
@@ -860,11 +981,23 @@ public class TuitionManagerController extends Application {
         void dropStudent(ActionEvent drop) {
                 String firstName = String.valueOf(enrollFirstName.getText());
                 String lastName = String.valueOf(enrollLastName.getText());
-                String dateOfBirth = enrollDob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
+                if (enrollFirstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (enrollLastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (enrollDob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                }
 
+                dateOfBirth = enrollDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 EnrollStudent student = new EnrollStudent(new Profile(lastName,
                         firstName, new Date(dateOfBirth)));
+
                 if (enrollment.contains(student)) {
                         int studentIndex = enrollment.find(student);
                         student = enrollment.getEnrollStudents()[studentIndex];
@@ -881,9 +1014,24 @@ public class TuitionManagerController extends Application {
         void grantScholarship(ActionEvent updateScholarship) {
                 String firstName = String.valueOf(scholarFirstName.getText());
                 String lastName = String.valueOf(scholarLastName.getText());
-                String dateOfBirth = scholarDob.getValue().format(
-                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String dateOfBirth;
                 String scholarshipString = String.valueOf(scholarAmount.getText());
+
+                if (scholarFirstName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a first name." + "\n");
+                        return;
+                } else if (scholarLastName.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a last name." + "\n");
+                        return;
+                } else if (scholarDob.getValue() == null) {
+                        resultField.appendText("Please enter a date of birth." + "\n");
+                        return;
+                } else if (scholarAmount.getText().equalsIgnoreCase("")) {
+                        resultField.appendText("Please enter a scholarship amount." + "\n");
+                        return;
+                }
+                dateOfBirth = scholarDob.getValue().format(
+                        DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 Student student = new Resident(new Profile(lastName, firstName,
                         new Date(dateOfBirth)));
 

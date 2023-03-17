@@ -117,6 +117,12 @@ public class TuitionManagerController extends Application {
         @FXML
         private MenuItem printSemesterEndItem;
 
+        public void initialize() {
+                disableDOBTextFields();
+                restrictInputRoster();
+                restrictInputEnroll();
+                restrictInputScholarship();
+        }
 
         @FXML
         private void disableButtons(){
@@ -164,6 +170,12 @@ public class TuitionManagerController extends Application {
         Roster roster = new Roster();
         Enrollment enrollment = new Enrollment();
 
+        private void disableDOBTextFields() {
+                dob.getEditor().setDisable(true);
+                enrollDob.getEditor().setDisable(true);
+                scholarDob.getEditor().setDisable(true);
+        }
+
         private Major getMajorButton(){
                 Major major = null;
                 if(BAIT.isSelected()){
@@ -194,7 +206,6 @@ public class TuitionManagerController extends Application {
                 } else if (connecticutState.isSelected()){
                         return "CT";
                 } else{
-                        resultField.appendText("Please select a state." + "\n");
                         return null;
                 }
         }
@@ -280,24 +291,6 @@ public class TuitionManagerController extends Application {
                                 "calendar date!" + "\n");
                 }
         }
-
-        /*
-        private void restrictNumericInput(TextField textField) {
-                TextFormatter<String> formatter = new TextFormatter<>(change -> {
-                        if (change.getText().matches("\\d")) { // only allow non-digit characters
-                                return null; // reject the change
-                        } else {
-                                return change; // accept the change
-                        }
-                });
-                textField.setTextFormatter(formatter);
-                textField.textProperty().addListener((observable, oldValue, newValue) -> {
-                        String filteredText = newValue.replaceAll("\\d", "");
-                        textField.setText(filteredText);
-                });
-        }
-
-         */
 
         @FXML
         void addResident(ActionEvent add){
@@ -763,7 +756,12 @@ public class TuitionManagerController extends Application {
         @FXML
         void addStudent(ActionEvent event){
                 if(triState.isSelected()){
-                        addTriState(event);
+                        if(newYorkState.isSelected() ||
+                                connecticutState.isSelected()) {
+                                addTriState(event);
+                        } else {
+                                resultField.appendText("Please select a state." + "\n");
+                        }
                 } else if(international.isSelected()){
                         addInternational(event);
                 } else if(resident.isSelected()){
@@ -900,8 +898,85 @@ public class TuitionManagerController extends Application {
         }
 
 
+        private void restrictInputRoster() {
+                TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterCE = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^\\d*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                firstName.setTextFormatter(formatterFN);
+                lastName.setTextFormatter(formatterLN);
+                creditsCompleted.setTextFormatter(formatterCE);
+        }
+        private void restrictInputEnroll() {
+                TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterCE = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^\\d*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                enrollFirstName.setTextFormatter(formatterFN);
+                enrollLastName.setTextFormatter(formatterLN);
+                enrollCreditsCompleted.setTextFormatter(formatterCE);
+        }
+        private void restrictInputScholarship() {
+                TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                TextFormatter<String> formatterCE = new TextFormatter<>(change -> {
+                        if (change.getText().matches("^\\d*[\b]?$")) { // only allow non-digit characters
+                                return change; // reject the change
+                        } else {
+                                return null; // accept the change
+                        }
+                });
+                scholarFirstName.setTextFormatter(formatterFN);
+                scholarLastName.setTextFormatter(formatterLN);
+                scholarAmount.setTextFormatter(formatterCE);
+        }
 
-        // this method is called from the GUI, when the enrollStudentButton is clicked
         @FXML
         void enrollStudent(ActionEvent enroll) {
                 String firstName = String.valueOf(enrollFirstName.getText());
@@ -943,7 +1018,6 @@ public class TuitionManagerController extends Application {
                 }
         }
 
-        // Stays private bc helper method?
         private void validEnrollStudent(Student student, int creditsEnrolled
                 , String firstName, String lastName, String dateOfBirth,
                                         Enrollment enrollment) {
@@ -1385,5 +1459,6 @@ public class TuitionManagerController extends Application {
         public void start(Stage stage) throws Exception {
                 stage.show();
         }
+
 }
 

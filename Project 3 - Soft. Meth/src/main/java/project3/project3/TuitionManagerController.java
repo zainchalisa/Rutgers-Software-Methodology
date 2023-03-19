@@ -18,16 +18,7 @@ import java.util.Scanner;
 public class TuitionManagerController extends Application {
 
         @FXML
-        private Button addStudentButton;
-
-        @FXML
-        private Button removeStudentButton;
-
-        @FXML
-        private Button changeMajorButton;
-
-        @FXML
-        private Button loadFromFileButton;
+        private Button addStudentButton, removeStudentButton, changeMajorButton, loadFromFileButton;
 
         @FXML
         private TextField firstName, lastName, creditsCompleted;
@@ -43,35 +34,20 @@ public class TuitionManagerController extends Application {
         @FXML
         private CheckBox newYorkState, connecticutState, studyAbroad;
 
-
         @FXML
         private TextArea resultField;
 
-        // Enroll/Drop tab
         @FXML
-        private Button enrollStudentButton;
+        private Button enrollStudentButton, dropStudentButton;
 
         @FXML
-        private Button dropStudentButton;
-
-        @FXML
-        private TextField enrollFirstName;
-
-        @FXML
-        private TextField enrollLastName;
+        private TextField enrollFirstName, enrollLastName;
 
         @FXML
         private DatePicker enrollDob;
 
         @FXML
-        private TextField enrollCreditsCompleted;
-
-        // Scholarship
-        @FXML
-        private TextField scholarFirstName;
-
-        @FXML
-        private TextField scholarLastName;
+        private TextField enrollCreditsCompleted, scholarFirstName, scholarLastName;
 
         @FXML
         private DatePicker scholarDob;
@@ -82,40 +58,15 @@ public class TuitionManagerController extends Application {
         @FXML
         private Button updateScholarButton;
 
-        // Print Tab
+        @FXML
+        private MenuItem printProfileItem, printSchoolMajorItem, printStandingItem;
 
         @FXML
-        private SplitMenuButton rosterPrintMenu; // might not need
+        private MenuItem printRBSItem, printSASItem, printSCIItem, printSOEItem;
 
         @FXML
-        private MenuItem printProfileItem;
+        private MenuItem printEnrolledItem, printTuitionDueItem, printSemesterEndItem;
 
-        @FXML
-        private MenuItem printSchoolMajorItem;
-
-        @FXML
-        private MenuItem printStandingItem;
-
-        @FXML
-        private MenuItem printRBSItem;
-
-        @FXML
-        private MenuItem printSASItem;
-
-        @FXML
-        private MenuItem printSCIItem;
-
-        @FXML
-        private MenuItem printSOEItem;
-
-        @FXML
-        private MenuItem printEnrolledItem;
-
-        @FXML
-        private MenuItem printTuitionDueItem;
-
-        @FXML
-        private MenuItem printSemesterEndItem;
 
         public void initialize() {
                 disableDOBTextFields();
@@ -200,7 +151,7 @@ public class TuitionManagerController extends Application {
 
         }
 
-        public String getStateButton(){
+        private String getStateButton(){
                 if(newYorkState.isSelected()){
                         return "NY";
                 } else if (connecticutState.isSelected()){
@@ -210,7 +161,7 @@ public class TuitionManagerController extends Application {
                 }
         }
 
-        public boolean getStudyAbroadButton(){
+        private boolean getStudyAbroadButton(){
                 if(studyAbroad.isSelected()){
                         return true;
                 } else {
@@ -293,7 +244,7 @@ public class TuitionManagerController extends Application {
         }
 
         @FXML
-        void addResident(ActionEvent add){
+        private void addResident(ActionEvent add){
                 // Can make helper method to check if textfields in roster have information inside
 
                 String studentFirstName = String.valueOf(firstName.getText());
@@ -784,9 +735,6 @@ public class TuitionManagerController extends Application {
                         return;
                 } else if (dob.getValue() == null) {
                         resultField.appendText("Please enter a date of birth." + "\n");
-                        return;
-                } else if (creditsCompleted.getText().equalsIgnoreCase("")){
-                        resultField.appendText("Please enter credits completed." + "\n");
                         return;
                 }
                 dateOfBirth = dob.getValue().format(

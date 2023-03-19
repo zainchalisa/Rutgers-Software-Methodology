@@ -17,16 +17,7 @@ import java.util.Scanner;
 public class TuitionManagerController extends Application {
 
     @FXML
-    private Button addStudentButton;
-
-    @FXML
-    private Button removeStudentButton;
-
-    @FXML
-    private Button changeMajorButton;
-
-    @FXML
-    private Button loadFromFileButton;
+    private Button addStudentButton, removeStudentButton, changeMajorButton, loadFromFileButton;
 
     @FXML
     private TextField firstName, lastName, creditsCompleted;
@@ -42,35 +33,20 @@ public class TuitionManagerController extends Application {
     @FXML
     private CheckBox newYorkState, connecticutState, studyAbroad;
 
-
     @FXML
     private TextArea resultField;
 
-    // Enroll/Drop tab
     @FXML
-    private Button enrollStudentButton;
+    private Button enrollStudentButton, dropStudentButton;
 
     @FXML
-    private Button dropStudentButton;
-
-    @FXML
-    private TextField enrollFirstName;
-
-    @FXML
-    private TextField enrollLastName;
+    private TextField enrollFirstName, enrollLastName;
 
     @FXML
     private DatePicker enrollDob;
 
     @FXML
-    private TextField enrollCreditsCompleted;
-
-    // Scholarship
-    @FXML
-    private TextField scholarFirstName;
-
-    @FXML
-    private TextField scholarLastName;
+    private TextField enrollCreditsCompleted, scholarFirstName, scholarLastName;
 
     @FXML
     private DatePicker scholarDob;
@@ -81,40 +57,14 @@ public class TuitionManagerController extends Application {
     @FXML
     private Button updateScholarButton;
 
-    // Print Tab
+    @FXML
+    private MenuItem printProfileItem, printSchoolMajorItem, printStandingItem;
 
     @FXML
-    private SplitMenuButton rosterPrintMenu; // might not need
+    private MenuItem printRBSItem, printSASItem, printSCIItem, printSOEItem;
 
     @FXML
-    private MenuItem printProfileItem;
-
-    @FXML
-    private MenuItem printSchoolMajorItem;
-
-    @FXML
-    private MenuItem printStandingItem;
-
-    @FXML
-    private MenuItem printRBSItem;
-
-    @FXML
-    private MenuItem printSASItem;
-
-    @FXML
-    private MenuItem printSCIItem;
-
-    @FXML
-    private MenuItem printSOEItem;
-
-    @FXML
-    private MenuItem printEnrolledItem;
-
-    @FXML
-    private MenuItem printTuitionDueItem;
-
-    @FXML
-    private MenuItem printSemesterEndItem;
+    private MenuItem printEnrolledItem, printTuitionDueItem, printSemesterEndItem;
 
     Roster roster = new Roster();
     Enrollment enrollment = new Enrollment();

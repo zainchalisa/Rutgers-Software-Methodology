@@ -268,32 +268,9 @@ public class TuitionManagerController extends Application {
                 firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (dob.isValid()) {
-            if (dob.isValidStudent()) {
-                if (!roster.contains(studentProfile)) {
-                    Major majorName = checkMajor(major);
-                    if (majorName != null) {
-                        validResident(roster, firstName, lastName,
-                                dateOfBirth, majorName,
-                                creditsCompletedString,
-                                defaultScholarship);
-                    }
-                } else {
-                    resultField.appendText(
-                            firstName + " " + lastName + " " +
-                                    dateOfBirth +
-                                    " is already in the roster." + "\n");
-                }
-            } else {
-                resultField.appendText(
-                        "DOB invalid: " + dob + " younger " +
-                                "than 16 years old." + "\n");
-            }
-        } else {
-            resultField.appendText(
-                    "DOB invalid: " + dob + " not a valid " +
-                            "calendar date!" + "\n");
-        }
+        checkResident(dob,studentProfile,firstName,
+                lastName,dateOfBirth,creditsCompletedString,
+                defaultScholarship);
     }
 
     private boolean hasEmptyFieldsRoster() {
@@ -313,26 +290,12 @@ public class TuitionManagerController extends Application {
         }
         return false;
     }
-    @FXML
-    void addResident(ActionEvent add) {
-        String studentFirstName = String.valueOf(firstName.getText());
-        String studentLastName = String.valueOf(lastName.getText());
-        String dateOfBirth;
-        String creditsCompletedString =
-                String.valueOf(creditsCompleted.getText());
-        int defaultScholarship = 0;
 
-        if (hasEmptyFieldsRoster()) {
-            return;
-        }
-
-        dateOfBirth = dob.getValue().format(
-                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-
-        Resident studentProfile = new Resident(new Profile(studentLastName,
-                studentFirstName, new Date(dateOfBirth)));
-        Date dobObject = new Date(dateOfBirth);
-
+    private void checkResident (Date dobObject, Resident studentProfile,
+                                String studentFirstName,
+                                String studentLastName,String dateOfBirth,
+                                String creditsCompletedString,
+                                int defaultScholarship) {
         if (dobObject.isValid()) {
             if (dobObject.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
@@ -362,6 +325,30 @@ public class TuitionManagerController extends Application {
                             "calendar date!" + "\n");
         }
     }
+    @FXML
+    void addResident(ActionEvent add) {
+        String studentFirstName = String.valueOf(firstName.getText());
+        String studentLastName = String.valueOf(lastName.getText());
+        String dateOfBirth;
+        String creditsCompletedString =
+                String.valueOf(creditsCompleted.getText());
+        int defaultScholarship = 0;
+
+        if (hasEmptyFieldsRoster()) {
+            return;
+        }
+
+        dateOfBirth = dob.getValue().format(
+                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        Resident studentProfile = new Resident(new Profile(studentLastName,
+                studentFirstName, new Date(dateOfBirth)));
+        Date dobObject = new Date(dateOfBirth);
+
+        checkResident(dobObject,studentProfile,studentFirstName,
+                studentLastName,dateOfBirth,creditsCompletedString,
+                defaultScholarship);
+    }
 
     private void inputAddNonResident(Roster roster, String[] inputLine) {
         if (inputLine.length != 6) {
@@ -378,54 +365,14 @@ public class TuitionManagerController extends Application {
                         new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (dob.isValid()) {
-            if (dob.isValidStudent()) {
-                if (!roster.contains(studentProfile)) {
-                    Major majorName = checkMajor(major);
-                    if (majorName != null) {
-                        validNonResident(roster, firstName, lastName,
-                                dateOfBirth, majorName,
-                                creditsCompletedString);
-                    }
-                } else {
-                    resultField.appendText(
-                            firstName + " " + lastName + " " +
-                                    dateOfBirth +
-                                    " is already in the roster." + "\n");
-                }
-            } else {
-                resultField.appendText(
-                        "DOB invalid: " + dob + " younger " +
-                                "than 16 years old." + "\n");
-            }
-        } else {
-            resultField.appendText(
-                    "DOB invalid: " + dob + " not a valid " +
-                            "calendar date!" + "\n");
-        }
+        checkNonResident(dob,studentProfile,firstName,
+                lastName,dateOfBirth,creditsCompletedString);
     }
 
-    @FXML
-    private void addNonResident(ActionEvent add) {
-
-        String studentFirstName = String.valueOf(firstName.getText());
-        String studentLastName = String.valueOf(lastName.getText());
-        String dateOfBirth;
-        String creditsCompletedString =
-                String.valueOf(creditsCompleted.getText());
-
-        if (hasEmptyFieldsRoster()) {
-            return;
-        }
-
-        dateOfBirth = dob.getValue().format(
-                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        NonResident studentProfile =
-                new NonResident(
-                        new Profile(studentLastName, studentFirstName,
-                                new Date(dateOfBirth)));
-        Date dob = studentProfile.getProfile().getDob();
-
+    private void checkNonResident (Date dob, NonResident studentProfile,
+                                String studentFirstName,
+                                String studentLastName,String dateOfBirth,
+                                String creditsCompletedString) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
@@ -453,6 +400,30 @@ public class TuitionManagerController extends Application {
                     "DOB invalid: " + dob + " not a valid " +
                             "calendar date!" + "\n");
         }
+    }
+    @FXML
+    private void addNonResident(ActionEvent add) {
+
+        String studentFirstName = String.valueOf(firstName.getText());
+        String studentLastName = String.valueOf(lastName.getText());
+        String dateOfBirth;
+        String creditsCompletedString =
+                String.valueOf(creditsCompleted.getText());
+
+        if (hasEmptyFieldsRoster()) {
+            return;
+        }
+
+        dateOfBirth = dob.getValue().format(
+                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        NonResident studentProfile =
+                new NonResident(
+                        new Profile(studentLastName, studentFirstName,
+                                new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        checkNonResident(dob,studentProfile,studentFirstName,
+                studentLastName,dateOfBirth,creditsCompletedString);
     }
 
     /**
@@ -512,19 +483,30 @@ public class TuitionManagerController extends Application {
                 firstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
+        checkTriState(dob,studentProfile,firstName,
+                lastName,dateOfBirth,creditsCompletedString,
+                state);
+    }
+
+    private void checkTriState (Date dob, TriState studentProfile,
+                                   String studentFirstName,
+                                   String studentLastName,String dateOfBirth,
+                                   String creditsCompletedString, String studentState) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
-                    Major majorName = checkMajor(major);
+                    Major majorName = getMajorButton();
                     if (majorName != null) {
-                        validTriState(roster, firstName, lastName,
+                        validTriState(roster, studentFirstName,
+                                studentLastName,
                                 dateOfBirth, majorName,
-                                creditsCompletedString, state,
+                                creditsCompletedString, studentState,
                                 studentProfile);
                     }
                 } else {
                     resultField.appendText(
-                            firstName + " " + lastName + " " +
+                            studentFirstName + " " + studentLastName +
+                                    " " +
                                     dateOfBirth +
                                     " is already in the roster." + "\n");
                 }
@@ -559,34 +541,9 @@ public class TuitionManagerController extends Application {
                 studentFirstName, new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (dob.isValid()) {
-            if (dob.isValidStudent()) {
-                if (!roster.contains(studentProfile)) {
-                    Major majorName = getMajorButton();
-                    if (majorName != null) {
-                        validTriState(roster, studentFirstName,
-                                studentLastName,
-                                dateOfBirth, majorName,
-                                creditsCompletedString, studentState,
-                                studentProfile);
-                    }
-                } else {
-                    resultField.appendText(
-                            studentFirstName + " " + studentLastName +
-                                    " " +
-                                    dateOfBirth +
-                                    " is already in the roster." + "\n");
-                }
-            } else {
-                resultField.appendText(
-                        "DOB invalid: " + dob + " younger " +
-                                "than 16 years old." + "\n");
-            }
-        } else {
-            resultField.appendText(
-                    "DOB invalid: " + dob + " not a valid " +
-                            "calendar date!" + "\n");
-        }
+        checkTriState(dob,studentProfile,studentFirstName,
+                studentLastName,dateOfBirth,creditsCompletedString,
+                studentState);
     }
 
     /**
@@ -656,31 +613,10 @@ public class TuitionManagerController extends Application {
                         new Date(dateOfBirth)));
         Date dob = studentProfile.getProfile().getDob();
 
-        if (dob.isValid()) {
-            if (dob.isValidStudent()) {
-                if (!roster.contains(studentProfile)) {
-                    Major majorName = checkMajor(major);
-                    if (majorName != null) {
-                        validInternational(roster, firstName, lastName,
-                                dateOfBirth, majorName,
-                                creditsCompletedString, isStudyAbroad);
-                    }
-                } else {
-                    resultField.appendText(
-                            firstName + " " + lastName + " " +
-                                    dateOfBirth +
-                                    " is already in the roster." + "\n");
-                }
-            } else {
-                resultField.appendText(
-                        "DOB invalid: " + dob + " younger " +
-                                "than 16 years old." + "\n");
-            }
-        } else {
-            resultField.appendText(
-                    "DOB invalid: " + dob + " not a valid " +
-                            "calendar date!" + "\n");
-        }
+        checkInternational(dob,studentProfile,firstName,
+                lastName,dateOfBirth,creditsCompletedString,
+                isStudyAbroad);
+
     }
 
     private String validStudyAbroad(String[] inputLine) {
@@ -693,28 +629,12 @@ public class TuitionManagerController extends Application {
         return studyAbroad;
     }
 
-    @FXML
-    private void addInternational(ActionEvent add) {
-
-        String studentFirstName = String.valueOf(firstName.getText());
-        String studentLastName = String.valueOf(lastName.getText());
-        String dateOfBirth;
-        String creditsCompletedString =
-                String.valueOf(creditsCompleted.getText());
-
-        if (hasEmptyFieldsRoster()) {
-            return;
-        }
-
-        dateOfBirth = dob.getValue().format(
-                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        Boolean isStudyAbroad = getStudyAbroadButton();
-        International studentProfile =
-                new International(
-                        new Profile(studentLastName, studentFirstName,
-                                new Date(dateOfBirth)));
-        Date dob = studentProfile.getProfile().getDob();
-
+    private void checkInternational (Date dob, NonResident studentProfile,
+                                   String studentFirstName,
+                                   String studentLastName,
+                                     String dateOfBirth,
+                                   String creditsCompletedString,
+                                     boolean isStudyAbroad) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
@@ -742,6 +662,32 @@ public class TuitionManagerController extends Application {
                     " not a valid " +
                     "calendar date!" + "\n");
         }
+    }
+    @FXML
+    private void addInternational(ActionEvent add) {
+
+        String studentFirstName = String.valueOf(firstName.getText());
+        String studentLastName = String.valueOf(lastName.getText());
+        String dateOfBirth;
+        String creditsCompletedString =
+                String.valueOf(creditsCompleted.getText());
+
+        if (hasEmptyFieldsRoster()) {
+            return;
+        }
+
+        dateOfBirth = dob.getValue().format(
+                DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        Boolean isStudyAbroad = getStudyAbroadButton();
+        International studentProfile =
+                new International(
+                        new Profile(studentLastName, studentFirstName,
+                                new Date(dateOfBirth)));
+        Date dob = studentProfile.getProfile().getDob();
+
+        checkInternational(dob,studentProfile,studentFirstName,
+                studentLastName,dateOfBirth,creditsCompletedString,
+                isStudyAbroad);
     }
 
 
@@ -809,20 +755,11 @@ public class TuitionManagerController extends Application {
         String studentFirstName = String.valueOf(firstName.getText());
         String studentLastName = String.valueOf(lastName.getText());
         String dateOfBirth;
-        if (firstName.getText().equalsIgnoreCase("")) {
-            resultField.appendText("Please enter a first name." + "\n");
-            return;
-        } else if (lastName.getText().equalsIgnoreCase("")) {
-            resultField.appendText("Please enter a last name." + "\n");
-            return;
-        } else if (dob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
-            return;
-        } else if (creditsCompleted.getText().equalsIgnoreCase("")) {
-            resultField.appendText(
-                    "Please enter credits completed." + "\n");
+
+        if (hasEmptyFieldsRoster()) {
             return;
         }
+
         dateOfBirth = dob.getValue().format(
                 DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
@@ -876,20 +813,11 @@ public class TuitionManagerController extends Application {
         String studentFirstName = String.valueOf(firstName.getText());
         String studentLastName = String.valueOf(lastName.getText());
         String dateOfBirth;
-        if (firstName.getText().equalsIgnoreCase("")) {
-            resultField.appendText("Please enter a first name." + "\n");
-            return;
-        } else if (lastName.getText().equalsIgnoreCase("")) {
-            resultField.appendText("Please enter a last name." + "\n");
-            return;
-        } else if (dob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
-            return;
-        } else if (creditsCompleted.getText().equalsIgnoreCase("")) {
-            resultField.appendText(
-                    "Please enter credits completed." + "\n");
+
+        if (hasEmptyFieldsRoster()) {
             return;
         }
+
         dateOfBirth = dob.getValue().format(
                 DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         String major = getMajorButton().name();

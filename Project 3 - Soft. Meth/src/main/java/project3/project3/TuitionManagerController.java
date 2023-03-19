@@ -788,12 +788,12 @@ public class TuitionManagerController extends Application {
                                     dateOfBirth + " major changed to " +
                                     major + "\n");
                 }
-            } else {
-                resultField.appendText(
-                        studentFirstName + " " + studentLastName + " " +
-                                dateOfBirth + " is not in the roster." +
-                                "\n");
             }
+            }else {
+            resultField.appendText(
+                    studentFirstName + " " + studentLastName + " " +
+                            dateOfBirth + " is not in the roster." +
+                            "\n");
         }
     }
 

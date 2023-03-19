@@ -254,7 +254,9 @@ public class Roster {
     }
 
     /**
-     * This constructor prints the student by first name, last name, DOB
+     * This constructor prints the student by first name, last name, DOB.
+     *
+     * @param resultField the visual display for program feedback in GUI.
      */
     public void print(TextArea resultField) { //print roster sorted by profiles
         if (size == EQUAL) {
@@ -271,7 +273,9 @@ public class Roster {
     }
 
     /**
-     * This constructor prints the roster in order of majors
+     * This constructor prints the roster in order of majors.
+     *
+     * @param resultField the visual display for program feedback in GUI.
      */
     public void printBySchoolMajor(TextArea resultField) {
         if (size == EQUAL) {
@@ -287,7 +291,9 @@ public class Roster {
     }
 
     /**
-     * This constructor prints the roster in order of standings
+     * This constructor prints the roster in order of standings.
+     *
+     * @param resultField the visual display for program feedback in GUI.
      */
     public void printByStanding(TextArea resultField) {
         if (size == EQUAL) {

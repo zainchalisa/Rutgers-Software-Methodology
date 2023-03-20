@@ -256,55 +256,61 @@ public class Roster {
     /**
      * This constructor prints the student by first name, last name, DOB.
      *
-     * @param resultField the visual display for program feedback in GUI.
+     * @return returns a string containing all data from roster.
      */
-    public void print(TextArea resultField) { //print roster sorted by profiles
+    public String print() { //print roster sorted by profiles
+        String result = "";
         if (size == EQUAL) {
-            resultField.appendText("Student roster is empty!" + "\n");
-            return;
+            return null;
         }
         insertionSort(roster);
-        resultField.appendText("* Student roster sorted by last name, first "
-                + "name, DOB **" + "\n");
+        result +="* Student roster sorted by last name, first "
+                + "name, DOB **" + "\n";
         for (int i = 0; i < size; i++) {
-            resultField.appendText(roster[i] + "\n");
+            result += roster[i] + "\n";
         }
-        resultField.appendText("* end of roster **" + "\n");
+        result += "* end of roster **" + "\n";
+
+        return result;
     }
 
     /**
      * This constructor prints the roster in order of majors.
      *
-     * @param resultField the visual display for program feedback in GUI.
+     * @return returns a string containing all data from the roster.
      */
-    public void printBySchoolMajor(TextArea resultField) {
+    public String printBySchoolMajor() {
+        String result = "";
         if (size == EQUAL) {
-            resultField.appendText("Student roster is empty!" + "\n");
-            return;
+            return null;
         }
         insertionSortMajor(roster);
-        resultField.appendText("* Student roster sorted by school, major **" + "\n");
+        result += "* Student roster sorted by school, major **" + "\n";
         for (int i = 0; i < size; i++) {
-            resultField.appendText(roster[i] + "\n");
+            result += roster[i] + "\n";
         }
-        resultField.appendText("* end of roster **" + "\n");
+        result += "* end of roster **" + "\n";
+
+        return result;
     }
 
     /**
      * This constructor prints the roster in order of standings.
      *
-     * @param resultField the visual display for program feedback in GUI.
+     * @return return a string containing the roster sorted by standing.
      */
-    public void printByStanding(TextArea resultField) {
+    public String printByStanding() {
+        String result = "";
         if (size == EQUAL) {
-            resultField.appendText("Student roster is empty!" + "\n");
-            return;
+            return null;
         }
         insertionSortStanding(roster);
-        resultField.appendText("* Student roster sorted by standing **" + "\n");
+        result += "* Student roster sorted by standing **" + "\n";
         for (int i = 0; i < size; i++) {
-            resultField.appendText(roster[i] + "\n");
+            result += roster[i] + "\n";
         }
-        resultField.appendText("* end of roster **" + "\n");
+        result += "* end of roster **" + "\n";
+
+        return result;
     }
 }

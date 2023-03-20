@@ -1719,7 +1719,12 @@ public class TuitionManagerController extends Application {
      */
     @FXML
     private void printProfile(ActionEvent event) {
-        roster.print(resultField);
+        if (roster.print() != null) {
+            resultField.appendText(roster.print());
+        }
+        else {
+            resultField.appendText("Student roster is empty!" + "\n");
+        }
     }
 
     /**
@@ -1730,7 +1735,12 @@ public class TuitionManagerController extends Application {
      */
     @FXML
     private void printSchoolMajor(ActionEvent event) {
-        roster.printBySchoolMajor(resultField);
+        if (roster.printBySchoolMajor() != null) {
+            resultField.appendText(roster.printBySchoolMajor());
+        }
+        else {
+            resultField.appendText("Student roster is empty!" + "\n");
+        }
     }
 
     /**
@@ -1741,7 +1751,12 @@ public class TuitionManagerController extends Application {
      */
     @FXML
     private void printStanding(ActionEvent event) {
-        roster.printByStanding(resultField);
+        if (roster.printByStanding() != null) {
+            resultField.appendText(roster.printByStanding());
+        }
+        else {
+            resultField.appendText("Student roster is empty!" + "\n");
+        }
     }
 
     /**
@@ -2048,6 +2063,7 @@ public class TuitionManagerController extends Application {
                 }
             }
         }
+        printSemesterEndItem.setDisable(true);
     }
 
     /**

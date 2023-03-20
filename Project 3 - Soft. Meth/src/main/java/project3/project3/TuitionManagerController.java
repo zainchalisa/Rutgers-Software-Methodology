@@ -961,11 +961,14 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Ensures only proper characters are entered into the text fields.
+     */
     private void restrictInputRoster() {
         TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -974,7 +977,7 @@ public class TuitionManagerController extends Application {
         TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -993,11 +996,14 @@ public class TuitionManagerController extends Application {
         creditsCompleted.setTextFormatter(formatterCE);
     }
 
+    /**
+     * Ensures only proper characters are entered into the text fields.
+     */
     private void restrictInputEnroll() {
         TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1006,7 +1012,7 @@ public class TuitionManagerController extends Application {
         TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1025,11 +1031,14 @@ public class TuitionManagerController extends Application {
         enrollCreditsCompleted.setTextFormatter(formatterCE);
     }
 
+    /**
+     * Ensures only proper characters are entered into the text fields.
+     */
     private void restrictInputScholarship() {
         TextFormatter<String> formatterFN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1038,7 +1047,7 @@ public class TuitionManagerController extends Application {
         TextFormatter<String> formatterLN = new TextFormatter<>(change -> {
             if (change.getText().matches(
                     "^[a-zA-Z\\-]*[\b]?$")) { // only allow non-digit
-                    // characters
+                // characters
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1057,6 +1066,12 @@ public class TuitionManagerController extends Application {
         scholarAmount.setTextFormatter(formatterCE);
     }
 
+    /**
+     * Checks if there are any empty text fields in Enroll tab.
+     * Runs after a button is clicked in the Enroll tab.
+     *
+     * @return true if there are any empty text fields, false otherwise.
+     */
     private boolean hasEmptyFieldEnroll() {
         if (enrollFirstName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a first name." + "\n");
@@ -1074,8 +1089,15 @@ public class TuitionManagerController extends Application {
         }
         return false;
     }
+
+    /**
+     * Enrolls a student in a semester if the data entered is valid.
+     *
+     * @param enroll ActionEvent created by a user clicking the Enroll
+     *               button in the GUI.
+     */
     @FXML
-    void enrollStudent(ActionEvent enroll) {
+    private void enrollStudent(ActionEvent enroll) {
         String firstName = String.valueOf(enrollFirstName.getText());
         String lastName = String.valueOf(enrollLastName.getText());
         String dateOfBirth;
@@ -1109,6 +1131,17 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Adds student to enrollment after ensuring data is valid.
+     *
+     * @param student student object to be added to enrollment.
+     * @param creditsEnrolled amount of credits student is taking this
+     *                        semester.
+     * @param firstName first name of student.
+     * @param lastName last name of student.
+     * @param dateOfBirth date of birth of student.
+     * @param enrollment list of students enrolled this semester.
+     */
     private void validEnrollStudent(Student student, int creditsEnrolled
             , String firstName, String lastName, String dateOfBirth,
                                     Enrollment enrollment) {
@@ -1146,8 +1179,14 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Drop student from semester if they are currently enrolled.
+     *
+     * @param drop ActionEvent created by user clicking the Drop button in
+     *             the GUI.
+     */
     @FXML
-    void dropStudent(ActionEvent drop) {
+    private void dropStudent(ActionEvent drop) {
         String firstName = String.valueOf(enrollFirstName.getText());
         String lastName = String.valueOf(enrollLastName.getText());
         String dateOfBirth;
@@ -1179,61 +1218,85 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Checks if there are any empty text fields in Scholarship tab.
+     * Runs after a button is clicked in the Roster tab.
+     *
+     * @return true if there are any empty text fields, false otherwise.
+     */
     private boolean hasEmptyFieldScholar() {
-            if (scholarFirstName.getText().equalsIgnoreCase("")) {
-                    resultField.appendText("Please enter a first name." + "\n");
-                    return true;
-            } else if (scholarLastName.getText().equalsIgnoreCase("")) {
-                    resultField.appendText("Please enter a last name." + "\n");
-                    return true;
-            } else if (scholarDob.getValue() == null) {
-                    resultField.appendText("Please enter a date of birth." + "\n");
-                    return true;
-            } else if (scholarAmount.getText().equalsIgnoreCase("")) {
-                    resultField.appendText(
-                            "Please enter a scholarship amount." + "\n");
-                    return true;
-            }
-            return false;
+        if (scholarFirstName.getText().equalsIgnoreCase("")) {
+            resultField.appendText("Please enter a first name." + "\n");
+            return true;
+        } else if (scholarLastName.getText().equalsIgnoreCase("")) {
+            resultField.appendText("Please enter a last name." + "\n");
+            return true;
+        } else if (scholarDob.getValue() == null) {
+            resultField.appendText("Please enter a date of birth." + "\n");
+            return true;
+        } else if (scholarAmount.getText().equalsIgnoreCase("")) {
+            resultField.appendText(
+                    "Please enter a scholarship amount." + "\n");
+            return true;
+        }
+        return false;
     }
 
+    /**
+     * Determines if a student can recieve scholarship based on status.
+     *
+     * @param student student object for student.
+     * @param firstName first name of student.
+     * @param lastName last name of student.
+     * @param dateOfBirth date of birth of student.
+     * @param scholarshipString scholarship value entered by user for the
+     *                          student.
+     */
     private void checkEligibleScholarship(Student student,
-                                          String firstName,String lastName,
+                                          String firstName,
+                                          String lastName,
                                           String dateOfBirth,
                                           String scholarshipString) {
-            if (roster.contains(student)) {
-                    int studentIndex = roster.find(student);
-                    student = roster.getRoster()[studentIndex];
-                    if (student instanceof Resident) {
-                            residentScholarship(student, firstName,
-                                    lastName, dateOfBirth,
-                                    scholarshipString, enrollment);
-                    } else {
-                        resultField.appendText(
-                                firstName + " " + lastName
-                                        + " " +
-                                        dateOfBirth + " (" +
-                                        student.getClass().
-                                                getSimpleName()
-                                        + ") is not eligible "
-                                        + "for " + "the " +
-                                        "scholarship." + "\n");
-                    }
+        if (roster.contains(student)) {
+            int studentIndex = roster.find(student);
+            student = roster.getRoster()[studentIndex];
+            if (student instanceof Resident) {
+                residentScholarship(student, firstName,
+                        lastName, dateOfBirth,
+                        scholarshipString, enrollment);
             } else {
-                    resultField.appendText(firstName + " " + lastName +
-                            " " + dateOfBirth + " is not in the roster." +
-                            "\n");
+                resultField.appendText(
+                        firstName + " " + lastName
+                                + " " +
+                                dateOfBirth + " (" +
+                                student.getClass().
+                                        getSimpleName()
+                                + ") is not eligible "
+                                + "for " + "the " +
+                                "scholarship." + "\n");
             }
+        } else {
+            resultField.appendText(firstName + " " + lastName +
+                    " " + dateOfBirth + " is not in the roster." +
+                    "\n");
+        }
     }
+
+    /**
+     * Gives student a scholarship if they are eligible.
+     *
+     * @param updateScholarship ActionEvent created by a user clicking the
+     *                          Update Scholarship button in the GUI.
+     */
     @FXML
-    void grantScholarship(ActionEvent updateScholarship) {
+    private void grantScholarship(ActionEvent updateScholarship) {
         String firstName = String.valueOf(scholarFirstName.getText());
         String lastName = String.valueOf(scholarLastName.getText());
         String dateOfBirth;
         String scholarshipString = String.valueOf(scholarAmount.getText());
 
         if (hasEmptyFieldScholar()) {
-                return;
+            return;
         }
 
         dateOfBirth = scholarDob.getValue().format(
@@ -1241,10 +1304,21 @@ public class TuitionManagerController extends Application {
         Student student = new Resident(new Profile(lastName, firstName,
                 new Date(dateOfBirth)));
 
-        checkEligibleScholarship(student,firstName,lastName,dateOfBirth,
+        checkEligibleScholarship(student, firstName, lastName, dateOfBirth,
                 scholarshipString);
     }
 
+    /**
+     * Ensures data is valid so scholarship can be given to a resident.
+     *
+     * @param student student object for the student.
+     * @param firstName first name of student.
+     * @param lastName last name of student.
+     * @param dateOfBirth date of birth of student.
+     * @param scholarshipString scholarship value entered by user for
+     *                          student.
+     * @param enrollment list of student currently enrolled.
+     */
     private void residentScholarship(Student student, String firstName,
                                      String lastName, String dateOfBirth
             , String scholarshipString, Enrollment enrollment) {
@@ -1284,23 +1358,47 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Prints students in roster sorted by first name, last name, & dob
+     *
+     * @param event ActionEvent created by a user clicking the Print by
+     *              Profile menu item in the GUI.
+     */
     @FXML
-    void printProfile(ActionEvent event) {
+    private void printProfile(ActionEvent event) {
         roster.print(resultField);
     }
 
+    /**
+     * Prints students in roster sorted by school and major.
+     *
+     * @param event ActionEvent created by a user clicking the Print by
+     *              School and Major menu item in the GUI.
+     */
     @FXML
-    void printSchoolMajor(ActionEvent event) {
+    private void printSchoolMajor(ActionEvent event) {
         roster.printBySchoolMajor(resultField);
     }
 
+    /**
+     * Prints students in roster sorted by standing class.
+     *
+     * @param event ActionEvent created by a user clicking the Print by
+     *              Standing menu item in the GUI.
+     */
     @FXML
-    void printStanding(ActionEvent event) {
+    private void printStanding(ActionEvent event) {
         roster.printByStanding(resultField);
     }
 
+    /**
+     * Lists students in RBS.
+     *
+     * @param event ActionEvent created by a user clicking the RBS menu
+     *              item in the GUI.
+     */
     @FXML
-    void listRBS(ActionEvent event) {
+    private void listRBS(ActionEvent event) {
         String school = "RBS";
         Student[] sortedSchoolArray = new Student[roster.getSize()];
         int counter = 0;
@@ -1320,8 +1418,14 @@ public class TuitionManagerController extends Application {
         resultField.appendText("* end of list **" + "\n");
     }
 
+    /**
+     * Lists students in SAS.
+     *
+     * @param event ActionEvent created by a user clicking the SAS menu
+     *              item in the GUI.
+     */
     @FXML
-    void listSAS(ActionEvent event) {
+    private void listSAS(ActionEvent event) {
         String school = "SAS";
         Student[] sortedSchoolArray = new Student[roster.getSize()];
         int counter = 0;
@@ -1341,8 +1445,14 @@ public class TuitionManagerController extends Application {
         resultField.appendText("* end of list **" + "\n");
     }
 
+    /**
+     * Lists students in SC&I.
+     *
+     * @param event ActionEvent created by a user clicking the SC&I menu
+     *              item in the GUI.
+     */
     @FXML
-    void listSCI(ActionEvent event) {
+    private void listSCI(ActionEvent event) {
         String school = "SC&I";
         Student[] sortedSchoolArray = new Student[roster.getSize()];
         int counter = 0;
@@ -1362,8 +1472,14 @@ public class TuitionManagerController extends Application {
         resultField.appendText("* end of list **" + "\n");
     }
 
+    /**
+     * Lists students in SOE.
+     *
+     * @param event ActionEvent created by a user clicking the SOE menu
+     *              item in the GUI.
+     */
     @FXML
-    void listSOE(ActionEvent event) {
+    private void listSOE(ActionEvent event) {
         String school = "SOE";
         Student[] sortedSchoolArray = new Student[roster.getSize()];
         int counter = 0;
@@ -1383,8 +1499,14 @@ public class TuitionManagerController extends Application {
         resultField.appendText("* end of list **" + "\n");
     }
 
+    /**
+     * Prints students who are currently enrolled.
+     *
+     * @param event ActionEvent created by a user clicking the Print
+     *              Enrolled Students menu item in the GUI.
+     */
     @FXML
-    void printEnrollment(ActionEvent event) {
+    private void printEnrollment(ActionEvent event) {
         if (enrollment.getEnrollStudents()[0] == null) {
             resultField.appendText("Enrollment is empty!" + "\n");
         } else {
@@ -1404,8 +1526,14 @@ public class TuitionManagerController extends Application {
 
     }
 
+    /**
+     * Prints the tuition due from students who are currently enrolled.
+     *
+     * @param event ActionEvent created by a user clicking the Print
+     *              Tuition Due menu item in the GUI.
+     */
     @FXML
-    void printTuitionDue(ActionEvent event) {
+    private void printTuitionDue(ActionEvent event) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
         if (enrollment.getEnrollStudents()[0] != null) {
             resultField.appendText("** Tuition due **" + "\n");
@@ -1444,6 +1572,14 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Calculates tuition due for international students.
+     *
+     * @param student student object for student.
+     * @param enrollStudent profile for student in enrollment list.
+     * @param decimalFormat formatted value for the amount of tuition due.
+     * @param tuitionDue amount of tuition due.
+     */
     private void tutitionInternational(Student student,
                                        EnrollStudent enrollStudent,
                                        DecimalFormat decimalFormat,
@@ -1463,6 +1599,14 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Calculates tuition due for tristate students.
+     *
+     * @param student student object for student.
+     * @param enrollStudent profile for student in enrollment list.
+     * @param decimalFormat formatted value for the amount of tuition due.
+     * @param tuitionDue amount of tuition due.
+     */
     private void tuitionTriState(Student student,
                                  EnrollStudent enrollStudent,
                                  DecimalFormat decimalFormat,
@@ -1474,6 +1618,14 @@ public class TuitionManagerController extends Application {
                 decimalFormat.format(tuitionDue) + "\n");
     }
 
+    /**
+     * Calculates tuition due for non-resident students.
+     *
+     * @param student student object for student.
+     * @param enrollStudent profile for student in enrollment list.
+     * @param decimalFormat formatted value for the amount of tuition due.
+     * @param tuitionDue amount of tution due.
+     */
     private void tuitionNonResident(Student student,
                                     EnrollStudent enrollStudent,
                                     DecimalFormat decimalFormat,
@@ -1486,6 +1638,14 @@ public class TuitionManagerController extends Application {
                         decimalFormat.format(tuitionDue) + "\n");
     }
 
+    /**
+     * Calculates tuition due for resident students.
+     *
+     * @param student student object for student.
+     * @param enrollStudent profile for student in enrollment list.
+     * @param decimalFormat formatted value for the amount of tuition due.
+     * @param tuitionDue amount of tution due.
+     */
     private void tuitionResident(Student student,
                                  EnrollStudent enrollStudent,
                                  DecimalFormat decimalFormat,
@@ -1496,8 +1656,14 @@ public class TuitionManagerController extends Application {
                 format(tuitionDue) + "\n");
     }
 
+    /**
+     * Prints student who are eligible for graduation.
+     *
+     * @param event ActionEvent created by user after clicking the Semester
+     *              End menu item in the GUI.
+     */
     @FXML
-    void printEligibleGraduates(ActionEvent event) {
+    private void printEligibleGraduates(ActionEvent event) {
         updateCredits(roster, enrollment);
 
         resultField.appendText(
@@ -1528,6 +1694,12 @@ public class TuitionManagerController extends Application {
         }
     }
 
+    /**
+     * Updates credits of students in roster if they are currently enrolled.
+     *
+     * @param roster list of students registered.
+     * @param enrollment list of students currently enrolled.
+     */
     private void updateCredits(Roster roster, Enrollment enrollment) {
         for (int i = 0; i < roster.getSize(); i++) {
             Student student = roster.getRoster()[i];
@@ -1543,6 +1715,11 @@ public class TuitionManagerController extends Application {
                 "Credit completed has been updated." + "\n");
     }
 
+    /**
+     * Prints out international students eligible for graduation.
+     *
+     * @param student student object for eligible student.
+     */
     private void printInternationalGraduate(Student student) {
         resultField.appendText(student.getProfile().toString() + " (" +
                 student.getMajor().getCoreCode() + " " +
@@ -1554,6 +1731,11 @@ public class TuitionManagerController extends Application {
                 getSimpleName().toLowerCase() + ")" + "\n");
     }
 
+    /**
+     * Prints out tristate students eligible for graduation.
+     *
+     * @param student student object for eligible student.
+     */
     private void printTriStateGraduate(Student student) {
         resultField.appendText(student.getProfile().toString() + " (" +
                 student.getMajor().getCoreCode() + " " +
@@ -1570,4 +1752,3 @@ public class TuitionManagerController extends Application {
     }
 
 }
-

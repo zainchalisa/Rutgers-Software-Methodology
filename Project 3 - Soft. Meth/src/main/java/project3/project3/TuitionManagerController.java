@@ -24,7 +24,8 @@ public class TuitionManagerController extends Application {
      * change major, and load from file.
      */
     @FXML
-    private Button addStudentButton, removeStudentButton, changeMajorButton, loadFromFileButton;
+    private Button addStudentButton, removeStudentButton, changeMajorButton
+            , loadFromFileButton;
 
     /**
      * These JavaFX text fields correspond to the parameters needed to add
@@ -122,18 +123,20 @@ public class TuitionManagerController extends Application {
     private Button updateScholarButton;
 
     /**
-     * These JavaFX MenuItems provide the functionality to print by profile,
-     * print by school and major, and print by standing
+     * These JavaFX MenuItems provide the functionality to print by
+     * profile, print by school and major, and print by standing
      */
     @FXML
-    private MenuItem printProfileItem, printSchoolMajorItem, printStandingItem;
+    private MenuItem printProfileItem, printSchoolMajorItem,
+            printStandingItem;
 
     /**
      * These JavaFX MenuItems provide the functionality to print students
      * by schools
      */
     @FXML
-    private MenuItem printRBSItem, printSASItem, printSCIItem, printSOEItem;
+    private MenuItem printRBSItem, printSASItem, printSCIItem,
+            printSOEItem;
 
     /**
      * These JavaFX MenuItems provide the functionality to print students
@@ -142,7 +145,8 @@ public class TuitionManagerController extends Application {
      * end of the year
      */
     @FXML
-    private MenuItem printEnrolledItem, printTuitionDueItem, printSemesterEndItem;
+    private MenuItem printEnrolledItem, printTuitionDueItem,
+            printSemesterEndItem;
 
     /**
      * The roster of students who may be enrolled into the school
@@ -304,11 +308,11 @@ public class TuitionManagerController extends Application {
                         firstName, new Date(dateOfBirth)), majorName,
                         creditsCompleted, defaultScholarship);
                 roster.add(student);
-                resultField.appendText(firstName + " " + lastName + " " +
-                        dateOfBirth + " added to the roster." + "\n");
+                resultField.appendText(firstName + " " + lastName + " "
+                        + dateOfBirth + " added to the roster." + "\n");
             } else {
-                resultField.appendText("Credits completed " + "invalid: " +
-                        "cannot be negative!" + "\n");
+                resultField.appendText("Credits completed " +
+                        "invalid: " + "cannot be negative!" + "\n");
             }
         } else {
             resultField.appendText(
@@ -322,7 +326,7 @@ public class TuitionManagerController extends Application {
      *
      * @param creditsCompletedString string entered by user to show how
      *                               many credits student has
-     * @return returns whether or not credit value entered by user is valid
+     * @return returns whether credit value entered by user is valid
      */
     private boolean isValidCreditString(String creditsCompletedString) {
         try {
@@ -342,7 +346,8 @@ public class TuitionManagerController extends Application {
      */
     private void inputAddResident(Roster roster, String[] inputLine) {
         if (inputLine.length != 6) {
-            resultField.appendText("Missing data in line command." + "\n");
+            resultField.appendText("Missing data in line command." +
+                    "\n");
             return;
         }
         String firstName = inputLine[1];
@@ -368,15 +373,40 @@ public class TuitionManagerController extends Application {
         if (firstName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a first name." + "\n");
             return true;
-        } else if (lastName.getText().equalsIgnoreCase("")) {
+        }
+        if (lastName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a last name." + "\n");
             return true;
-        } else if (dob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
+        }
+        if (dob.getValue() == null) {
+            resultField.appendText("Please enter a date of birth."
+                    + "\n");
             return true;
-        } else if (creditsCompleted.getText().equalsIgnoreCase("")) {
+        }
+        if (creditsCompleted.getText().equalsIgnoreCase("")) {
             resultField.appendText(
                     "Please enter credits completed." + "\n");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks if any of the input fields are empty
+     * @return returns a message to the user to fill out those fields
+     */
+    private boolean removeHasEmptyFieldsRoster() {
+        if (firstName.getText().equalsIgnoreCase("")) {
+            resultField.appendText("Please enter a first name." + "\n");
+            return true;
+        }
+        if (lastName.getText().equalsIgnoreCase("")) {
+            resultField.appendText("Please enter a last name." + "\n");
+            return true;
+        }
+        if (dob.getValue() == null) {
+            resultField.appendText
+                    ("Please enter a date of birth." + "\n");
             return true;
         }
         return false;
@@ -442,10 +472,13 @@ public class TuitionManagerController extends Application {
      * @param defaultScholarship the amount of scholarship the student will
      *                           be awarded
      */
-    private void inputCheckResident (Date dobObject, Resident studentProfile,
+    private void inputCheckResident (Date dobObject,
+                                     Resident studentProfile,
                                      String studentFirstName,
-                                     String studentLastName,String dateOfBirth,
-                                     String creditsCompletedString, String major,
+                                     String studentLastName,
+                                     String dateOfBirth,
+                                     String creditsCompletedString,
+                                     String major,
                                      int defaultScholarship) {
         if (dobObject.isValid()) {
             if (dobObject.isValidStudent()) {
@@ -543,7 +576,8 @@ public class TuitionManagerController extends Application {
      */
     private void checkNonResident (Date dob, NonResident studentProfile,
                                    String studentFirstName,
-                                   String studentLastName,String dateOfBirth,
+                                   String studentLastName,
+                                   String dateOfBirth,
                                    String creditsCompletedString) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
@@ -585,9 +619,11 @@ public class TuitionManagerController extends Application {
      * @param major the students mojor
      * @param creditsCompletedString the credits completed by the student
      */
-    private void inputCheckNonResident (Date dob, NonResident studentProfile,
+    private void inputCheckNonResident (Date dob,
+                                        NonResident studentProfile,
                                         String studentFirstName,
-                                        String studentLastName,String dateOfBirth, String major,
+                                        String studentLastName,
+                                        String dateOfBirth, String major,
                                         String creditsCompletedString) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
@@ -670,13 +706,13 @@ public class TuitionManagerController extends Application {
                         firstName, new Date(dateOfBirth)), majorName,
                         creditsCompleted);
                 roster.add(student);
-                resultField.appendText(firstName + " " + lastName + " " +
-                        dateOfBirth + " added to the roster." + "\n");
+                resultField.appendText(firstName + " " + lastName + " "
+                        + dateOfBirth + " added to the roster." + "\n");
 
 
             } else {
-                resultField.appendText("Credits completed " + "invalid: " +
-                        "cannot be negative!" + "\n");
+                resultField.appendText("Credits completed " +
+                        "invalid: " + "" + "cannot be negative!" + "\n");
             }
         } else {
             resultField.appendText(
@@ -729,7 +765,8 @@ public class TuitionManagerController extends Application {
     private void checkTriState (Date dob, TriState studentProfile,
                                 String studentFirstName,
                                 String studentLastName,String dateOfBirth,
-                                String creditsCompletedString, String studentState) {
+                                String creditsCompletedString, String
+                                        studentState) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
@@ -774,8 +811,10 @@ public class TuitionManagerController extends Application {
      */
     private void inputCheckTriState (Date dob, TriState studentProfile,
                                      String studentFirstName,
-                                     String studentLastName,String dateOfBirth,
-                                     String creditsCompletedString, String major, String studentState) {
+                                     String studentLastName,
+                                     String dateOfBirth,
+                                     String creditsCompletedString,
+                                     String major, String studentState) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
                 if (!roster.contains(studentProfile)) {
@@ -988,11 +1027,13 @@ public class TuitionManagerController extends Application {
      * @param major the major of the student
      * @param isStudyAbroad the state of the tri-state student
      */
-    private void inputCheckInternational (Date dob, NonResident studentProfile,
+    private void inputCheckInternational (Date dob,
+                                          NonResident studentProfile,
                                           String studentFirstName,
                                           String studentLastName,
                                           String dateOfBirth,
-                                          String creditsCompletedString,String major,
+                                          String creditsCompletedString,
+                                          String major,
                                           boolean isStudyAbroad) {
         if (dob.isValid()) {
             if (dob.isValidStudent()) {
@@ -1079,12 +1120,12 @@ public class TuitionManagerController extends Application {
                         , firstName, new Date(dateOfBirth)), majorName,
                         creditsCompleted, isStudyAbroad);
                 roster.add(student);
-                resultField.appendText(firstName + " " + lastName + " " +
-                        dateOfBirth + " added to the roster." + "\n");
+                resultField.appendText(firstName + " " + lastName + " "
+                        + dateOfBirth + " added to the roster." + "\n");
 
             } else {
-                resultField.appendText("Credits completed " + "invalid: " +
-                        "cannot be negative!" + "\n");
+                resultField.appendText("Credits completed " +
+                        "invalid: " + "cannot be negative!" + "\n");
             }
         } else {
             resultField.appendText(
@@ -1131,7 +1172,7 @@ public class TuitionManagerController extends Application {
         String studentLastName = String.valueOf(lastName.getText());
         String dateOfBirth;
 
-        if (hasEmptyFieldsRoster()) {
+        if (removeHasEmptyFieldsRoster()) {
             return;
         }
 
@@ -1198,7 +1239,7 @@ public class TuitionManagerController extends Application {
         String studentLastName = String.valueOf(lastName.getText());
         String dateOfBirth;
 
-        if (hasEmptyFieldsRoster()) {
+        if (removeHasEmptyFieldsRoster()) {
             return;
         }
 
@@ -1323,7 +1364,7 @@ public class TuitionManagerController extends Application {
         });
         TextFormatter<String> formatterCE = new TextFormatter<>(change -> {
             if (change.getText().matches(
-                    "^\\d*[\b]?$")) { // only allow non-digit characters
+                    "^\\d*[\b]?$")) {
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1358,7 +1399,7 @@ public class TuitionManagerController extends Application {
         });
         TextFormatter<String> formatterCE = new TextFormatter<>(change -> {
             if (change.getText().matches(
-                    "^\\d*[\b]?$")) { // only allow non-digit characters
+                    "^\\d*[\b]?$")) {
                 return change; // reject the change
             } else {
                 return null; // accept the change
@@ -1379,13 +1420,16 @@ public class TuitionManagerController extends Application {
         if (enrollFirstName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a first name." + "\n");
             return true;
-        } else if (enrollLastName.getText().equalsIgnoreCase("")) {
+        } else if (enrollLastName.getText().equalsIgnoreCase
+                ("")) {
             resultField.appendText("Please enter a last name." + "\n");
             return true;
         } else if (enrollDob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
+            resultField.appendText("Please enter a date of birth."
+                    + "\n");
             return true;
-        } else if (enrollCreditsCompleted.getText().equalsIgnoreCase("")) {
+        } else if (enrollCreditsCompleted.getText().equalsIgnoreCase
+                ("")) {
             resultField.appendText(
                     "Please enter credits to enroll." + "\n");
             return true;
@@ -1496,11 +1540,13 @@ public class TuitionManagerController extends Application {
         if (enrollFirstName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a first name." + "\n");
             return;
-        } else if (enrollLastName.getText().equalsIgnoreCase("")) {
+        } else if (enrollLastName.getText().equalsIgnoreCase
+                ("")) {
             resultField.appendText("Please enter a last name." + "\n");
             return;
         } else if (enrollDob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
+            resultField.appendText("Please enter a date of birth."
+                    + "\n");
             return;
         }
 
@@ -1531,13 +1577,16 @@ public class TuitionManagerController extends Application {
         if (scholarFirstName.getText().equalsIgnoreCase("")) {
             resultField.appendText("Please enter a first name." + "\n");
             return true;
-        } else if (scholarLastName.getText().equalsIgnoreCase("")) {
+        } else if (scholarLastName.getText().equalsIgnoreCase(
+                "")) {
             resultField.appendText("Please enter a last name." + "\n");
             return true;
         } else if (scholarDob.getValue() == null) {
-            resultField.appendText("Please enter a date of birth." + "\n");
+            resultField.appendText("Please enter a date of birth."
+                    + "\n");
             return true;
-        } else if (scholarAmount.getText().equalsIgnoreCase("")) {
+        } else if (scholarAmount.getText().equalsIgnoreCase(""
+        )) {
             resultField.appendText(
                     "Please enter a scholarship amount." + "\n");
             return true;
@@ -1652,7 +1701,8 @@ public class TuitionManagerController extends Application {
                             "amount." + "\n");
                 }
             } else {
-                resultField.appendText("Amount is not an integer." + "\n");
+                resultField.appendText("Amount is not an integer."
+                        + "\n");
             }
         } else {
             resultField.appendText(firstName + " " + lastName + " " +
@@ -1820,7 +1870,8 @@ public class TuitionManagerController extends Application {
                     resultField.appendText(
                             enrollment.getEnrollStudents()[i]
                                     + ": credits enrolled: " + enrollment.
-                                    getEnrollStudents()[i].getCreditsEnrolled() +
+                                    getEnrollStudents()[i].
+                                    getCreditsEnrolled() +
                                     "\n");
                 }
             }
@@ -1914,7 +1965,8 @@ public class TuitionManagerController extends Application {
                                  EnrollStudent enrollStudent,
                                  DecimalFormat decimalFormat,
                                  double tuitionDue) {
-        resultField.appendText("" + student.getProfile() + " (Tri-state " +
+        resultField.appendText("" + student.getProfile() +
+                " (Tri-state " +
                 ((TriState) student).getState() + ") enrolled " +
                 enrollStudent.getCreditsEnrolled() +
                 " credits: tuition due: $" +
@@ -1953,7 +2005,8 @@ public class TuitionManagerController extends Application {
                                  EnrollStudent enrollStudent,
                                  DecimalFormat decimalFormat,
                                  double tuitionDue) {
-        resultField.appendText("" + student.getProfile() + " (Resident) " +
+        resultField.appendText("" + student.getProfile() +
+                " (Resident) " +
                 "enrolled " + enrollStudent.getCreditsEnrolled() + " " +
                 "credits: tuition due: $" + decimalFormat.
                 format(tuitionDue) + "\n");
@@ -1998,7 +2051,8 @@ public class TuitionManagerController extends Application {
     }
 
     /**
-     * Updates credits of students in roster if they are currently enrolled.
+     * Updates credits of students in roster if they are currently
+     * enrolled.
      *
      * @param roster list of students registered.
      * @param enrollment list of students currently enrolled.
@@ -2049,6 +2103,11 @@ public class TuitionManagerController extends Application {
                 ((TriState) student).getState() + ")" + "\n");
     }
 
+    /**
+     * This method displays the JavaFX desktop window
+     * @param stage the desktop window
+     * @throws Exception if the window cannot be displayed
+     */
     @Override
     public void start(Stage stage) throws Exception {
         stage.show();

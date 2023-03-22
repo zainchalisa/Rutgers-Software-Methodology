@@ -3,6 +3,6 @@ module proiect4.project4 {
     requires javafx.fxml;
 
 
-    opens proiect4.project4 to javafx.fxml;
-    exports proiect4.project4;
+    opens project4.project4 to javafx.fxml;
+    exports project4.project4;
 }

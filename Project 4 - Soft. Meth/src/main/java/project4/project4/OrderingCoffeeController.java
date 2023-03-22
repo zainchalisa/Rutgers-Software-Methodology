@@ -1,9 +1,10 @@
-package proiect4.project4;
+package project4.project4;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class OrderingCoffeeController {
+
     @FXML
     private Label welcomeText;
 

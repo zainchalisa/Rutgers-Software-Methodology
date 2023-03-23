@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="project4.project4.OrderingDonutsController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingDonutsController">
+   <children>
+      <Label layoutX="231.0" layoutY="14.0" prefHeight="28.0" prefWidth="138.0" text="Donut Ordering Menu">
+         <font>
+            <Font name="Helvetica Neue Bold" size="13.0" />
+         </font></Label>
+      <ComboBox layoutX="73.0" layoutY="70.0" prefWidth="150.0" />
+      <ListView layoutX="73.0" layoutY="126.0" prefHeight="191.0" prefWidth="150.0" />
+      <Button layoutX="261.0" layoutY="194.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="ADD" />
+      <Button layoutX="261.0" layoutY="243.0" mnemonicParsing="false" text="REMOVE" />
+      <ListView layoutX="361.0" layoutY="165.0" prefHeight="156.0" prefWidth="159.0" />
+      <TextArea layoutX="275.0" layoutY="349.0" prefHeight="27.0" prefWidth="111.0" />
+      <Label layoutX="212.0" layoutY="354.0" text="Subtotal:" />
+      <ImageView fitHeight="102.0" fitWidth="159.0" layoutX="361.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="73.0" layoutY="103.0" text="Donut Options" />
+      <Label layoutX="361.0" layoutY="144.0" text="Donut Shopping Cart:" />
+   </children>
 </AnchorPane>

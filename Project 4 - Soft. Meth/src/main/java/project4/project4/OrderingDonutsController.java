@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import java.util.List;
 
 public class OrderingDonutsController {
+
+    private CafeStoreMainController mainController;
     @FXML
     private ComboBox donutTypes;
 
@@ -30,6 +32,11 @@ public class OrderingDonutsController {
 
     @FXML
     private ImageView donutPictures;
+
+    @FXML
+    public void setMainController(CafeStoreMainController cafeStoreMainController) {
+        mainController = cafeStoreMainController;
+    }
 
     @FXML
     private void populateDonutFlavors(){

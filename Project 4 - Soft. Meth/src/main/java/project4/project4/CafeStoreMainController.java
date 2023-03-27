@@ -19,7 +19,7 @@ public class CafeStoreMainController {
     private Label welcomeText;
 
     @FXML
-    private Button orderDonuts, orderCoffee, yourOrder;
+    private Button orderDonuts, orderCoffee, yourOrder, storeOrders;
 
 
     @FXML
@@ -42,14 +42,73 @@ public class CafeStoreMainController {
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
-            alert.setHeaderText("Loading View1.fxml.");
-            alert.setContentText("Couldn't load View1.fxml.");
+            alert.setHeaderText("Loading OrderingCoffee-view.fxml.");
+            alert.setContentText("Couldn't load OrderingCoffee-view.fxml.");
             alert.showAndWait();
         }
     }
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void storeOrdersButton(ActionEvent storeOrdersView) {
+        Stage storeOrderView = new Stage();
+        AnchorPane root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StoreOrders-view.fxml"));
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            storeOrderView.setScene(scene);
+            storeOrderView.show();
+            StoreOrdersController storeOrdersControl = loader.getController();
+            storeOrdersControl.setMainController(this);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Loading StoreOrders-view.fxml.");
+            alert.setContentText("Couldn't load StoreOrders-view.fxml.");
+            alert.showAndWait();
+        }
     }
+
+    @FXML
+    protected void donutsOrderButton(ActionEvent donutsOrderView) {
+        Stage donutView = new Stage();
+        AnchorPane root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderingDonuts-view.fxml"));
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            donutView.setScene(scene);
+            donutView.show();
+            OrderingDonutsController donutsControl = loader.getController();
+            donutsControl.setMainController(this);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Loading OrderingDonuts-view.fxml.");
+            alert.setContentText("Couldn't load OrderingDonuts-view.fxml.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    protected void myOrderButton(ActionEvent myOrderView) {
+        Stage myOrdersView = new Stage();
+        AnchorPane root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderingBasket-view.fxml"));
+            root = (AnchorPane) loader.load();
+            Scene scene = new Scene(root, 600, 400);
+            myOrdersView.setScene(scene);
+            myOrdersView.show();
+            OrderingBasketController basketControl = loader.getController();
+            basketControl.setMainController(this);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Loading OrderingBasket-view.fxml.");
+            alert.setContentText("Couldn't load OrderingBasket-view.fxml.");
+            alert.showAndWait();
+        }
+    }
+
 }

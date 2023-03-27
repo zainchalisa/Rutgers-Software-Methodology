@@ -23,7 +23,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Donuts">
+            <Button fx:id="orderDonuts" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#donutsOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Donuts">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -31,7 +31,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" text="Your Order" GridPane.rowIndex="1">
+            <Button fx:id="yourOrder" contentDisplay="TOP" mnemonicParsing="false" onAction="#myOrderButton" text="Your Order" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="90.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
@@ -50,7 +50,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="storeOrders" contentDisplay="TOP" mnemonicParsing="false" onAction="#storeOrdersButton" text="Store Orders" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="90.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

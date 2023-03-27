@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.CafeStoreMainController">
    <children>
-      <BorderPane prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #FFFDD0;">
+      <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFDD0;">
          <top>
             <Label prefHeight="79.0" prefWidth="90.0" text="Rutgers Cafe" BorderPane.alignment="CENTER" />
          </top>
@@ -44,7 +39,7 @@
                   <Insets left="80.0" />
                </GridPane.margin>
             </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Coffee" GridPane.columnIndex="1">
+            <Button fx:id="orderCoffee" contentDisplay="TOP" mnemonicParsing="false" onAction="#coffeeOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Coffee" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

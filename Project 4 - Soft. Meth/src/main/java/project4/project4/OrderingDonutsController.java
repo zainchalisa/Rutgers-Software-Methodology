@@ -2,6 +2,7 @@ package project4.project4;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -45,12 +46,9 @@ public class OrderingDonutsController {
     }
 
     public void initialize() {
-        donutTypeList = FXCollections.observableArrayList("Green", "Red", "Blue", "Yellow");
+        donutTypeList = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");
         donutTypes.setItems(donutTypeList);  //fruitList is the data source, and it is an observable list
-        String selectedDonutType = donutTypes.getSelectionModel().getSelectedItem();
-        if(selectedDonutType.equals("Green")){
-            donutFlavors.getItems().addAll("Apple", "Orange", "Banana", "Watermelon");
-        }
+
 
 
         /*
@@ -59,4 +57,22 @@ public class OrderingDonutsController {
           listview.getItems().addAll("Apple", "Orange", "Banana", "Watermelon"); //add to ListView object
         */
     }
+
+    @FXML
+    private void getDonutType(ActionEvent getDonutType){
+        String donutType = donutTypes.getSelectionModel().getSelectedItem();
+        if(donutType.equals("Yeast Donut")){
+            donutFlavors.getItems().clear();
+            donutFlavors.getItems().addAll("Chocolate", "Vanilla", "Jelly", "Sugar", "Glazed", "Maple Iced");
+        }
+        if(donutType.equals("Cake Donut")){
+            donutFlavors.getItems().clear();
+            donutFlavors.getItems().addAll("Boston Creme", "Vanilla", "Strawberry");
+        }
+        if(donutType.equals("Donut Holes")){
+            donutFlavors.getItems().clear();
+            donutFlavors.getItems().addAll("Chocolate", "Glazed", "Blueberry");
+        }
+    }
+
 }

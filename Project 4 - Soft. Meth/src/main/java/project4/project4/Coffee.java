@@ -26,6 +26,14 @@ public class Coffee extends MenuItem {
         this.coffeeToppings = coffeeToppings;
     }
 
+    public String getCupSize() {
+        return cupSize;
+    }
+
+    public String[] getCoffeeToppings() {
+        return coffeeToppings;
+    }
+
     @Override
     public double itemPrice() {
         if(cupSize.equals(SMALL_CUP)){

@@ -18,6 +18,7 @@ public class CafeManagerMain extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 600);
         stage.setTitle("Rutgers Cafe Manager");
         stage.setScene(scene);
+
         stage.show();
     }
 

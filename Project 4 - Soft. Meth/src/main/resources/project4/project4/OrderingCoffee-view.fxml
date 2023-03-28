@@ -8,20 +8,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingCoffeeController">
+<AnchorPane fx:id="coffeeCupSizes" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingCoffeeController">
    <children>
       <Label layoutX="231.0" layoutY="23.0" text="Coffee Ordering Menu">
          <font>
             <Font name="Helvetica Neue Bold" size="13.0" />
          </font>
       </Label>
-      <ComboBox layoutX="61.0" layoutY="72.0" prefWidth="150.0" promptText="Coffee Cup Sizes" />
-      <ListView layoutX="57.0" layoutY="132.0" prefHeight="200.0" prefWidth="157.0" />
-      <Button layoutX="263.0" layoutY="200.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="ADD" />
-      <Button layoutX="263.0" layoutY="253.0" mnemonicParsing="false" text="REMOVE" />
-      <ListView layoutX="385.0" layoutY="193.0" prefHeight="139.0" prefWidth="157.0" />
-      <Label layoutX="222.0" layoutY="355.0" text="Subtotal:" />
-      <TextField layoutX="281.0" layoutY="350.0" prefHeight="27.0" prefWidth="88.0" />
+      <ComboBox fx:id="coffeeCupSizes" layoutX="57.0" layoutY="65.0" prefHeight="31.0" prefWidth="166.0" promptText="Coffee Cup Sizes" />
+      <ListView fx:id="coffeeToppings" layoutX="57.0" layoutY="132.0" prefHeight="200.0" prefWidth="166.0" />
+      <Button fx:id="addCoffee" layoutX="263.0" layoutY="200.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="79.0" text="ADD" />
+      <Button fx:id="removeCoffee" layoutX="263.0" layoutY="253.0" mnemonicParsing="false" text="REMOVE" />
+      <ListView fx:id="coffeeShoppingCart" layoutX="385.0" layoutY="193.0" prefHeight="139.0" prefWidth="157.0" />
+      <Label layoutX="214.0" layoutY="355.0" text="Subtotal:" />
+      <TextField fx:id="coffeeSubtotal" layoutX="281.0" layoutY="350.0" prefHeight="27.0" prefWidth="88.0" />
       <ImageView fitHeight="126.0" fitWidth="157.0" layoutX="385.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="385.0" layoutY="169.0" text="Coffee Shopping Cart:" />
       <Label layoutX="57.0" layoutY="106.0" text="Coffee Toppings:" />

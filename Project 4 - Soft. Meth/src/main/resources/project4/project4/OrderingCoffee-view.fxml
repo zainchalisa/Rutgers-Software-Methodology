@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingCoffeeController">
    <children>
       <Label layoutX="231.0" layoutY="23.0" text="Coffee Ordering Menu">
@@ -16,7 +15,7 @@
             <Font name="Helvetica Neue Bold" size="13.0" />
          </font>
       </Label>
-      <ComboBox layoutX="61.0" layoutY="72.0" prefWidth="150.0" />
+      <ComboBox layoutX="61.0" layoutY="72.0" prefWidth="150.0" promptText="Coffee Cup Sizes" />
       <ListView layoutX="57.0" layoutY="132.0" prefHeight="200.0" prefWidth="157.0" />
       <Button layoutX="263.0" layoutY="200.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="69.0" text="ADD" />
       <Button layoutX="263.0" layoutY="253.0" mnemonicParsing="false" text="REMOVE" />
@@ -25,6 +24,6 @@
       <TextField layoutX="281.0" layoutY="350.0" prefHeight="27.0" prefWidth="88.0" />
       <ImageView fitHeight="126.0" fitWidth="157.0" layoutX="385.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="385.0" layoutY="169.0" text="Coffee Shopping Cart:" />
-      <Label layoutX="57.0" layoutY="106.0" text="Coffee Options:" />
+      <Label layoutX="57.0" layoutY="106.0" text="Coffee Toppings:" />
    </children>
 </AnchorPane>

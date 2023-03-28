@@ -28,15 +28,10 @@ public class CafeStoreMainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderingCoffee-view.fxml"));
             root = (AnchorPane) loader.load();
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 500, 500);
             coffeeView.setScene(scene);
             coffeeView.show();
             OrderingCoffeeController coffeeControl = loader.getController();
-            /*
-              The statement below is to pass the reference of the MainController object
-              to the View1Controller object so the View1Controller can call the
-              public methods in the MainController.
-             */
             coffeeControl.setMainController(this);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -46,6 +41,12 @@ public class CafeStoreMainController {
             alert.showAndWait();
         }
     }
+
+    /*
+              The statement below is to pass the reference of the MainController object
+              to the View1Controller object so the View1Controller can call the
+              public methods in the MainController.
+             */
 
     @FXML
     protected void storeOrdersButton(ActionEvent storeOrdersView) {

@@ -8,22 +8,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="coffeeCupSizes" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingCoffeeController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingCoffeeController">
    <children>
-      <Label layoutX="231.0" layoutY="23.0" text="Coffee Ordering Menu">
+      <Label layoutX="165.0" layoutY="22.0" text="Ordering Coffee">
          <font>
-            <Font name="Helvetica Neue Bold" size="13.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="coffeeCupSizes" layoutX="57.0" layoutY="65.0" prefHeight="31.0" prefWidth="166.0" promptText="Coffee Cup Sizes" />
-      <ListView fx:id="coffeeToppings" layoutX="57.0" layoutY="132.0" prefHeight="200.0" prefWidth="166.0" />
-      <Button fx:id="addCoffee" layoutX="263.0" layoutY="200.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="79.0" text="ADD" />
-      <Button fx:id="removeCoffee" layoutX="263.0" layoutY="253.0" mnemonicParsing="false" text="REMOVE" />
-      <ListView fx:id="coffeeShoppingCart" layoutX="385.0" layoutY="193.0" prefHeight="139.0" prefWidth="157.0" />
-      <Label layoutX="214.0" layoutY="355.0" text="Subtotal:" />
-      <TextField fx:id="coffeeSubtotal" layoutX="281.0" layoutY="350.0" prefHeight="27.0" prefWidth="88.0" />
-      <ImageView fitHeight="126.0" fitWidth="157.0" layoutX="385.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="385.0" layoutY="169.0" text="Coffee Shopping Cart:" />
-      <Label layoutX="57.0" layoutY="106.0" text="Coffee Toppings:" />
+      <ImageView fx:id="coffeeImage" fitHeight="139.0" fitWidth="222.0" layoutX="140.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="coffeeCupSizes" layoutX="302.0" layoutY="250.0" prefWidth="150.0" promptText="Cup Size" AnchorPane.rightAnchor="50.0" />
+      <ComboBox fx:id="coffeeQuantity" layoutX="300.0" layoutY="293.0" prefWidth="150.0" promptText="Quantity" AnchorPane.rightAnchor="50.0" />
+      <TextField fx:id="coffeeSubtotal" layoutX="302.0" layoutY="338.0" prefHeight="31.0" prefWidth="150.0" AnchorPane.rightAnchor="50.0" />
+      <Button fx:id="addCoffee" layoutX="302.0" layoutY="429.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Add to Order" AnchorPane.rightAnchor="50.0" />
+      <CheckBox fx:id="sweetCream" layoutX="47.0" layoutY="255.0" mnemonicParsing="false" text="Sweet Cream" AnchorPane.leftAnchor="50.0" />
+      <CheckBox fx:id="mocha" layoutX="190.0" layoutY="255.0" mnemonicParsing="false" text="Mocha" />
+      <CheckBox fx:id="frenchVanilla" layoutX="47.0" layoutY="298.0" mnemonicParsing="false" text="French Vanilla" AnchorPane.leftAnchor="50.0" />
+      <CheckBox fx:id="caramel" layoutX="190.0" layoutY="298.0" mnemonicParsing="false" text="Caramel" />
+      <CheckBox fx:id="irishCream" layoutX="47.0" layoutY="343.0" mnemonicParsing="false" text="Irish Cream" AnchorPane.leftAnchor="50.0" />
    </children>
 </AnchorPane>

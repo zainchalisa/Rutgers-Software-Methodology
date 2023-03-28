@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="project4.project4.StoreOrdersController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.StoreOrdersController">
+   <children>
+      <BorderPane prefHeight="77.0" prefWidth="600.0">
+         <center>
+            <Label prefHeight="54.0" prefWidth="142.0" text="Store Orders" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+      <ComboBox layoutX="30.0" layoutY="77.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
+      <TextField layoutX="319.0" layoutY="77.0" />
+      <Label layoutX="217.0" layoutY="82.0" text="Total Amount:" />
+      <ListView layoutX="30.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <Button layoutX="30.0" layoutY="347.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="225.0" text="Cancel Order" />
+      <Button layoutX="281.0" layoutY="347.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="225.0" text="Export Orders" />
+   </children>
 </AnchorPane>

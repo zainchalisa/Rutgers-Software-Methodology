@@ -20,6 +20,11 @@ public class CafeStoreMainController {
     @FXML
     private Button orderDonuts, orderCoffee, yourOrder, storeOrders;
 
+    public final Order donutOrders = new Order();
+
+    public Order getDonutOrders() {
+        return donutOrders;
+    }
 
     @FXML
     protected void coffeeOrderButton(ActionEvent coffeeOrderView) {

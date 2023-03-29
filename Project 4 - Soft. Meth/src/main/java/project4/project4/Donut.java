@@ -7,7 +7,7 @@ public class Donut extends MenuItem{
 
     private static final String YEAST_DONUT = "Yeast Donut";
     private static final String CAKE_DONUT = "Cake Donut";
-    private static final String DONUT_HOLES = "Donut Holes";
+    private static final String DONUT_HOLES = "Donut Hole";
     private static final String CHOCOLATE = "Chocolate";
     private static final String VANILLA = "Vanilla";
     private static final String JELLY = "Jelly";
@@ -25,6 +25,7 @@ public class Donut extends MenuItem{
         donutType = type;
         donutFlavor = flavor;
     }
+
 
     public String getDonutFlavor() {
         return this.donutFlavor;
@@ -46,6 +47,12 @@ public class Donut extends MenuItem{
             return super.setItemPrice(DONUT_HOLES_PRICE);
         }
         return 0;
+    }
+
+    @Override
+    public String toString(){
+        return "(" + getQuantity() + ")" + getDonutFlavor() + " "
+                + getDonutType();
     }
 
 }

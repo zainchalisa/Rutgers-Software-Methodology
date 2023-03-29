@@ -25,6 +25,9 @@ public class OrderingDonutsController {
     private Button removeDonut;
 
     @FXML
+    private Button addToBasket;
+
+    @FXML
     private TextField quantity;
 
     @FXML
@@ -38,7 +41,7 @@ public class OrderingDonutsController {
 
     private ObservableList<String> donutTypeList;
 
-
+    public static final String ONE = "1";
 
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {
@@ -47,15 +50,8 @@ public class OrderingDonutsController {
 
     public void initialize() {
         donutTypeList = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");
-        donutTypes.setItems(donutTypeList);  //fruitList is the data source, and it is an observable list
-
-
-
-        /*
-          The following statements would add the items to the GUI objects only without setting the data source.
-          cmb_color.getItems().addAll("Red", "Green", "Blue", "Yellow"); //add to ComboBox object
-          listview.getItems().addAll("Apple", "Orange", "Banana", "Watermelon"); //add to ListView object
-        */
+        donutTypes.setItems(donutTypeList);
+        quantity.setText(ONE);
     }
 
     @FXML
@@ -73,6 +69,25 @@ public class OrderingDonutsController {
             donutFlavors.getItems().clear();
             donutFlavors.getItems().addAll("Chocolate", "Glazed", "Blueberry");
         }
+    }
+
+    @FXML
+    private void addDonuts(ActionEvent addDonut){
+        if(donutTypes.getSelectionModel().getSelectedItem() != null){
+            if(donutFlavors.getSelectionModel().getSelectedItem() != null){
+                String donutType = donutTypes.getSelectionModel().getSelectedItem();
+                String donutFlavor = donutFlavors.getSelectionModel().getSelectedItem();
+                Donut newDonut = new Donut(donutType, donutFlavor);
+                newDonut.setQuantity(Integer.parseInt(quantity.getText()));
+                mainController.getDonutOrders().add(newDonut);
+                ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
+                newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+                donutShoppingCart.setItems(newAdditions);
+
+            }
+        }
+        // based off the options selected add the donut to the list view
+        // Donut Flavor + Donut Type + (Quantity of Donut Type)
     }
 
 }

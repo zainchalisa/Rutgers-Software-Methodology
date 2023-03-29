@@ -5,8 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 public class OrderingDonutsController {
@@ -83,11 +87,34 @@ public class OrderingDonutsController {
                 ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
                 newAdditions.addAll(mainController.getDonutOrders().getOrderList());
                 donutShoppingCart.setItems(newAdditions);
-
+            } else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Please Select a Flavor");
+                alert.setContentText("You must select a flavor to add the donut to your order.");
+                alert.showAndWait();
             }
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Please Select a Donut Type");
+            alert.setContentText("You must select a donut type to add the donut to your order.");
+            alert.showAndWait();
         }
         // based off the options selected add the donut to the list view
         // Donut Flavor + Donut Type + (Quantity of Donut Type)
+    }
+
+    @FXML
+    private void donutImageChange() throws FileNotFoundException {
+        String donutType = donutTypes.getSelectionModel().getSelectedItem();
+        if(donutType.isEmpty()){
+            donutPictures.setImage(null);
+        }
+        InputStream imagePath = new FileInputStream("src/main/resources/project4/project4/"+ donutType +".jpeg");
+        Image image = new Image(imagePath);
+        donutPictures.setImage(image);
+
     }
 
 }

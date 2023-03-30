@@ -15,10 +15,10 @@
          <font>
             <Font name="Helvetica Neue Bold" size="17.0" />
          </font></Label>
-      <ComboBox fx:id="donutTypes" layoutX="73.0" layoutY="70.0" onAction="#getDonutType" onMouseMoved="#donutImageChange" prefWidth="150.0" promptText="Donut Types" />
+      <ComboBox fx:id="donutTypes" layoutX="73.0" layoutY="70.0" onAction="#getDonutType" prefWidth="150.0" promptText="Donut Types" />
       <ListView fx:id="donutFlavors" layoutX="73.0" layoutY="126.0" prefHeight="191.0" prefWidth="150.0" />
       <Button fx:id="addDonut" layoutX="261.0" layoutY="194.0" mnemonicParsing="false" onAction="#addDonuts" prefHeight="27.0" prefWidth="69.0" text="ADD" />
-      <Button fx:id="removeDonut" layoutX="261.0" layoutY="237.0" mnemonicParsing="false" text="REMOVE" />
+      <Button fx:id="removeDonut" layoutX="261.0" layoutY="237.0" mnemonicParsing="false" onAction="#removeDonuts" text="REMOVE" />
       <ListView fx:id="donutShoppingCart" layoutX="361.0" layoutY="165.0" prefHeight="156.0" prefWidth="159.0" />
       <Label layoutX="303.0" layoutY="346.0" text="Subtotal:" />
       <ImageView fx:id="donutPictures" fitHeight="102.0" fitWidth="159.0" layoutX="361.0" layoutY="42.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />

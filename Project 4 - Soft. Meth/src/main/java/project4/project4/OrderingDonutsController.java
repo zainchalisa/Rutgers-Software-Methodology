@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderingDonutsController {
@@ -21,6 +22,12 @@ public class OrderingDonutsController {
 
     @FXML
     private ListView<String> donutFlavors;
+
+    private ObservableList<String> yeastDonutFlavors = FXCollections.observableArrayList("Chocolate", "Vanilla", "Jelly", "Sugar", "Glazed", "Maple Iced");
+
+    private ObservableList<String> cakeDonutFlavors = FXCollections.observableArrayList("Boston Creme", "Vanilla", "Strawberry");
+
+    private ObservableList<String> donutHolesFlavors = FXCollections.observableArrayList("Chocolate", "Glazed", "Blueberry");
 
     @FXML
     private Button addDonut;
@@ -47,6 +54,8 @@ public class OrderingDonutsController {
 
     public static final String ONE = "1";
 
+    private static DecimalFormat decimalFormat =  new DecimalFormat("#,##0.00");
+
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {
         mainController = cafeStoreMainController;
@@ -59,19 +68,23 @@ public class OrderingDonutsController {
     }
 
     @FXML
-    private void getDonutType(ActionEvent getDonutType){
+    private void getDonutType() throws FileNotFoundException {
         String donutType = donutTypes.getSelectionModel().getSelectedItem();
+        InputStream imagePath = new FileInputStream("src/main/resources/project4/project4/"+ donutType +".jpeg");
         if(donutType.equals("Yeast Donut")){
-            donutFlavors.getItems().clear();
-            donutFlavors.getItems().addAll("Chocolate", "Vanilla", "Jelly", "Sugar", "Glazed", "Maple Iced");
+            donutFlavors.setItems(yeastDonutFlavors);
+            Image image = new Image(imagePath);
+            donutPictures.setImage(image);
         }
         if(donutType.equals("Cake Donut")){
-            donutFlavors.getItems().clear();
-            donutFlavors.getItems().addAll("Boston Creme", "Vanilla", "Strawberry");
+            donutFlavors.setItems(cakeDonutFlavors);
+            Image image = new Image(imagePath);
+            donutPictures.setImage(image);
         }
         if(donutType.equals("Donut Holes")){
-            donutFlavors.getItems().clear();
-            donutFlavors.getItems().addAll("Chocolate", "Glazed", "Blueberry");
+            donutFlavors.setItems(donutHolesFlavors);
+            Image image = new Image(imagePath);
+            donutPictures.setImage(image);
         }
     }
 
@@ -87,6 +100,7 @@ public class OrderingDonutsController {
                 ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
                 newAdditions.addAll(mainController.getDonutOrders().getOrderList());
                 donutShoppingCart.setItems(newAdditions);
+                subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
             } else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
@@ -101,20 +115,25 @@ public class OrderingDonutsController {
             alert.setContentText("You must select a donut type to add the donut to your order.");
             alert.showAndWait();
         }
-        // based off the options selected add the donut to the list view
-        // Donut Flavor + Donut Type + (Quantity of Donut Type)
     }
 
     @FXML
-    private void donutImageChange() throws FileNotFoundException {
-        String donutType = donutTypes.getSelectionModel().getSelectedItem();
-        if(donutType.isEmpty()){
-            donutPictures.setImage(null);
+    private void removeDonuts(ActionEvent removeDonut){
+        if(donutShoppingCart.getSelectionModel().getSelectedItem() != null){
+            mainController.getDonutOrders().remove(donutShoppingCart.getSelectionModel().getSelectedItem());
+            ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
+            newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+            donutShoppingCart.setItems(newAdditions);
+            subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
+            } else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Please Select a Donut");
+                alert.setContentText("You must select a donut you want to remove from your donut order.");
+                alert.showAndWait();
+            }
         }
-        InputStream imagePath = new FileInputStream("src/main/resources/project4/project4/"+ donutType +".jpeg");
-        Image image = new Image(imagePath);
-        donutPictures.setImage(image);
-
     }
 
-}
+
+

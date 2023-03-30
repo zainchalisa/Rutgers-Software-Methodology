@@ -51,8 +51,20 @@ public class Donut extends MenuItem{
 
     @Override
     public String toString(){
-        return "(" + getQuantity() + ")" + getDonutFlavor() + " "
+        return "(" + getQuantity() + ") " + getDonutFlavor() + " "
                 + getDonutType();
     }
 
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof Donut) {
+            Donut donut = (Donut) obj;
+            return (donut.donutFlavor.equals(this.donutFlavor) &&
+                    donut.donutType.equals(this.donutType) &&
+                    donut.getQuantity() == this.getQuantity());
+        } else {
+            return false;
+        }
+    }
 }

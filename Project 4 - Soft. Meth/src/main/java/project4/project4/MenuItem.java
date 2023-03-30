@@ -4,8 +4,8 @@ public abstract class MenuItem {
 
     public abstract double itemPrice();
 
-    public double price;
-    public int quantity;
+    private double price;
+    private int quantity;
 
     public static final int initialQuantity = 1;
 

@@ -30,6 +30,14 @@ public class Order {
         }
     }
 
+    public double orderPrice(){
+        double orderPrice = 0;
+        for(MenuItem orderItem : orderList){
+            orderPrice += orderItem.itemPrice() * orderItem.getQuantity();
+        }
+        return orderPrice;
+    }
+
     public ObservableList<MenuItem> getOrderList(){
         return orderList;
     }

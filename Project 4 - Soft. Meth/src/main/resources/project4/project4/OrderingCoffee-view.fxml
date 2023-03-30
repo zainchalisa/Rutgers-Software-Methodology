@@ -16,14 +16,14 @@
          </font>
       </Label>
       <ImageView fx:id="coffeeImage" fitHeight="139.0" fitWidth="222.0" layoutX="140.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
-      <ComboBox fx:id="coffeeCupSizes" layoutX="302.0" layoutY="250.0" prefWidth="150.0" promptText="Cup Size" AnchorPane.rightAnchor="50.0" />
-      <ComboBox fx:id="coffeeQuantity" layoutX="300.0" layoutY="293.0" prefWidth="150.0" promptText="Quantity" AnchorPane.rightAnchor="50.0" />
+      <ComboBox fx:id="coffeeCupSizes" layoutX="302.0" layoutY="250.0" onAction="#calculateSubtotal" prefWidth="150.0" promptText="Cup Size" AnchorPane.rightAnchor="50.0" />
+      <ComboBox fx:id="coffeeQuantity" layoutX="300.0" layoutY="293.0" onAction="#calculateSubtotal" prefWidth="150.0" promptText="Quantity" AnchorPane.rightAnchor="50.0" />
       <TextField fx:id="coffeeSubtotal" layoutX="302.0" layoutY="338.0" prefHeight="31.0" prefWidth="150.0" AnchorPane.rightAnchor="50.0" />
       <Button fx:id="addCoffee" layoutX="302.0" layoutY="429.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Add to Order" AnchorPane.rightAnchor="50.0" />
-      <CheckBox fx:id="sweetCream" layoutX="47.0" layoutY="255.0" mnemonicParsing="false" text="Sweet Cream" AnchorPane.leftAnchor="50.0" />
-      <CheckBox fx:id="mocha" layoutX="190.0" layoutY="255.0" mnemonicParsing="false" text="Mocha" />
-      <CheckBox fx:id="frenchVanilla" layoutX="47.0" layoutY="298.0" mnemonicParsing="false" text="French Vanilla" AnchorPane.leftAnchor="50.0" />
-      <CheckBox fx:id="caramel" layoutX="190.0" layoutY="298.0" mnemonicParsing="false" text="Caramel" />
-      <CheckBox fx:id="irishCream" layoutX="47.0" layoutY="343.0" mnemonicParsing="false" text="Irish Cream" AnchorPane.leftAnchor="50.0" />
+      <CheckBox fx:id="sweetCream" layoutX="47.0" layoutY="255.0" mnemonicParsing="false" onAction="#calculateSubtotal" text="Sweet Cream" AnchorPane.leftAnchor="50.0" />
+      <CheckBox fx:id="mocha" layoutX="190.0" layoutY="255.0" mnemonicParsing="false" onAction="#calculateSubtotal" text="Mocha" />
+      <CheckBox fx:id="frenchVanilla" layoutX="47.0" layoutY="298.0" mnemonicParsing="false" onAction="#calculateSubtotal" text="French Vanilla" AnchorPane.leftAnchor="50.0" />
+      <CheckBox fx:id="caramel" layoutX="190.0" layoutY="298.0" mnemonicParsing="false" onAction="#calculateSubtotal" text="Caramel" />
+      <CheckBox fx:id="irishCream" layoutX="47.0" layoutY="343.0" mnemonicParsing="false" onAction="#calculateSubtotal" text="Irish Cream" AnchorPane.leftAnchor="50.0" />
    </children>
 </AnchorPane>

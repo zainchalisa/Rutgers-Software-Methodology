@@ -23,6 +23,8 @@ public class Coffee extends MenuItem {
     public static final double TALL_PRICE = 2.29;
     public static final double GRANDE_PRICE = 2.69;
     public static final double VENTI_PRICE = 3.09;
+    public static final double TOPPING_PRICE = 0.30;
+
 
     public Coffee (String cupSize, String[] coffeeToppings){
         this.cupSize = cupSize;

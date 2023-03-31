@@ -1,12 +1,15 @@
 package project4.project4;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Menu;
+
+import java.util.ArrayList;
 
 public class Coffee extends MenuItem {
 
     private String cupSize;
 
-    private String coffeeToppings[];
+    private ObservableList<String> coffeeToppings;
 
     public static final String SHORT_CUP = "Short";
     public static final String TALL_CUP = "Tall";
@@ -25,8 +28,8 @@ public class Coffee extends MenuItem {
     public static final double VENTI_PRICE = 3.09;
     public static final double TOPPING_PRICE = 0.30;
 
-
-    public Coffee (String cupSize, String[] coffeeToppings){
+    public Coffee (String cupSize, int quantity, ObservableList<String> coffeeToppings){
+        super();
         this.cupSize = cupSize;
         this.coffeeToppings = coffeeToppings;
     }
@@ -35,7 +38,7 @@ public class Coffee extends MenuItem {
         return cupSize;
     }
 
-    public String[] getCoffeeToppings() {
+    public ObservableList<String> getCoffeeToppings() {
         return coffeeToppings;
     }
 

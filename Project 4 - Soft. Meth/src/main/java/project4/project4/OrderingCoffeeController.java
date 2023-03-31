@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class OrderingCoffeeController {
 
@@ -50,6 +51,7 @@ public class OrderingCoffeeController {
     private double runningSubtotal;
 
     DecimalFormat decimalFormat = new DecimalFormat("'$'0.00");
+    Order order = new Order();
 
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {
@@ -88,7 +90,7 @@ public class OrderingCoffeeController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Didn't choose cup size");
-            alert.setContentText("Please choose a cup size before adding toppings.");
+            alert.setContentText("Please choose a cup size before changing quanity and adding toppings.");
             alert.showAndWait();
             return;
         }
@@ -114,7 +116,7 @@ public class OrderingCoffeeController {
         return -1;
     }
 
-    private double checkQuantity () {
+    private int checkQuantity () {
         return coffeeQuantity.getSelectionModel().getSelectedItem();
     }
 
@@ -144,6 +146,54 @@ public class OrderingCoffeeController {
         irishCream.setSelected(false);
         mocha.setSelected(false);
         caramel.setSelected(false);
+    }
+
+    private void addToppings (ObservableList<String> toppings) {
+        if (sweetCream.isSelected()) {
+            toppings.add(Coffee.SWEET_CREAM);
+        }
+        if (frenchVanilla.isSelected()) {
+            toppings.add(Coffee.FRENCH_VANILLA);
+        }
+        if (irishCream.isSelected()) {
+            toppings.add(Coffee.IRISH_CREAM);
+        }
+        if (mocha.isSelected()) {
+            toppings.add(Coffee.MOCHA);
+        }
+        if (caramel.isSelected()) {
+            toppings.add(Coffee.CARAMEL);
+        }
+    }
+
+    private void confirmOrder () {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("CONFIRMATION");
+        alert.setHeaderText("Your order has been added to the basket.");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void addToOrder(ActionEvent event) {
+        if (coffeeCupSizes.getSelectionModel().getSelectedItem() != null) {
+            String cupSize = coffeeCupSizes.getSelectionModel().getSelectedItem();
+            int quantity = checkQuantity();
+            ObservableList<String> toppingList = FXCollections.observableArrayList();
+            addToppings(toppingList);
+
+            Coffee item = new Coffee(cupSize,quantity,toppingList);
+            order.add(item);
+            confirmOrder();
+        } else {
+            unselectButtons();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Didn't finish order");
+            alert.setContentText("Please choose a cup size for your order.");
+            alert.showAndWait();
+        }
+
+
     }
 
 }

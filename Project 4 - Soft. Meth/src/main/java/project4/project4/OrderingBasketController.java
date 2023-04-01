@@ -13,6 +13,8 @@ import java.text.DecimalFormat;
 
 public class OrderingBasketController {
 
+    public static final double SALES_TAX = .06625;
+
     private static CafeStoreMainController mainController;
 
     private static ObservableList<MenuItem> currentOrders = FXCollections.observableArrayList();
@@ -35,15 +37,32 @@ public class OrderingBasketController {
     @FXML
     private TextField totalAmount;
 
-    private static DecimalFormat decimalFormat =  new DecimalFormat("#,##0.00");
+    private static DecimalFormat decimalFormat =  new DecimalFormat("'$'0.00");
+
+    private double getSubtotal() {
+        double runningSubtotal = 0;
+        for (MenuItem item : currentOrders) {
+            runningSubtotal += item.itemPrice();
+        }
+        return runningSubtotal;
+    }
+
+    private double getSalesTax() {
+        return getSubtotal() * SALES_TAX;
+    }
+
+    private double getTotalAmount() {
+        return getSubtotal() + getSalesTax();
+    }
 
     public void initialize(){
-        //double myOrderPrice = mainController.getMyOrder().orderPrice();
-        //System.out.println("$" + decimalFormat.format(mainController.getMyOrder().orderPrice()));
+        subtotal.setEditable(false);
+        salesTax.setEditable(false);
+        totalAmount.setEditable(false);
         myOrderItems.setItems(currentOrders);
-        //subtotal.setText("$"+ mainController.getDonutOrders().orderPrice());
-
-
+        subtotal.setText(decimalFormat.format(getSubtotal()));
+        salesTax.setText(decimalFormat.format(getSalesTax()));
+        totalAmount.setText(decimalFormat.format(getTotalAmount()));
     }
 
 
@@ -54,7 +73,6 @@ public class OrderingBasketController {
 
     public static void addToBasket(MenuItem item){
         currentOrders.add(item);
-
     }
 
 

@@ -33,7 +33,7 @@ public class Order {
     public double orderPrice(){
         double orderPrice = 0;
         for(MenuItem orderItem : orderList){
-            orderPrice += orderItem.itemPrice() * orderItem.getQuantity();
+            orderPrice += orderItem.itemPrice();
         }
         return orderPrice;
     }

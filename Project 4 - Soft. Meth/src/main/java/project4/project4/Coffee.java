@@ -42,26 +42,34 @@ public class Coffee extends MenuItem {
         return coffeeToppings;
     }
 
+    private double sumToppings() {
+        double runningSum = 0;
+        for (String topping : getCoffeeToppings()) {
+            runningSum += TOPPING_PRICE;
+        }
+        return runningSum;
+    }
+
     @Override
     public double itemPrice() {
         if(cupSize.equals(SHORT_CUP)){
-            return super.setItemPrice(SHORT_PRICE);
+            return super.setItemPrice((SHORT_PRICE + sumToppings()) * super.getQuantity());
         }
         if(cupSize.equals(TALL_CUP)){
-            return super.setItemPrice(TALL_PRICE);
+            return super.setItemPrice((TALL_PRICE + sumToppings()) * super.getQuantity());
         }
         if(cupSize.equals(GRANDE_CUP)){
-            return super.setItemPrice(GRANDE_PRICE);
+            return super.setItemPrice((GRANDE_PRICE + sumToppings()) * super.getQuantity());
         }
         if(cupSize.equals(VENTI_CUP)){
-            return super.setItemPrice(VENTI_PRICE);
+            return super.setItemPrice((VENTI_PRICE + sumToppings()) * super.getQuantity());
         }
         return 0;
     }
 
     @Override
     public String toString(){
-        return "(" + getQuantity() + ") " + getCupSize() + " "
+        return "(" + getQuantity() + ") " + getCupSize() + " Coffee "
                 + getCoffeeToppings();
     }
 

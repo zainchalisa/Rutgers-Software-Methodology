@@ -27,7 +27,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="orderDonuts" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#donutsOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Donuts">
+            <Button fx:id="orderDonuts" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#donutsOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" style="-fx-background-color: black;" text="Order Donuts" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="yourOrder" contentDisplay="TOP" mnemonicParsing="false" onAction="#myOrderButton" text="Your Order" GridPane.rowIndex="1">
+            <Button fx:id="yourOrder" contentDisplay="TOP" mnemonicParsing="false" onAction="#myOrderButton" style="-fx-background-color: black;" text="Your Order" textFill="WHITE" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="90.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,7 +52,7 @@
                   <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                </padding>
             </Button>
-            <Button fx:id="orderCoffee" contentDisplay="TOP" mnemonicParsing="false" onAction="#coffeeOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" text="Order Coffee" GridPane.columnIndex="1">
+            <Button fx:id="orderCoffee" contentDisplay="TOP" mnemonicParsing="false" onAction="#coffeeOrderButton" prefHeight="135.0" prefWidth="220.0" scaleShape="false" style="-fx-background-color: black;" text="Order Coffee" textFill="WHITE" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                   <Insets left="40.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="storeOrders" contentDisplay="TOP" mnemonicParsing="false" onAction="#storeOrdersButton" text="Store Orders" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="storeOrders" contentDisplay="TOP" mnemonicParsing="false" onAction="#storeOrdersButton" style="-fx-background-color: black;" text="Store Orders" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="90.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>

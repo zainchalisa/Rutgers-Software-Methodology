@@ -78,7 +78,7 @@ public class OrderingCoffeeController {
         coffeeQuantity.setItems(coffeeQuantityList);
         setStartingTotal();
         coffeeQuantity.setValue(coffeeQuantityList.get(0));
-        //setCoffeeImage();
+        coffeeSubtotal.setEditable(false);
     }
 
     private void setStartingTotal () {
@@ -196,7 +196,7 @@ public class OrderingCoffeeController {
             addToppings(toppingList);
 
             Coffee item = new Coffee(cupSize,quantity,toppingList);
-
+            item.setQuantity(quantity);
             OrderingBasketController.addToBasket(item);
 
 

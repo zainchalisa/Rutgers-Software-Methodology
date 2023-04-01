@@ -38,13 +38,13 @@ public class Donut extends MenuItem{
     @Override
     public double itemPrice() {
         if (donutType.equals(YEAST_DONUT)){
-            return super.setItemPrice(YEAST_DONUT_PRICE);
+            return super.setItemPrice(YEAST_DONUT_PRICE * super.getQuantity());
         }
         if(donutType.equals(CAKE_DONUT)){
-            return super.setItemPrice(CAKE_DONUT_PRICE);
+            return super.setItemPrice(CAKE_DONUT_PRICE * super.getQuantity());
         }
         if(donutType.equals(DONUT_HOLES)){
-            return super.setItemPrice(DONUT_HOLES_PRICE);
+            return super.setItemPrice(DONUT_HOLES_PRICE * super.getQuantity());
         }
         return 0;
     }

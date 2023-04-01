@@ -15,20 +15,21 @@ import java.io.IOException;
 
 public class CafeStoreMainController {
     @FXML
-    private Label welcomeText;
-
-    @FXML
     private Button orderDonuts, orderCoffee, yourOrder, storeOrders;
 
     public final Order donutOrders = new Order();
-
     public final Order coffeeOrders = new Order();
+    public final Order myOrder = new Order();
 
     public Order getDonutOrders() {
         return donutOrders;
     }
 
     public Order getCoffeeOrders() { return coffeeOrders; }
+
+    public Order getMyOrder(){
+        return myOrder;
+    }
 
     @FXML
     protected void coffeeOrderButton(ActionEvent coffeeOrderView) {
@@ -104,19 +105,12 @@ public class CafeStoreMainController {
         Stage myOrdersView = new Stage();
         AnchorPane root;
         try {
-            System.out.println("1");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderingBasket-view.fxml"));
-            System.out.println("2");
             root = (AnchorPane) loader.load();
-            System.out.println("3");
             Scene scene = new Scene(root, 600, 400);
-            System.out.println("4");
             myOrdersView.setScene(scene);
-            System.out.println("5");
             myOrdersView.show();
-            System.out.println("6");
             OrderingBasketController basketControl = loader.getController();
-            System.out.println("7");
             basketControl.setMainController(this);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

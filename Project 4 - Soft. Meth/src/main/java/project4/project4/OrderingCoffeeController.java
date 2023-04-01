@@ -197,7 +197,7 @@ public class OrderingCoffeeController {
 
             Coffee item = new Coffee(cupSize,quantity,toppingList);
             mainController.coffeeOrders.add(item);
-            OrderingBasketController.addCoffee();
+            //OrderingBasketController.addCoffee();
             confirmOrder();
         } else {
             unselectButtons();

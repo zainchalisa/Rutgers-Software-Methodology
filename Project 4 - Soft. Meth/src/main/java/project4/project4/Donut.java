@@ -7,7 +7,7 @@ public class Donut extends MenuItem{
 
     private static final String YEAST_DONUT = "Yeast Donut";
     private static final String CAKE_DONUT = "Cake Donut";
-    private static final String DONUT_HOLES = "Donut Hole";
+    private static final String DONUT_HOLES = "Donut Holes";
     private static final String CHOCOLATE = "Chocolate";
     private static final String VANILLA = "Vanilla";
     private static final String JELLY = "Jelly";
@@ -55,14 +55,12 @@ public class Donut extends MenuItem{
                 + getDonutType();
     }
 
-
     @Override
     public boolean equals(Object obj){
         if (obj instanceof Donut) {
             Donut donut = (Donut) obj;
             return (donut.donutFlavor.equals(this.donutFlavor) &&
-                    donut.donutType.equals(this.donutType) &&
-                    donut.getQuantity() == this.getQuantity());
+                    donut.donutType.equals(this.donutType));
         } else {
             return false;
         }

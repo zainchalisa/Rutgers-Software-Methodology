@@ -6,12 +6,9 @@ import javafx.scene.control.Label;
 public class StoreOrdersController {
 
     private CafeStoreMainController mainController;
-    @FXML
-    private Label welcomeText;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void initialize(){
+
     }
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {

@@ -18,7 +18,7 @@ public class OrderingBasketController {
     private static ObservableList<MenuItem> currentOrders = FXCollections.observableArrayList();
 
     @FXML
-    private ListView myOrderItems;
+    private ListView<MenuItem> myOrderItems;
 
     @FXML
     private Button removeItem;
@@ -39,9 +39,9 @@ public class OrderingBasketController {
 
     public void initialize(){
         //double myOrderPrice = mainController.getMyOrder().orderPrice();
-        //subtotal.setText(String.valueOf("$" + decimalFormat.format(myOrderPrice)));
-        //currentOrders.setAll(mainController.getMyOrder().getOrderList());
+        //System.out.println("$" + decimalFormat.format(mainController.getMyOrder().orderPrice()));
         myOrderItems.setItems(currentOrders);
+        subtotal.setText("$" + mainController.getMyOrder().orderPrice());
     }
 
 

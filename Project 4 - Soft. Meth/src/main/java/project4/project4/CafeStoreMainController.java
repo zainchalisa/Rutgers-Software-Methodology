@@ -25,9 +25,7 @@ public class CafeStoreMainController {
         return donutOrders;
     }
 
-    public Order getCoffeeOrders(){
-        return coffeeOrders;
-    }
+    public Order getCoffeeOrders() { return coffeeOrders; }
 
     public Order getMyOrder(){
         return myOrder;

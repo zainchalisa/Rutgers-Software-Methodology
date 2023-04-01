@@ -20,9 +20,9 @@
          <children>
             <VBox layoutX="370.0" layoutY="24.0" prefHeight="96.0" prefWidth="100.0">
                <children>
-                  <TextField prefHeight="31.0" prefWidth="125.0" />
-                  <TextField prefHeight="31.0" prefWidth="125.0" />
-                  <TextField prefHeight="31.0" prefWidth="125.0" />
+                  <TextField fx:id="subtotal" prefHeight="31.0" prefWidth="125.0" />
+                  <TextField fx:id="salesTax" prefHeight="31.0" prefWidth="125.0" />
+                  <TextField fx:id="totalAmount" prefHeight="31.0" prefWidth="125.0" />
                </children>
             </VBox>
             <VBox layoutX="263.0" layoutY="27.0" prefHeight="95.0" prefWidth="100.0">

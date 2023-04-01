@@ -13,22 +13,16 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-<<<<<<< HEAD
-      <ListView fx:id="basketList" layoutX="100.0" layoutY="140.0" prefHeight="160.0" prefWidth="500.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0" />
-      <Button fx:id="removeItem" layoutX="89.0" layoutY="327.0" mnemonicParsing="false" text="Remove Selected Item" />
-      <Button fx:id="placeOrder" layoutX="371.0" layoutY="327.0" mnemonicParsing="false" text="Place Order" />
-=======
       <ListView fx:id="myOrderItems" layoutX="100.0" layoutY="140.0" prefHeight="160.0" prefWidth="500.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0" />
       <Button layoutX="89.0" layoutY="327.0" mnemonicParsing="false" text="Remove Selected Item" />
       <Button layoutX="371.0" layoutY="327.0" mnemonicParsing="false" text="Place Order" />
->>>>>>> ea774f2b15d5ac5b21dc4758eec3110ebddc2910
       <Group>
          <children>
             <VBox layoutX="370.0" layoutY="24.0" prefHeight="96.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="subtotal" prefHeight="31.0" prefWidth="125.0" />
-                  <TextField fx:id="salesTax" prefHeight="31.0" prefWidth="125.0" />
-                  <TextField fx:id="totalAmount" prefHeight="31.0" prefWidth="125.0" />
+                  <TextField prefHeight="31.0" prefWidth="125.0" />
+                  <TextField prefHeight="31.0" prefWidth="125.0" />
+                  <TextField prefHeight="31.0" prefWidth="125.0" />
                </children>
             </VBox>
             <VBox layoutX="263.0" layoutY="27.0" prefHeight="95.0" prefWidth="100.0">

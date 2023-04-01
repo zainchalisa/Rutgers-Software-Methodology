@@ -30,6 +30,6 @@
             <Font name="Helvetica Neue" size="13.0" />
          </font></Label>
       <TextField fx:id="subtotal" editable="false" layoutX="358.0" layoutY="341.0" prefHeight="27.0" prefWidth="62.0" />
-      <Button fx:id="addToBasket" layoutX="432.0" layoutY="341.0" mnemonicParsing="false" text="Add to Basket" />
+      <Button fx:id="addToBasket" layoutX="432.0" layoutY="341.0" mnemonicParsing="false" onAction="#addToOrder" text="Add to Basket" />
    </children>
 </AnchorPane>

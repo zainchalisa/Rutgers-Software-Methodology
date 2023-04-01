@@ -92,14 +92,30 @@ public class OrderingDonutsController {
     private void addDonuts(ActionEvent addDonut){
         if(donutTypes.getSelectionModel().getSelectedItem() != null){
             if(donutFlavors.getSelectionModel().getSelectedItem() != null){
+                boolean dup = false; // checks for the same donut
                 String donutType = donutTypes.getSelectionModel().getSelectedItem();
                 String donutFlavor = donutFlavors.getSelectionModel().getSelectedItem();
                 Donut newDonut = new Donut(donutType, donutFlavor);
-                newDonut.setQuantity(Integer.parseInt(quantity.getText()));
-                mainController.getDonutOrders().add(newDonut);
-                ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
-                newAdditions.addAll(mainController.getDonutOrders().getOrderList());
-                donutShoppingCart.setItems(newAdditions);
+                int quantityOfDonuts = Integer.parseInt(quantity.getText());
+                for(MenuItem donut: mainController.getDonutOrders().getOrderList()){
+                    if(newDonut.equals(donut)) {
+                        dup = true;
+                        newDonut.setQuantity(quantityOfDonuts + donut.getQuantity());
+                        mainController.getDonutOrders().remove(donut); // removed the original
+                        mainController.getDonutOrders().add(newDonut); // adds the new donut with the updated quantity
+                        ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
+                        newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+                        donutShoppingCart.setItems(newAdditions);
+                    }
+                }
+                if(!dup){ // if there is on duplicate then add the donut normally
+                    newDonut.setQuantity(quantityOfDonuts);
+                    mainController.getDonutOrders().add(newDonut);
+                    ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
+                    newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+                    donutShoppingCart.setItems(newAdditions);
+                }
+
                 subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
             } else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -133,7 +149,24 @@ public class OrderingDonutsController {
                 alert.showAndWait();
             }
         }
+    @FXML
+    private void addToOrder(ActionEvent addToBasket){
+        if(!mainController.getDonutOrders().getOrderList().isEmpty()){
+            for(MenuItem donut: mainController.getDonutOrders().getOrderList()){
+                OrderingBasketController.addToBasket(donut);
+            }
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Please Add Something to the Basket");
+            alert.setContentText("You must have donuts in your basket to add to your basket.");
+            alert.showAndWait();
+        }
+
+
     }
+
+}
 
 
 

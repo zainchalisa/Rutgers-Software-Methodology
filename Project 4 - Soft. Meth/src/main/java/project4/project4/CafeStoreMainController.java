@@ -15,15 +15,22 @@ import java.io.IOException;
 
 public class CafeStoreMainController {
     @FXML
-    private Label welcomeText;
-
-    @FXML
     private Button orderDonuts, orderCoffee, yourOrder, storeOrders;
 
     public final Order donutOrders = new Order();
+    public final Order coffeeOrders = new Order();
+    public final Order myOrder = new Order();
 
     public Order getDonutOrders() {
         return donutOrders;
+    }
+
+    public Order getCoffeeOrders(){
+        return coffeeOrders;
+    }
+
+    public Order getMyOrder(){
+        return myOrder;
     }
 
     @FXML

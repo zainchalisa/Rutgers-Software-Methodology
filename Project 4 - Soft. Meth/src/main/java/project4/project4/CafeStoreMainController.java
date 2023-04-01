@@ -38,7 +38,7 @@ public class CafeStoreMainController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("OrderingCoffee-view.fxml"));
             root = (AnchorPane) loader.load();
-            Scene scene = new Scene(root, 500, 500);
+            Scene scene = new Scene(root, 600, 400);
             coffeeView.setScene(scene);
             coffeeView.show();
             OrderingCoffeeController coffeeControl = loader.getController();

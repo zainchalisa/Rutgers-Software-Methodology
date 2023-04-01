@@ -41,9 +41,10 @@ public class OrderingBasketController {
         //double myOrderPrice = mainController.getMyOrder().orderPrice();
         //System.out.println("$" + decimalFormat.format(mainController.getMyOrder().orderPrice()));
         myOrderItems.setItems(currentOrders);
-        subtotal.setText("$" + mainController.getMyOrder().orderPrice());
-    }
+        //subtotal.setText("$"+ mainController.getDonutOrders().orderPrice());
 
+
+    }
 
 
     @FXML

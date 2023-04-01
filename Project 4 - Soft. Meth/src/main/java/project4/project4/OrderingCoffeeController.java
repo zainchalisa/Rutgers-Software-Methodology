@@ -182,7 +182,7 @@ public class OrderingCoffeeController {
             addToppings(toppingList);
 
             Coffee item = new Coffee(cupSize,quantity,toppingList);
-            order.add(item);
+            OrderingBasketController.addToBasket(item);
             confirmOrder();
         } else {
             unselectButtons();
@@ -192,8 +192,6 @@ public class OrderingCoffeeController {
             alert.setContentText("Please choose a cup size for your order.");
             alert.showAndWait();
         }
-
-
     }
 
 }

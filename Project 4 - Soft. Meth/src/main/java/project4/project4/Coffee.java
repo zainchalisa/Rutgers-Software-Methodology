@@ -59,4 +59,10 @@ public class Coffee extends MenuItem {
         return 0;
     }
 
+    @Override
+    public String toString(){
+        return "(" + getQuantity() + ") " + getCupSize() + " "
+                + getCoffeeToppings();
+    }
+
 }

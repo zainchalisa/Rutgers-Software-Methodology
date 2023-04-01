@@ -19,7 +19,7 @@ public class CafeStoreMainController {
 
     public final Order donutOrders = new Order();
     public final Order coffeeOrders = new Order();
-    public Order myOrder = new Order();
+    public final Order myOrder = new Order();
 
     public Order getDonutOrders() {
         return donutOrders;

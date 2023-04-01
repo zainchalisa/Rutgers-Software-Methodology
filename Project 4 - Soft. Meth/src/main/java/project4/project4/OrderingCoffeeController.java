@@ -5,8 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -53,10 +57,19 @@ public class OrderingCoffeeController {
     DecimalFormat decimalFormat = new DecimalFormat("'$'0.00");
     Order order = new Order();
 
+
+
+
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {
             mainController = cafeStoreMainController;
     }
+
+//    private void setCoffeeImage() throws FileNotFoundException {
+//        InputStream imagePath = new FileInputStream("src/main/resources/project4/project4/"+ "Coffee" +".jpeg");
+//        Image image = new Image(imagePath);
+//        coffeeImage.setImage(image);
+//    }
 
     public void initialize () {
         coffeeCupSizesList = FXCollections.observableArrayList("Short","Tall","Grande","Venti");
@@ -65,7 +78,7 @@ public class OrderingCoffeeController {
         coffeeQuantity.setItems(coffeeQuantityList);
         setStartingTotal();
         coffeeQuantity.setValue(coffeeQuantityList.get(0));
-
+        //setCoffeeImage();
     }
 
     private void setStartingTotal () {
@@ -146,6 +159,7 @@ public class OrderingCoffeeController {
         irishCream.setSelected(false);
         mocha.setSelected(false);
         caramel.setSelected(false);
+
     }
 
     private void addToppings (ObservableList<String> toppings) {
@@ -182,7 +196,8 @@ public class OrderingCoffeeController {
             addToppings(toppingList);
 
             Coffee item = new Coffee(cupSize,quantity,toppingList);
-            order.add(item);
+            mainController.coffeeOrders.add(item);
+            OrderingBasketController.addCoffee();
             confirmOrder();
         } else {
             unselectButtons();

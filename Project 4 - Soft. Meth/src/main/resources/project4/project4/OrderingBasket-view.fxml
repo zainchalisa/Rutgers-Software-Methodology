@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingBasketController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project4.project4.OrderingBasketController">
    <children>
       <Label layoutX="61.0" layoutY="24.0" prefHeight="48.0" prefWidth="178.0" text="Ordering Basket">
          <font>
             <Font size="24.0" />
          </font></Label>
       <ListView fx:id="myOrderItems" layoutX="100.0" layoutY="140.0" prefHeight="160.0" prefWidth="500.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0" />
-      <Button layoutX="89.0" layoutY="327.0" mnemonicParsing="false" text="Remove Selected Item" />
-      <Button layoutX="371.0" layoutY="327.0" mnemonicParsing="false" text="Place Order" />
+      <Button fx:id="removeItem" layoutX="89.0" layoutY="327.0" mnemonicParsing="false" onAction="#removeItem" text="Remove Selected Item" />
+      <Button fx:id="placeOrder" layoutX="371.0" layoutY="327.0" mnemonicParsing="false" text="Place Order" />
       <Group>
          <children>
             <VBox layoutX="370.0" layoutY="24.0" prefHeight="96.0" prefWidth="100.0">

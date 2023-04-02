@@ -5,11 +5,28 @@ import javafx.collections.ObservableList;
 
 public class Order {
 
-    private int orderNumber;
+    private static int orderNumber = -3;
+    private int uniqueOrderNumber;
     private ObservableList<MenuItem> orderList;
+
+    public ObservableList<String> storeOrderNumbers = FXCollections.observableArrayList();
 
     public Order (){
         orderList = FXCollections.observableArrayList();
+        orderNumber++;
+        this.uniqueOrderNumber = orderNumber;
+    }
+
+    public void setOrderList(ObservableList<MenuItem> orderList) {
+        this.orderList = orderList;
+    }
+
+    public int getUniqueOrderNumber() {
+        return uniqueOrderNumber;
+    }
+
+    public ObservableList<MenuItem> getOrder() {
+        return orderList;
     }
 
     public boolean add (Object obj){
@@ -42,4 +59,17 @@ public class Order {
         return orderList;
     }
 
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public int getOrderNumber() {
+        orderNumber++;
+        return orderNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "#" + uniqueOrderNumber;
+    }
 }

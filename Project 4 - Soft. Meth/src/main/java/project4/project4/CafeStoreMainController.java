@@ -1,12 +1,13 @@
 package project4.project4;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,15 +22,23 @@ public class CafeStoreMainController {
     public final Order coffeeOrders = new Order();
     public final Order myOrder = new Order();
 
+
+    public ObservableList<String> storeOrderNumbers = FXCollections.observableArrayList();
+
+
     public Order getDonutOrders() {
         return donutOrders;
     }
 
-    public Order getCoffeeOrders() { return coffeeOrders; }
+    public Order getCoffeeOrders() {
+        return coffeeOrders;
+    }
 
     public Order getMyOrder(){
         return myOrder;
     }
+
+
 
     @FXML
     protected void coffeeOrderButton(ActionEvent coffeeOrderView) {
@@ -121,4 +130,8 @@ public class CafeStoreMainController {
         }
     }
 
+
+    public ObservableList<String> getStoreOrderNumbers() {
+        return storeOrderNumbers;
+    }
 }

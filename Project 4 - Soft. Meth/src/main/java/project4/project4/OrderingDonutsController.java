@@ -162,6 +162,12 @@ public class OrderingDonutsController {
             alert.setContentText("You must have donuts in your basket to add to your basket.");
             alert.showAndWait();
         }
+
+        donutShoppingCart.getItems().clear();
+        mainController.getDonutOrders().getOrder().clear();
+        subtotal.clear();
+        System.out.println(mainController.getDonutOrders());
+
     }
 
 }

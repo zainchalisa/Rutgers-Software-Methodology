@@ -55,10 +55,6 @@ public class OrderingCoffeeController {
     private double runningSubtotal;
 
     DecimalFormat decimalFormat = new DecimalFormat("'$'0.00");
-    Order order = new Order();
-
-
-
 
     @FXML
     public void setMainController(CafeStoreMainController cafeStoreMainController) {
@@ -198,8 +194,6 @@ public class OrderingCoffeeController {
             Coffee item = new Coffee(cupSize,quantity,toppingList);
             item.setQuantity(quantity);
             OrderingBasketController.addToBasket(item);
-
-
             confirmOrder();
         } else {
             unselectButtons();

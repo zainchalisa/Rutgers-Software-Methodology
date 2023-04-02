@@ -48,6 +48,38 @@ public class OrderingBasketController {
     }
 
     @FXML
+    private void placeOrder(){
+        Order newOrder = new Order();
+        newOrder.setOrderList(currentOrders);
+        int orderNumber = mainController.getMyOrder().getOrderNumber();
+        System.out.println(orderNumber);
+        StoreOrdersController.addToStoreOrders(newOrder);
+        System.out.println("Before Clear" + currentOrders);
+        myOrderItems.getItems().clear();
+        subtotal.setText("$ 0.00");
+        salesTax.setText("$ 0.00");
+        totalAmount.setText("$ 0.00");
+
+
+        System.out.println(currentOrders);
+        //mainController.getCustomerOrder().add(mainController.getMyOrder());
+        //mainController.getStoreOrderNumbers().add(Integer.toString(orderNumber));
+
+
+
+    }
+
+    // currently in basket
+    // combine the orders from donut and coffee
+    // assign it a unique store order id number
+    // add that unique store order id number to an arraylist to set it to the combo-box
+    // set the combo box to that arraylist
+    // then call that combination order and add it to the list of store orders
+
+
+
+
+    @FXML
     private void removeItem (ActionEvent removeItem) {
         if (myOrderItems.getSelectionModel().getSelectedItem() != null) {
             currentOrders.remove(myOrderItems.getSelectionModel().getSelectedItem());
@@ -87,5 +119,6 @@ public class OrderingBasketController {
     public static void addToBasket(MenuItem item){
         currentOrders.add(item);
     }
+
 
 }

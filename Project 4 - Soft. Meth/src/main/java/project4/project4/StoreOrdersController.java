@@ -41,6 +41,7 @@ public class StoreOrdersController {
 
     public static final double SALES_TAX = .06625;
 
+    public static final double STARTING_TOTAL = 0.00;
     private static DecimalFormat decimalFormat =  new DecimalFormat("'$'0.00");
 
 
@@ -52,6 +53,8 @@ public class StoreOrdersController {
             holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
             contentOfOrder.setItems(orders.getValue().getOrderList());
             totalAmount.setText(decimalFormat.format(getTotalAmount()));
+        } else{
+            totalAmount.setText(decimalFormat.format(STARTING_TOTAL));
         }
     }
 
@@ -69,7 +72,7 @@ public class StoreOrdersController {
                         contentOfOrder.getItems().clear();
                         orders.getItems().remove(orders.getValue());
                         orders.setValue(null);
-                        totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
+                        totalAmount.setText(decimalFormat.format(STARTING_TOTAL));
                         break;
                     }
                     orders.getItems().remove(orders.getValue());

@@ -47,7 +47,6 @@ public class StoreOrdersController {
 
     public void initialize(){
         if(!orderList.isEmpty()){
-            System.out.println(holderOrder);
             orders.setItems(orderList);
             orders.getSelectionModel().select(0);
             holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
@@ -63,27 +62,18 @@ public class StoreOrdersController {
     @FXML
     public void cancelOrder(ActionEvent cancelOrder){
         holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
-        if(!orderList.isEmpty()){
-            for(Order order: orderList){
-                if(order.equals(orders.getValue())){ // works
-                    if (orderList.size() == 1 || order.equals(orderList.get(0))) {
-                        System.out.println("1st conditional");
-                        contentOfOrder.getItems().clear();
-                        orders.getItems().remove(orders.getValue());
-                        orders.setValue(null);
-                        totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
-                        break;
-                    }
+        for(Order order: orderList){
+            if(order.equals(orders.getValue())){ // works
+                if (orderList.size() == 1 || order.equals(orderList.get(0))) {
+                    contentOfOrder.getItems().clear();
                     orders.getItems().remove(orders.getValue());
+                    orders.setValue(null);
+                    totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
                     break;
                 }
+                orders.getItems().remove(orders.getValue());
+                break;
             }
-        } else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Your Store Has No Current Orders");
-            alert.setContentText("Please wait till orders are placed to export orders.");
-            alert.showAndWait();
         }
         orders.setItems(orderList);
     }
@@ -93,16 +83,12 @@ public class StoreOrdersController {
         if(!orderList.isEmpty()){
             FileChooser chooser = new FileChooser();
             chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Document", "*.txt"));
-            System.out.println();
             Stage stage = new Stage();
             File fileChosen = chooser.showOpenDialog(stage);
-
-            System.out.println(fileChosen);
 
             FileWriter myWriter = new FileWriter("" + fileChosen);
             for (Order order : orderList){
                 myWriter.write("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrderList().toString() + "\n");
-                System.out.println("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrderList().toString() + "\n");
             }
             myWriter.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -125,8 +111,6 @@ public class StoreOrdersController {
         if (orders.getValue() != null) {
             holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
             contentOfOrder.setItems(holderOrder);
-            System.out.println(holderOrder);
-            System.out.println(getTotalAmount());
             totalAmount.setText(decimalFormat.format(getTotalAmount()));
         }
     }

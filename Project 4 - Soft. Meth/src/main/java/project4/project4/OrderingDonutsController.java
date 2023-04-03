@@ -191,7 +191,6 @@ public class OrderingDonutsController {
         donutShoppingCart.getItems().clear();
         mainController.getDonutOrders().getOrder().clear();
         subtotal.clear();
-        System.out.println(mainController.getDonutOrders());
 
     }
 }

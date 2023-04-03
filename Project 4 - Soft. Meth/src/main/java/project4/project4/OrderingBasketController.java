@@ -72,7 +72,6 @@ public class OrderingBasketController {
 
 
 
-        System.out.println(currentOrders);
         //mainController.getCustomerOrder().add(mainController.getMyOrder());
         //mainController.getStoreOrderNumbers().add(Integer.toString(orderNumber));
 

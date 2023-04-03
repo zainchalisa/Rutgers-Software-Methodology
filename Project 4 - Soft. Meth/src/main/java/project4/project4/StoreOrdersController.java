@@ -61,19 +61,32 @@ public class StoreOrdersController {
 
     @FXML
     public void cancelOrder(ActionEvent cancelOrder){
-        holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
-        for(Order order: orderList){
-            if(order.equals(orders.getValue())){ // works
-                if (orderList.size() == 1 || order.equals(orderList.get(0))) {
-                    contentOfOrder.getItems().clear();
+        if(!orderList.isEmpty()){
+            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
+            for(Order order: orderList){
+                if(order.equals(orders.getValue())){ // works
+                    if (orderList.size() == 1 || order.equals(orderList.get(0))) {
+                        contentOfOrder.getItems().clear();
+                        orders.getItems().remove(orders.getValue());
+                        orders.setValue(null);
+                        totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
+                        break;
+                    }
                     orders.getItems().remove(orders.getValue());
-                    orders.setValue(null);
-                    totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
                     break;
                 }
-                orders.getItems().remove(orders.getValue());
-                break;
             }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Canceled");
+            alert.setHeaderText("Your Order Has Been Canceled");
+            alert.setContentText("Order was canceled.");
+            alert.showAndWait();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your Store Has No Current Orders");
+            alert.setContentText("Please wait till orders are placed to export orders.");
+            alert.showAndWait();
         }
         orders.setItems(orderList);
     }

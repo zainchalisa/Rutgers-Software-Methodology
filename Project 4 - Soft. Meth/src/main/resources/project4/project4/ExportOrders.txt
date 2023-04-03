@@ -1,2 +1,4 @@
-Order Number: #1 [(1) Tall Coffee]
-Order Number: #2 [(1) Tall Coffee [Mocha, Caramel]]
+Order Number: #3 [(8) Glazed Donut Holes, (1000) Glazed Donut Holes, (3) Grande Coffee [Mocha, Caramel]]
+Order Number: #6 [(2) Tall Coffee [Caramel], (1) Blueberry Donut Holes]
+Order Number: #7 [(1) Vanilla Cake Donut]
+Order Number: #8 [(4) Chocolate Donut Holes]

@@ -56,7 +56,13 @@ public class StoreOrdersController {
         holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
         System.out.println("Current Order" + holderOrder);
         System.out.println("Order List" + orders.getValue());
-        orderList.remove(orders.getValue().getOrderList());
+        System.out.println("All Orders" + orderList);
+        for(Order order: orderList){
+            if(order == holderOrder){
+                orderList.remove(orders.getValue().getOrderList());
+            }
+        }
+        System.out.println("All Orders After Remove" + orderList);
         orders.setItems(orderList);
         System.out.println(orders.getValue().getOrderList());
     }

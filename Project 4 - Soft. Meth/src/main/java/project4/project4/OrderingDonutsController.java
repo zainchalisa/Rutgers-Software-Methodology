@@ -128,22 +128,29 @@ public class OrderingDonutsController {
                     newAdditions.addAll(mainController.getDonutOrders().getOrderList());
                     donutShoppingCart.setItems(newAdditions);
                 }
-
                 subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
             } else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setHeaderText("Please Select a Flavor");
-                alert.setContentText("You must select a flavor to add the donut to your order.");
-                alert.showAndWait();
+                donutTypeError();
             }
         } else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Please Select a Donut Type");
-            alert.setContentText("You must select a donut type to add the donut to your order.");
-            alert.showAndWait();
+            donutTypeError();
         }
+    }
+
+    public void donutFlavorError(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Please Select a Flavor");
+        alert.setContentText("You must select a flavor to add the donut to your order.");
+        alert.showAndWait();
+    }
+
+    public void donutTypeError(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText("Please Select a Donut Type");
+        alert.setContentText("You must select a donut type to add the donut to your order.");
+        alert.showAndWait();
     }
 
     @FXML
@@ -186,7 +193,6 @@ public class OrderingDonutsController {
         subtotal.clear();
 
     }
-
 }
 
 

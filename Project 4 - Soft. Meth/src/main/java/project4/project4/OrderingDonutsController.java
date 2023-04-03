@@ -155,7 +155,7 @@ public class OrderingDonutsController {
             for(MenuItem donut: mainController.getDonutOrders().getOrderList()){
                 OrderingBasketController.addToBasket(donut);
             }
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Complete");
             alert.setHeaderText("Donut Order Has Been Placed");
             alert.setContentText("Your donut order has been added to your basket.");

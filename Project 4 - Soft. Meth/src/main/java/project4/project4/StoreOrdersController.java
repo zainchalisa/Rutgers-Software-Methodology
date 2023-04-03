@@ -9,6 +9,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
 public class StoreOrdersController {
@@ -68,12 +73,34 @@ public class StoreOrdersController {
     }
 
     @FXML
-    public void exportOrders(ActionEvent exportOrders){
-        FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Document", "*.txt"));
-        Stage stage = new Stage();
-        File file = chooser.showSaveDialog(stage);
-        //displayExportAlert(file);
+    public void exportOrders(ActionEvent exportOrders) throws IOException {
+        if(!orderList.isEmpty()){
+            FileChooser chooser = new FileChooser();
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Document", "*.txt"));
+            System.out.println();
+            Stage stage = new Stage();
+            File fileChosen = chooser.showOpenDialog(stage);
+
+            System.out.println(fileChosen);
+
+            FileWriter myWriter = new FileWriter("" + fileChosen);
+            for (Order order : orderList){
+                myWriter.write("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrderList().toString() + "\n");
+                System.out.println("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrderList().toString() + "\n");
+            }
+            myWriter.close();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Exported");
+            alert.setHeaderText("Your Store Orders Have Been Exported");
+            alert.setContentText("Your store orders have been exported to ExportOrders.txt.");
+            alert.showAndWait();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your Store Has No Current Orders");
+            alert.setContentText("Please wait till orders are placed to export orders.");
+            alert.showAndWait();
+        }
     }
 
 

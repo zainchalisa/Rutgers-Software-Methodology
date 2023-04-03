@@ -23,7 +23,7 @@
       <TextField fx:id="totalAmount" layoutX="319.0" layoutY="77.0" />
       <Label layoutX="217.0" layoutY="82.0" text="Total Amount:" />
       <ListView fx:id="contentOfOrder" layoutX="30.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-      <Button fx:id="cancelOrder" layoutX="30.0" layoutY="347.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="225.0" text="Cancel Order" />
-      <Button fx:id="exportOrder" layoutX="281.0" layoutY="347.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="225.0" text="Export Orders" />
+      <Button fx:id="cancelOrder" layoutX="30.0" layoutY="347.0" mnemonicParsing="false" onAction="#cancelOrder" prefHeight="31.0" prefWidth="225.0" text="Cancel Order" />
+      <Button fx:id="exportOrder" layoutX="281.0" layoutY="347.0" mnemonicParsing="false" onAction="#exportOrders" prefHeight="31.0" prefWidth="225.0" text="Export Orders" />
    </children>
 </AnchorPane>

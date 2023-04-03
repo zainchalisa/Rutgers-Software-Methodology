@@ -49,16 +49,27 @@ public class OrderingBasketController {
 
     @FXML
     private void placeOrder(){
-        Order newOrder = new Order();
-        newOrder.setOrderList(currentOrders);
-        int orderNumber = mainController.getMyOrder().getOrderNumber();
-        System.out.println(orderNumber);
-        StoreOrdersController.addToStoreOrders(newOrder);
-        System.out.println("Before Clear" + currentOrders);
-        myOrderItems.getItems().clear();
-        subtotal.setText("$ 0.00");
-        salesTax.setText("$ 0.00");
-        totalAmount.setText("$ 0.00");
+        if(!currentOrders.isEmpty()){
+            Order newOrder = new Order();
+            newOrder.setOrderList(currentOrders);
+            StoreOrdersController.addToStoreOrders(newOrder);
+            myOrderItems.getItems().clear();
+            subtotal.setText("$ 0.00");
+            salesTax.setText("$ 0.00");
+            totalAmount.setText("$ 0.00");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Complete");
+            alert.setHeaderText("Your Order Has Been Placed");
+            alert.setContentText("Your order has been sent to the store.");
+            alert.showAndWait();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Please Add Something to the Basket");
+            alert.setContentText("You must have items in your basket to send to the store.");
+            alert.showAndWait();
+        }
+
 
 
         System.out.println(currentOrders);
@@ -119,6 +130,8 @@ public class OrderingBasketController {
     public static void addToBasket(MenuItem item){
         currentOrders.add(item);
     }
+
+
 
 
 }

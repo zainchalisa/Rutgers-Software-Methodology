@@ -54,6 +54,8 @@ public class OrderingCoffeeController {
 
     private double runningSubtotal;
 
+    private boolean triggeredActionEvent;
+
     DecimalFormat decimalFormat = new DecimalFormat("'$'0.00");
 
     @FXML
@@ -183,6 +185,12 @@ public class OrderingCoffeeController {
         alert.showAndWait();
     }
 
+    private void resetOrder() {
+        coffeeQuantity.setValue(coffeeQuantityList.get(0));
+        coffeeSubtotal.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
+        unselectButtons();
+        coffeeCupSizes.setValue(coffeeCupSizesList.get(0));
+    }
 
 
     @FXML
@@ -195,8 +203,8 @@ public class OrderingCoffeeController {
             Coffee item = new Coffee(cupSize,quantity,toppingList);
             item.setQuantity(quantity);
             OrderingBasketController.addToBasket(item);
-            //reset();
             confirmOrder();
+            resetOrder();
         } else {
             unselectButtons();
             Alert alert = new Alert(Alert.AlertType.ERROR);

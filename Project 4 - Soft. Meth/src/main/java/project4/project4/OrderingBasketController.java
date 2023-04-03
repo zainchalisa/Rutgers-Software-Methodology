@@ -57,7 +57,7 @@ public class OrderingBasketController {
             subtotal.setText("$ 0.00");
             salesTax.setText("$ 0.00");
             totalAmount.setText("$ 0.00");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Complete");
             alert.setHeaderText("Your Order Has Been Placed");
             alert.setContentText("Your order has been sent to the store.");

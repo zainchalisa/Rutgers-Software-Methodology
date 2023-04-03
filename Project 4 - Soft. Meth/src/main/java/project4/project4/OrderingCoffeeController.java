@@ -183,6 +183,8 @@ public class OrderingCoffeeController {
         alert.showAndWait();
     }
 
+
+
     @FXML
     private void addToOrder(ActionEvent event) {
         if (coffeeCupSizes.getSelectionModel().getSelectedItem() != null) {
@@ -190,10 +192,10 @@ public class OrderingCoffeeController {
             int quantity = checkQuantity();
             ObservableList<String> toppingList = FXCollections.observableArrayList();
             addToppings(toppingList);
-
             Coffee item = new Coffee(cupSize,quantity,toppingList);
             item.setQuantity(quantity);
             OrderingBasketController.addToBasket(item);
+            //reset();
             confirmOrder();
         } else {
             unselectButtons();

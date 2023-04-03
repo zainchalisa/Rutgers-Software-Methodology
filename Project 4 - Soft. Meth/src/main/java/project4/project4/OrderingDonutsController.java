@@ -65,6 +65,19 @@ public class OrderingDonutsController {
         donutTypeList = FXCollections.observableArrayList("Yeast Donut", "Cake Donut", "Donut Holes");
         donutTypes.setItems(donutTypeList);
         quantity.setText(ONE);
+        restrictDonutQuantity();
+    }
+
+    private void restrictDonutQuantity() {
+        TextFormatter<String> formatterQuantity = new TextFormatter<>(change -> {
+            if (change.getText().matches("^\\d*[\b]?$")) { // only allow non-digit characters
+                return change; // reject the change
+            } else {
+                return null; // accept the change
+            }
+        });
+        quantity.setTextFormatter(formatterQuantity);
+
     }
 
     @FXML

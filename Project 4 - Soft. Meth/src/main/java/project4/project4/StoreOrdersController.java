@@ -63,29 +63,29 @@ public class StoreOrdersController {
     @FXML
     public void cancelOrder(ActionEvent cancelOrder){
         holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
-        //System.out.println("Current Order" + holderOrder);
-//        System.out.println("Order List" + orders.getValue());
-//        System.out.println("All Orders" + orderList); // holds order number, not actual values
-        for(Order order: orderList){
-            System.out.println(order);
-            System.out.println(orders.getValue());
-            //System.out.println(order.equals(orders.getValue()));
-            if(order.equals(orders.getValue())){ // works
-                if (orderList.size() == 1 || order.equals(orderList.get(0))) {
-                    System.out.println("1st conditional");
-                    contentOfOrder.getItems().clear();
+        if(!orderList.isEmpty()){
+            for(Order order: orderList){
+                if(order.equals(orders.getValue())){ // works
+                    if (orderList.size() == 1 || order.equals(orderList.get(0))) {
+                        System.out.println("1st conditional");
+                        contentOfOrder.getItems().clear();
+                        orders.getItems().remove(orders.getValue());
+                        orders.setValue(null);
+                        totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
+                        break;
+                    }
                     orders.getItems().remove(orders.getValue());
-                    orders.setValue(null);
-                    totalAmount.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
                     break;
                 }
-                orders.getItems().remove(orders.getValue());
-                break;
             }
+        } else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Your Store Has No Current Orders");
+            alert.setContentText("Please wait till orders are placed to export orders.");
+            alert.showAndWait();
         }
-        System.out.println("All Orders After Remove" + orderList);
         orders.setItems(orderList);
-        //System.out.println(orders.getValue().getOrderList());
     }
 
     @FXML

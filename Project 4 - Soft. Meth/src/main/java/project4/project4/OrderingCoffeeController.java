@@ -5,14 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 public class OrderingCoffeeController {
 
@@ -34,19 +29,7 @@ public class OrderingCoffeeController {
     private Button addCoffee;
 
     @FXML
-    private CheckBox sweetCream;
-
-    @FXML
-    private CheckBox frenchVanilla;
-
-    @FXML
-    private CheckBox irishCream;
-
-    @FXML
-    private CheckBox mocha;
-
-    @FXML
-    private CheckBox caramel;
+    private CheckBox sweetCream, frenchVanilla, irishCream, mocha, caramel;
 
     private ObservableList<String> coffeeCupSizesList;
 
@@ -63,12 +46,6 @@ public class OrderingCoffeeController {
             mainController = cafeStoreMainController;
     }
 
-//    private void setCoffeeImage() throws FileNotFoundException {
-//        InputStream imagePath = new FileInputStream("src/main/resources/project4/project4/"+ "Coffee" +".jpeg");
-//        Image image = new Image(imagePath);
-//        coffeeImage.setImage(image);
-//    }
-
     public void initialize () {
         coffeeCupSizesList = FXCollections.observableArrayList("Short","Tall","Grande","Venti");
         coffeeQuantityList = FXCollections.observableArrayList(1,2,3,4,5);
@@ -80,11 +57,7 @@ public class OrderingCoffeeController {
     }
 
     private void setStartingTotal () {
-//        TextFormatter<String> restrictInput = new TextFormatter<String>(change -> {
-//            return null;
-//        });
         coffeeSubtotal.appendText(decimalFormat.format(Coffee.STARTING_TOTAL));
-//        coffeeSubtotal.setTextFormatter(restrictInput);
     }
 
     @FXML
@@ -105,9 +78,7 @@ public class OrderingCoffeeController {
             alert.showAndWait();
             return;
         }
-
         runningSubtotal = (cupPrice + toppingPrice) * quantity;
-
         coffeeSubtotal.replaceText(startIndex, coffeeSubtotal.getText().length(),decimalFormat.format(runningSubtotal));
     }
 

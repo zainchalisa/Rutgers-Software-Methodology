@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
 public class StoreOrdersController {
@@ -50,8 +47,8 @@ public class StoreOrdersController {
         if(!orderList.isEmpty()){
             orders.setItems(orderList);
             orders.getSelectionModel().select(0);
-            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
-            contentOfOrder.setItems(orders.getValue().getOrderList());
+            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrder());
+            contentOfOrder.setItems(orders.getValue().getOrder());
             totalAmount.setText(decimalFormat.format(getTotalAmount()));
         } else{
             totalAmount.setText(decimalFormat.format(STARTING_TOTAL));
@@ -65,7 +62,7 @@ public class StoreOrdersController {
     @FXML
     public void cancelOrder(ActionEvent cancelOrder){
         if(!orderList.isEmpty()){
-            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
+            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrder());
             for(Order order: orderList){
                 if(order.equals(orders.getValue())){ // works
                     if (orderList.size() == 1 || order.equals(orderList.get(0))) {
@@ -104,7 +101,7 @@ public class StoreOrdersController {
 
             FileWriter myWriter = new FileWriter("" + fileChosen);
             for (Order order : orderList){
-                myWriter.write("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrderList().toString() + "\n");
+                myWriter.write("Order Number: #" + order.getUniqueOrderNumber() + " " +  order.getOrder().toString() + "\n");
             }
             myWriter.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -125,7 +122,7 @@ public class StoreOrdersController {
     @FXML
     public void getSelectedOrder(ActionEvent selectOrder){
         if (orders.getValue() != null) {
-            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrderList());
+            holderOrder = FXCollections.observableArrayList(orders.getValue().getOrder());
             contentOfOrder.setItems(holderOrder);
             totalAmount.setText(decimalFormat.format(getTotalAmount()));
         }
@@ -153,7 +150,7 @@ public class StoreOrdersController {
     }
 
     public static void addToStoreOrders(Order customerOrder){
-        holderOrder = FXCollections.observableArrayList(customerOrder.getOrderList());
+        holderOrder = FXCollections.observableArrayList(customerOrder.getOrder());
         orderList.add(customerOrder);
         customerOrder.setOrderList(holderOrder);
     }

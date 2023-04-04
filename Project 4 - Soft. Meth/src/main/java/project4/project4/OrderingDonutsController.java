@@ -12,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.List;
 
 public class OrderingDonutsController {
 
@@ -110,14 +109,14 @@ public class OrderingDonutsController {
                 String donutFlavor = donutFlavors.getSelectionModel().getSelectedItem();
                 Donut newDonut = new Donut(donutType, donutFlavor);
                 int quantityOfDonuts = Integer.parseInt(quantity.getText());
-                for(MenuItem donut: mainController.getDonutOrders().getOrderList()){
+                for(MenuItem donut: mainController.getDonutOrders().getOrder()){
                     if(newDonut.equals(donut)) {
                         dup = true;
                         newDonut.setQuantity(quantityOfDonuts + donut.getQuantity());
                         mainController.getDonutOrders().remove(donut); // removed the original
                         mainController.getDonutOrders().add(newDonut); // adds the new donut with the updated quantity
                         ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
-                        newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+                        newAdditions.addAll(mainController.getDonutOrders().getOrder());
                         donutShoppingCart.setItems(newAdditions);
                     }
                 }
@@ -125,7 +124,7 @@ public class OrderingDonutsController {
                     newDonut.setQuantity(quantityOfDonuts);
                     mainController.getDonutOrders().add(newDonut);
                     ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
-                    newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+                    newAdditions.addAll(mainController.getDonutOrders().getOrder());
                     donutShoppingCart.setItems(newAdditions);
                 }
                 subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
@@ -158,7 +157,7 @@ public class OrderingDonutsController {
         if(donutShoppingCart.getSelectionModel().getSelectedItem() != null){
             mainController.getDonutOrders().remove(donutShoppingCart.getSelectionModel().getSelectedItem());
             ObservableList<MenuItem> newAdditions = FXCollections.observableArrayList();
-            newAdditions.addAll(mainController.getDonutOrders().getOrderList());
+            newAdditions.addAll(mainController.getDonutOrders().getOrder());
             donutShoppingCart.setItems(newAdditions);
             subtotal.setText(String.valueOf("$" + decimalFormat.format(mainController.getDonutOrders().orderPrice())));
             } else{
@@ -171,8 +170,8 @@ public class OrderingDonutsController {
         }
     @FXML
     private void addToOrder(ActionEvent addToBasket){
-        if(!mainController.getDonutOrders().getOrderList().isEmpty()){
-            for(MenuItem donut: mainController.getDonutOrders().getOrderList()){
+        if(!mainController.getDonutOrders().getOrder().isEmpty()){
+            for(MenuItem donut: mainController.getDonutOrders().getOrder()){
                 OrderingBasketController.addToBasket(donut);
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

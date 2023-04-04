@@ -13,33 +13,39 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * This class manages to the main controller which holds 4 other
+ * controllers those include Coffee, Donut, Order Cart, and Store Cart
+ *
+ * @author zainchalisa
+ * @author nanaafriyie
+ */
 public class CafeStoreMainController {
+
+    /**
+     * These JavaFx buttons hold the access to open the 4 other controllers
+     */
     @FXML
     private Button orderDonuts, orderCoffee, yourOrder, storeOrders;
 
     public final Order donutOrders = new Order();
     public final Order coffeeOrders = new Order();
     public final Order myOrder = new Order();
-
-
     public ObservableList<String> storeOrderNumbers = FXCollections.observableArrayList();
 
-
+    /**
+     * This getter method gets the current donut order which is
+     * accessible by the main controller
+     * @return returns the donut order
+     */
     public Order getDonutOrders() {
         return donutOrders;
     }
 
-    public Order getCoffeeOrders() {
-        return coffeeOrders;
-    }
-
-    public Order getMyOrder(){
-        return myOrder;
-    }
-
-
-
+    /**
+     * This method opens up the coffeeOrderButton Controller in a new window
+     * @param coffeeOrderView on action opens a new window
+     */
     @FXML
     protected void coffeeOrderButton(ActionEvent coffeeOrderView) {
         Stage coffeeView = new Stage();
@@ -61,12 +67,10 @@ public class CafeStoreMainController {
         }
     }
 
-    /*
-              The statement below is to pass the reference of the MainController object
-              to the View1Controller object so the View1Controller can call the
-              public methods in the MainController.
-             */
-
+    /**
+     * This method opens up the storeOrder Controller in a new window
+     * @param storeOrdersView on action opens up a new window
+     */
     @FXML
     protected void storeOrdersButton(ActionEvent storeOrdersView) {
         Stage storeOrderView = new Stage();
@@ -88,6 +92,10 @@ public class CafeStoreMainController {
         }
     }
 
+    /**
+     * This method opens up the donutOrder controller in a new window
+     * @param donutsOrderView on action opens a new window
+     */
     @FXML
     protected void donutsOrderButton(ActionEvent donutsOrderView) {
         Stage donutView = new Stage();
@@ -109,6 +117,10 @@ public class CafeStoreMainController {
         }
     }
 
+    /**
+     * opens up the orderButton controller in a new window
+     * @param myOrderView on action opens a new window
+     */
     @FXML
     protected void myOrderButton(ActionEvent myOrderView) {
         Stage myOrdersView = new Stage();
@@ -130,8 +142,4 @@ public class CafeStoreMainController {
         }
     }
 
-
-    public ObservableList<String> getStoreOrderNumbers() {
-        return storeOrderNumbers;
-    }
 }

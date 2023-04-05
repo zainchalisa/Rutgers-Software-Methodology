@@ -9,14 +9,14 @@ import javafx.collections.ObservableList;
  */
 public class Order {
     private static int orderNumber = -3;
-    private int uniqueOrderNumber;
+    private final int uniqueOrderNumber;
     private ObservableList<MenuItem> orderList;
 
     /**
      * This constructor creates the unique orderID and the orderList
      * observable arraylist
      */
-    public Order (){
+    public Order() {
         orderList = FXCollections.observableArrayList();
         orderNumber++;
         this.uniqueOrderNumber = orderNumber;
@@ -24,6 +24,7 @@ public class Order {
 
     /**
      * This method sets the orderList
+     *
      * @param orderList the orderList which you're working with
      */
     public void setOrderList(ObservableList<MenuItem> orderList) {
@@ -33,6 +34,7 @@ public class Order {
     /**
      * This method gets the unique order id which is associated to the
      * current order list
+     *
      * @return returns a unique number which cannot be reused
      */
     public int getUniqueOrderNumber() {
@@ -42,6 +44,7 @@ public class Order {
     /**
      * This method gets the current observable list associated to the
      * menu item
+     *
      * @return returns the current orderList you're working with
      */
     public ObservableList<MenuItem> getOrder() {
@@ -50,40 +53,43 @@ public class Order {
 
     /**
      * This method adds the current Menu Item you're working with
+     *
      * @param obj the obj you're calling to add into the list
      * @return returns a boolean depending on if the item was added or not
      */
-    public boolean add (Object obj){
-        if(obj instanceof MenuItem itemAdded){
+    public boolean add(Object obj) {
+        if (obj instanceof MenuItem itemAdded) {
             orderList.add(itemAdded);
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     /**
      * This method removes the current Menu Item you're working with
+     *
      * @param obj the obj you're calling to remove from the list
      * @return returns a boolean depending on if the item was
      * removed or not
      */
-    public boolean remove (Object obj){
-        if(obj instanceof MenuItem itemRemoved){
+    public boolean remove(Object obj) {
+        if (obj instanceof MenuItem itemRemoved) {
             orderList.remove(itemRemoved);
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     /**
      * This method returns the overall order total cost
+     *
      * @return returns the double value of the order total cost
      */
-    public double orderPrice(){
+    public double orderPrice() {
         double orderPrice = 0;
-        for(MenuItem orderItem : orderList){
+        for (MenuItem orderItem : orderList) {
             orderPrice += orderItem.itemPrice();
         }
         return orderPrice;
@@ -91,6 +97,7 @@ public class Order {
 
     /**
      * This method overrides the toString() for the order class
+     *
      * @return returns the unique order id for the specific list
      */
     @Override

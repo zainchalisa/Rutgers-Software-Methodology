@@ -1,4 +1,10 @@
-Order Number: #3 [(8) Glazed Donut Holes, (1000) Glazed Donut Holes, (3) Grande Coffee [Mocha, Caramel]]
-Order Number: #6 [(2) Tall Coffee [Caramel], (1) Blueberry Donut Holes]
-Order Number: #7 [(1) Vanilla Cake Donut]
-Order Number: #8 [(4) Chocolate Donut Holes]
+Order Number: #1
+(1) Vanilla Cake Donut
+(1) Vanilla Cake Donut
+Total Order Price: $3.58
+-----------------------
+Order Number: #2
+(5) Vanilla Cake Donut
+(4) Tall Coffee [Sweet Cream, French Vanilla, Irish Cream, Mocha, Caramel]
+Total Order Price: $24.11
+-----------------------

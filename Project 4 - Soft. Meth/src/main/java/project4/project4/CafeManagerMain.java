@@ -9,14 +9,14 @@ import java.io.IOException;
 
 public class CafeManagerMain extends Application {
 
-    public CafeManagerMain(){
+    public CafeManagerMain() {
     }
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader =
-                new FXMLLoader(CafeManagerMain.class.getResource("CafeStoreMain" +
-                        "-view.fxml"));
+                new FXMLLoader(CafeManagerMain.class.getResource(
+                        "CafeStoreMain" + "-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Rutgers Cafe Manager");
         stage.setScene(scene);

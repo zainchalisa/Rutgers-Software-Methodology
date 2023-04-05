@@ -107,6 +107,7 @@ public class OrderingDonutsController {
                 "Yeast Donut", "Cake Donut", "Donut Holes");
         donutTypes.setItems(donutTypeList);
         quantity.setText(ONE);
+        subtotal.setText("$0.00");
         restrictDonutQuantity();
     }
 
@@ -306,7 +307,7 @@ public class OrderingDonutsController {
 
         donutShoppingCart.getItems().clear();
         mainController.getDonutOrders().getOrder().clear();
-        subtotal.clear();
+        subtotal.setText("$0.00");
     }
 }
 

@@ -1,10 +1,4 @@
 Order Number: #1
 (1) Vanilla Cake Donut
-(1) Vanilla Cake Donut
-Total Order Price: $3.58
------------------------
-Order Number: #2
-(5) Vanilla Cake Donut
-(4) Tall Coffee [Sweet Cream, French Vanilla, Irish Cream, Mocha, Caramel]
-Total Order Price: $24.11
------------------------
+Total Order Price: $1.79
+-----------------------------

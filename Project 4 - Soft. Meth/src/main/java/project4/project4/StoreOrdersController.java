@@ -148,9 +148,10 @@ public class StoreOrdersController {
                 myWriter.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Exported");
-                alert.setHeaderText("Your Store Orders Have Been Exported");
-                alert.setContentText("Your store orders have been exported " +
-                        "to text file selected.");
+                alert.setHeaderText("Your Store Orders Have Been " +
+                        "Exported");
+                alert.setContentText("Your store orders have been " +
+                        "exported to text file selected.");
                 alert.showAndWait();
             }
         } else {

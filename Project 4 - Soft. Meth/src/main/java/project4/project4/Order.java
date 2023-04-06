@@ -6,9 +6,14 @@ import javafx.collections.ObservableList;
 /**
  * This class creates an order object holding the unique order id and the
  * menu items objects in an observable arraylist
+ *
+ * @author zainchalisa
+ * @author nanaafriyie
+ *
  */
 public class Order {
     private static int orderNumber = -3;
+    public static final int ZERO = 0;
     private final int uniqueOrderNumber;
     private ObservableList<MenuItem> orderList;
 
@@ -88,7 +93,7 @@ public class Order {
      * @return returns the double value of the order total cost
      */
     public double orderPrice() {
-        double orderPrice = 0;
+        double orderPrice = ZERO;
         for (MenuItem orderItem : orderList) {
             orderPrice += orderItem.itemPrice();
         }

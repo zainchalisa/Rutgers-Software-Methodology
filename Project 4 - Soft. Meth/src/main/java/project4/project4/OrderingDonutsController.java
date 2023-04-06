@@ -15,6 +15,10 @@ import java.text.DecimalFormat;
 
 /**
  * This class is used to order the donuts for the users
+ *
+ * @author zainchalisa
+ * @author nanaafriyie
+ *
  */
 public class OrderingDonutsController {
 

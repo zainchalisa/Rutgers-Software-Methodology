@@ -22,6 +22,8 @@ public class OrderingBasketController {
 
     public static final double SALES_TAX = .06625;
 
+    public static final int ZERO = 0;
+
     private static CafeStoreMainController mainController;
 
     private static final ObservableList<MenuItem> currentOrders =
@@ -121,7 +123,7 @@ public class OrderingBasketController {
      * @return returns the subtotal for the order as a double
      */
     private double getSubtotal() {
-        double runningSubtotal = 0;
+        double runningSubtotal = ZERO;
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
         }

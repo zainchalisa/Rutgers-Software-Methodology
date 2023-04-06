@@ -20,6 +20,8 @@ import java.text.DecimalFormat;
 public class OrderingCoffeeController {
 
     private CafeStoreMainController mainController;
+    public static final int ZERO = 0;
+    public static final int NEG_ONE = -1;
 
     /**
      * This is the JavaFX component which shows the image of the coffee
@@ -90,7 +92,7 @@ public class OrderingCoffeeController {
         coffeeCupSizes.setItems(coffeeCupSizesList);
         coffeeQuantity.setItems(coffeeQuantityList);
         setStartingTotal();
-        coffeeQuantity.setValue(coffeeQuantityList.get(0));
+        coffeeQuantity.setValue(coffeeQuantityList.get(ZERO));
         coffeeSubtotal.setEditable(false);
     }
 
@@ -110,13 +112,13 @@ public class OrderingCoffeeController {
     @FXML
     private void calculateSubtotal(ActionEvent event) {
         runningSubtotal = Coffee.STARTING_TOTAL;
-        int startIndex = 0;
+        int startIndex = ZERO;
 
         double cupPrice = checkCupSize();
         double quantity = checkQuantity();
         double toppingPrice = checkTopping();
 
-        if (cupPrice < 0) {
+        if (cupPrice < ZERO) {
             unselectButtons();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
@@ -150,7 +152,7 @@ public class OrderingCoffeeController {
                 return Coffee.VENTI_PRICE;
             }
         }
-        return -1;
+        return NEG_ONE;
     }
 
     /**
@@ -166,7 +168,7 @@ public class OrderingCoffeeController {
      * @return returns the selected toppings as a double value
      */
     private double checkTopping() {
-        double toppingTotal = 0;
+        double toppingTotal = ZERO;
         if (sweetCream.isSelected()) {
             toppingTotal += Coffee.TOPPING_PRICE;
         }
@@ -236,10 +238,10 @@ public class OrderingCoffeeController {
      * been sent to basket
      */
     private void resetOrder() {
-        coffeeQuantity.setValue(coffeeQuantityList.get(0));
+        coffeeQuantity.setValue(coffeeQuantityList.get(ZERO));
         coffeeSubtotal.setText(decimalFormat.format(Coffee.STARTING_TOTAL));
         unselectButtons();
-        coffeeCupSizes.setValue(coffeeCupSizesList.get(0));
+        coffeeCupSizes.setValue(coffeeCupSizesList.get(ZERO));
     }
 
 

@@ -28,6 +28,9 @@ public class StoreOrdersController {
 
     private CafeStoreMainController mainController;
 
+    public static final int ZERO = 0;
+    public static final int ONE = 1;
+
     /**
      * This JavaFX listview holds the content of the different store orders
      */
@@ -65,7 +68,7 @@ public class StoreOrdersController {
     public void initialize() {
         if (!orderList.isEmpty()) {
             orders.setItems(orderList);
-            orders.getSelectionModel().select(0);
+            orders.getSelectionModel().select(ZERO);
             holderOrder =
                     FXCollections.observableArrayList(orders.getValue().
                             getOrder());
@@ -89,8 +92,8 @@ public class StoreOrdersController {
                             getOrder());
             for (Order order : orderList) {
                 if (order.equals(orders.getValue())) { // works
-                    if (orderList.size() == 1 || order.equals(orderList.
-                            get(0))) {
+                    if (orderList.size() == ONE || order.equals(orderList.
+                            get(ZERO))) {
                         contentOfOrder.getItems().clear();
                         orders.getItems().remove(orders.getValue());
                         orders.setValue(null);
@@ -186,7 +189,7 @@ public class StoreOrdersController {
      * @return returns the total amount of the current order selected
      */
     private double getTotalAmount() {
-        double runningSubtotal = 0;
+        double runningSubtotal = ZERO;
         for (MenuItem item : holderOrder) {
             runningSubtotal += item.itemPrice();
         }

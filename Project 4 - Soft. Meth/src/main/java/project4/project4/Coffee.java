@@ -28,6 +28,7 @@ public class Coffee extends MenuItem {
     public static final double GRANDE_PRICE = 2.69;
     public static final double VENTI_PRICE = 3.09;
     public static final double TOPPING_PRICE = 0.30;
+    public static final int ZERO = 0;
 
     /**
      * This constructor contains the necessary parameters to create a
@@ -72,7 +73,7 @@ public class Coffee extends MenuItem {
      * the coffee
      */
     private double sumToppings() {
-        double runningSum = 0;
+        double runningSum = ZERO;
         for (String topping : getCoffeeToppings()) {
             runningSum += TOPPING_PRICE;
         }
@@ -103,7 +104,7 @@ public class Coffee extends MenuItem {
             return super.setItemPrice((VENTI_PRICE + sumToppings()) *
                     super.getQuantity());
         }
-        return 0;
+        return ZERO;
     }
 
     /**

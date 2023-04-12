@@ -1,6 +1,8 @@
-package project4.project4;
+package project5.project5;
 
 import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 /**
  * This class extends menu item and contains the methods neccesary to
@@ -12,7 +14,7 @@ import javafx.collections.ObservableList;
 public class Coffee extends MenuItem {
 
     private final String cupSize;
-    private final ObservableList<String> coffeeToppings;
+    private final ArrayList<String> coffeeToppings;
     public static final String SHORT_CUP = "Short";
     public static final String TALL_CUP = "Tall";
     public static final String GRANDE_CUP = "Grande";
@@ -40,7 +42,7 @@ public class Coffee extends MenuItem {
      * @param coffeeToppings this is the toppings put on the coffee
      */
     public Coffee(String cupSize, int quantity,
-                  ObservableList<String> coffeeToppings) {
+                  ArrayList<String> coffeeToppings) {
         super();
         this.cupSize = cupSize;
         this.coffeeToppings = coffeeToppings;
@@ -61,7 +63,7 @@ public class Coffee extends MenuItem {
      *
      * @return returns the arraylist of coffee toppings
      */
-    public ObservableList<String> getCoffeeToppings() {
+    public ArrayList<String> getCoffeeToppings() {
         return coffeeToppings;
     }
 
@@ -114,7 +116,7 @@ public class Coffee extends MenuItem {
      */
     @Override
     public String toString() {
-        if (!getCoffeeToppings().isEmpty()) {
+        if (getCoffeeToppings().size() == 0 ) {
             return "(" + getQuantity() + ") " + getCupSize() + " Coffee "
                     + getCoffeeToppings();
         } else {

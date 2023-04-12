@@ -1,7 +1,7 @@
-package project4.project4;
+package project5.project5;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import android.view.Menu;
+import java.util.ArrayList;
 
 /**
  * This class creates an order object holding the unique order id and the
@@ -15,14 +15,14 @@ public class Order {
     private static int orderNumber = -3;
     public static final int ZERO = 0;
     private final int uniqueOrderNumber;
-    private ObservableList<MenuItem> orderList;
+    private ArrayList<MenuItem> orderList;
 
     /**
      * This constructor creates the unique orderID and the orderList
      * observable arraylist
      */
     public Order() {
-        orderList = FXCollections.observableArrayList();
+        orderList = new  ArrayList<MenuItem>();
         orderNumber++;
         this.uniqueOrderNumber = orderNumber;
     }
@@ -32,7 +32,7 @@ public class Order {
      *
      * @param orderList the orderList which you're working with
      */
-    public void setOrderList(ObservableList<MenuItem> orderList) {
+    public void setOrderList(ArrayList<MenuItem> orderList) {
         this.orderList = orderList;
     }
 
@@ -52,7 +52,7 @@ public class Order {
      *
      * @return returns the current orderList you're working with
      */
-    public ObservableList<MenuItem> getOrder() {
+    public ArrayList<MenuItem> getOrder() {
         return orderList;
     }
 

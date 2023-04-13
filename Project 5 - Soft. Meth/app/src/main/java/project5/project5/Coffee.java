@@ -1,7 +1,5 @@
 package project5.project5;
 
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 
 /**
@@ -116,7 +114,7 @@ public class Coffee extends MenuItem {
      */
     @Override
     public String toString() {
-        if (getCoffeeToppings().size() == 0 ) {
+        if (getCoffeeToppings().size() == ZERO ) {
             return "(" + getQuantity() + ") " + getCupSize() + " Coffee "
                     + getCoffeeToppings();
         } else {

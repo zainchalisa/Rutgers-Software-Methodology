@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/donutOrderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
@@ -29,15 +29,15 @@
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="30dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
+        app:layout_constraintBottom_toTopOf="@+id/currentOrderButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/donutOrderButton"
         app:srcCompat="@drawable/main_coffee"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/currentOrderButton"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_marginStart="20dp"
@@ -47,13 +47,13 @@
         android:baselineAlignBottom="false"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintEnd_toStartOf="@+id/storeOrderButton"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/main_cart"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/storeOrderButton"
         android:layout_width="166dp"
         android:layout_height="166dp"
         android:layout_marginStart="12dp"
@@ -62,7 +62,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toEndOf="@+id/currentOrderButton"
         app:srcCompat="@drawable/main_store"
         tools:ignore="MissingConstraints" />
 

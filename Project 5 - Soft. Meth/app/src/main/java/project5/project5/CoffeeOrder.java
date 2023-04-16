@@ -12,6 +12,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee_order);
+
     }
 
     @Override

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,11 +13,54 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       ImageButton coffeeButton = findViewById(R.id.CoffeeOrderButton);
-       coffeeButton.setOnClickListener(v ->
-               startActivity(new Intent(MainActivity.this, CoffeeOrder.class)));
-
-
+        createCoffeeView();
+        createDonutView();
+        createCurrentOrderView();
+        createStoreOrderView();
     }
+
+    public void createCoffeeView(){
+        ImageButton coffeeButton = findViewById(R.id.CoffeeOrderButton);
+        coffeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CoffeeOrder.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void createDonutView(){
+        ImageButton donutButton = findViewById(R.id.donutOrderButton);
+        donutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DonutOrder.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void createCurrentOrderView(){
+        ImageButton currentOrderButton = findViewById(R.id.currentOrderButton);
+        currentOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CurrentOrder.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void createStoreOrderView(){
+        ImageButton storeOrderButton = findViewById(R.id.storeOrderButton);
+        storeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, StoreOrders.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 }

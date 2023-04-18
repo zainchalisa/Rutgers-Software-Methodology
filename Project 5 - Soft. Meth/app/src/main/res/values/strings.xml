@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Rutgers Cafe</string>
+    <string-array name="donutItemNames">
+        <item>Chocolate Yeast Donut</item>
+        <item>Vanilla Yeast Donut</item>
+        <item>Jelly Yeast Donut</item>
+        <item>Sugar Yeast Donut</item>
+        <item>Glazed Yeast Donut</item>
+        <item>Boston Creme Cake Donut</item>
+        <item>Vanilla Cake Donut</item>
+        <item>Strawberry Cake Donut</item>
+        <item>Chocolate Donut Holes</item>
+        <item>Glazed Donut Holes</item>
+        <item>Blueberry Donut Holes</item>
+    </string-array>
 </resources>

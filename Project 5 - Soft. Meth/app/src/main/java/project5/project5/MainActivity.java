@@ -7,7 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<DonutItem> donutItems = new ArrayList<>();
+
+    private int [] donutImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void createDonutItems() {
+        String [] donutNames = getResources().getStringArray(R.array.donutItemNames);
+
+        for (int i = 0; i < donutNames.length; i++) {
+            donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"1.39"));
+        }
     }
 
 }

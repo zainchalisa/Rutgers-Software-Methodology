@@ -66,12 +66,12 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/spinner2"
+                app:layout_constraintStart_toEndOf="@+id/spn_quantity"
                 app:layout_constraintTop_toBottomOf="@+id/tv_flavor"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spn_quantity"
                 android:layout_width="60dp"
                 android:layout_height="23dp"
                 android:layout_marginStart="11dp"

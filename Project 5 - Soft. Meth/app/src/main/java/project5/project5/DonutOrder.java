@@ -17,14 +17,6 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
 
     private ArrayList<DonutItem> donutItems = new ArrayList<>();
 
-//    private Spinner spinner;
-//
-//    private TextView textView;
-//
-//    private String [] donutQuantity = {"1","2","3","4","5"};
-//
-//    private ArrayAdapter<String> spnAdapter;
-
     private int [] donutImages = {R.drawable.chocolate_yeast_donut,
             R.drawable.vanilla_yeast_donut, R.drawable.jelly_yeast_donut,
             R.drawable.sugar_yeast_donut, R.drawable.glazed_yeast_donut,
@@ -38,9 +30,6 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donut_order);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//        spinner = findViewById(R.id.spn_quantity);
-//        spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
-//        spinner.setAdapter(spnAdapter);
         createDonutItems();
         DonutItemsAdapter adapter = new DonutItemsAdapter(this,donutItems); // this corresponds to the current DonutOrder Activity
         recyclerView.setAdapter(adapter);
@@ -62,7 +51,13 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
         String [] donutNames = getResources().getStringArray(R.array.donutItemNames);
 
         for (int i = 0; i < donutNames.length; i++) {
-            donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"1.39"));
+            if (donutNames[i].contains(Donut.YEAST_DONUT)) {
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.YEAST_DONUT_PRICE));
+            } else if (donutNames[i].contains(Donut.CAKE_DONUT)) {
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.CAKE_DONUT_PRICE));
+            } else if (donutNames[i].contains(Donut.DONUT_HOLES)) {
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.DONUT_HOLES_PRICE));
+            }
         }
     }
 

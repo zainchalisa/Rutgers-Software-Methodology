@@ -16,13 +16,18 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
     private Context context;
     private ArrayList<DonutItem> donutItems;
 
+    private ArrayAdapter<String> spnAdapter;
+
+    String [] quantity = {"1","2","3","4","5"};
+
     public DonutItemsAdapter(Context context, ArrayList<DonutItem> donutItems) {
         this.context = context;
         this.donutItems = donutItems;
+
     }
     @NonNull
     @Override
-    public DonutItemsHolder onCreateViewHolder(
+    public DonutItemsHolder onCreateViewHolder( // creates base layout of row on screen
             @NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
@@ -31,10 +36,13 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
     }
 
     @Override
-    public void onBindViewHolder(
+    public void onBindViewHolder( // populates row with specific data
             @NonNull DonutItemsHolder holder,
             int position) {
-        ArrayAdapter<String> spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
+
+        spnAdapter = new ArrayAdapter<String>(holder.itemView.getContext(),android.R.layout.simple_spinner_item,quantity);
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        holder.spn_quantity.setAdapter(spnAdapter);
         holder.tv_name.setText(donutItems.get(position).getDonutName());
         holder.tv_price.setText(donutItems.get(position).getDonutPrice());
         holder.im_item.setImageResource(donutItems.get(position).getImage());
@@ -51,8 +59,8 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         private ImageView im_item;
         private Button btn_add;
         private Spinner spn_quantity;
-        private TextView textView;
-        private String [] donutQuantity = {"1","2","3","4","5"};
+        //private TextView textView;
+        //private String [] donutQuantity = {"1","2","3","4","5"};
         //private ArrayAdapter<String> spnAdapter;
         private ConstraintLayout parentLayout; //this is the row layout
 
@@ -63,9 +71,6 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
             spn_quantity = itemView.findViewById(R.id.spn_quantity);
-
-            //spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
-            spn_quantity.setAdapter(spnAdapter);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 
@@ -97,12 +102,14 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
          * @param itemView
          */
         private void setAddButtonOnClick(@NonNull View itemView) {
+
+            spn_quantity = itemView.findViewById(R.id.spn_quantity);
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
                     alert.setTitle("Add to order");
-                    alert.setMessage(tv_name.getText().toString());
+                    alert.setMessage(spn_quantity.getSelectedItem().toString() + " " + tv_name.getText().toString() + "(s)");
                     //handle the "YES" click
                     alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

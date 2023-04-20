@@ -47,7 +47,7 @@
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="$1.39"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -72,10 +72,10 @@
 
             <Spinner
                 android:id="@+id/spn_quantity"
-                android:layout_width="60dp"
-                android:layout_height="23dp"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="11dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toEndOf="@+id/tv_price"
                 app:layout_constraintTop_toBottomOf="@+id/tv_flavor" />
         </androidx.constraintlayout.widget.ConstraintLayout>

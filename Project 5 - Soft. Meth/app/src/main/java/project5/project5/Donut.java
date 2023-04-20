@@ -1,5 +1,7 @@
 package project5.project5;
 
+import java.util.ArrayList;
+
 /**
  * This class extends menu item to create a donut object
  *
@@ -10,9 +12,9 @@ public class Donut extends MenuItem {
 
     public String donutType;
     public String donutFlavor;
-    private static final String YEAST_DONUT = "Yeast Donut";
-    private static final String CAKE_DONUT = "Cake Donut";
-    private static final String DONUT_HOLES = "Donut Holes";
+    public static final String YEAST_DONUT = "Yeast Donut";
+    public static final String CAKE_DONUT = "Cake Donut";
+    public static final String DONUT_HOLES = "Donut Holes";
     private static final String CHOCOLATE = "Chocolate";
     private static final String VANILLA = "Vanilla";
     private static final String JELLY = "Jelly";
@@ -22,9 +24,12 @@ public class Donut extends MenuItem {
     private static final String BOSTON_CREME = "Boston Creme";
     private static final String BLUEBERRY = "Blueberry";
     private static final String STRAWBERRY = "Strawberry";
-    private static final double YEAST_DONUT_PRICE = 1.59;
-    private static final double CAKE_DONUT_PRICE = 1.79;
-    private static final double DONUT_HOLES_PRICE = 0.39;
+    public static final double YEAST_DONUT_PRICE = 1.59;
+    public static final double CAKE_DONUT_PRICE = 1.79;
+    public static final double DONUT_HOLES_PRICE = 0.39;
+
+    //public static final String [] DONUT_QUANTITY = {"1","2","3","4","5"};
+
 
     /**
      * This constructor creates the donut object

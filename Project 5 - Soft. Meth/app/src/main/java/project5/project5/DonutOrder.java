@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,14 @@ import java.util.ArrayList;
 public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private ArrayList<DonutItem> donutItems = new ArrayList<>();
+
+//    private Spinner spinner;
+//
+//    private TextView textView;
+//
+//    private String [] donutQuantity = {"1","2","3","4","5"};
+//
+//    private ArrayAdapter<String> spnAdapter;
 
     private int [] donutImages = {R.drawable.chocolate_yeast_donut,
             R.drawable.vanilla_yeast_donut, R.drawable.jelly_yeast_donut,
@@ -27,6 +38,9 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donut_order);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//        spinner = findViewById(R.id.spn_quantity);
+//        spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
+//        spinner.setAdapter(spnAdapter);
         createDonutItems();
         DonutItemsAdapter adapter = new DonutItemsAdapter(this,donutItems); // this corresponds to the current DonutOrder Activity
         recyclerView.setAdapter(adapter);

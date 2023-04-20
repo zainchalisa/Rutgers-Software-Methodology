@@ -25,11 +25,11 @@
                 android:id="@+id/tv_flavor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="24dp"
                 android:text="Glazed Donut"
                 android:textColor="@color/black"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/im_item"
                 app:layout_constraintTop_toTopOf="parent" />

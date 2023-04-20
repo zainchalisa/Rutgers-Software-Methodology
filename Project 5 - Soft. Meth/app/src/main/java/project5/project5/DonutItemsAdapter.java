@@ -34,9 +34,11 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
     public void onBindViewHolder(
             @NonNull DonutItemsHolder holder,
             int position) {
+        ArrayAdapter<String> spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
         holder.tv_name.setText(donutItems.get(position).getDonutName());
         holder.tv_price.setText(donutItems.get(position).getDonutPrice());
         holder.im_item.setImageResource(donutItems.get(position).getImage());
+
     }
 
     @Override
@@ -49,6 +51,9 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         private ImageView im_item;
         private Button btn_add;
         private Spinner spn_quantity;
+        private TextView textView;
+        private String [] donutQuantity = {"1","2","3","4","5"};
+        //private ArrayAdapter<String> spnAdapter;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public DonutItemsHolder(@NonNull View itemView) {
@@ -58,6 +63,9 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             im_item = itemView.findViewById(R.id.im_item);
             btn_add = itemView.findViewById(R.id.btn_add);
             spn_quantity = itemView.findViewById(R.id.spn_quantity);
+
+            //spnAdapter = new ArrayAdapter<String>(this,R.layout.row_view,donutQuantity);
+            spn_quantity.setAdapter(spnAdapter);
             parentLayout = itemView.findViewById(R.id.rowLayout);
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
 

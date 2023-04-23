@@ -9,21 +9,34 @@
         android:id="@+id/textView3"
         android:layout_width="133dp"
         android:layout_height="45dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="76dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="68dp" />
+        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="243dp"
-        tools:layout_editor_absoluteY="68dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_width="152dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="28dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/main_store" />
 
     <ListView
         android:layout_width="353dp"
         android:layout_height="480dp"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="222dp" />
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

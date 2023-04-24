@@ -1,5 +1,7 @@
 package project5.project5;
 
+import android.database.CursorIndexOutOfBoundsException;
+
 /**
  * This class is the abstract and used to create the Donut and Coffee
  * objects
@@ -48,5 +50,13 @@ public abstract class MenuItem {
      */
     public int getQuantity() {
         return quantity;
+    }
+
+    public boolean compare(MenuItem item) {
+        if(item instanceof Coffee && this instanceof Coffee){
+            return true;
+        } else{
+            return item instanceof Donut && this instanceof Donut;
+        }
     }
 }

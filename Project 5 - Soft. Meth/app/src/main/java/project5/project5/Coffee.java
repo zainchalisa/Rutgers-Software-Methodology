@@ -46,6 +46,12 @@ public class Coffee extends MenuItem {
         this.coffeeToppings = coffeeToppings;
     }
 
+    public Coffee(String cupSize, ArrayList<String> coffeeToppings){
+        super();
+        this.cupSize = cupSize;
+        this.coffeeToppings = coffeeToppings;
+    }
+
     /**
      * This method gets the cupsize of the coffee
      *

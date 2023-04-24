@@ -43,15 +43,15 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-        int position = recyclerView.getChildLayoutPosition((View) adapterView.getParent());
-
-        // Get the DonutItem at the selected position
-        DonutItem selectedItem = donutItems.get(position);
-
-        // Update the quantity value of the selected item
-        selectedItem.setQuantity(i + 1);
-
-        selectedItem.setDonutPrice(selectedItem.getQuantity() * selectedItem.getDonutPrice());
+//        int position = recyclerView.getChildLayoutPosition((View) adapterView.getParent());
+//
+//        // Get the DonutItem at the selected position
+//        DonutItem selectedItem = donutItems.get(position);
+//
+//        // Update the quantity value of the selected item
+//        selectedItem.setQuantity(i + 1);
+//
+//        selectedItem.setDonutPrice(selectedItem.getQuantity() * selectedItem.getDonutPrice());
 
 
         // Notify the adapter that the data has changed
@@ -68,11 +68,11 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
 
         for (int i = 0; i < donutNames.length; i++) {
             if (donutNames[i].contains(Donut.YEAST_DONUT)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.YEAST_DONUT_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.YEAST_DONUT_PRICE,Donut.YEAST_DONUT));
             } else if (donutNames[i].contains(Donut.CAKE_DONUT)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.CAKE_DONUT_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.CAKE_DONUT_PRICE,Donut.CAKE_DONUT));
             } else if (donutNames[i].contains(Donut.DONUT_HOLES)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.DONUT_HOLES_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.DONUT_HOLES_PRICE,Donut.DONUT_HOLES));
             }
         }
     }

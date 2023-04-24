@@ -4,16 +4,18 @@ public class DonutItem {
     private String donutName;
     private int image;
     private double donutPrice;
+    private String donutType;
 
     private int quantity;
 
     private static final int DEFAULT_QUANTITY = 1;
 
-    public DonutItem(String donutName,int image,double donutPrice) {
+    public DonutItem(String donutName,int image,double donutPrice,String donutType) {
         this.donutName = donutName;
         this.image = image;
         this.donutPrice = donutPrice;
         this.quantity = DEFAULT_QUANTITY;
+        this.donutType = donutType;
     }
 
     public String getDonutName() {
@@ -30,8 +32,8 @@ public class DonutItem {
 
     public int getQuantity() { return quantity; }
 
-    public double getTotalPrice() {
-        return donutPrice * quantity;
+    public String getDonutType() {
+        return donutType;
     }
 
     public void setQuantity(int quantity) {

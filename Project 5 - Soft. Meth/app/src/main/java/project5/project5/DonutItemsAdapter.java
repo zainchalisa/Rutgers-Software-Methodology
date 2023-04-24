@@ -65,11 +65,11 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", currentItem.getDonutPrice()));
 
         // Set the quantity of the DonutItem
-        holder.spn_quantity.setSelection(currentItem.getQuantity() - 1);
+        //holder.spn_quantity.setSelection(currentItem.getQuantity() - 1);
 
         // Update the total price of the DonutItem
-        double totalPrice = currentItem.getDonutPrice() * currentItem.getQuantity();
-        holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", totalPrice));
+        //double totalPrice = currentItem.getDonutPrice() * currentItem.getQuantity();
+        //holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", totalPrice));
     }
 
 
@@ -85,11 +85,11 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        DonutItem selectedItem = donutItems.get(position); // aren't I selecting the spinner
-        selectedItem.setQuantity(selectedItem.getQuantity() + 1);
-        double price = selectedItem.getDonutPrice() * selectedItem.getQuantity();
-        selectedItem.setDonutPrice(price);
-        notifyItemChanged(position);
+//        DonutItem selectedItem = donutItems.get(position); // aren't I selecting the spinner
+//        selectedItem.setQuantity(selectedItem.getQuantity() + 1);
+//        double price = selectedItem.getDonutPrice() * selectedItem.getQuantity();
+//        selectedItem.setDonutPrice(price);
+//        notifyItemChanged(position);
 
     }
 
@@ -148,9 +148,14 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
 //                    double price = Double.parseDouble(priceStr); // needs to be donutPrice instead of price
 
                     DonutItem item = itemList.get(getAdapterPosition());
-                    item.setDonutPrice(item.getDonutPrice()*quantity);
-                    tv_price.setText("$" + String.format("%.2f",item.getDonutPrice() * quantity));
-
+                    if (item.getDonutType().equals(Donut.YEAST_DONUT)) {
+                        item.setDonutPrice(Donut.YEAST_DONUT_PRICE*quantity);
+                    } else if (item.getDonutType().equals(Donut.CAKE_DONUT)) {
+                        item.setDonutPrice(Donut.CAKE_DONUT_PRICE*quantity);
+                    } else if (item.getDonutType().equals(Donut.DONUT_HOLES)) {
+                        item.setDonutPrice(Donut.DONUT_HOLES_PRICE*quantity);
+                    }
+                    tv_price.setText("$" + String.format("%.2f",item.getDonutPrice()));
                 }
 
                 @Override

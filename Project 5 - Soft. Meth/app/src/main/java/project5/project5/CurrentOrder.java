@@ -5,9 +5,12 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableList;
+
 
 public class CurrentOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private static final ObservableList<MenuItem> currentOrders;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

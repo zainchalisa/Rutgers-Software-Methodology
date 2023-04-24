@@ -103,12 +103,8 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         private ImageView im_item;
         private Button btn_add;
         private Spinner spn_quantity;
-
         private List<DonutItem> itemList;
         private DonutItemClickListener listener;
-        //private TextView textView;
-        //private String [] donutQuantity = {"1","2","3","4","5"};
-        //private ArrayAdapter<String> spnAdapter;
         private ConstraintLayout parentLayout; //this is the row layout
 
         public DonutItemsHolder(@NonNull View itemView, List<DonutItem> itemList, DonutItemClickListener listener) {
@@ -123,12 +119,6 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             this.listener = listener;
 
             setAddButtonOnClick(itemView); //register the onClicklistener for the button on each row.
-
-
-            /* set onClickListener for the row layout,
-             * clicking on a row will navigate to another Activity
-             */
-
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -136,17 +126,11 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     listener.onItemClick(itemList.get(position));
                 }
             });
-
             spn_quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String quantityStr = parent.getItemAtPosition(position).toString();
                     int quantity = Integer.parseInt(quantityStr);
-
-
-//                    String priceStr = tv_price.getText().toString().replaceAll("[^\\d.]", "");
-//                    double price = Double.parseDouble(priceStr); // needs to be donutPrice instead of price
-
                     DonutItem item = itemList.get(getAdapterPosition());
                     if (item.getDonutType().equals(Donut.YEAST_DONUT)) {
                         item.setDonutPrice(Donut.YEAST_DONUT_PRICE*quantity);
@@ -157,15 +141,10 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     }
                     tv_price.setText("$" + String.format("%.2f",item.getDonutPrice()));
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
-
             });
-
-
         }
 
         /**
@@ -198,6 +177,7 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     });
                     AlertDialog dialog = alert.create();
                     dialog.show();
+
                 }
             });
         }

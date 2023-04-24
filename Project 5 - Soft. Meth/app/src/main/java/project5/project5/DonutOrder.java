@@ -16,6 +16,8 @@ import java.util.ArrayList;
 public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private ArrayList<DonutItem> donutItems = new ArrayList<>();
+    private DonutItemsAdapter adapter;
+    private RecyclerView recyclerView;
 
     private int [] donutImages = {R.drawable.chocolate_yeast_donut,
             R.drawable.vanilla_yeast_donut, R.drawable.jelly_yeast_donut,
@@ -31,7 +33,7 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
         setContentView(R.layout.activity_donut_order);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         createDonutItems();
-        DonutItemsAdapter adapter = new DonutItemsAdapter(this,donutItems); // this corresponds to the current DonutOrder Activity
+        adapter = new DonutItemsAdapter(this,donutItems); // this corresponds to the current DonutOrder Activity
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -40,6 +42,20 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+
+        int position = recyclerView.getChildLayoutPosition((View) adapterView.getParent());
+
+        // Get the DonutItem at the selected position
+        DonutItem selectedItem = donutItems.get(position);
+
+        // Update the quantity value of the selected item
+        selectedItem.setQuantity(i + 1);
+
+        selectedItem.setDonutPrice(selectedItem.getQuantity() * selectedItem.getDonutPrice());
+
+
+        // Notify the adapter that the data has changed
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -47,16 +63,16 @@ public class DonutOrder extends AppCompatActivity implements AdapterView.OnItemS
 
     }
 
-    private void createDonutItems() {
+    private void createDonutItems() { // Initializes Donut
         String [] donutNames = getResources().getStringArray(R.array.donutItemNames);
 
         for (int i = 0; i < donutNames.length; i++) {
             if (donutNames[i].contains(Donut.YEAST_DONUT)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.YEAST_DONUT_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.YEAST_DONUT_PRICE));
             } else if (donutNames[i].contains(Donut.CAKE_DONUT)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.CAKE_DONUT_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.CAKE_DONUT_PRICE));
             } else if (donutNames[i].contains(Donut.DONUT_HOLES)) {
-                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],"$" + Donut.DONUT_HOLES_PRICE));
+                donutItems.add(new DonutItem((donutNames[i]),donutImages[i],Donut.DONUT_HOLES_PRICE));
             }
         }
     }

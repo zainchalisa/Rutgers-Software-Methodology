@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/main_coffee" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/sweetCream"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -39,45 +39,45 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/frenchVanilla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:text="French Vanilla"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/sweetCream"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/caramel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Caramel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
+        app:layout_constraintStart_toEndOf="@+id/frenchVanilla"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/irishCream"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Irish Cream"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/sweetCream" />
 
     <CheckBox
-        android:id="@+id/checkBox5"
+        android:id="@+id/mocha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="180dp"
         android:text="Mocha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/frenchVanilla" />
 
     <Spinner
         android:id="@+id/coffeeSizes"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintTop_toBottomOf="@+id/irishCream" />
 
     <TextView
         android:id="@+id/textView4"
@@ -117,6 +117,6 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="80dp"
         app:layout_constraintStart_toEndOf="@+id/coffeeSizes"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        app:layout_constraintTop_toBottomOf="@+id/caramel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -139,6 +139,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
 
         if (duplicate != true){
             coffeeOrder.add(newCoffee);
+            CurrentOrder.addToBasket(newCoffee);
         }
 
         sweetCream.setChecked(false);

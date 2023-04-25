@@ -1,6 +1,6 @@
 package project5.project5;
 
-public class DonutItem {
+public class DonutItem extends MenuItem {
     private String donutName;
     private int image;
     private double donutPrice;
@@ -34,6 +34,11 @@ public class DonutItem {
 
     public String getDonutType() {
         return donutType;
+    }
+
+    @Override
+    public double itemPrice() {
+        return 0;
     }
 
     public void setQuantity(int quantity) {

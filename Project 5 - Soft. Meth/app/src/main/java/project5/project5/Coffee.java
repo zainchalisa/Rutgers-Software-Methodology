@@ -132,7 +132,7 @@ public class Coffee extends MenuItem {
      */
     @Override
     public String toString() {
-        if (getCoffeeToppings().size() == ZERO ) {
+        if (getCoffeeToppings().size() != ZERO ) {
             return "(" + getQuantity() + ") " + getCupSize() + " Coffee "
                     + getCoffeeToppings();
         } else {

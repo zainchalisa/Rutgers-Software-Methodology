@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -130,21 +131,20 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
 
     public void addItem(){
         Coffee newCoffee = newCoffeeItem();
-        //CurrentOrder.addToBasket(newCoffee);
-        boolean duplicate = false;
-
-        for(MenuItem item : CurrentOrder.getOrder()){
+        boolean sameCoffee = false;
+        Iterator<MenuItem> iterator = CurrentOrder.getOrder().iterator();
+        while(iterator.hasNext()){
+            MenuItem item = iterator.next();
             if(item.equals(newCoffee)){
-                duplicate = true;
-                System.out.println(item.getQuantity());
-                System.out.println(newCoffee.getQuantity());
+                sameCoffee = true;
                 newCoffee.setQuantity(item.getQuantity() + newCoffee.getQuantity());
-                CurrentOrder.getOrder().remove(newCoffee);
+                iterator.remove();
                 CurrentOrder.getOrder().add(newCoffee);
             }
         }
 
-        if(duplicate != true){
+
+        if(sameCoffee != true){
             CurrentOrder.addToBasket(newCoffee);
         }
 

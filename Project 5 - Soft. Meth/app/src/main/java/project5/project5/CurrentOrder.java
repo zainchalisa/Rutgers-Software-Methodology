@@ -35,6 +35,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
     public static ObservableArrayList<MenuItem> getOrder() {
         return currentOrders;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,17 +44,20 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         ListView listView = findViewById(R.id.order_list);
         listView.setAdapter(adapter);
         order.setOrderList(currentOrders);
-        order_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(order_list != null){
+            order_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            }
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        }
+
         createViews();
         calculateCart();
 

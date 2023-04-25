@@ -2,6 +2,7 @@ package project5.project5;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,17 +130,21 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
 
     public void addItem(){
         Coffee newCoffee = newCoffeeItem();
+        //CurrentOrder.addToBasket(newCoffee);
         boolean duplicate = false;
 
-        for (MenuItem item: coffeeOrder.getOrder()) {
-            if(item.compare(newCoffee)){
+        for(MenuItem item : CurrentOrder.getOrder()){
+            if(item.equals(newCoffee)){
                 duplicate = true;
+                System.out.println(item.getQuantity());
+                System.out.println(newCoffee.getQuantity());
                 newCoffee.setQuantity(item.getQuantity() + newCoffee.getQuantity());
+                CurrentOrder.getOrder().remove(newCoffee);
+                CurrentOrder.getOrder().add(newCoffee);
             }
         }
 
-        if (duplicate != true){
-            coffeeOrder.add(newCoffee);
+        if(duplicate != true){
             CurrentOrder.addToBasket(newCoffee);
         }
 
@@ -157,7 +163,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         String coffeeSize = getCoffeeSize(coffeeSizeIndex);
         int coffeeQuantityIndex = quantity.getSelectedItemPosition();
         int coffeeQuantity = coffeeQuantityIndex + INCREMENT;
-        ArrayList<String> toppings = new ArrayList<>();
+        ObservableArrayList<String> toppings = new ObservableArrayList<>();
         toppingsSelected(toppings);
         Coffee newCoffee = new Coffee(coffeeSize, toppings);
         newCoffee.setQuantity(coffeeQuantity);

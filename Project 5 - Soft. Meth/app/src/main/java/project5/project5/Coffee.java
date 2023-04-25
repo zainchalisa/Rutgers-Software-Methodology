@@ -1,5 +1,7 @@
 package project5.project5;
 
+import androidx.databinding.ObservableArrayList;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 public class Coffee extends MenuItem {
 
     private final String cupSize;
-    private final ArrayList<String> coffeeToppings;
+    private final ObservableArrayList<String> coffeeToppings;
     public static final String SHORT_CUP = "Short";
     public static final String TALL_CUP = "Tall";
     public static final String GRANDE_CUP = "Grande";
@@ -40,13 +42,13 @@ public class Coffee extends MenuItem {
      * @param coffeeToppings this is the toppings put on the coffee
      */
     public Coffee(String cupSize, int quantity,
-                  ArrayList<String> coffeeToppings) {
+                  ObservableArrayList<String> coffeeToppings) {
         super();
         this.cupSize = cupSize;
         this.coffeeToppings = coffeeToppings;
     }
 
-    public Coffee(String cupSize, ArrayList<String> coffeeToppings){
+    public Coffee(String cupSize, ObservableArrayList<String> coffeeToppings){
         super();
         this.cupSize = cupSize;
         this.coffeeToppings = coffeeToppings;
@@ -67,7 +69,7 @@ public class Coffee extends MenuItem {
      *
      * @return returns the arraylist of coffee toppings
      */
-    public ArrayList<String> getCoffeeToppings() {
+    public ObservableArrayList<String> getCoffeeToppings() {
         return coffeeToppings;
     }
 
@@ -111,6 +113,16 @@ public class Coffee extends MenuItem {
                     super.getQuantity());
         }
         return ZERO;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Coffee coffee) {
+            return (coffee.coffeeToppings.equals(this.coffeeToppings) && coffee.
+                    cupSize.equals(this.cupSize));
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
@@ -15,12 +16,14 @@ import java.util.ArrayList;
 
 public class CurrentOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private TextView orderNumberView;
+    private TextView subtotalView;
+    private TextView salesTaxView;
+    private TextView totalAmountView;
     private static ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
-
     public static ObservableArrayList<MenuItem> getOrder() {
         return currentOrders;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +31,16 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<MenuItem> adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, currentOrders);;
         ListView listView = findViewById(R.id.order_list);
         listView.setAdapter(adapter);
+        createViews();
 
     }
 
+    private void createViews() {
+        orderNumberView = findViewById(R.id.orderNumber);
+        subtotalView = findViewById(R.id.subtotalView);
+        salesTaxView = findViewById(R.id.salesTaxView);
+        totalAmountView = findViewById(R.id.totalAmountView);
+    }
 
     public static void addToBasket(MenuItem item) {
         currentOrders.add(item);

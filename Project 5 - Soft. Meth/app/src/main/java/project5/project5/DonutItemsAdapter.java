@@ -53,7 +53,7 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         // Set the name, image, and price of the DonutItem
         holder.tv_name.setText(currentItem.getDonutName());
         holder.im_item.setImageResource(currentItem.getImage());
-        holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", currentItem.getDonutPrice()));
+        holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", currentItem.itemPrice()));
     }
 
 
@@ -111,13 +111,13 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     DonutItem item = itemList.get(getAdapterPosition());
                     item.setQuantity(quantity);
                     if (item.getDonutType().equals(Donut.YEAST_DONUT)) {
-                        item.setDonutPrice(Donut.YEAST_DONUT_PRICE*quantity);
+                        item.setItemPrice(Donut.YEAST_DONUT_PRICE*quantity);
                     } else if (item.getDonutType().equals(Donut.CAKE_DONUT)) {
-                        item.setDonutPrice(Donut.CAKE_DONUT_PRICE*quantity);
+                        item.setItemPrice(Donut.CAKE_DONUT_PRICE*quantity);
                     } else if (item.getDonutType().equals(Donut.DONUT_HOLES)) {
-                        item.setDonutPrice(Donut.DONUT_HOLES_PRICE*quantity);
+                        item.setItemPrice(Donut.DONUT_HOLES_PRICE*quantity);
                     }
-                    tv_price.setText("$" + String.format("%.2f",item.getDonutPrice()));
+                    tv_price.setText("$" + String.format("%.2f",item.itemPrice()));
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {

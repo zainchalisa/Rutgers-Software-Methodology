@@ -3,17 +3,13 @@ package project5.project5;
 public class DonutItem extends Donut {
     private String donutName;
     private int image;
-    private double donutPrice;
     private String donutType;
-    private int quantity;
-    private static final int DEFAULT_QUANTITY = 1;
 
-    public DonutItem(String donutName,int image,double donutPrice,String donutType) {
+    public DonutItem(String donutName,int image,double price,String donutType) {
         super();
+        super.setItemPrice(price);
         this.donutName = donutName;
         this.image = image;
-        this.donutPrice = donutPrice;
-        this.quantity = DEFAULT_QUANTITY;
         this.donutType = donutType;
     }
 
@@ -25,23 +21,26 @@ public class DonutItem extends Donut {
         return image;
     }
 
-    public double getDonutPrice() {
-        return donutPrice;
-    }
-
-    public int getQuantity() { return quantity; }
-
     public String getDonutType() {
         return donutType;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    @Override
+    public double itemPrice() {
+        if (donutType.equals(YEAST_DONUT)) {
+            return super.setItemPrice(YEAST_DONUT_PRICE * super.
+                    getQuantity());
+        }
+        if (donutType.equals(CAKE_DONUT)) {
+            return super.setItemPrice(CAKE_DONUT_PRICE * super.
+                    getQuantity());
+        }
+        if (donutType.equals(DONUT_HOLES)) {
+            return super.setItemPrice(DONUT_HOLES_PRICE * super.
+                    getQuantity());
+        }
+        return 0;
     }
-
-
-
-    public void setDonutPrice (double donutPrice) { this.donutPrice = donutPrice; }
 
     @Override
     public String toString() {

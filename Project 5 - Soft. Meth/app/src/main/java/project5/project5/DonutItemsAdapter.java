@@ -17,9 +17,7 @@ import java.util.Locale;
 class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItemsHolder> implements AdapterView.OnItemSelectedListener {
     private Context context;
     private static ArrayList<DonutItem> donutItems;
-
     private ArrayAdapter<String> spnAdapter;
-
     String [] quantity = {"1","2","3","4","5"};
 
     public DonutItemsAdapter(Context context, ArrayList<DonutItem> donutItems) {
@@ -51,25 +49,11 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         spnAdapter = new ArrayAdapter<String>(holder.itemView.getContext(),android.R.layout.simple_spinner_item,quantity);
         spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spn_quantity.setAdapter(spnAdapter);
-
-
-//        holder.tv_name.setText(donutItems.get(position).getDonutName());
-//        holder.tv_price.setText("$" + donutItems.get(position).getDonutPrice());
-//        holder.im_item.setImageResource(donutItems.get(position).getImage());
-
         DonutItem currentItem = donutItems.get(position);
-
         // Set the name, image, and price of the DonutItem
         holder.tv_name.setText(currentItem.getDonutName());
         holder.im_item.setImageResource(currentItem.getImage());
         holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", currentItem.getDonutPrice()));
-
-        // Set the quantity of the DonutItem
-        //holder.spn_quantity.setSelection(currentItem.getQuantity() - 1);
-
-        // Update the total price of the DonutItem
-        //double totalPrice = currentItem.getDonutPrice() * currentItem.getQuantity();
-        //holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", totalPrice));
     }
 
 
@@ -85,17 +69,10 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        DonutItem selectedItem = donutItems.get(position); // aren't I selecting the spinner
-//        selectedItem.setQuantity(selectedItem.getQuantity() + 1);
-//        double price = selectedItem.getDonutPrice() * selectedItem.getQuantity();
-//        selectedItem.setDonutPrice(price);
-//        notifyItemChanged(position);
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public static class DonutItemsHolder extends RecyclerView.ViewHolder {
@@ -132,6 +109,7 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     String quantityStr = parent.getItemAtPosition(position).toString();
                     int quantity = Integer.parseInt(quantityStr);
                     DonutItem item = itemList.get(getAdapterPosition());
+                    item.setQuantity(quantity);
                     if (item.getDonutType().equals(Donut.YEAST_DONUT)) {
                         item.setDonutPrice(Donut.YEAST_DONUT_PRICE*quantity);
                     } else if (item.getDonutType().equals(Donut.CAKE_DONUT)) {
@@ -159,6 +137,7 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    DonutItem item = itemList.get(getAdapterPosition());
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
                     alert.setTitle("Add to order");
                     alert.setMessage(spn_quantity.getSelectedItem().toString() + " " + tv_name.getText().toString() + "(s)");
@@ -167,7 +146,7 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(itemView.getContext(),
                                     tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                            //CurrentOrder.addToBasket(current);
+                            CurrentOrder.addToBasket(item);
                         }
                         //handle the "NO" click
                     }).setNegativeButton("no", new DialogInterface.OnClickListener() {
@@ -182,8 +161,6 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                 }
             });
         }
-
-
     }
 
 }

@@ -30,6 +30,10 @@ public class Donut extends MenuItem {
 
     //public static final String [] DONUT_QUANTITY = {"1","2","3","4","5"};
 
+    public Donut() {
+
+    }
+
 
     /**
      * This constructor creates the donut object

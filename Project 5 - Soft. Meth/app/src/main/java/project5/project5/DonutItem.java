@@ -1,16 +1,15 @@
 package project5.project5;
 
-public class DonutItem extends MenuItem {
+public class DonutItem extends Donut {
     private String donutName;
     private int image;
     private double donutPrice;
     private String donutType;
-
     private int quantity;
-
     private static final int DEFAULT_QUANTITY = 1;
 
     public DonutItem(String donutName,int image,double donutPrice,String donutType) {
+        super();
         this.donutName = donutName;
         this.image = image;
         this.donutPrice = donutPrice;
@@ -36,14 +35,18 @@ public class DonutItem extends MenuItem {
         return donutType;
     }
 
-    @Override
-    public double itemPrice() {
-        return 0;
-    }
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
+
+
     public void setDonutPrice (double donutPrice) { this.donutPrice = donutPrice; }
+
+    @Override
+    public String toString() {
+        return "(" + getQuantity() + ") " + getDonutName();
+    }
 }
+
+

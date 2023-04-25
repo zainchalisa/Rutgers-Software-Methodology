@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
@@ -62,7 +63,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         subtotalAmount = findViewById(R.id.subtotalAmount);
     }
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         quantity.setAdapter(quantityAdapter);
         addToOrderButton.setOnClickListener(view -> {
             addItem();
+            Toast.makeText(this, "Coffee was added to order.", Toast.LENGTH_SHORT).show();
         });
         checkBoxListener();
         quantityListener();

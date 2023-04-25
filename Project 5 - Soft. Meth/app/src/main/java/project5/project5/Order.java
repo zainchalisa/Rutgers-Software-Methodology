@@ -1,6 +1,9 @@
 package project5.project5;
 
 import android.view.Menu;
+
+import androidx.databinding.ObservableArrayList;
+
 import java.util.ArrayList;
 
 /**
@@ -15,14 +18,14 @@ public class Order {
     private static int orderNumber = -3;
     public static final int ZERO = 0;
     private final int uniqueOrderNumber;
-    private ArrayList<MenuItem> orderList;
+    private ObservableArrayList<MenuItem> orderList;
 
     /**
      * This constructor creates the unique orderID and the orderList
      * observable arraylist
      */
     public Order() {
-        orderList = new  ArrayList<MenuItem>();
+        orderList = new ObservableArrayList<>();
         orderNumber++;
         this.uniqueOrderNumber = orderNumber;
     }
@@ -32,7 +35,7 @@ public class Order {
      *
      * @param orderList the orderList which you're working with
      */
-    public void setOrderList(ArrayList<MenuItem> orderList) {
+    public void setOrderList(ObservableArrayList<MenuItem> orderList) {
         this.orderList = orderList;
     }
 
@@ -52,7 +55,7 @@ public class Order {
      *
      * @return returns the current orderList you're working with
      */
-    public ArrayList<MenuItem> getOrder() {
+    public ObservableArrayList<MenuItem> getOrder() {
         return orderList;
     }
 

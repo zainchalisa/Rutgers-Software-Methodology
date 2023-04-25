@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
@@ -41,14 +43,16 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_order);
         ArrayAdapter<MenuItem> adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, currentOrders);;
-        ListView listView = findViewById(R.id.order_list);
-        listView.setAdapter(adapter);
+        order_list = findViewById(R.id.order_list);
+        order_list.setAdapter(adapter);
         order.setOrderList(currentOrders);
-        if(order_list != null){
+        createViews();
+        calculateCart();
+
             order_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                    deleteItem(position);
                 }
 
                 @Override
@@ -56,10 +60,13 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
 
                 }
             });
-        }
 
-        createViews();
-        calculateCart();
+        placeOrderButton.setOnClickListener(view -> {
+            placeOrder();
+            Toast.makeText(this, "Order has been placed.", Toast.LENGTH_SHORT).show();
+        });
+
+
 
     }
 
@@ -69,7 +76,6 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         salesTaxView = findViewById(R.id.salesTaxView);
         totalAmountView = findViewById(R.id.totalAmountView);
         placeOrderButton = findViewById(R.id.placeOrderButton);
-
         placeOrderButton.setText("Place Order");
     }
 
@@ -85,8 +91,25 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         totalAmountView.setText("$" + String.format("%.2f",runningTotal));
     }
 
-    private void deleteItem() {
+    private void placeOrder(){
+        if(currentOrders != null){
+            Order newOrder = new Order();
+            newOrder.setOrderList(currentOrders);
+            StoreOrders.addToStoreOrders(newOrder);
 
+            ListAdapter adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, new ArrayList<>());
+            order_list.setAdapter(adapter);
+            subtotalView.setText("$ 0.00");
+            salesTaxView.setText("$ 0.00");
+            totalAmountView.setText("$ 0.00");
+        } else{
+            Toast.makeText(this, "Order is empty.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteItem(int index) {
+        currentOrders.remove(index);
+        System.out.println(currentOrders);
     }
 
     public static void addToBasket(MenuItem item) {

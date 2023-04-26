@@ -37,8 +37,6 @@ public class CurrentOrder extends AppCompatActivity
     private  double runningSalesTax;
     private double runningTotal;
     public static final double SALES_TAX = .06625;
-
-
     public static final int ZERO = 0;
 
     public static ObservableArrayList<MenuItem> getOrder() {

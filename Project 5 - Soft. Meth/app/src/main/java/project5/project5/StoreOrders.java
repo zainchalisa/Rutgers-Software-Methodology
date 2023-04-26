@@ -83,6 +83,8 @@ public class StoreOrders extends AppCompatActivity
                     adapter1.remove(storeOrders.remove(getSelectedPosition()));
                     if(storeOrders.size() >= ONE){
                         orderSpinner.setSelection(ZERO);
+                        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(context, android.R.layout.simple_list_item_1, storeOrders);
+                        orderSpinner.setAdapter(adapter);
                         getSelectedOrder();
                         totalAmount.setText(String.format(decimalFormat.format(getTotalAmount())));
                     } else{

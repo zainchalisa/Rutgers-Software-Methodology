@@ -1,8 +1,12 @@
 package project5.project5;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,13 +27,13 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
 
     private ListView order_list;
     private TextView orderNumberView;
-    private TextView subtotalView;
-    private TextView salesTaxView;
-    private TextView totalAmountView;
+    private  TextView subtotalView;
+    private  TextView salesTaxView;
+    private  TextView totalAmountView;
     private Button placeOrderButton;
     private static final ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
-    private double runningSubtotal;
-    private double runningSalesTax;
+    private  double runningSubtotal;
+    private  double runningSalesTax;
     private double runningTotal;
     public static final double SALES_TAX = .06625;
     public static ObservableArrayList<MenuItem> getOrder() {
@@ -45,27 +49,38 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         order_list.setAdapter(adapter);
         createViews();
         calculateCart();
-
-            order_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    deleteItem(position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
+        removeCoffee();
 
         placeOrderButton.setOnClickListener(view -> {
             placeOrder();
             Toast.makeText(this, "Order has been placed.", Toast.LENGTH_SHORT).show();
         });
 
-
-
     }
+
+    private void removeCoffee(){
+        order_list.setOnItemClickListener((parent, view, position, id) -> {
+            ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>) parent.getAdapter();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            Context context = this;
+            alert.setTitle("Add to order");
+            alert.setMessage("Your item is going to be removed from your cart. Would you like to proceed?");
+            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    adapter1.remove(adapter1.getItem(position));
+                    adapter1.notifyDataSetChanged();
+                    calculateCart();
+                    Toast.makeText(context, "Item was removed from order.", Toast.LENGTH_SHORT).show();
+                }
+            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            AlertDialog dialog = alert.create();
+            dialog.show();
+        });
+    }
+
 
     private void createViews() {
         orderNumberView = findViewById(R.id.orderNumber);
@@ -78,6 +93,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void calculateCart() {
+        runningSubtotal = 0;
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
             System.out.println("Running Subtotal: $" + runningSubtotal);

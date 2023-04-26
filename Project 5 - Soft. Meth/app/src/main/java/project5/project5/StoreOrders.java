@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoreOrders extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -31,6 +33,8 @@ public class StoreOrders extends AppCompatActivity implements AdapterView.OnItem
     private ListView contentOfOrder;
 
     private TextView totalAmount;
+
+    private Button removeOrder;
 
     public static final int ZERO = 0;
     public static final double SALES_TAX = .06625;
@@ -47,61 +51,48 @@ public class StoreOrders extends AppCompatActivity implements AdapterView.OnItem
         createViews();
         orderSpinner.setSelection(0);
         int spinnerIndex = orderSpinner.getSelectedItemPosition();
-        //System.out.println(spinnerIndex);
         totalAmount.setText("$0.00");
         ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, storeOrders);
-        ;
         orderSpinner.setAdapter(adapter);
-        if (spinnerIndex != -1) {
+        if (spinnerIndex != 0) {
             ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, storeOrders.get(spinnerIndex).getOrder());
             contentOfOrder.setAdapter(ordersAdapter);
         }
         orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                   @Override
-                                                   public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                                       getSelectedOrder();
-                                                       System.out.println(spinnerIndex);
-                                                   }
-
-                                                   @Override
-                                                   public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                                   }
-                                               }
-        );
-        if (storeOrders.size() != 0 || spinnerIndex != -1) {
-            contentOfOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Remove item from ArrayList
-
-                    storeOrders.remove(spinnerIndex);
-                    adapter.notifyDataSetChanged();
-                    if (storeOrders.size() != 0) {
-                        //orderSpinner.setSelection(0);
-                        //getSelectedOrderForRemove();
-                    }
-
-
-                    System.out.println(storeOrders);
-                    Toast.makeText(getApplicationContext(), "ListView item clicked", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                getSelectedOrder();
+                //System.out.println(spinnerIndex);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        remove();
     }
 
-    private void remove() {
+    private void remove(){
         contentOfOrder.setOnItemClickListener((parent, view, position, id) -> {
             ArrayAdapter<Order> adapter1 = (ArrayAdapter<Order>) parent.getAdapter();
+            ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, new ObservableArrayList<Order>());
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             Context context = this;
             alert.setTitle("Add to order");
             alert.setMessage("Your item is going to be removed from your cart. Would you like to proceed?");
             alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    adapter1.remove(storeOrders.get(position));
+                    adapter1.remove(storeOrders.remove(getSelectedPosition()));
+                    if(storeOrders.size() >= 1){
+                        orderSpinner.setSelection(0);
+                        getSelectedOrder();
+                        totalAmount.setText(String.format(decimalFormat.format(getTotalAmount())));
+                    } else{
+                        adapter1.clear();
+                        orderSpinner.setAdapter(adapter);
+                        totalAmount.setText("$0.00");
+                    }
+
+                    System.out.println(storeOrders);
                     adapter1.notifyDataSetChanged();
                     Toast.makeText(context, "Item was removed from order.", Toast.LENGTH_SHORT).show();
                 }
@@ -114,9 +105,14 @@ public class StoreOrders extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
+    public int getSelectedPosition(){
+        System.out.println(orderSpinner.getSelectedItemPosition());
+        return orderSpinner.getSelectedItemPosition();
+    }
+
 
     private void getSelectedOrder(){
-        int spinnerIndex = orderSpinner.getSelectedItemPosition();
+        int spinnerIndex = getSelectedPosition();
         ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, storeOrders.get(spinnerIndex).getOrder());
         contentOfOrder.setAdapter(ordersAdapter);
         totalAmount.setText(String.format(decimalFormat.format(getTotalAmount())));

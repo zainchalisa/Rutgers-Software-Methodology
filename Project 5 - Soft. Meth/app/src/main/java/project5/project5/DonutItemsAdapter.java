@@ -18,6 +18,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This class is used to load data in the donut recyclerview
+ *
+ * @author nanaafriyie
+ * @author zainchalisa
+ */
 class DonutItemsAdapter
         extends RecyclerView.Adapter<DonutItemsAdapter.DonutItemsHolder>
         implements AdapterView.OnItemSelectedListener {
@@ -26,6 +32,11 @@ class DonutItemsAdapter
     private ArrayAdapter<String> spnAdapter;
     String[] quantity = {"1", "2", "3", "4", "5"};
 
+    /**
+     * Constructor for the adapter
+     * @param context the current state of the activity
+     * @param donutItems list of all donutItems in the recyclerview
+     */
     public DonutItemsAdapter(Context context,
                              ArrayList<DonutItem> donutItems) {
         this.context = context;
@@ -33,6 +44,14 @@ class DonutItemsAdapter
 
     }
 
+    /**
+     *
+     * Creates and initializes new ViewHolder objects
+     * @param parent   The ViewGroup into which the new View will be added after it is bound to
+     *                 an adapter position.
+     * @param viewType The view type of the new View.
+     * @return new ViewHolder for items in each row in recyclerview
+     */
     @NonNull
     @Override
     public DonutItemsHolder onCreateViewHolder(
@@ -51,6 +70,12 @@ class DonutItemsAdapter
                 listener); // returns the next row-view
     }
 
+    /**
+     * Updates the contents of ViewHolder object for data in each position
+     * @param holder   The ViewHolder which should be updated to represent the contents of the
+     *                 item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder( // populates row with specific data
                                   @NonNull DonutItemsHolder holder,
@@ -62,7 +87,6 @@ class DonutItemsAdapter
                 android.R.layout.simple_spinner_dropdown_item);
         holder.spn_quantity.setAdapter(spnAdapter);
         DonutItem currentItem = donutItems.get(position);
-        // Set the name, image, and price of the DonutItem
         holder.tv_name.setText(currentItem.getDonutName());
         holder.im_item.setImageResource(currentItem.getImage());
         holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f",
@@ -70,24 +94,41 @@ class DonutItemsAdapter
     }
 
 
+    /**
+     * Returns the amount of items in the list
+     * @return an integer representing the size of the list
+     */
     @Override
     public int getItemCount() {
         return donutItems.size();
     }
 
-    public ArrayAdapter<String> getSpnAdapter() {
-        return spnAdapter;
-    }
-
+    /**
+     * Performs an action when item is selected
+     * @param parent The AdapterView where the selection happened
+     * @param view The view within the AdapterView that was clicked
+     * @param position The position of the view in the adapter
+     * @param id The row id of the item that is selected
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int position, long id) {
     }
 
+    /**
+     * Performs an action when no item is selected
+     * @param parent The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+    /**
+     * This class provides functionality for items in the recyclerview
+     *
+     * @author nanaafriyie
+     * @author zainchalisa
+     */
     public static class DonutItemsHolder extends RecyclerView.ViewHolder {
         private TextView tv_name, tv_price;
         private ImageView im_item;
@@ -101,6 +142,15 @@ class DonutItemsAdapter
         private static final int STARTING_VALUE = 1;
 
 
+        /**
+         * Constructor for the ViewHolder for items in the recyclerview
+         * @param itemView view object representing UI layout for a
+         *                 single row in the RecyclerView
+         * @param itemList  a List of DonutItem objects that represents the
+         *                  data to be displayed in the UI
+         * @param listener  a DonutItemClickListener object that represents
+         *                  the click listener for the UI item.
+         */
         public DonutItemsHolder(@NonNull View itemView,
                                 List<DonutItem> itemList,
                                 DonutItemClickListener listener) {
@@ -116,6 +166,10 @@ class DonutItemsAdapter
 
             setAddButtonOnClick(itemView);
             parentLayout.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Gets the position of item in list on click
+                 * @param v The view that was clicked.
+                 */
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -124,6 +178,14 @@ class DonutItemsAdapter
             });
             spn_quantity.setOnItemSelectedListener(
                     new AdapterView.OnItemSelectedListener() {
+                        /**
+                         * Recalculates itemPrice after quantity is
+                         * selected
+                         * @param parent The AdapterView where the selection happened
+                         * @param view The view within the AdapterView that was clicked
+                         * @param position The position of the view in the adapter
+                         * @param id The row id of the item that is selected
+                         */
                         @Override
                         public void onItemSelected(AdapterView<?> parent,
                                                    View view, int position,
@@ -135,22 +197,16 @@ class DonutItemsAdapter
                             DonutItem item =
                                     itemList.get(getAdapterPosition());
                             item.setQuantity(quantity);
-                            if (item.getDonutType()
-                                    .equals(Donut.YEAST_DONUT)) {
-                                item.setItemPrice(Donut.YEAST_DONUT_PRICE *
-                                        quantity);
-                            } else if (item.getDonutType()
-                                    .equals(Donut.CAKE_DONUT)) {
-                                item.setItemPrice(
-                                        Donut.CAKE_DONUT_PRICE * quantity);
-                            } else if (item.getDonutType()
-                                    .equals(Donut.DONUT_HOLES)) {
-                                item.setItemPrice(Donut.DONUT_HOLES_PRICE *
-                                        quantity);
-                            }
+                            calculateItemPrice(item,quantity);
                             tv_price.setText("$" + String.format("%.2f",
                                     item.itemPrice()));
                         }
+
+                        /**
+                         * Performs no action if no quantity value is
+                         * selected
+                         * @param parent The AdapterView that now contains no selected item.
+                         */
                         @Override
                         public void onNothingSelected(
                                 AdapterView<?> parent) {}
@@ -166,6 +222,10 @@ class DonutItemsAdapter
         private void setAddButtonOnClick(@NonNull View itemView) {
             spn_quantity = itemView.findViewById(R.id.spn_quantity);
             btn_add.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * Creates confirmation message after clicking add button
+                 * @param view The view that was clicked.
+                 */
                 @Override
                 public void onClick(View view) {
                     DonutItem item = itemList.get(getAdapterPosition());
@@ -178,6 +238,13 @@ class DonutItemsAdapter
                                     "(s)");
                     alert.setPositiveButton("yes",
                             new DialogInterface.OnClickListener() {
+                                /**
+                                 * adds donut to cart if user selects yes
+                                 * @param dialog the dialog that received the click
+                                 * @param which the button that was clicked (ex.
+                                 *              {@link DialogInterface#BUTTON_POSITIVE}) or the position
+                                 *              of the item clicked
+                                 */
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     Toast.makeText(itemView.getContext(),
@@ -191,6 +258,14 @@ class DonutItemsAdapter
                                 }
                             }).setNegativeButton("no",
                             new DialogInterface.OnClickListener() {
+                                /**
+                                 * Returns toast message if user cancels
+                                 * order
+                                 * @param dialog the dialog that received the click
+                                 * @param which the button that was clicked (ex.
+                                 *              {@link DialogInterface#BUTTON_POSITIVE}) or the position
+                                 *              of the item clicked
+                                 */
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     Toast.makeText(itemView.getContext(),
@@ -205,6 +280,31 @@ class DonutItemsAdapter
             });
         }
 
+        /**
+         * Helper method to calculate the itemPrice
+         * @param item DonutItem object for a single row
+         * @param quantity quantity value obtain from spinner menu
+         */
+        private void calculateItemPrice(DonutItem item, int quantity) {
+            if (item.getDonutType()
+                    .equals(Donut.YEAST_DONUT)) {
+                item.setItemPrice(Donut.YEAST_DONUT_PRICE *
+                        quantity);
+            } else if (item.getDonutType()
+                    .equals(Donut.CAKE_DONUT)) {
+                item.setItemPrice(
+                        Donut.CAKE_DONUT_PRICE * quantity);
+            } else if (item.getDonutType()
+                    .equals(Donut.DONUT_HOLES)) {
+                item.setItemPrice(Donut.DONUT_HOLES_PRICE *
+                        quantity);
+            }
+        }
+
+        /**
+         * Adds DonutItem to cart and checks for duplicates
+         * @param item DonutItem to be inserted into shopping cart
+         */
         private void addDonutToCart(DonutItem item) {
             boolean sameDonut = false;
             Iterator<MenuItem> iterator =
@@ -215,8 +315,6 @@ class DonutItemsAdapter
                     if (((DonutItem) listItem).getDonutName()
                             .equals(item.getDonutName())) {
                         sameDonut = true;
-                        System.out.println(item.getQuantity());
-                        System.out.println(listItem.getQuantity());
                         item.setQuantity(item.getQuantity() +
                                 listItem.getQuantity()); //
                         DonutItem newItem =
@@ -224,9 +322,9 @@ class DonutItemsAdapter
                                         item.itemPrice(),
                                         item.getQuantity(),
                                         item.getDonutName());
-                        iterator.remove(); // Remove the old item using the iterator
+                        iterator.remove();
                         CurrentOrder.addToBasket(newItem);
-                        break; // We found a matching item, so we can exit the loop
+                        break;
                     }
                 }
             }
@@ -234,11 +332,7 @@ class DonutItemsAdapter
                 DonutItem newItem = new DonutItem(item.getDonutName(),
                         item.itemPrice(), item.getQuantity(),
                         item.getDonutName());
-                System.out.println("Price: " + newItem.itemPrice());
-                System.out.println("Quantity: " + newItem.getQuantity());
-                System.out.println("Type: " + newItem.getDonutType());
                 CurrentOrder.addToBasket(newItem);
-                System.out.println(item.getQuantity());
             }
 
         }

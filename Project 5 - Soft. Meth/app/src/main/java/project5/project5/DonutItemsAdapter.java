@@ -215,7 +215,8 @@ class DonutItemsAdapter
 
         /**
          * Set the onClickListener for the button on each row.
-         * Clicking on the button will create an AlertDialog with the options of YES/NO.
+         * Clicking on the button will create an AlertDialog with the
+         * options of YES/NO.
          *
          * @param itemView
          */

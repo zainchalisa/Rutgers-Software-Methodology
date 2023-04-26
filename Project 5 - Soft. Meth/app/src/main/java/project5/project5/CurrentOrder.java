@@ -32,11 +32,13 @@ public class CurrentOrder extends AppCompatActivity
     private  TextView salesTaxView;
     private  TextView totalAmountView;
     private Button placeOrderButton;
-    private static final ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
+    private static final ObservableArrayList<MenuItem> currentOrders =
+            new ObservableArrayList<>();
     private  double runningSubtotal;
     private  double runningSalesTax;
     private double runningTotal;
     public static final double SALES_TAX = .06625;
+    public static final int ZERO = 0;
 
     public static ObservableArrayList<MenuItem> getOrder() {
         return currentOrders;
@@ -65,19 +67,24 @@ public class CurrentOrder extends AppCompatActivity
 
     private void remove(){
         order_list.setOnItemClickListener((parent, view, position, id) -> {
-            ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>) parent.getAdapter();
+            ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>)
+                    parent.getAdapter();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             Context context = this;
             alert.setTitle("Remove from Order");
-            alert.setMessage("Your item is going to be removed from your cart. Would you like to proceed?");
-            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            alert.setMessage("Your item is going to be removed from " +
+                    "your cart. Would you like to proceed?");
+            alert.setPositiveButton("yes", new DialogInterface.
+                    OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     adapter1.remove(adapter1.getItem(position));
                     adapter1.notifyDataSetChanged();
                     calculateCart();
-                    Toast.makeText(context, "Item was removed from order.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Item was removed from order.",
+                            Toast.LENGTH_SHORT).show();
                 }
-            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("no", new DialogInterface.
+                    OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                 }
             });
@@ -98,10 +105,9 @@ public class CurrentOrder extends AppCompatActivity
     }
 
     private void calculateCart() {
-        runningSubtotal = 0;
+        runningSubtotal = ZERO;
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
-            System.out.println("Running Subtotal: $" + runningSubtotal);
         }
         runningSalesTax = runningSubtotal * SALES_TAX;
         runningTotal = runningSubtotal + runningSalesTax;
@@ -137,10 +143,6 @@ public class CurrentOrder extends AppCompatActivity
         }
     }
 
-    private void deleteItem(int index) {
-        currentOrders.remove(index);
-        System.out.println(currentOrders);
-    }
 
     public static void addToBasket(MenuItem item) {
         currentOrders.add(item);

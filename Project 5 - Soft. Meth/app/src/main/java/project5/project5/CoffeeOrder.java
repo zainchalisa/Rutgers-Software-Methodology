@@ -113,17 +113,14 @@ public class CoffeeOrder extends AppCompatActivity
     public void quantityListener() {
         quantity.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
-
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView,
                                                View view, int i, long l) {
                         subtotalAmount();
                     }
-
                     @Override
                     public void onNothingSelected(
                             AdapterView<?> adapterView) {
-
                     }
                 });
     }
@@ -136,7 +133,6 @@ public class CoffeeOrder extends AppCompatActivity
                                                View view, int i, long l) {
                         subtotalAmount();
                     }
-
                     @Override
                     public void onNothingSelected(
                             AdapterView<?> adapterView) {
@@ -150,7 +146,8 @@ public class CoffeeOrder extends AppCompatActivity
         Context context = this;
         alert.setTitle("Add to order");
         alert.setMessage(
-                "Your coffee is going to be added to your cart. Would you like to proceed?");
+                "Your coffee is going to be added to your cart. Would " +
+                        "you like to proceed?");
         //handle the "YES" click
         alert.setPositiveButton("yes",
                 new DialogInterface.OnClickListener() {
@@ -162,9 +159,8 @@ public class CoffeeOrder extends AppCompatActivity
                                 Toast.LENGTH_SHORT).show();
 
                     }
-                    //handle the "NO" click
-                }).setNegativeButton("no",
-                new DialogInterface.OnClickListener() {
+                }).setNegativeButton("no", new DialogInterface.
+                OnClickListener() {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                     }
@@ -177,7 +173,7 @@ public class CoffeeOrder extends AppCompatActivity
         Coffee newCoffee = newCoffeeItem();
         boolean sameCoffee = false;
         ObservableArrayList<MenuItem> arrayList = CurrentOrder.getOrder();
-        for (int i = 0; i < arrayList.size(); i++) {
+        for (int i = ZERO; i < arrayList.size(); i++) {
             if (arrayList.get(i).equals(newCoffee)) {
                 sameCoffee = true;
                 newCoffee.setQuantity(arrayList.get(i).getQuantity() +

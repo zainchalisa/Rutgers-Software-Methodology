@@ -26,9 +26,13 @@ public class DonutOrder extends AppCompatActivity
             R.drawable.sugar_yeast_donut, R.drawable.glazed_yeast_donut,
             R.drawable.maple_iced_yeast_donut,
             R.drawable.boston_creme_cake_donut,
-            R.drawable.vanilla_cake_donut, R.drawable.strawberry_cake_donut,
-            R.drawable.chocolate_donut_holes, R.drawable.glazed_donut_holes,
+            R.drawable.vanilla_cake_donut,
+            R.drawable.strawberry_cake_donut,
+            R.drawable.chocolate_donut_holes,
+            R.drawable.glazed_donut_holes,
             R.drawable.blueberry_donut_holes};
+
+    public static final int ZERO = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,7 @@ public class DonutOrder extends AppCompatActivity
         setContentView(R.layout.activity_donut_order);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         createDonutItems();
-        adapter = new DonutItemsAdapter(this,
-                donutItems); // this corresponds to the current DonutOrder Activity
+        adapter = new DonutItemsAdapter(this, donutItems);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -58,7 +61,7 @@ public class DonutOrder extends AppCompatActivity
         String[] donutNames =
                 getResources().getStringArray(R.array.donutItemNames);
 
-        for (int i = 0; i < donutNames.length; i++) {
+        for (int i = ZERO; i < donutNames.length; i++) {
             if (donutNames[i].contains(Donut.YEAST_DONUT)) {
                 donutItems.add(
                         new DonutItem((donutNames[i]), donutImages[i],

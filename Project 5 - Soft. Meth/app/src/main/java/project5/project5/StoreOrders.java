@@ -51,16 +51,22 @@ public class StoreOrders extends AppCompatActivity
         int spinnerIndex = orderSpinner.getSelectedItemPosition();
         totalAmount.setText("$0.00");
 
-        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, storeOrders);
+        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this,
+                android.R.layout.simple_list_item_1, storeOrders);
         orderSpinner.setAdapter(adapter);
         if (spinnerIndex != ZERO) {
-            ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, storeOrders.get(spinnerIndex).getOrder());
+            ArrayAdapter<MenuItem> ordersAdapter = new
+                    ArrayAdapter<MenuItem>(this, android.R.layout.
+                    simple_list_item_1, storeOrders.get(spinnerIndex).
+                    getOrder());
             contentOfOrder.setAdapter(ordersAdapter);
         }
-        orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        orderSpinner.setOnItemSelectedListener(new AdapterView.
+                OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView,
+                                       View view, int i, long l) {
                 getSelectedOrder();
             }
             @Override
@@ -71,31 +77,43 @@ public class StoreOrders extends AppCompatActivity
     }
 
     private void remove(){
-        contentOfOrder.setOnItemClickListener((parent, view, position, id) -> {
-            ArrayAdapter<Order> adapter1 = (ArrayAdapter<Order>) parent.getAdapter();
-            ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this, android.R.layout.simple_list_item_1, new ObservableArrayList<Order>());
+        contentOfOrder.setOnItemClickListener((parent, view, position, id)
+                -> {
+            ArrayAdapter<Order> adapter1 = (ArrayAdapter<Order>)
+                    parent.getAdapter();
+            ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this,
+                    android.R.layout.simple_list_item_1,
+                    new ObservableArrayList<Order>());
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             Context context = this;
             alert.setTitle("Remove from Store Orders");
-            alert.setMessage("Your order is going to be removed from the stores orders. Would you like to proceed?");
-            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            alert.setMessage("Your order is going to be removed from " +
+                    "the stores orders. Would you like to proceed?");
+            alert.setPositiveButton("yes", new DialogInterface.
+                    OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    adapter1.remove(storeOrders.remove(getSelectedPosition()));
+                    adapter1.remove(storeOrders.remove
+                            (getSelectedPosition()));
                     if(storeOrders.size() >= ONE){
                         orderSpinner.setSelection(ZERO);
-                        ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(context, android.R.layout.simple_list_item_1, storeOrders);
+                        ArrayAdapter<Order> adapter = new
+                                ArrayAdapter<Order>(context, android.
+                                R.layout.simple_list_item_1, storeOrders);
                         orderSpinner.setAdapter(adapter);
                         getSelectedOrder();
-                        totalAmount.setText(String.format(decimalFormat.format(getTotalAmount())));
+                        totalAmount.setText(String.format(decimalFormat.
+                                format(getTotalAmount())));
                     } else{
                         adapter1.clear();
                         orderSpinner.setAdapter(adapter);
                         totalAmount.setText("$0.00");
                     }
                     adapter1.notifyDataSetChanged();
-                    Toast.makeText(context, "Order was removed from store.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Order was removed from store."
+                            , Toast.LENGTH_SHORT).show();
                 }
-            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("no", new DialogInterface.
+                    OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                 }
             });
@@ -112,7 +130,9 @@ public class StoreOrders extends AppCompatActivity
     private void getSelectedOrder(){
 
         int spinnerIndex = getSelectedPosition();
-        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, storeOrders.get(spinnerIndex).getOrder());
+        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
+                (this, android.R.layout.simple_list_item_1, storeOrders.
+                        get(spinnerIndex).getOrder());
         contentOfOrder.setAdapter(ordersAdapter);
         totalAmount.setText(
                 String.format(decimalFormat.format(getTotalAmount())));
@@ -121,9 +141,12 @@ public class StoreOrders extends AppCompatActivity
 
     private void getSelectedOrderForRemove(){
         int spinnerIndex = orderSpinner.getSelectedItemPosition();
-        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, storeOrders.get(ZERO).getOrder());
+        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
+                (this, android.R.layout.simple_list_item_1, storeOrders.
+                        get(ZERO).getOrder());
         contentOfOrder.setAdapter(ordersAdapter);
-        totalAmount.setText(String.format(decimalFormat.format(getTotalAmount())));
+        totalAmount.setText(String.format(decimalFormat.format
+                (getTotalAmount())));
     }
 
 

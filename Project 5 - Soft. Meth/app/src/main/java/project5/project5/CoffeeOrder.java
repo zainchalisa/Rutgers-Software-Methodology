@@ -1,6 +1,9 @@
 package project5.project5;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -46,7 +49,6 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
 
     private ArrayList<String> coffeeSizesList = new ArrayList<>(List.of("Short", "Tall", "Grande", "Venti"));
     private ArrayList<Integer> coffeeQuantityList = new ArrayList<>(List.of(1,2,3,4,5));
-    public static Order coffeeOrder = new Order();
 
     public CoffeeOrder() {
     }
@@ -76,8 +78,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         coffeeSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantity.setAdapter(quantityAdapter);
         addToOrderButton.setOnClickListener(view -> {
-            addItem();
-            Toast.makeText(this, "Coffee was added to order.", Toast.LENGTH_SHORT).show();
+            coffeeAlert();
         });
         checkBoxListener();
         quantityListener();
@@ -131,19 +132,40 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         });
     }
 
+    private void coffeeAlert(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        Context context = this;
+        alert.setTitle("Add to order");
+        alert.setMessage("Your coffee is going to be added to your cart. Would you like to proceed?");
+        //handle the "YES" click
+        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                addItem();
+                Toast.makeText(context, "Coffee was added to order.", Toast.LENGTH_SHORT).show();
+
+            }
+            //handle the "NO" click
+        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
     public void addItem(){
         Coffee newCoffee = newCoffeeItem();
         boolean sameCoffee = false;
-        Iterator<MenuItem> iterator = CurrentOrder.getOrder().iterator();
-        while(iterator.hasNext()){
-            MenuItem item = iterator.next();
-            if(item.equals(newCoffee)){
+        ObservableArrayList<MenuItem> arrayList = CurrentOrder.getOrder();
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).equals(newCoffee)) {
                 sameCoffee = true;
-                newCoffee.setQuantity(item.getQuantity() + newCoffee.getQuantity());
-                iterator.remove();
+                newCoffee.setQuantity(arrayList.get(i).getQuantity() + newCoffee.getQuantity());
+                arrayList.remove(i);
                 CurrentOrder.getOrder().add(newCoffee);
             }
         }
+
 
 
         if(sameCoffee != true){

@@ -1,6 +1,7 @@
 package project5.project5;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,10 +27,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
     private TextView salesTaxView;
     private TextView totalAmountView;
     private Button placeOrderButton;
-
-    private Order order = new Order();
-    private static ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
-
+    private static final ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
     private double runningSubtotal;
     private double runningSalesTax;
     private double runningTotal;
@@ -45,7 +43,6 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<MenuItem> adapter = new ArrayAdapter<MenuItem>(this, android.R.layout.simple_list_item_1, currentOrders);;
         order_list = findViewById(R.id.order_list);
         order_list.setAdapter(adapter);
-        order.setOrderList(currentOrders);
         createViews();
         calculateCart();
 
@@ -77,6 +74,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         totalAmountView = findViewById(R.id.totalAmountView);
         placeOrderButton = findViewById(R.id.placeOrderButton);
         placeOrderButton.setText("Place Order");
+
     }
 
     private void calculateCart() {
@@ -91,12 +89,18 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         totalAmountView.setText("$" + String.format("%.2f",runningTotal));
     }
 
+
+
     private void placeOrder(){
         if(currentOrders != null){
+            ObservableArrayList<MenuItem> temp = new ObservableArrayList<>();
+            for(MenuItem item : currentOrders){
+                temp.add(item);
+            }
             Order newOrder = new Order();
-            newOrder.setOrderList(currentOrders);
+            newOrder.setOrderList(temp);
             StoreOrders.addToStoreOrders(newOrder);
-
+            currentOrders.clear();
             ListAdapter adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, new ArrayList<>());
             order_list.setAdapter(adapter);
             subtotalView.setText("$ 0.00");

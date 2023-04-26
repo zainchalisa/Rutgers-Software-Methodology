@@ -4,6 +4,7 @@ import android.view.Menu;
 
 import androidx.databinding.ObservableArrayList;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,9 @@ import java.util.ArrayList;
  * @author nanaafriyie
  *
  */
-public class Order {
-    private static int orderNumber = -3;
+public class Order implements Serializable {
+    private static int orderNumber = 0;
+
     public static final int ZERO = 0;
     private final int uniqueOrderNumber;
     private ObservableArrayList<MenuItem> orderList;
@@ -102,6 +104,8 @@ public class Order {
         }
         return orderPrice;
     }
+
+
 
     /**
      * This method overrides the toString() for the order class

@@ -13,7 +13,6 @@ import java.util.ArrayList;
  *
  * @author zainchalisa
  * @author nanaafriyie
- *
  */
 public class Order implements Serializable {
     private static int orderNumber = 0;
@@ -104,7 +103,6 @@ public class Order implements Serializable {
         }
         return orderPrice;
     }
-
 
 
     /**

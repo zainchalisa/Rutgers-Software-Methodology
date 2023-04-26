@@ -8,7 +8,6 @@ import android.database.CursorIndexOutOfBoundsException;
  *
  * @author zainchalisa
  * @author nanaafriyie
- *
  */
 public abstract class MenuItem {
 
@@ -53,9 +52,9 @@ public abstract class MenuItem {
     }
 
     public boolean compare(MenuItem item) {
-        if(item instanceof Coffee && this instanceof Coffee){
+        if (item instanceof Coffee && this instanceof Coffee) {
             return true;
-        } else{
+        } else {
             return item instanceof Donut && this instanceof Donut;
         }
     }

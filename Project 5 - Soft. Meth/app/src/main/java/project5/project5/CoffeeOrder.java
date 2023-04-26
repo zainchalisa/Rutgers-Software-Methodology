@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CoffeeOrder extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     private CheckBox sweetCream;
     private CheckBox frenchVanilla;
@@ -47,13 +48,15 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
     public static final int INCREMENT = 1;
     public static final int ZERO = 0;
 
-    private ArrayList<String> coffeeSizesList = new ArrayList<>(List.of("Short", "Tall", "Grande", "Venti"));
-    private ArrayList<Integer> coffeeQuantityList = new ArrayList<>(List.of(1,2,3,4,5));
+    private ArrayList<String> coffeeSizesList =
+            new ArrayList<>(List.of("Short", "Tall", "Grande", "Venti"));
+    private ArrayList<Integer> coffeeQuantityList =
+            new ArrayList<>(List.of(1, 2, 3, 4, 5));
 
     public CoffeeOrder() {
     }
 
-    public void createItems(){
+    public void createItems() {
         sweetCream = findViewById(R.id.sweetCream);
         irishCream = findViewById(R.id.irishCream);
         caramel = findViewById(R.id.caramel);
@@ -71,11 +74,15 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee_order);
         createItems();
-        ArrayAdapter<String> coffeeSizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, coffeeSizesList);
-        coffeeSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> coffeeSizeAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, coffeeSizesList);
+        coffeeSizeAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
         coffeeSizes.setAdapter(coffeeSizeAdapter);
-        ArrayAdapter<Integer> quantityAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, coffeeQuantityList);
-        coffeeSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Integer> quantityAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, coffeeQuantityList);
+        coffeeSizeAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
         quantity.setAdapter(quantityAdapter);
         addToOrderButton.setOnClickListener(view -> {
             coffeeAlert();
@@ -85,90 +92,103 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         coffeeSizeListener();
     }
 
-    public void checkBoxListener(){
-        irishCream.setOnClickListener(view ->{
+    public void checkBoxListener() {
+        irishCream.setOnClickListener(view -> {
             subtotalAmount();
         });
-        sweetCream.setOnClickListener(view ->{
+        sweetCream.setOnClickListener(view -> {
             subtotalAmount();
         });
-        frenchVanilla.setOnClickListener(view ->{
+        frenchVanilla.setOnClickListener(view -> {
             subtotalAmount();
         });
-        caramel.setOnClickListener(view ->{
+        caramel.setOnClickListener(view -> {
             subtotalAmount();
         });
-        mocha.setOnClickListener(view ->{
+        mocha.setOnClickListener(view -> {
             subtotalAmount();
         });
     }
 
-    public void quantityListener(){
-        quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    public void quantityListener() {
+        quantity.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                subtotalAmount();
-            }
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView,
+                                               View view, int i, long l) {
+                        subtotalAmount();
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                    @Override
+                    public void onNothingSelected(
+                            AdapterView<?> adapterView) {
 
-            }
-        });
+                    }
+                });
     }
 
-    public void coffeeSizeListener(){
-        coffeeSizes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                subtotalAmount();
-            }
+    public void coffeeSizeListener() {
+        coffeeSizes.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView,
+                                               View view, int i, long l) {
+                        subtotalAmount();
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                    @Override
+                    public void onNothingSelected(
+                            AdapterView<?> adapterView) {
 
-            }
-        });
+                    }
+                });
     }
 
-    private void coffeeAlert(){
+    private void coffeeAlert() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         Context context = this;
         alert.setTitle("Add to order");
-        alert.setMessage("Your coffee is going to be added to your cart. Would you like to proceed?");
+        alert.setMessage(
+                "Your coffee is going to be added to your cart. Would you like to proceed?");
         //handle the "YES" click
-        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                addItem();
-                Toast.makeText(context, "Coffee was added to order.", Toast.LENGTH_SHORT).show();
+        alert.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        addItem();
+                        Toast.makeText(context,
+                                "Coffee was added to order.",
+                                Toast.LENGTH_SHORT).show();
 
-            }
-            //handle the "NO" click
-        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
+                    }
+                    //handle the "NO" click
+                }).setNegativeButton("no",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                });
         AlertDialog dialog = alert.create();
         dialog.show();
     }
 
-    public void addItem(){
+    public void addItem() {
         Coffee newCoffee = newCoffeeItem();
         boolean sameCoffee = false;
         ObservableArrayList<MenuItem> arrayList = CurrentOrder.getOrder();
         for (int i = 0; i < arrayList.size(); i++) {
             if (arrayList.get(i).equals(newCoffee)) {
                 sameCoffee = true;
-                newCoffee.setQuantity(arrayList.get(i).getQuantity() + newCoffee.getQuantity());
+                newCoffee.setQuantity(arrayList.get(i).getQuantity() +
+                        newCoffee.getQuantity());
                 arrayList.remove(i);
                 CurrentOrder.getOrder().add(newCoffee);
             }
         }
 
 
-
-        if(sameCoffee != true){
+        if (sameCoffee != true) {
             CurrentOrder.addToBasket(newCoffee);
         }
 
@@ -182,7 +202,7 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         subtotalAmount.setText(String.format("$1.89"));
     }
 
-    public Coffee newCoffeeItem(){
+    public Coffee newCoffeeItem() {
         int coffeeSizeIndex = coffeeSizes.getSelectedItemPosition();
         String coffeeSize = getCoffeeSize(coffeeSizeIndex);
         int coffeeQuantityIndex = quantity.getSelectedItemPosition();
@@ -194,26 +214,27 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         return newCoffee;
     }
 
-    public String getCoffeeSize(int coffeeSizeIndex){
-        if(coffeeSizeIndex == SHORT_INDEX){
+    public String getCoffeeSize(int coffeeSizeIndex) {
+        if (coffeeSizeIndex == SHORT_INDEX) {
             return "Short";
-        } else if(coffeeSizeIndex == TALL_INDEX){
+        } else if (coffeeSizeIndex == TALL_INDEX) {
             return "Tall";
-        } else if(coffeeSizeIndex == GRANDE_INDEX){
+        } else if (coffeeSizeIndex == GRANDE_INDEX) {
             return "Grande";
-        } else if(coffeeSizeIndex == VENTI_INDEX){
+        } else if (coffeeSizeIndex == VENTI_INDEX) {
             return "Venti";
-        } else{
+        } else {
             return "";
         }
     }
 
-    public void subtotalAmount(){
+    public void subtotalAmount() {
         Coffee currentCoffee = newCoffeeItem();
-        subtotalAmount.setText(String.format("$" + "%.2f", currentCoffee.itemPrice()));
+        subtotalAmount.setText(
+                String.format("$" + "%.2f", currentCoffee.itemPrice()));
     }
 
-    public void toppingsSelected(ArrayList<String> toppings){
+    public void toppingsSelected(ArrayList<String> toppings) {
         toppings.remove(SWEET_CREAM);
         toppings.remove(FRENCH_VANILLA);
         toppings.remove(IRISH_CREAM);
@@ -221,29 +242,30 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
         toppings.remove(MOCHA);
 
 
-        if(sweetCream.isChecked()){
+        if (sweetCream.isChecked()) {
             toppings.add(SWEET_CREAM);
         }
 
-        if(frenchVanilla.isChecked()){
+        if (frenchVanilla.isChecked()) {
             toppings.add(FRENCH_VANILLA);
         }
 
-        if(irishCream.isChecked()){
+        if (irishCream.isChecked()) {
             toppings.add(IRISH_CREAM);
         }
 
-        if(caramel.isChecked()){
+        if (caramel.isChecked()) {
             toppings.add(CARAMEL);
         }
 
-        if(mocha.isChecked()){
+        if (mocha.isChecked()) {
             toppings.add(MOCHA);
         }
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemSelected(AdapterView<?> adapterView, View view,
+                               int i, long l) {
 
     }
 

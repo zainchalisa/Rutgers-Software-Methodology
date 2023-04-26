@@ -48,7 +48,8 @@ public class Coffee extends MenuItem {
         this.coffeeToppings = coffeeToppings;
     }
 
-    public Coffee(String cupSize, ObservableArrayList<String> coffeeToppings){
+    public Coffee(String cupSize,
+                  ObservableArrayList<String> coffeeToppings) {
         super();
         this.cupSize = cupSize;
         this.coffeeToppings = coffeeToppings;
@@ -118,8 +119,9 @@ public class Coffee extends MenuItem {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Coffee coffee) {
-            return (coffee.coffeeToppings.equals(this.coffeeToppings) && coffee.
-                    cupSize.equals(this.cupSize));
+            return (coffee.coffeeToppings.equals(this.coffeeToppings) &&
+                    coffee.
+                            cupSize.equals(this.cupSize));
         } else {
             return false;
         }
@@ -132,7 +134,7 @@ public class Coffee extends MenuItem {
      */
     @Override
     public String toString() {
-        if (getCoffeeToppings().size() != ZERO ) {
+        if (getCoffeeToppings().size() != ZERO) {
             return "(" + getQuantity() + ") " + getCupSize() + " Coffee "
                     + getCoffeeToppings();
         } else {

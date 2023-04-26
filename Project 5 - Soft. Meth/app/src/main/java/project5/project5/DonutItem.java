@@ -6,7 +6,8 @@ public class DonutItem extends Donut {
     private String donutType;
 
 
-    public DonutItem(String donutName,double price,int quantity,String donutType) {
+    public DonutItem(String donutName, double price, int quantity,
+                     String donutType) {
         super();
         this.setItemPrice(price);
         this.donutName = donutName;
@@ -15,7 +16,8 @@ public class DonutItem extends Donut {
     }
 
 
-    public DonutItem(String donutName,int image,double price,String donutType) {
+    public DonutItem(String donutName, int image, double price,
+                     String donutType) {
         super();
         super.setItemPrice(price);
         this.donutName = donutName;

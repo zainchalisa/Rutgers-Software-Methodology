@@ -8,28 +8,35 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItemsHolder> implements AdapterView.OnItemSelectedListener {
+class DonutItemsAdapter
+        extends RecyclerView.Adapter<DonutItemsAdapter.DonutItemsHolder>
+        implements AdapterView.OnItemSelectedListener {
     private Context context;
     private static ArrayList<DonutItem> donutItems;
     private ArrayAdapter<String> spnAdapter;
-    String [] quantity = {"1","2","3","4","5"};
+    String[] quantity = {"1", "2", "3", "4", "5"};
 
-    public DonutItemsAdapter(Context context, ArrayList<DonutItem> donutItems) {
+    public DonutItemsAdapter(Context context,
+                             ArrayList<DonutItem> donutItems) {
         this.context = context;
         this.donutItems = donutItems;
 
     }
+
     @NonNull
     @Override
-    public DonutItemsHolder onCreateViewHolder( // creates base layout of row on screen
+    public DonutItemsHolder onCreateViewHolder(
+            // creates base layout of row on screen
             @NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view, parent, false);
@@ -40,24 +47,27 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             }
         };
 
-        return new DonutItemsHolder(view,donutItems,listener); // returns the next row-view
+        return new DonutItemsHolder(view, donutItems,
+                listener); // returns the next row-view
     }
 
     @Override
     public void onBindViewHolder( // populates row with specific data
-            @NonNull DonutItemsHolder holder,
-            int position) {
+                                  @NonNull DonutItemsHolder holder,
+                                  int position) {
 
-        spnAdapter = new ArrayAdapter<String>(holder.itemView.getContext(),android.R.layout.simple_spinner_item,quantity);
-        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnAdapter = new ArrayAdapter<String>(holder.itemView.getContext(),
+                android.R.layout.simple_spinner_item, quantity);
+        spnAdapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
         holder.spn_quantity.setAdapter(spnAdapter);
         DonutItem currentItem = donutItems.get(position);
         // Set the name, image, and price of the DonutItem
         holder.tv_name.setText(currentItem.getDonutName());
         holder.im_item.setImageResource(currentItem.getImage());
-        holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f", currentItem.itemPrice()));
+        holder.tv_price.setText(String.format(Locale.getDefault(), "$%.2f",
+                currentItem.itemPrice()));
     }
-
 
 
     @Override
@@ -70,7 +80,8 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int position, long id) {
     }
 
     @Override
@@ -90,7 +101,9 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         private static final int STARTING_VALUE = 1;
 
 
-        public DonutItemsHolder(@NonNull View itemView, List<DonutItem> itemList, DonutItemClickListener listener) {
+        public DonutItemsHolder(@NonNull View itemView,
+                                List<DonutItem> itemList,
+                                DonutItemClickListener listener) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_flavor);
             tv_price = itemView.findViewById(R.id.tv_price);
@@ -102,7 +115,6 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             this.listener = listener;
 
             setAddButtonOnClick(itemView);
-            //register the onClicklistener for the button on each row.
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -110,27 +122,39 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                     listener.onItemClick(itemList.get(position));
                 }
             });
-            spn_quantity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String quantityStr = parent.getItemAtPosition(position).toString();
-                    int quantity = Integer.parseInt(quantityStr);
-                    DonutItem item = itemList.get(getAdapterPosition());
-                    item.setQuantity(quantity);
-                    if (item.getDonutType().equals(Donut.YEAST_DONUT)) {
-                        item.setItemPrice(Donut.YEAST_DONUT_PRICE * quantity);
-                    } else if (item.getDonutType().equals(Donut.CAKE_DONUT)) {
-                        item.setItemPrice(Donut.CAKE_DONUT_PRICE * quantity);
-                    } else if (item.getDonutType().equals(Donut.DONUT_HOLES)) {
-                        item.setItemPrice(Donut.DONUT_HOLES_PRICE * quantity);
-                    }
-                    tv_price.setText("$" + String.format("%.2f", item.itemPrice()));
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
+            spn_quantity.setOnItemSelectedListener(
+                    new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent,
+                                                   View view, int position,
+                                                   long id) {
+                            String quantityStr =
+                                    parent.getItemAtPosition(position)
+                                            .toString();
+                            int quantity = Integer.parseInt(quantityStr);
+                            DonutItem item =
+                                    itemList.get(getAdapterPosition());
+                            item.setQuantity(quantity);
+                            if (item.getDonutType()
+                                    .equals(Donut.YEAST_DONUT)) {
+                                item.setItemPrice(Donut.YEAST_DONUT_PRICE *
+                                        quantity);
+                            } else if (item.getDonutType()
+                                    .equals(Donut.CAKE_DONUT)) {
+                                item.setItemPrice(
+                                        Donut.CAKE_DONUT_PRICE * quantity);
+                            } else if (item.getDonutType()
+                                    .equals(Donut.DONUT_HOLES)) {
+                                item.setItemPrice(Donut.DONUT_HOLES_PRICE *
+                                        quantity);
+                            }
+                            tv_price.setText("$" + String.format("%.2f",
+                                    item.itemPrice()));
+                        }
+                        @Override
+                        public void onNothingSelected(
+                                AdapterView<?> parent) {}
+                    });
         }
 
         /**
@@ -140,52 +164,66 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
          * @param itemView
          */
         private void setAddButtonOnClick(@NonNull View itemView) {
-
             spn_quantity = itemView.findViewById(R.id.spn_quantity);
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     DonutItem item = itemList.get(getAdapterPosition());
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
+                    AlertDialog.Builder alert =
+                            new AlertDialog.Builder(itemView.getContext());
                     alert.setTitle("Add to order");
-                    alert.setMessage(spn_quantity.getSelectedItem().toString() + " " + tv_name.getText().toString() + "(s)");
-                    //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                            addDonutToCart(item);
-                            spn_quantity.setSelection(STARTING_INDEX);
-                            item.setQuantity(STARTING_VALUE);
-                            //CurrentOrder.addToBasket(item);
-                        }
-                        //handle the "NO" click
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    tv_name.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    alert.setMessage(
+                            spn_quantity.getSelectedItem().toString() +
+                                    " " + tv_name.getText().toString() +
+                                    "(s)");
+                    alert.setPositiveButton("yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    Toast.makeText(itemView.getContext(),
+                                            tv_name.getText().toString() +
+                                                    " added.",
+                                            Toast.LENGTH_LONG).show();
+                                    addDonutToCart(item);
+                                    spn_quantity.setSelection(
+                                            STARTING_INDEX);
+                                    item.setQuantity(STARTING_VALUE);
+                                }
+                            }).setNegativeButton("no",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    Toast.makeText(itemView.getContext(),
+                                            tv_name.getText().toString() +
+                                                    " not added.",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
                     AlertDialog dialog = alert.create();
                     dialog.show();
-                    //spn_quantity.setSelection(0);
-
                 }
             });
         }
 
         private void addDonutToCart(DonutItem item) {
             boolean sameDonut = false;
-            Iterator<MenuItem> iterator = CurrentOrder.getOrder().iterator();
+            Iterator<MenuItem> iterator =
+                    CurrentOrder.getOrder().iterator();
             while (iterator.hasNext()) {
                 MenuItem listItem = iterator.next();
                 if (listItem instanceof DonutItem) {
-                    if (((DonutItem) listItem).getDonutName().equals(item.getDonutName())) {
+                    if (((DonutItem) listItem).getDonutName()
+                            .equals(item.getDonutName())) {
                         sameDonut = true;
                         System.out.println(item.getQuantity());
                         System.out.println(listItem.getQuantity());
-                        item.setQuantity(item.getQuantity() + listItem.getQuantity()); //
-                        DonutItem newItem = new DonutItem(item.getDonutName(),item.itemPrice(),item.getQuantity(),item.getDonutName());
+                        item.setQuantity(item.getQuantity() +
+                                listItem.getQuantity()); //
+                        DonutItem newItem =
+                                new DonutItem(item.getDonutName(),
+                                        item.itemPrice(),
+                                        item.getQuantity(),
+                                        item.getDonutName());
                         iterator.remove(); // Remove the old item using the iterator
                         CurrentOrder.addToBasket(newItem);
                         break; // We found a matching item, so we can exit the loop
@@ -193,7 +231,9 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                 }
             }
             if (!sameDonut) {
-                DonutItem newItem = new DonutItem(item.getDonutName(),item.itemPrice(),item.getQuantity(),item.getDonutName());
+                DonutItem newItem = new DonutItem(item.getDonutName(),
+                        item.itemPrice(), item.getQuantity(),
+                        item.getDonutName());
                 System.out.println("Price: " + newItem.itemPrice());
                 System.out.println("Quantity: " + newItem.getQuantity());
                 System.out.println("Type: " + newItem.getDonutType());
@@ -201,7 +241,8 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                 System.out.println(item.getQuantity());
             }
 
-    }
+        }
 
-}}
+    }
+}
 

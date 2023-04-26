@@ -49,7 +49,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
         order_list.setAdapter(adapter);
         createViews();
         calculateCart();
-        removeCoffee();
+        remove();
 
         placeOrderButton.setOnClickListener(view -> {
             placeOrder();
@@ -58,7 +58,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void removeCoffee(){
+    private void remove(){
         order_list.setOnItemClickListener((parent, view, position, id) -> {
             ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>) parent.getAdapter();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);

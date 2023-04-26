@@ -166,8 +166,6 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
             }
         }
 
-
-
         if(sameCoffee != true){
             CurrentOrder.addToBasket(newCoffee);
         }

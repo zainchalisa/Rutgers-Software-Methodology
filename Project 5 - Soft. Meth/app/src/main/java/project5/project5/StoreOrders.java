@@ -136,7 +136,6 @@ public class StoreOrders extends AppCompatActivity
 
 
     private void getSelectedOrder(){
-
         int spinnerIndex = getSelectedPosition();
         ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
                 (this, android.R.layout.simple_list_item_1, storeOrders.
@@ -145,19 +144,6 @@ public class StoreOrders extends AppCompatActivity
         totalAmount.setText(
                 String.format(decimalFormat.format(getTotalAmount())));
     }
-
-
-    private void getSelectedOrderForRemove(){
-        int spinnerIndex = orderSpinner.getSelectedItemPosition();
-        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
-                (this, android.R.layout.simple_list_item_1, storeOrders.
-                        get(ZERO).getOrder());
-        contentOfOrder.setAdapter(ordersAdapter);
-        totalAmount.setText(String.format(decimalFormat.format
-                (getTotalAmount())));
-    }
-
-
 
     private void createViews(){
         orderSpinner = findViewById(R.id.orderSpinner);

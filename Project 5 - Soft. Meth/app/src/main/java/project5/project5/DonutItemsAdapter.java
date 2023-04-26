@@ -86,6 +86,10 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
         private DonutItemClickListener listener;
         private ConstraintLayout parentLayout; //this is the row layout
 
+        private static final int STARTING_INDEX = 0;
+        private static final int STARTING_VALUE = 1;
+
+
         public DonutItemsHolder(@NonNull View itemView, List<DonutItem> itemList, DonutItemClickListener listener) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_flavor);
@@ -151,7 +155,8 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
                             Toast.makeText(itemView.getContext(),
                                     tv_name.getText().toString() + " added.", Toast.LENGTH_LONG).show();
                             addDonutToCart(item);
-                            spn_quantity.setSelection(0);
+                            spn_quantity.setSelection(STARTING_INDEX);
+                            item.setQuantity(STARTING_VALUE);
                             //CurrentOrder.addToBasket(item);
                         }
                         //handle the "NO" click

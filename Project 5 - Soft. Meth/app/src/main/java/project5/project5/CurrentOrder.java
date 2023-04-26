@@ -80,6 +80,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
     private void calculateCart() {
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
+            System.out.println("Running Subtotal: $" + runningSubtotal);
         }
         runningSalesTax = runningSubtotal * SALES_TAX;
         runningTotal = runningSubtotal + runningSalesTax;

@@ -189,6 +189,9 @@ class DonutItemsAdapter extends RecyclerView.Adapter<DonutItemsAdapter.DonutItem
             }
             if (!sameDonut) {
                 DonutItem newItem = new DonutItem(item.getDonutName(),item.itemPrice(),item.getQuantity(),item.getDonutName());
+                System.out.println("Price: " + newItem.itemPrice());
+                System.out.println("Quantity: " + newItem.getQuantity());
+                System.out.println("Type: " + newItem.getDonutType());
                 CurrentOrder.addToBasket(newItem);
                 System.out.println(item.getQuantity());
             }

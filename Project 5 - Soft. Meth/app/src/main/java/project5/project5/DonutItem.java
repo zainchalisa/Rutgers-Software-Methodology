@@ -8,7 +8,7 @@ public class DonutItem extends Donut {
 
     public DonutItem(String donutName,double price,int quantity,String donutType) {
         super();
-        super.setItemPrice(price);
+        this.setItemPrice(price);
         this.donutName = donutName;
         super.setQuantity(quantity);
         this.donutType = donutType;
@@ -37,15 +37,15 @@ public class DonutItem extends Donut {
 
     @Override
     public double itemPrice() {
-        if (donutType.equals(YEAST_DONUT)) {
+        if (donutType.contains(YEAST_DONUT)) {
             return super.setItemPrice(YEAST_DONUT_PRICE * super.
                     getQuantity());
         }
-        if (donutType.equals(CAKE_DONUT)) {
+        if (donutType.contains(CAKE_DONUT)) {
             return super.setItemPrice(CAKE_DONUT_PRICE * super.
                     getQuantity());
         }
-        if (donutType.equals(DONUT_HOLES)) {
+        if (donutType.contains(DONUT_HOLES)) {
             return super.setItemPrice(DONUT_HOLES_PRICE * super.
                     getQuantity());
         }

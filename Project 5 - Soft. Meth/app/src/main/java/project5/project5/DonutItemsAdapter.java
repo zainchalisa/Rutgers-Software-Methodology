@@ -190,12 +190,9 @@ class DonutItemsAdapter
                             int quantity = Integer.parseInt(quantityStr);
                             DonutItem item =
                                     itemList.get(getAdapterPosition());
-<<<<<<< Updated upstream
                             item.setQuantity(quantity);
-                            calculateItemPrice(item,quantity);
-=======
                             setItemPrice(item, quantity);
->>>>>>> Stashed changes
+
                             tv_price.setText("$" + String.format("%.2f",
                                     item.itemPrice()));
                         }

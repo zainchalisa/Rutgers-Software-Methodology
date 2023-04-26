@@ -63,7 +63,7 @@ public class CurrentOrder extends AppCompatActivity implements AdapterView.OnIte
             ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>) parent.getAdapter();
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             Context context = this;
-            alert.setTitle("Add to order");
+            alert.setTitle("Remove from Order");
             alert.setMessage("Your item is going to be removed from your cart. Would you like to proceed?");
             alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {

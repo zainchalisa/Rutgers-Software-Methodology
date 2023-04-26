@@ -38,6 +38,9 @@ public class CurrentOrder extends AppCompatActivity
     private double runningTotal;
     public static final double SALES_TAX = .06625;
 
+
+    public static final int ZERO = 0;
+
     public static ObservableArrayList<MenuItem> getOrder() {
         return currentOrders;
     }
@@ -98,10 +101,9 @@ public class CurrentOrder extends AppCompatActivity
     }
 
     private void calculateCart() {
-        runningSubtotal = 0;
+        runningSubtotal = ZERO;
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
-            System.out.println("Running Subtotal: $" + runningSubtotal);
         }
         runningSalesTax = runningSubtotal * SALES_TAX;
         runningTotal = runningSubtotal + runningSalesTax;
@@ -137,10 +139,6 @@ public class CurrentOrder extends AppCompatActivity
         }
     }
 
-    private void deleteItem(int index) {
-        currentOrders.remove(index);
-        System.out.println(currentOrders);
-    }
 
     public static void addToBasket(MenuItem item) {
         currentOrders.add(item);

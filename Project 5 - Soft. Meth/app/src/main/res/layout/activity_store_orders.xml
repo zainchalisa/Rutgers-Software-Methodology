@@ -10,6 +10,7 @@
         android:layout_width="353dp"
         android:layout_height="480dp"
         android:paddingTop="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -25,7 +25,6 @@ public class DonutOrder extends AppCompatActivity
 
     private ArrayList<DonutItem> donutItems = new ArrayList<>();
     private DonutItemsAdapter adapter;
-    private RecyclerView recyclerView;
 
     private int[] donutImages = {R.drawable.chocolate_yeast_donut,
             R.drawable.vanilla_yeast_donut, R.drawable.jelly_yeast_donut,
@@ -42,9 +41,10 @@ public class DonutOrder extends AppCompatActivity
 
     /**
      * Sets content view and intial state of the UI components
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @param savedInstanceState If the activity is being re-initialized
+     *                           after previously being shut down then this
+     *                           Bundle contains the data it most recently
+     *                           supplied in {@link #onSaveInstanceState}.
      *
      */
     @Override
@@ -74,7 +74,8 @@ public class DonutOrder extends AppCompatActivity
 
     /**
      * Performs no actions if no items are selcted
-     * @param adapterView The AdapterView that now contains no selected item.
+     * @param adapterView The AdapterView that now contains no selected
+     *                    item.
      */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

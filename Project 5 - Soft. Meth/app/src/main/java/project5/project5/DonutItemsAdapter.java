@@ -47,8 +47,8 @@ class DonutItemsAdapter
     /**
      *
      * Creates and initializes new ViewHolder objects
-     * @param parent   The ViewGroup into which the new View will be added after it is bound to
-     *                 an adapter position.
+     * @param parent   The ViewGroup into which the new View will be added
+     *                 after it is bound to an adapter position.
      * @param viewType The view type of the new View.
      * @return new ViewHolder for items in each row in recyclerview
      */
@@ -72,15 +72,16 @@ class DonutItemsAdapter
 
     /**
      * Updates the contents of ViewHolder object for data in each position
-     * @param holder   The ViewHolder which should be updated to represent the contents of the
+     * @param holder   The ViewHolder which should be updated to represent
+     *                 the contents of the
      *                 item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     * @param position The position of the item within the adapter's data
+     *                 set.
      */
     @Override
     public void onBindViewHolder( // populates row with specific data
                                   @NonNull DonutItemsHolder holder,
                                   int position) {
-
         spnAdapter = new ArrayAdapter<String>(holder.itemView.getContext(),
                 android.R.layout.simple_spinner_item, quantity);
         spnAdapter.setDropDownViewResource(
@@ -175,10 +176,14 @@ class DonutItemsAdapter
                         /**
                          * Recalculates itemPrice after quantity is
                          * selected
-                         * @param parent The AdapterView where the selection happened
-                         * @param view The view within the AdapterView that was clicked
-                         * @param position The position of the view in the adapter
-                         * @param id The row id of the item that is selected
+                         * @param parent The AdapterView where the
+                         *               selection happened
+                         * @param view The view within the AdapterView that
+                         *            was clicked
+                         * @param position The position of the view in the
+                         *                 adapter
+                         * @param id The row id of the item that is
+                         *           selected
                          */
                         @Override
                         public void onItemSelected(AdapterView<?> parent,
@@ -196,11 +201,11 @@ class DonutItemsAdapter
                             tv_price.setText("$" + String.format("%.2f",
                                     item.itemPrice()));
                         }
-
                         /**
                          * Performs no action if no quantity value is
                          * selected
-                         * @param parent The AdapterView that now contains no selected item.
+                         * @param parent The AdapterView that now contains
+                         *               no selected item.
                          */
                         @Override
                         public void onNothingSelected(
@@ -208,6 +213,9 @@ class DonutItemsAdapter
                     });
         }
 
+        /**
+         * This method create the different views in the activity
+         */
         public void createViews(){
             tv_name = itemView.findViewById(R.id.tv_flavor);
             tv_price = itemView.findViewById(R.id.tv_price);
@@ -217,6 +225,11 @@ class DonutItemsAdapter
             parentLayout = itemView.findViewById(R.id.rowLayout);
         }
 
+        /**
+         * This method sets the donutItems price
+         * @param item the donut item
+         * @param quantity the quantity of donuts
+         */
         public void setItemPrice(DonutItem item, int quantity){
             item.setQuantity(quantity);
             if (item.getDonutType()
@@ -260,34 +273,12 @@ class DonutItemsAdapter
                                     "(s)");
                     alert.setPositiveButton("yes",
                             new DialogInterface.OnClickListener() {
-                                /**
-                                 * adds donut to cart if user selects yes
-                                 * @param dialog the dialog that received the click
-                                 * @param which the button that was clicked (ex.
-                                 *              {@link DialogInterface#BUTTON_POSITIVE}) or the position
-                                 *              of the item clicked
-                                 */
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
-                                    Toast.makeText(itemView.getContext(),
-                                            tv_name.getText().toString() +
-                                                    " added.",
-                                            Toast.LENGTH_LONG).show();
-                                    addDonutToCart(item);
-                                    spn_quantity.setSelection(
-                                            STARTING_INDEX);
-                                    item.setQuantity(STARTING_VALUE);
+                                    onClickModule(item);
                                 }
                             }).setNegativeButton("no",
                             new DialogInterface.OnClickListener() {
-                                /**
-                                 * Returns toast message if user cancels
-                                 * order
-                                 * @param dialog the dialog that received the click
-                                 * @param which the button that was clicked (ex.
-                                 *              {@link DialogInterface#BUTTON_POSITIVE}) or the position
-                                 *              of the item clicked
-                                 */
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
                                     Toast.makeText(itemView.getContext(),
@@ -303,25 +294,20 @@ class DonutItemsAdapter
         }
 
         /**
-         * Helper method to calculate the itemPrice
-         * @param item DonutItem object for a single row
-         * @param quantity quantity value obtain from spinner menu
+         * This method modularized the code for the addButton method
+         * @param item the donutItem being added
          */
-        private void calculateItemPrice(DonutItem item, int quantity) {
-            if (item.getDonutType()
-                    .equals(Donut.YEAST_DONUT)) {
-                item.setItemPrice(Donut.YEAST_DONUT_PRICE *
-                        quantity);
-            } else if (item.getDonutType()
-                    .equals(Donut.CAKE_DONUT)) {
-                item.setItemPrice(
-                        Donut.CAKE_DONUT_PRICE * quantity);
-            } else if (item.getDonutType()
-                    .equals(Donut.DONUT_HOLES)) {
-                item.setItemPrice(Donut.DONUT_HOLES_PRICE *
-                        quantity);
-            }
+        public void onClickModule(DonutItem item){
+            Toast.makeText(itemView.getContext(),
+                    tv_name.getText().toString() +
+                            " added.",
+                    Toast.LENGTH_LONG).show();
+            addDonutToCart(item);
+            spn_quantity.setSelection(
+                    STARTING_INDEX);
+            item.setQuantity(STARTING_VALUE);
         }
+
 
         /**
          * Adds DonutItem to cart and checks for duplicates

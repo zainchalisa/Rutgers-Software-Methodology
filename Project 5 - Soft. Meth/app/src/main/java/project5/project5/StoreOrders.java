@@ -36,8 +36,20 @@ public class StoreOrders extends AppCompatActivity
     private static final ObservableArrayList<Order> storeOrders =
             new ObservableArrayList<>();
     private static ObservableArrayList<MenuItem> holderOrder;
+
+    /**
+     * This spinner holds the different storeOrders
+     */
     private Spinner orderSpinner;
+
+    /**
+     * This Listview displays the storeOrders
+     */
     private ListView contentOfOrder;
+
+    /**
+     * This textView displays the current orders different amounts
+     */
     private TextView totalAmount;
     public static final int ZERO = 0;
     public static final int ONE = 1;
@@ -50,9 +62,11 @@ public class StoreOrders extends AppCompatActivity
     /**
      * Creates the UI components and sets up view elements for this
      * activity
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @param savedInstanceState If the activity is being re-initialized
+     *                           after previously being shut down then this
+     *                           Bundle contains the data it most recently
+     *                           supplied in {@link #onSaveInstanceState}.
+     *                           <b><i>Note: Otherwise it is null.</i></b>
      *
      */
     @SuppressLint("MissingInflatedId")
@@ -228,7 +242,8 @@ public class StoreOrders extends AppCompatActivity
 
     /**
      * Performs no action on no item being selected
-     * @param adapterView The AdapterView that now contains no selected item.
+     * @param adapterView The AdapterView that now contains no selected
+     *                    item.
      */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

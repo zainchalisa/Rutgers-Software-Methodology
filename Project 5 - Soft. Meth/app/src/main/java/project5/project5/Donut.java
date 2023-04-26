@@ -28,12 +28,9 @@ public class Donut extends MenuItem {
     public static final double CAKE_DONUT_PRICE = 1.79;
     public static final double DONUT_HOLES_PRICE = 0.39;
 
-    //public static final String [] DONUT_QUANTITY = {"1","2","3","4","5"};
-
     public Donut() {
 
     }
-
 
     /**
      * This constructor creates the donut object

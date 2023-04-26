@@ -5,6 +5,16 @@ public class DonutItem extends Donut {
     private int image;
     private String donutType;
 
+
+    public DonutItem(String donutName,double price,int quantity,String donutType) {
+        super();
+        super.setItemPrice(price);
+        this.donutName = donutName;
+        super.setQuantity(quantity);
+        this.donutType = donutType;
+    }
+
+
     public DonutItem(String donutName,int image,double price,String donutType) {
         super();
         super.setItemPrice(price);
@@ -46,6 +56,18 @@ public class DonutItem extends Donut {
     public String toString() {
         return "(" + getQuantity() + ") " + getDonutName();
     }
+
+    /*
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DonutItem) {
+            return this.donutName.equals(((DonutItem) obj).donutName);
+        } else {
+            return false;
+        }
+    }
+
+     */
 }
 
 

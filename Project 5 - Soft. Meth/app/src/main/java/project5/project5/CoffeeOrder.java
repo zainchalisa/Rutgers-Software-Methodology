@@ -46,7 +46,6 @@ public class CoffeeOrder extends AppCompatActivity implements AdapterView.OnItem
 
     private ArrayList<String> coffeeSizesList = new ArrayList<>(List.of("Short", "Tall", "Grande", "Venti"));
     private ArrayList<Integer> coffeeQuantityList = new ArrayList<>(List.of(1,2,3,4,5));
-    public static Order coffeeOrder = new Order();
 
     public CoffeeOrder() {
     }

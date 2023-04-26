@@ -1,8 +1,12 @@
 package project5.project5;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,14 +28,20 @@ public class CurrentOrder extends AppCompatActivity
 
     private ListView order_list;
     private TextView orderNumberView;
-    private TextView subtotalView;
-    private TextView salesTaxView;
-    private TextView totalAmountView;
+    private  TextView subtotalView;
+    private  TextView salesTaxView;
+    private  TextView totalAmountView;
     private Button placeOrderButton;
+<<<<<<< HEAD
     private static final ObservableArrayList<MenuItem> currentOrders =
             new ObservableArrayList<>();
     private double runningSubtotal;
     private double runningSalesTax;
+=======
+    private static final ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
+    private  double runningSubtotal;
+    private  double runningSalesTax;
+>>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
     private double runningTotal;
     public static final double SALES_TAX = .06625;
 
@@ -50,6 +60,7 @@ public class CurrentOrder extends AppCompatActivity
         order_list.setAdapter(adapter);
         createViews();
         calculateCart();
+<<<<<<< HEAD
 
         order_list.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -65,6 +76,9 @@ public class CurrentOrder extends AppCompatActivity
 
                     }
                 });
+=======
+        remove();
+>>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
 
         placeOrderButton.setOnClickListener(view -> {
             placeOrder();
@@ -72,8 +86,35 @@ public class CurrentOrder extends AppCompatActivity
                     Toast.LENGTH_SHORT).show();
         });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
     }
+
+    private void remove(){
+        order_list.setOnItemClickListener((parent, view, position, id) -> {
+            ArrayAdapter<MenuItem> adapter1 = (ArrayAdapter<MenuItem>) parent.getAdapter();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            Context context = this;
+            alert.setTitle("Add to order");
+            alert.setMessage("Your item is going to be removed from your cart. Would you like to proceed?");
+            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    adapter1.remove(adapter1.getItem(position));
+                    adapter1.notifyDataSetChanged();
+                    calculateCart();
+                    Toast.makeText(context, "Item was removed from order.", Toast.LENGTH_SHORT).show();
+                }
+            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            AlertDialog dialog = alert.create();
+            dialog.show();
+        });
+    }
+
 
     private void createViews() {
         orderNumberView = findViewById(R.id.orderNumber);
@@ -86,6 +127,7 @@ public class CurrentOrder extends AppCompatActivity
     }
 
     private void calculateCart() {
+        runningSubtotal = 0;
         for (MenuItem item : currentOrders) {
             runningSubtotal += item.itemPrice();
             System.out.println("Running Subtotal: $" + runningSubtotal);

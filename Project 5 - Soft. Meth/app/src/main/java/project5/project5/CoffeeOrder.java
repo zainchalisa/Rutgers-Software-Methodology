@@ -187,7 +187,6 @@ public class CoffeeOrder extends AppCompatActivity
             }
         }
 
-
         if (sameCoffee != true) {
             CurrentOrder.addToBasket(newCoffee);
         }

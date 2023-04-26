@@ -59,7 +59,7 @@ public class DonutItem extends Donut {
         return "(" + getQuantity() + ") " + getDonutName();
     }
 
-    /*
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DonutItem) {
@@ -68,8 +68,6 @@ public class DonutItem extends Donut {
             return false;
         }
     }
-
-     */
 }
 
 

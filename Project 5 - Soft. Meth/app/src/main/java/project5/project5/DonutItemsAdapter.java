@@ -155,15 +155,9 @@ class DonutItemsAdapter
                                 List<DonutItem> itemList,
                                 DonutItemClickListener listener) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv_flavor);
-            tv_price = itemView.findViewById(R.id.tv_price);
-            im_item = itemView.findViewById(R.id.im_item);
-            btn_add = itemView.findViewById(R.id.btn_add);
-            spn_quantity = itemView.findViewById(R.id.spn_quantity);
-            parentLayout = itemView.findViewById(R.id.rowLayout);
+            createViews();
             this.itemList = itemList;
             this.listener = listener;
-
             setAddButtonOnClick(itemView);
             parentLayout.setOnClickListener(new View.OnClickListener() {
                 /**
@@ -197,7 +191,8 @@ class DonutItemsAdapter
                             DonutItem item =
                                     itemList.get(getAdapterPosition());
                             item.setQuantity(quantity);
-                            calculateItemPrice(item,quantity);
+                            setItemPrice(item, quantity);
+
                             tv_price.setText("$" + String.format("%.2f",
                                     item.itemPrice()));
                         }
@@ -211,6 +206,32 @@ class DonutItemsAdapter
                         public void onNothingSelected(
                                 AdapterView<?> parent) {}
                     });
+        }
+
+        public void createViews(){
+            tv_name = itemView.findViewById(R.id.tv_flavor);
+            tv_price = itemView.findViewById(R.id.tv_price);
+            im_item = itemView.findViewById(R.id.im_item);
+            btn_add = itemView.findViewById(R.id.btn_add);
+            spn_quantity = itemView.findViewById(R.id.spn_quantity);
+            parentLayout = itemView.findViewById(R.id.rowLayout);
+        }
+
+        public void setItemPrice(DonutItem item, int quantity){
+            item.setQuantity(quantity);
+            if (item.getDonutType()
+                    .equals(Donut.YEAST_DONUT)) {
+                item.setItemPrice(Donut.YEAST_DONUT_PRICE *
+                        quantity);
+            } else if (item.getDonutType()
+                    .equals(Donut.CAKE_DONUT)) {
+                item.setItemPrice(
+                        Donut.CAKE_DONUT_PRICE * quantity);
+            } else if (item.getDonutType()
+                    .equals(Donut.DONUT_HOLES)) {
+                item.setItemPrice(Donut.DONUT_HOLES_PRICE *
+                        quantity);
+            }
         }
 
         /**
@@ -335,9 +356,7 @@ class DonutItemsAdapter
                         item.getDonutName());
                 CurrentOrder.addToBasket(newItem);
             }
-
         }
-
     }
 }
 

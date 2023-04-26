@@ -28,14 +28,14 @@ public class CurrentOrder extends AppCompatActivity
 
     private ListView order_list;
     private TextView orderNumberView;
-    private  TextView subtotalView;
-    private  TextView salesTaxView;
-    private  TextView totalAmountView;
+    private TextView subtotalView;
+    private TextView salesTaxView;
+    private TextView totalAmountView;
     private Button placeOrderButton;
     private static final ObservableArrayList<MenuItem> currentOrders =
             new ObservableArrayList<>();
-    private  double runningSubtotal;
-    private  double runningSalesTax;
+    private double runningSubtotal;
+    private double runningSalesTax;
     private double runningTotal;
     public static final double SALES_TAX = .06625;
     public static final int ZERO = 0;
@@ -50,19 +50,42 @@ public class CurrentOrder extends AppCompatActivity
         setContentView(R.layout.activity_current_order);
         ArrayAdapter<MenuItem> adapter = new ArrayAdapter<MenuItem>(this,
                 android.R.layout.simple_list_item_1, currentOrders);
-        ;
         order_list = findViewById(R.id.order_list);
         order_list.setAdapter(adapter);
         createViews();
         calculateCart();
-
         remove();
         placeOrderButton.setOnClickListener(view -> {
-            placeOrder();
-            Toast.makeText(this, "Order has been placed.",
-                    Toast.LENGTH_SHORT).show();
-        });
+        placeOrderAlert();
+    });
 
+}
+
+    public void placeOrderAlert(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        Context context = this;
+        alert.setTitle("Place the Order");
+        alert.setMessage(
+                "Your Order is going to be sent to the store. Would " +
+                        "you like to proceed?");
+        //handle the "YES" click
+        alert.setPositiveButton("yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        placeOrder();
+                        Toast.makeText(context, "Order has been placed.",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                }).setNegativeButton("no", new DialogInterface.
+                OnClickListener() {
+            public void onClick(DialogInterface dialog,
+                                int which) {
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
     }
 
     private void remove(){
@@ -119,7 +142,7 @@ public class CurrentOrder extends AppCompatActivity
 
 
     private void placeOrder() {
-        if (currentOrders != null) {
+        if (currentOrders.size() != ZERO) {
             ObservableArrayList<MenuItem> temp =
                     new ObservableArrayList<>();
             for (MenuItem item : currentOrders) {
@@ -138,9 +161,22 @@ public class CurrentOrder extends AppCompatActivity
             salesTaxView.setText("$ 0.00");
             totalAmountView.setText("$ 0.00");
         } else {
-            Toast.makeText(this, "Order is empty.", Toast.LENGTH_SHORT)
-                    .show();
+            emptyOrderAlert();
         }
+    }
+
+    public void emptyOrderAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Order is Empty");
+        builder.setMessage("You cannot send an empty order to the store.");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do something when the OK button is clicked
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 

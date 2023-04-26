@@ -167,7 +167,6 @@ public class StoreOrders extends AppCompatActivity
      * Displays the items for order selected in dropdown menu
      */
     private void getSelectedOrder(){
-
         int spinnerIndex = getSelectedPosition();
         ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
                 (this, android.R.layout.simple_list_item_1, storeOrders.
@@ -176,6 +175,7 @@ public class StoreOrders extends AppCompatActivity
         totalAmount.setText(
                 String.format(decimalFormat.format(getTotalAmount())));
     }
+
 
     /**
      * Initializes variables for views

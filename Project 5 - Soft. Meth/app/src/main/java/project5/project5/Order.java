@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author nanaafriyie
  */
 public class Order implements Serializable {
-    private static int orderNumber = -1;
+    private static int orderNumber = 0;
 
     public static final int ZERO = 0;
     private final int uniqueOrderNumber;

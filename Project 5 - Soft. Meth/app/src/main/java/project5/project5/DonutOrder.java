@@ -14,6 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the main activity for ordering donut
+ *
+ * @author nanaafriyie
+ * @author zainchalisa
+ */
 public class DonutOrder extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
@@ -34,6 +40,13 @@ public class DonutOrder extends AppCompatActivity
 
     public static final int ZERO = 0;
 
+    /**
+     * Sets content view and intial state of the UI components
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +59,31 @@ public class DonutOrder extends AppCompatActivity
 
     }
 
+    /**
+     * Notifys adapter when an item is selected
+     * @param adapterView The AdapterView where the selection happened
+     * @param view The view within the AdapterView that was clicked
+     * @param i The position of the view in the adapter
+     * @param l The row id of the item that is selected
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view,
                                int i, long l) {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Performs no actions if no items are selcted
+     * @param adapterView The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+    /**
+     * Populates the activity with the data for each donut
+     */
     private void createDonutItems() { // Initializes Donut
         String[] donutNames =
                 getResources().getStringArray(R.array.donutItemNames);

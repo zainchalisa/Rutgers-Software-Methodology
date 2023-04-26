@@ -24,6 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * This class provides functionality for the Store Orders screen in app
+ *
+ * @author nanaafriyie
+ * @author zainchalisa
+ */
 public class StoreOrders extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
@@ -41,6 +47,14 @@ public class StoreOrders extends AppCompatActivity
             ("'$'0.00");
 
 
+    /**
+     * Creates the UI components and sets up view elements for this
+     * activity
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +90,9 @@ public class StoreOrders extends AppCompatActivity
         remove();
     }
 
+    /**
+     * Removes an order from the store by clicking an item from the order
+     */
     private void remove(){
         contentOfOrder.setOnItemClickListener((parent, view, position, id)
                 -> {
@@ -106,6 +123,13 @@ public class StoreOrders extends AppCompatActivity
         });
     }
 
+    /**
+     * As orders are removed, this method repopulates the spinner
+     * @param adapter2 resets the arraylist
+     * @param adapter1 listView
+     * @param context state of activity
+     * @param currentPosition position of item in listView
+     */
     public void removesOrder(ArrayAdapter<Order> adapter2,
                              ArrayAdapter<Order> adapter1,
                              Context context, int currentPosition) {
@@ -130,11 +154,18 @@ public class StoreOrders extends AppCompatActivity
             , Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Returns index of item in spinner
+     * @return integer representing position of item
+     */
     public int getSelectedPosition(){
         return orderSpinner.getSelectedItemPosition();
     }
 
 
+    /**
+     * Displays the items for order selected in dropdown menu
+     */
     private void getSelectedOrder(){
 
         int spinnerIndex = getSelectedPosition();
@@ -146,25 +177,19 @@ public class StoreOrders extends AppCompatActivity
                 String.format(decimalFormat.format(getTotalAmount())));
     }
 
-
-    private void getSelectedOrderForRemove(){
-        int spinnerIndex = orderSpinner.getSelectedItemPosition();
-        ArrayAdapter<MenuItem> ordersAdapter = new ArrayAdapter<MenuItem>
-                (this, android.R.layout.simple_list_item_1, storeOrders.
-                        get(ZERO).getOrder());
-        contentOfOrder.setAdapter(ordersAdapter);
-        totalAmount.setText(String.format(decimalFormat.format
-                (getTotalAmount())));
-    }
-
-
-
+    /**
+     * Initializes variables for views
+     */
     private void createViews(){
         orderSpinner = findViewById(R.id.orderSpinner);
         contentOfOrder = findViewById(R.id.storeOrders);
         totalAmount = findViewById(R.id.totalAmount);
     }
 
+    /**
+     * Calculates the total amount of an order
+     * @return the total amounnt of the current order
+     */
     private double getTotalAmount() {
         int spinnerIndex = orderSpinner.getSelectedItemPosition();
         ObservableArrayList<MenuItem> currentOrder =
@@ -178,18 +203,33 @@ public class StoreOrders extends AppCompatActivity
     }
 
 
+    /**
+     * Adds order to Store Orders view
+     * @param customerOrder order to send to Store Orders
+     */
     public static void addToStoreOrders(Order customerOrder) {
         holderOrder = customerOrder.getOrder();
         storeOrders.add(customerOrder);
         customerOrder.setOrderList(holderOrder);
     }
 
+    /**
+     * Performs no action on item selected
+     * @param adapterView The AdapterView where the selection happened
+     * @param view The view within the AdapterView that was clicked
+     * @param i The position of the view in the adapter
+     * @param l The row id of the item that is selected
+     */
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view,
                                int i, long l) {
 
     }
 
+    /**
+     * Performs no action on no item being selected
+     * @param adapterView The AdapterView that now contains no selected item.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 

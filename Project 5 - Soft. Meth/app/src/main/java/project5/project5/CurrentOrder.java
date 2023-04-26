@@ -32,16 +32,9 @@ public class CurrentOrder extends AppCompatActivity
     private  TextView salesTaxView;
     private  TextView totalAmountView;
     private Button placeOrderButton;
-<<<<<<< HEAD
-    private static final ObservableArrayList<MenuItem> currentOrders =
-            new ObservableArrayList<>();
-    private double runningSubtotal;
-    private double runningSalesTax;
-=======
     private static final ObservableArrayList<MenuItem> currentOrders = new ObservableArrayList<>();
     private  double runningSubtotal;
     private  double runningSalesTax;
->>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
     private double runningTotal;
     public static final double SALES_TAX = .06625;
 
@@ -60,36 +53,14 @@ public class CurrentOrder extends AppCompatActivity
         order_list.setAdapter(adapter);
         createViews();
         calculateCart();
-<<<<<<< HEAD
 
-        order_list.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position,
-                                               long id) {
-                        deleteItem(position);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-=======
         remove();
->>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
-
         placeOrderButton.setOnClickListener(view -> {
             placeOrder();
             Toast.makeText(this, "Order has been placed.",
                     Toast.LENGTH_SHORT).show();
         });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6cd8fe6e88093af8c3b8fdf2565b9b1a32c87d8d
     }
 
     private void remove(){

@@ -81,36 +81,20 @@ public class StoreOrders extends AppCompatActivity
                 -> {
             ArrayAdapter<Order> adapter1 = (ArrayAdapter<Order>)
                     parent.getAdapter();
-            ArrayAdapter<Order> adapter = new ArrayAdapter<Order>(this,
+            Context context = this;
+            ArrayAdapter<Order> adapter2 = new ArrayAdapter<Order>(this,
                     android.R.layout.simple_list_item_1,
                     new ObservableArrayList<Order>());
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            Context context = this;
             alert.setTitle("Remove from Store Orders");
             alert.setMessage("Your order is going to be removed from " +
                     "the stores orders. Would you like to proceed?");
             alert.setPositiveButton("yes", new DialogInterface.
                     OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    adapter1.remove(storeOrders.remove
-                            (getSelectedPosition()));
-                    if(storeOrders.size() >= ONE){
-                        orderSpinner.setSelection(ZERO);
-                        ArrayAdapter<Order> adapter = new
-                                ArrayAdapter<Order>(context, android.
-                                R.layout.simple_list_item_1, storeOrders);
-                        orderSpinner.setAdapter(adapter);
-                        getSelectedOrder();
-                        totalAmount.setText(String.format(decimalFormat.
-                                format(getTotalAmount())));
-                    } else{
-                        adapter1.clear();
-                        orderSpinner.setAdapter(adapter);
-                        totalAmount.setText("$0.00");
-                    }
-                    adapter1.notifyDataSetChanged();
-                    Toast.makeText(context, "Order was removed from store."
-                            , Toast.LENGTH_SHORT).show();
+                    int currentPosition = getSelectedPosition();
+                    removesOrder(adapter2, adapter1, context,
+                            currentPosition);
                 }
             }).setNegativeButton("no", new DialogInterface.
                     OnClickListener() {
@@ -120,6 +104,30 @@ public class StoreOrders extends AppCompatActivity
             AlertDialog dialog = alert.create();
             dialog.show();
         });
+    }
+
+    public void removesOrder(ArrayAdapter<Order> adapter2,
+                             ArrayAdapter<Order> adapter1,
+                             Context context, int currentPosition) {
+        adapter1.remove(storeOrders.remove
+                (currentPosition));
+        if (storeOrders.size() >= ONE) {
+            orderSpinner.setSelection(ZERO);
+            ArrayAdapter<Order> adapter = new
+                    ArrayAdapter<Order>(context, android.
+                    R.layout.simple_list_item_1, storeOrders);
+            orderSpinner.setAdapter(adapter);
+            getSelectedOrder();
+            totalAmount.setText(String.format(decimalFormat.
+                    format(getTotalAmount())));
+        } else{
+        adapter1.clear();
+        orderSpinner.setAdapter(adapter2);
+        totalAmount.setText("$0.00");
+    }
+                    adapter1.notifyDataSetChanged();
+                    Toast.makeText(context, "Order was removed from store."
+            , Toast.LENGTH_SHORT).show();
     }
 
     public int getSelectedPosition(){
